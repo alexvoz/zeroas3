@@ -3,6 +3,7 @@
 	import com.general.BaseClip;
 	import com.general.BaseMenu;
 	import flash.display.MovieClip;
+	import flash.display.SimpleButton;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -11,9 +12,11 @@
 				
 		private var activePhoto:LBPortfolioPhoto;
 		private var activeItem:LBPortfolioItemData;
-				
+					
 		public function  LBPortfolioSection() {
 			super();
+			artesAplicadasBtn.visible = false;
+			artesPlasticasBtn.visible = false;
 			mcMenu.addEventListener( Event.CHANGE, menuChanged);
 			mcThumbs.addEventListener( Event.CHANGE, thumbChanged);
 		}
@@ -71,7 +74,7 @@
 		
 		private function childShowed( evnt:Event ):void {
 			if ( evnt.currentTarget == mcTitle ) {
-				mcMenu.show();
+				//mcMenu.show();
 			}
 		}
 		

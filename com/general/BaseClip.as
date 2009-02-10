@@ -1,4 +1,6 @@
 ﻿package com.general {
+	import fl.transitions.Tween;
+	import fl.transitions.TweenEvent;
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	
@@ -10,6 +12,7 @@
 		public static var CLIP_HIDDEN:String = "baseclip_hidden";
 		
 		protected var data:Object;
+		protected var tweens:Array;
 		protected var bShowed:Boolean;
 		
 		public function BaseClip() {
@@ -82,6 +85,32 @@
 		
 		public function getShowed():Boolean {
 			return bShowed;
+		}
+		
+		protected function registerTween( key:String, tween:Tween, keepAlive:Boolean, listenEnd:Boolean, listenChange:Boolean ):void {
+			if ( !tweens ) tweens = new Array();
+			tweens.push( { key: key, tween: tween } );
+			
+			var oListener:Object = new Object();
+			var root = this;
+			if( listenChange ){
+				oListener.onMotionChanged = function() {
+					root.tweenChanged( key, tween );
+				}
+				tween.addEventListener( TweenEvent.MOTION_CHANGE, oListener.onMotionChanged );
+			}
+			oListener.onMotionFinished = function() {
+				// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
+				for (var i:Number = 0; i < root.tweens.length ; i++) {
+					if ( root.tweens[i].tween == tween ) {
+						if( listenEnd ) root.tweenFinished( key, tween );
+						if ( !keepAlive ) root.tweens.splice( i, 1 );
+						
+					}
+				}
+			}
+			tween.addEventListener( TweenEvent.MOTION_FINISH, oListener.onMotionFinished );
+			
 		}
 		
 		
