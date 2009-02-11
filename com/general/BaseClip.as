@@ -87,19 +87,19 @@
 			return bShowed;
 		}
 		
-		protected function registerTween( key:String, tween:Tween, keepAlive:Boolean, listenEnd:Boolean, listenChange:Boolean ):void {
+		protected function registerTween( key:String, tween:Tween, keepAlive:Boolean=false, listenEnd:Boolean=false, listenChange:Boolean=false ):void {
 			if ( !tweens ) tweens = new Array();
 			tweens.push( { key: key, tween: tween } );
 			
 			var oListener:Object = new Object();
 			var root = this;
 			if( listenChange ){
-				oListener.onMotionChanged = function() {
+				oListener.onMotionChanged = function(ev) {
 					root.tweenChanged( key, tween );
 				}
 				tween.addEventListener( TweenEvent.MOTION_CHANGE, oListener.onMotionChanged );
 			}
-			oListener.onMotionFinished = function() {
+			oListener.onMotionFinished = function(ev) {
 				// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
 				for (var i:Number = 0; i < root.tweens.length ; i++) {
 					if ( root.tweens[i].tween == tween ) {
@@ -111,6 +111,39 @@
 			}
 			tween.addEventListener( TweenEvent.MOTION_FINISH, oListener.onMotionFinished );
 			
+		}
+		
+		/**
+		 * @author: sminutoli
+		 * @usage: for override purposes
+		 * @param	key
+		 * @param	tween
+		 */
+		protected function tweenChanged(key:String, tween:Tween):void {
+			
+		}
+		/**
+		 * @author: sminutoli
+		 * @usage: for override purposes
+		 * @param	key
+		 * @param	tween
+		 */
+		protected function tweenFinished(key:String, tween:Tween):void {
+			
+		}
+		
+		protected function killTween(tween:Tween):void {
+			// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
+			for (var i:Number = 0; i < tweens.length ; i++) {
+				if ( tweens[i].tween == tween ) tweens.splice( i, 1 );
+			}
+		}
+		protected function getTween(key:String):Tween {
+			// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
+			for (var i:Number = 0; i < tweens.length ; i++) {
+				if ( tweens[i].key == key ) return tweens[i].tween;
+			}
+			return undefined;
 		}
 		
 		
