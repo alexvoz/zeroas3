@@ -29,31 +29,30 @@
 			artesAplicadasBtn.addEventListener( MouseEvent.CLICK, drawMenu );
 			artesAplicadasBtn.addEventListener( MouseEvent.CLICK, moveButton );
 			artesPlasticasBtn.addEventListener( MouseEvent.CLICK, drawMenu );
-			//mcMenu.addEventListener( Event.CHANGE, menuChanged);
-			//mcThumbs.addEventListener( Event.CHANGE, thumbChanged);
+			
 		}
 		
 		private function moveButton(evnt):void {
 			if( evnt.currentTarget == artesAplicadasBtn ){
 				artesAplicadasBtn.removeEventListener( MouseEvent.CLICK, moveButton);
 				artesPlasticasBtn.addEventListener( MouseEvent.CLICK, moveButton );
-				registerTween("buttonMove", new Tween( artesPlasticasBtn, "y", Regular.easeOut, artesPlasticasBtn.y, mcInfo.y + mcInfo.height + 30, 1.5, true));
+				registerTween("buttonMoveDown", new Tween( artesPlasticasBtn, "y", Regular.easeOut, artesPlasticasBtn.y, mcInfo.y + mcInfo.height + 60, 1.5, true), false, true);
 				
 			} else if ( evnt.currentTarget == artesPlasticasBtn ) {
 				artesAplicadasBtn.addEventListener( MouseEvent.CLICK, moveButton);
 				artesPlasticasBtn.removeEventListener( MouseEvent.CLICK, moveButton );
-				registerTween("buttonMove", new Tween( artesPlasticasBtn, "y", Regular.easeOut, artesPlasticasBtn.y, artesPlasticasInitY, 1.5, true), false, true);
+				registerTween("buttonMoveUp", new Tween( artesPlasticasBtn, "y", Regular.easeOut, artesPlasticasBtn.y, artesPlasticasInitY, 1.5, true), false, true);
 				
 			}
 			mcPhotoShower.hideContent();
 		}
 		private function drawMenu(evnt:Event):void {
-				
+						
 			if ( mcMenu && this.contains(mcMenu) ) {
 				
 				var tween:Tween;
 				tween = new Tween(mcMenu, "alpha", Regular.easeOut, mcMenu.alpha, 0, 0.5, true);
-				registerTween("menuFadeOut", tween, false, true);
+				registerTween("menuFadeOut"+evnt.currentTarget.name, tween, false, true);
 				tween = new Tween(mcThumbs, "alpha", Regular.easeOut, mcThumbs.alpha, 0, 0.5, true);
 				registerTween("thumbsFadeOut", tween);
 				tween = new Tween(mcInfo, "alpha", Regular.easeOut, mcInfo.alpha, 0, 0.5, true);
@@ -168,17 +167,17 @@
 				artesPlasticasBtn.visible = true;
 				registerTween( "artesPlasticasFadeIn", new Tween(artesPlasticasBtn, "alpha", Regular.easeOut, artesPlasticasBtn.alpha, 1, 1, true), false, true)
 			} 
-			else if (key == "menuFadeOut") {
+			else if (key.indexOf("menuFadeOut") > -1) {
 				this.removeChild( mcMenu );
 				this.removeChild( mcThumbs );
 				this.removeChild( mcInfo );
 				mcMenu = null;
 				mcThumbs = null;
 				mcInfo = null;
+				if (key == "menuFadeOutartesPlasticasBtn") artesPlasticasBtn.dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+				else if (key == "menuFadeOutartesAplicadasBtn") artesAplicadasBtn.dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 			}
-			else if (key == "buttonMove") {
-				tween.obj.dispatchEvent( new MouseEvent(MouseEvent.CLICK) );
-			}
+			
 		}
 		
 	}
