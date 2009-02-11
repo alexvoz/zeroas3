@@ -20,6 +20,8 @@
 		
 		public static function dummyContent():Array {
 			var aPortfolio = new Array();
+			var aArtesAplicadas:Array = new Array();
+			var aArtesPlasticas:Array = new Array();
 			
 			var pItem:LBPortfolioItemData; 
 			var aPhotos:Array;
@@ -35,35 +37,38 @@
 			photo = new LBPortfolioPhoto("1", '"En la estación"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-1_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-1_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			pItem = new LBPortfolioItemData("1", "Dec.Interior", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			
 			/* portfolio item 2 */
 			pItem = new LBPortfolioItemData("2", "Dec.Locales", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			
 			/* portfolio item 3 */
 			pItem = new LBPortfolioItemData("3", "Escenografía", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			
 			/* portfolio item 4 */
 			pItem = new LBPortfolioItemData("4", "Marketing", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			
 			/* portfolio item 5 */
 			pItem = new LBPortfolioItemData("5", "Navidad", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			
 			/* portfolio item 6 */
 			pItem = new LBPortfolioItemData("6", "Pinturas", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesPlasticas.push(pItem);
 			
 			/* portfolio item 7 */
 			pItem = new LBPortfolioItemData("7", "Taller", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesPlasticas.push(pItem);
 			
 			/* portfolio item 8 */
-			pItem = new LBPortfolioItemData("8", "Varios shop", aPhotos, new Array( aPortfolio[0], aPortfolio[1], aPortfolio[2]) );
-			aPortfolio.push(pItem);
+			pItem = new LBPortfolioItemData("8", "Varios shop", aPhotos, new Array( aArtesAplicadas[0], aArtesAplicadas[1], aArtesAplicadas[2]) );
+			aArtesAplicadas.push(pItem);
+			
+			aPortfolio.push( new LBPortfolioSectionData("1", "Artes Aplicadas", aArtesAplicadas) );
+			aPortfolio.push( new LBPortfolioSectionData("2", "Artes Plasticas", aArtesPlasticas) );
 			
 			return aPortfolio;
 		}
@@ -78,7 +83,9 @@
 			
 		override protected function loadExternalContent():void {
 			aPortfolio = new Array();
-			
+			var aArtesAplicadas:Array = new Array();
+			var aArtesPlasticas:Array = new Array();
+				
 			var pItem:LBPortfolioItemData; 
 			var aPhotos:Array;
 			var aItems:Array;
@@ -89,7 +96,6 @@
 			
 			
 			/* portfolio item 1 */
-			
 			aSubItems = new Array();
 			
 			/*subitem 1*/
@@ -345,7 +351,7 @@
 			/* end subItem 9 */
 			
 			pItem = new LBPortfolioItemData(sectionID as String, "Navidad", aPhotos, aSubItems);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			sectionID++;
 			
 			/*
@@ -434,7 +440,7 @@
 			/* end subItem 3 */
 			
 			pItem = new LBPortfolioItemData(sectionID as String, "Dec.Locales", aPhotos, aSubItems);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			sectionID++;
 			
 			/*
@@ -498,7 +504,7 @@
 			photoID++;
 			
 			pItem = new LBPortfolioItemData(sectionID as String, "Marketing", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			sectionID++;
 			
 			/*
@@ -582,7 +588,7 @@
 			/* end subItem 3 */
 			
 			pItem = new LBPortfolioItemData(sectionID as String, "Escenografías", aPhotos, aSubItems);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			sectionID++;
 			
 			/* 
@@ -763,7 +769,7 @@
 			/* end subItem 5 */
 						
 			pItem = new LBPortfolioItemData(sectionID as String, "Pinturas", aPhotos, aSubItems);
-			aPortfolio.push(pItem);
+			aArtesPlasticas.push(pItem);
 			sectionID++;
 			/* 
 			 *   end Item 5
@@ -815,7 +821,7 @@
 			photoID++;
 						 
 			pItem = new LBPortfolioItemData(sectionID as String, "Varios Shop", aPhotos, aSubItems);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			sectionID++;
 			/* 
 			 *   end Item 6
@@ -846,7 +852,7 @@
 			photoID++;
 			
 			pItem = new LBPortfolioItemData(sectionID as String, "Dec.Interior", aPhotos);
-			aPortfolio.push(pItem);
+			aArtesAplicadas.push(pItem);
 			sectionID++;
 			
 			/*
@@ -906,14 +912,17 @@
 			photoID++;
 			 
 			pItem = new LBPortfolioItemData(sectionID as String, "El Taller", aPhotos, aSubItems);
-			aPortfolio.push(pItem);
+			aArtesPlasticas.push(pItem);
 			sectionID++;
 			/* 
 			 *   end Item 8
 			 * 
 			 * 
 			 */
-				
+						
+			aPortfolio.push( new LBPortfolioSectionData("1", "Artes Aplicadas", aArtesAplicadas) );
+			aPortfolio.push( new LBPortfolioSectionData("2", "Artes Plasticas", aArtesPlasticas) );
+			 
 			this.externalContentLoaded();
 		}
 		

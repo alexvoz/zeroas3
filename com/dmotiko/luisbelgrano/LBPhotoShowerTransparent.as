@@ -14,7 +14,7 @@
 			
 		private var loader:Loader;
 		private var clipAlpha:Tween;
-		private var tweens:Array;
+		private var _tweens:Array;
 		
 		public function LBPhotoShowerTransparent() {
 			super();
@@ -42,16 +42,16 @@
 				} else {
 					mcPhotoZoom.show();
 				}
-				tweens.push( new Tween( clip.mcPhoto, "alpha", Regular.easeOut, clip.mcPhoto.alpha, 0, 1, true) );
-				tweens.push( new Tween( clip.btnZoom, "alpha", Regular.easeOut, clip.btnZoom.alpha, 0, 1, true) );
-				tweens.push( new Tween( clip.btnClose, "alpha", Regular.easeOut, clip.btnClose.alpha, 1, 1, true) );
+				_tweens.push( new Tween( clip.mcPhoto, "alpha", Regular.easeOut, clip.mcPhoto.alpha, 0, 1, true) );
+				_tweens.push( new Tween( clip.btnZoom, "alpha", Regular.easeOut, clip.btnZoom.alpha, 0, 1, true) );
+				_tweens.push( new Tween( clip.btnClose, "alpha", Regular.easeOut, clip.btnClose.alpha, 1, 1, true) );
 				clip.btnZoom.mouseEnabled = false;
 				clip.btnClose.mouseEnabled = true;
 				return;
 			} else if ( evnt.currentTarget == btnClose) {
-				tweens.push( new Tween( clip.mcPhoto, "alpha", Regular.easeOut, clip.mcPhoto.alpha, 1, 1, true) );
-				tweens.push( new Tween( clip.btnZoom, "alpha", Regular.easeOut, clip.btnZoom.alpha, 1, 1, true) );
-				tweens.push( new Tween( clip.btnClose, "alpha", Regular.easeOut, clip.btnClose.alpha, 0, 1, true) );
+				_tweens.push( new Tween( clip.mcPhoto, "alpha", Regular.easeOut, clip.mcPhoto.alpha, 1, 1, true) );
+				_tweens.push( new Tween( clip.btnZoom, "alpha", Regular.easeOut, clip.btnZoom.alpha, 1, 1, true) );
+				_tweens.push( new Tween( clip.btnClose, "alpha", Regular.easeOut, clip.btnClose.alpha, 0, 1, true) );
 				clip.btnZoom.mouseEnabled = true;
 				clip.btnClose.mouseEnabled = false;
 				mcPhotoZoom.hide();
@@ -61,7 +61,10 @@
 		}
 		
 		override public function hide():void {
-			
+			registerTween("fadeOut", new Tween( this, "alpha", Regular.easeOut, this.alpha, 0, 1, true), false, true);
+		}
+		override protected function tweenFinished( key:String, tween:Tween):void {
+			if(key == "fadeOut") hideEnd();
 		}
 		
 		override protected function refreshData():void {
@@ -88,7 +91,7 @@
 		}
 		
 		public function showButtons():void {
-			tweens = new Array();
+			_tweens = new Array();
 			var btn:SimpleButton;
 			var alphaTween:Tween;
 			var offsetTween:Tween;
@@ -100,7 +103,7 @@
 			offset = 10;
 			alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 1, true);
 			offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
-			tweens.push( alphaTween, offsetTween);
+			_tweens.push( alphaTween, offsetTween);
 			btn.mouseEnabled = true;
 			
 			btn = btnNext;
@@ -108,7 +111,7 @@
 			offset = -10;
 			alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 1, true);
 			offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
-			tweens.push( alphaTween, offsetTween);
+			_tweens.push( alphaTween, offsetTween);
 			btn.mouseEnabled = true;
 			
 			var sZoom:String = (getData() as LBPortfolioPhoto).getZoomSrc();
@@ -118,7 +121,7 @@
 				offset = -10;
 				alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 1, true);
 				offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
-				tweens.push( alphaTween, offsetTween);
+				_tweens.push( alphaTween, offsetTween);
 				btn.mouseEnabled = true;
 				
 				alphaTween = new Tween( mcZoomStroke, "alpha", Regular.easeOut, mcZoomStroke.alpha, 1, 1, true);

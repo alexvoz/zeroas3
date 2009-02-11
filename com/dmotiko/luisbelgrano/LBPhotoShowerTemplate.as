@@ -15,7 +15,7 @@
 		private var loader:Loader;
 		private var shadowAlpha:Tween;
 		private var clipAlpha:Tween;
-		private var tweens:Array;
+		private var _tweens:Array;
 		
 		public function LBPhotoShowerTemplate() {
 			super();
@@ -43,7 +43,7 @@
 		
 		override public function hide():void {
 			shadowAlpha = new Tween( this, "alpha", Regular.easeOut, this.alpha, 0, 1, true);
-			shadowAlpha.addEventListener( TweenEvent.MOTION_FINISH, function() { 
+			shadowAlpha.addEventListener( TweenEvent.MOTION_FINISH, function(evn) { 
 				hideEnd();
 				}
 			);
@@ -74,7 +74,7 @@
 		}
 		
 		public function showButtons():void {
-			tweens = new Array();
+			_tweens = new Array();
 			var btn:SimpleButton;
 			var alphaTween:Tween;
 			var offsetTween:Tween;
@@ -86,28 +86,28 @@
 			offset = 10;
 			alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 1, true);
 			offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
-			tweens.push( alphaTween, offsetTween);
+			_tweens.push( alphaTween, offsetTween);
 			
 			btn = btnNext;
 			prop = "x";
 			offset = -10;
 			alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 1, true);
 			offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
-			tweens.push( alphaTween, offsetTween);
+			_tweens.push( alphaTween, offsetTween);
 			
 			btn = btnClose;
 			prop = "y";
 			offset = 20;
 			alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 0.5, true);
 			offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
-			tweens.push( alphaTween, offsetTween);
+			_tweens.push( alphaTween, offsetTween);
 			
 			btn = btnZoom;
 			prop = "y";
 			offset = 20;
 			alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 0.5, true);
 			offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
-			tweens.push( alphaTween, offsetTween);
+			_tweens.push( alphaTween, offsetTween);
 		}
 		
 		

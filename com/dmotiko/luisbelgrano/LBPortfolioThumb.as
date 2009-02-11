@@ -6,6 +6,8 @@ package com.dmotiko.luisbelgrano {
 	import flash.display.MovieClip;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.events.NetStatusEvent;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	
 	public class LBPortfolioThumb
@@ -33,7 +35,7 @@ package com.dmotiko.luisbelgrano {
 			var request:URLRequest = new URLRequest( photo.getIcon() + sNoCache );
 			this.loader = new Loader();
 			this.loader.load( request );
-			this.loader.addEventListener( Event.INIT, thumbInit);
+			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
 			mcPhoto.addChild( this.loader );
 		}
 		
@@ -48,9 +50,8 @@ package com.dmotiko.luisbelgrano {
 		}
 		
 		private function thumbInit( evnt:Event ):void {
-			var clip = evnt.currentTarget;
-			clip.alpha = 0;
-			clipAlpha = new Tween( clip, "alpha", Regular.easeIn, 0, 1, 1, true);
+			mcPhoto.alpha = 0;
+			clipAlpha = new Tween( mcPhoto, "alpha", Regular.easeOut, 0, 1, 1, true);
 		}
 	}
 	

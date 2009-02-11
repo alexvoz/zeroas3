@@ -16,7 +16,7 @@
 			
 		private var loader:Loader;
 		private var clipAlpha:Tween;
-		private var tweens:Array;
+		private var _tweens:Array;
 		
 		public function LBPhotoShowerZoom() {
 			super();
@@ -35,11 +35,11 @@
 		
 		override public function show():void {
 			if ( bShowed ) return;
-			if ( !tweens ) tweens = new Array();
+			if ( !_tweens ) _tweens = new Array();
 			this.visible = true;
 			var tween:Tween = new Tween( this, "alpha", Regular.easeOut, this.alpha, 1, 1, true);
 			tween.addEventListener( TweenEvent.MOTION_FINISH, showEnd);
-			tweens.push( tween );			
+			_tweens.push( tween );			
 		}
 		
 		override protected function showEnd( evnt = undefined ):void {
@@ -48,10 +48,10 @@
 		
 		override public function hide():void {
 			if ( !bShowed ) return;
-			if ( !tweens ) tweens = new Array();
+			if ( !_tweens ) _tweens = new Array();
 			var tween:Tween = new Tween( this, "alpha", Regular.easeOut, this.alpha, 0, 1, true);
 			tween.addEventListener( TweenEvent.MOTION_FINISH, hideEnd);
-			tweens.push( tween );
+			_tweens.push( tween );
 		}
 		override protected function hideEnd( evnt = undefined ):void {
 			this.visible = false;
@@ -100,7 +100,7 @@
 		}
 		
 		private function scrollImg( evnt:MouseEvent ):void {
-			tweens = new Array();
+			_tweens = new Array();
 			var sProp:String;
 			var nEnd:Number;
 			if ( evnt.currentTarget == btnLeft || evnt.currentTarget == btnRight) sProp = "x";
@@ -124,7 +124,7 @@
 			}
 			
 			var tween:Tween = new Tween( mcPhoto, sProp, Regular.easeOut, mcPhoto[sProp], nEnd, 1, true);
-			tweens.push(tween);
+			_tweens.push(tween);
 			
 		}
 		

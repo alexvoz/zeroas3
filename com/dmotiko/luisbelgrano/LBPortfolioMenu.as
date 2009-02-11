@@ -11,24 +11,21 @@ package com.dmotiko.luisbelgrano {
 		private var menu:BaseMenu;
 		private var subMenu:BaseMenu;
 		private var activeItem:LBPortfolioItemData;
-		private var alphaTween:Tween;
-		private var subMenuTween:Tween;
-		
+				
 		public function LBPortfolioMenu() {
 			super();
 			visible = false;
 			alpha = 0;
-			if( LBSite.getApp() ){
-				this.setData( LBSite.getApp().getPortfolio() );
-			} else {
-				this.setData( LBSite.dummyContent() );
-			}
 		}
 		
 		override public function show():void {
 			visible = true;
-			alphaTween = new Tween( this, "alpha", Regular.easeOut, 0, 1, 1.5, true);
-			alphaTween.addEventListener( TweenEvent.MOTION_FINISH, showEnd );
+			registerTween( "fadeIn", new Tween( this, "alpha", Regular.easeOut, 0, 1, 1.5, true), false, true);
+		}
+		
+		override protected function tweenFinished( key:String, tween:Tween):void {
+			if ( key == "fadeIn" ) showEnd();
+			else if ( key == "subMenuFadeIn") removeSubMenu();
 		}
 		
 		override protected function showEnd( evnt=undefined ):void {
@@ -48,13 +45,13 @@ package com.dmotiko.luisbelgrano {
 		
 		private function menuChanged( evnt:Event):void {
 			if( subMenu ){
-				subMenuTween = new Tween( subMenu, "alpha", Regular.easeIn, subMenu.alpha, 0, 1.5, true);
-				subMenuTween.addEventListener( TweenEvent.MOTION_FINISH, removeSubMenu);
+				registerTween( "subMenuFadeOut", new Tween( subMenu, "alpha", Regular.easeIn, subMenu.alpha, 0, 1.5, true), false, true);
 			}
 			var items = evnt.currentTarget.getActiveButton().getData().getItems();
 			if (items && items.length > 1) {
 				if ( subMenu ) {
-					if ( subMenuTween ) { subMenuTween.stop(); subMenuTween = null; }
+					var t = getTween("subMenuFadeIn");
+					if ( t ) { t.stop(); killTween(t); }
 					removeSubMenu( undefined );	
 				}				
 				subMenu = new BaseMenu();
@@ -67,7 +64,7 @@ package com.dmotiko.luisbelgrano {
 				this.addChild(subMenu);
 				subMenu.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 				(subMenu.getButtons()[0] as LBMenuBtn).rollOver(undefined);
-				subMenuTween = new Tween( subMenu, "alpha", Regular.easeIn, subMenu.alpha, 1, 1.5, true);
+				registerTween( "subMenuFadeIn", new Tween( subMenu, "alpha", Regular.easeIn, subMenu.alpha, 1, 1.5, true), false, true);
 			} else {
 				this.activeItem = evnt.currentTarget.getActiveButton().getData() as LBPortfolioItemData;
 				this.dispatchEvent( new Event( Event.CHANGE ) );
@@ -78,7 +75,7 @@ package com.dmotiko.luisbelgrano {
 			this.dispatchEvent( new Event( Event.CHANGE ) );
 		}
 		
-		private function removeSubMenu( evnt ):void {
+		private function removeSubMenu( evnt = undefined ):void {
 			removeChild(subMenu);
 			subMenu = null;	
 		}

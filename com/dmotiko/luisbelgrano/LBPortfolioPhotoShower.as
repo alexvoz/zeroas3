@@ -64,6 +64,11 @@
 			});
 		}
 		
+		public function hideContent():void {
+			if ( !clip ) return;
+			clip.hide();
+		}
+				
 		private function nextPhoto( evnt:Event ):void {
 			dispatchEvent( new Event( SLIDER_NEXT ) );
 		}
