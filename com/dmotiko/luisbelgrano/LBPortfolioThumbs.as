@@ -1,14 +1,12 @@
 ﻿package com.dmotiko.luisbelgrano {
 	
-	import fl.transitions.easing.Regular;
-	import fl.transitions.easing.Strong;
-	import fl.transitions.Tween;
-	import fl.transitions.TweenEvent;
-	import FLA.*;
 	import com.general.*;
-	import flash.display.MovieClip;
-	import flash.display.Sprite;
-	import flash.events.MouseEvent;
+	import FLA.*;
+	import fl.transitions.*;
+	import fl.transitions.easing.*;
+	import flash.display.*;
+	import flash.events.*;
+	import flash.geom.Point;
 	
 	public class LBPortfolioThumbs
 	extends BaseMenu {
@@ -23,6 +21,8 @@
 		
 		override protected function initClip():void {
 			super.initClip();
+			setSize( new Point( this.width, mcMask.height ) );
+			
 			mcContainer = new MovieClip();
 			this.addChild(mcContainer);
 			mcContainer.mask = mcMask;
@@ -43,7 +43,7 @@
 		private function checkScroll( evnt:TweenEvent = undefined ):void {
 			var bWidth:Boolean = mcContainer.height > mcMask.height;
 			var bPrev:Boolean = mcContainer.y < 0;
-			var bNext:Boolean = mcContainer.y > mcContainer.y - mcContainer.height + mcMask.height;
+			var bNext:Boolean = mcContainer.y > mcContainer.y - mcContainer.height + mcMask.y + mcMask.height;
 			
 			mcPrev.visible = bWidth && bPrev;
 			mcNext.visible = bWidth && bNext;
@@ -103,6 +103,18 @@
 			if (tContainer){  tContainer.stop(); }
 			tContainer = new Tween( mcContainer, "y", Strong.easeOut, mcContainer.y, nEnd, 1.5, true);
 			tContainer.addEventListener( TweenEvent.MOTION_FINISH, checkScroll);
+		}
+		
+		override public function activeBtn( evnt:MouseEvent ):void {
+			super.activeBtn( evnt );
+			var btn:DisplayObject = (evnt.currentTarget as DisplayObject);
+			var check:Boolean = mcMask.hitTestObject( btn );
+			if ( !check ) {
+				var nEnd:Number = -btn.y;
+				if (tContainer){  tContainer.stop(); }
+				tContainer = new Tween( mcContainer, "y", Strong.easeOut, mcContainer.y, nEnd, 1.5, true);
+				tContainer.addEventListener( TweenEvent.MOTION_FINISH, checkScroll);
+			}
 		}
 		
 	}

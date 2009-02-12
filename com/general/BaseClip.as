@@ -3,6 +3,7 @@
 	import fl.transitions.TweenEvent;
 	import flash.display.MovieClip;
 	import flash.events.Event;
+	import flash.geom.Point;
 	
 	public class BaseClip
 	extends MovieClip {
@@ -10,10 +11,12 @@
 		public static var CLIP_LOADED:String = "baseclip_loaded";
 		public static var CLIP_SHOWED:String = "baseclip_showed";
 		public static var CLIP_HIDDEN:String = "baseclip_hidden";
+		public static var CLIP_RESIZED:String = "baseclip_resized";
 		
 		protected var data:Object;
 		protected var tweens:Array;
 		protected var bShowed:Boolean;
+		protected var pSize:Point;
 		
 		public function BaseClip() {
 			super();
@@ -43,6 +46,19 @@
 			this.data = data;
 			refreshData();
 		}
+		
+		public function getSize():Point {
+			if( !pSize ) pSize = new Point( this.width, this.height );
+			return pSize;
+		}
+		public function setSize(pSize:Point):void {
+			this.pSize = pSize;
+			refreshSize();
+		}
+		protected function refreshSize():void {
+			dispatchEvent( new Event( CLIP_RESIZED ) );
+		}
+		
 		/**
 		 * @author: sminutoli
 		 * @usage:  Su uso es para la herencia

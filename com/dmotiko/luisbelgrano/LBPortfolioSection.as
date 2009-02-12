@@ -36,7 +36,7 @@
 			if( evnt.currentTarget == artesAplicadasBtn ){
 				artesAplicadasBtn.removeEventListener( MouseEvent.CLICK, moveButton);
 				artesPlasticasBtn.addEventListener( MouseEvent.CLICK, moveButton );
-				registerTween("buttonMoveDown", new Tween( artesPlasticasBtn, "y", Regular.easeOut, artesPlasticasBtn.y, mcInfo.y + mcInfo.height + 60, 1.5, true), false, true);
+				registerTween("buttonMoveDown", new Tween( artesPlasticasBtn, "y", Regular.easeOut, artesPlasticasBtn.y, artesAplicadasBtn.y + 350, 1.5, true), false, true);
 				
 			} else if ( evnt.currentTarget == artesPlasticasBtn ) {
 				artesAplicadasBtn.addEventListener( MouseEvent.CLICK, moveButton);
@@ -93,9 +93,6 @@
 					
 				}
 				
-				mcThumbs.y = mcMenu.y + mcMenu.height + 20;
-				mcInfo.y = mcThumbs.y + mcThumbs.height + 20;
-				
 			}
 			
 		}
@@ -105,6 +102,8 @@
 			var item:LBPortfolioItemData = ( menu.getActiveItem() as LBPortfolioItemData );
 			activeItem = item;
 			mcThumbs.setData( item.getPhotos() );
+			mcThumbs.y = mcMenu.y + mcMenu.getSize().y + 20;
+			mcInfo.y = mcThumbs.y + mcThumbs.getSize().y + 20;
 			(mcThumbs as BaseMenu).getButtons()[0].rollOver( undefined );
 			(mcThumbs as BaseMenu).getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 			if( LBSite.getApp() ) LBSite.getApp().setSection( LBSite.PORTFOLIO+"_"+item.getLabel() );
@@ -139,7 +138,7 @@
 		}
 		private function showPrevPhoto( evnt:Event ):void {
 			var i:int = getPhotoIndex( activePhoto );
-			if ( i == 0 ) i = (mcThumbs as BaseMenu).getButtons().length + 1;
+			if ( i == 0 ) i = (mcThumbs as BaseMenu).getButtons().length;
 			(mcThumbs as BaseMenu).getButtons()[i-1].rollOver( undefined );
 			(mcThumbs as BaseMenu).getButtons()[i-1].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 		}

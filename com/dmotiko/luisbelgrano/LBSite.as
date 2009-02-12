@@ -22,69 +22,6 @@
 			var aPortfolio = new Array();
 			var aArtesAplicadas:Array = new Array();
 			var aArtesPlasticas:Array = new Array();
-			
-			var pItem:LBPortfolioItemData; 
-			var aPhotos:Array;
-			var aItems:Array;
-			var photo:LBPortfolioPhoto;
-						
-			/* portfolio item 1 */
-			aPhotos = new Array();
-			photo = new LBPortfolioPhoto("1", '"En la estación"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-1_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-1_zoom.png", "portfolio/pintura/expoCentroCulturalSanTelmo/megaZoom/P-ECST-3_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
-			aPhotos.push(photo);
-			photo = new LBPortfolioPhoto("1", '"En la estación"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-1_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-1_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
-			aPhotos.push(photo);
-			photo = new LBPortfolioPhoto("1", '"En la estación"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-1_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-1_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
-			aPhotos.push(photo);
-			pItem = new LBPortfolioItemData("1", "Dec.Interior", aPhotos);
-			aArtesAplicadas.push(pItem);
-			
-			/* portfolio item 2 */
-			pItem = new LBPortfolioItemData("2", "Dec.Locales", aPhotos);
-			aArtesAplicadas.push(pItem);
-			
-			/* portfolio item 3 */
-			pItem = new LBPortfolioItemData("3", "Escenografía", aPhotos);
-			aArtesAplicadas.push(pItem);
-			
-			/* portfolio item 4 */
-			pItem = new LBPortfolioItemData("4", "Marketing", aPhotos);
-			aArtesAplicadas.push(pItem);
-			
-			/* portfolio item 5 */
-			pItem = new LBPortfolioItemData("5", "Navidad", aPhotos);
-			aArtesAplicadas.push(pItem);
-			
-			/* portfolio item 6 */
-			pItem = new LBPortfolioItemData("6", "Pinturas", aPhotos);
-			aArtesPlasticas.push(pItem);
-			
-			/* portfolio item 7 */
-			pItem = new LBPortfolioItemData("7", "Taller", aPhotos);
-			aArtesPlasticas.push(pItem);
-			
-			/* portfolio item 8 */
-			pItem = new LBPortfolioItemData("8", "Varios shop", aPhotos, new Array( aArtesAplicadas[0], aArtesAplicadas[1], aArtesAplicadas[2]) );
-			aArtesAplicadas.push(pItem);
-			
-			aPortfolio.push( new LBPortfolioSectionData("1", "Artes Aplicadas", aArtesAplicadas) );
-			aPortfolio.push( new LBPortfolioSectionData("2", "Artes Plasticas", aArtesPlasticas) );
-			
-			return aPortfolio;
-		}
-		
-		private var aPortfolio:Array;
-		private var mainClip:MovieClip;
-		
-		public function LBSite() {
-			super();
-			isFullFlash();
-		}
-			
-		override protected function loadExternalContent():void {
-			aPortfolio = new Array();
-			var aArtesAplicadas:Array = new Array();
-			var aArtesPlasticas:Array = new Array();
 				
 			var pItem:LBPortfolioItemData; 
 			var aPhotos:Array;
@@ -922,7 +859,21 @@
 						
 			aPortfolio.push( new LBPortfolioSectionData("1", "Artes Aplicadas", aArtesAplicadas) );
 			aPortfolio.push( new LBPortfolioSectionData("2", "Artes Plasticas", aArtesPlasticas) );
-			 
+			
+			return aPortfolio;
+		}
+		
+		private var aPortfolio:Array;
+		private var mainClip:MovieClip;
+		
+		public function LBSite() {
+			super();
+			isFullFlash();
+		}
+			
+		override protected function loadExternalContent():void {
+			aPortfolio = dummyContent();
+						 
 			this.externalContentLoaded();
 		}
 		
