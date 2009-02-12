@@ -47,7 +47,9 @@
 			mcPhotoShower.hideContent();
 		}
 		private function drawMenu(evnt:Event):void {
-						
+			
+			dispatchEvent( new Event( Event.CHANGE ) );
+			
 			if ( mcMenu && this.contains(mcMenu) ) {
 				
 				var tween:Tween;

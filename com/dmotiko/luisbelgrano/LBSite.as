@@ -1,10 +1,10 @@
 ﻿package com.dmotiko.luisbelgrano {
 	
 	import com.general.WebSite;
-	import flash.net.URLRequest;
+	import flash.net.*;
 	import flash.display.*;
 	import flash.events.*;
-
+	import flash.xml.*;
 	
 	public class LBSite
 	extends WebSite {
@@ -865,6 +865,8 @@
 		
 		private var aPortfolio:Array;
 		private var mainClip:MovieClip;
+		private var portfolioLoader:LBDataLoader;
+		
 		
 		public function LBSite() {
 			super();
@@ -873,11 +875,16 @@
 			
 		override protected function loadExternalContent():void {
 			aPortfolio = dummyContent();
-						 
 			this.externalContentLoaded();
+			/*
+			portfolioLoader = new LBDataLoader("portfolio.xml");
+			portfolioLoader.addEventListener( Event.COMPLETE, externalContentLoaded);
+			portfolioLoader.loadData();
+			*/
 		}
 		
-		override protected function externalContentLoaded():void {
+		override protected function externalContentLoaded( evnt:Event=undefined ):void {
+						
 			var mLoader:Loader = new Loader(); 
 			var mRequest:URLRequest = new URLRequest("main.swf"+getNoCache()); 
 			mLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandler); 

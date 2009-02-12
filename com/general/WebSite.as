@@ -63,7 +63,7 @@ package com.general {
 		 *  @author: sminutoli
 		 *  @usage: for override purposes
 		 */
-		protected function externalContentLoaded():void {
+		protected function externalContentLoaded( evnt:Event = undefined):void {
 			
 		}
 		
