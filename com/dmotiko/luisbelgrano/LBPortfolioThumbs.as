@@ -131,6 +131,8 @@
 			if (tContainer){  tContainer.stop(); }
 			tContainer = new Tween( mcContainer, "y", Strong.easeOut, mcContainer.y, nEnd, 1.5, true);
 			tContainer.addEventListener( TweenEvent.MOTION_FINISH, checkScroll);
+			mcNext.mouseChildren = mcPrev.mouseChildren = false;
+			mcNext.mouseEnabled = mcPrev.mouseEnabled = false;
 		}
 		
 		override public function activeBtn( evnt:MouseEvent ):void {
