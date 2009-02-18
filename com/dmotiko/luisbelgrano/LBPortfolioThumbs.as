@@ -35,7 +35,8 @@
 			mcNext.addEventListener( MouseEvent.ROLL_OUT, btnOut);
 			mcPrev.addEventListener( MouseEvent.CLICK, scrollThumbs);
 			mcNext.addEventListener( MouseEvent.CLICK, scrollThumbs);
-			checkScroll();
+			
+			mcNext.visible = mcPrev.visible = false;
 			
 			nSpace = 8;
 			setView( LBPortfolioThumb );
