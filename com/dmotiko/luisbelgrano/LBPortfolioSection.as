@@ -83,13 +83,13 @@
 				( LBSite.getApp() ) ? aPortfolio = LBSite.getApp().getPortfolio() : aPortfolio = LBSite.dummyContent();
 						
 				if ( evnt.currentTarget == artesPlasticasBtn ) {
-					mcMenu.y = 295;
+					mcMenu.y = 275;
 					mcMenu.setData( aPortfolio[1].getItems() );
 					mcMenu.show();
 					
 					
 				} else if ( evnt.currentTarget == artesAplicadasBtn ) {
-					mcMenu.y = 265;
+					mcMenu.y = 245;
 					mcMenu.setData( aPortfolio[0].getItems() );
 					mcMenu.show();
 					

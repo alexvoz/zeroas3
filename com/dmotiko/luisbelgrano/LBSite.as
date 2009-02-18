@@ -106,31 +106,31 @@
 			/* end subItem 3 */
 			/*subitem 4*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Casa y trineo de Papá Noel con duendes.", "", "portfolio/navidad/palermo/minis/N-P-1_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photo = new LBPortfolioPhoto(photoID as String, "Casa y trineo de Papá Noel con duendes.", "", "portfolio/navidad/palermo/mini/N-P-1_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Detalle de un duende.", "", "portfolio/navidad/palermo/minis/N-P-2_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photo = new LBPortfolioPhoto(photoID as String, "Detalle de un duende.", "", "portfolio/navidad/palermo/mini/N-P-2_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Adornos en columnas.", "", "portfolio/navidad/palermo/minis/N-P-3_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
+			photo = new LBPortfolioPhoto(photoID as String, "Adornos en columnas.", "", "portfolio/navidad/palermo/mini/N-P-3_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la casa de Papá Noel.", "", "portfolio/navidad/palermo/minis/N-P-4_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la casa de Papá Noel.", "", "portfolio/navidad/palermo/mini/N-P-4_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la casa de Papá Noel.", "", "portfolio/navidad/palermo/minis/N-P-5_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-5_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la casa de Papá Noel.", "", "portfolio/navidad/palermo/mini/N-P-5_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-5_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Móviles de estrellas, lunas y soles con gorros navideños.", "", "portfolio/navidad/palermo/minis/N-P-6_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Móviles de estrellas, lunas y soles con gorros navideños.", "", "portfolio/navidad/palermo/mini/N-P-6_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la ambientación “La cocina Navideña”.", "", "portfolio/navidad/palermo/minis/N-P-7_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la ambientación “La cocina Navideña”.", "", "portfolio/navidad/palermo/mini/N-P-7_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la ambientación “La cocina Navideña”.", "", "portfolio/navidad/palermo/minis/N-P-8_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-8_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la ambientación “La cocina Navideña”.", "", "portfolio/navidad/palermo/mini/N-P-8_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-8_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la ambientación “La cocina Navideña”.", "", "portfolio/navidad/palermo/minis/N-P-9_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-9_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Detalles de la ambientación “La cocina Navideña”.", "", "portfolio/navidad/palermo/mini/N-P-9_mini.jpg", "portfolio/navidad/palermo/zoom/N-P-9_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 									
@@ -225,7 +225,7 @@
 			/* end subItem 6 */
 			/*subitem 7*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, 'Columnas con estandartes navideños.', "", "portfolio/navidad/quilmes/minis/N-Q-1_mini.jpg", "portfolio/navidad/quilmes/zoom/N-Q-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, 'Columnas con estandartes navideños.', "", "portfolio/navidad/quilmes/minis/N-Q-1_mini.jpg", "portfolio/navidad/quilmes/zoom/N-Q-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, 'Papá Noel colgando de una tela.', "", "portfolio/navidad/quilmes/minis/N-Q-2_mini.jpg", "portfolio/navidad/quilmes/zoom/N-Q-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
@@ -403,7 +403,7 @@
 			photo = new LBPortfolioPhoto(photoID as String, "Muñecos para vidrieras de Christian Lacroix.", "", "portfolio/marketing/minis/M-5_mini.jpg", "portfolio/marketing/zoom/M-5_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Muñecos para vidrieras de Christian Lacroix.", "", "portfolio/marketing/minis/M-6_mini.jpg", "portfolio/marketing/zoom/M-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
+			photo = new LBPortfolioPhoto(photoID as String, "Muñecos para vidrieras de Christian Lacroix.", "", "portfolio/marketing/minis/M-6_mini.jpg", "portfolio/marketing/zoom/M-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Vidrieras navideñas para Paula Cahen D´anvers.", "", "portfolio/marketing/minis/M-7_mini.jpg", "portfolio/marketing/zoom/M-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
@@ -430,7 +430,7 @@
 			photo = new LBPortfolioPhoto(photoID as String, "Tarjeta pintada sobre goma espuma para promociones en la playa.", "", "portfolio/marketing/minis/M-14_mini.jpg", "portfolio/marketing/zoom/M-14_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Esculturas de pareja Indú para bienvenida.", "", "portfolio/marketing/minis/M-15_mini.jpg", "portfolio/marketing/zoom/M-15_zoom.jpg", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Esculturas de pareja Indú para bienvenida.", "", "portfolio/marketing/minis/M-15_mini.jpg", "portfolio/marketing/zoom/M-15_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Gigantismo del paquete de pastillas MenthoPlus con ruleta.", "", "portfolio/marketing/minis/M-16_mini.jpg", "portfolio/marketing/zoom/M-16_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
@@ -833,9 +833,6 @@
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-11_mini.jpg", "portfolio/taller/zoom/T-11_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-11_mini.jpg", "portfolio/taller/zoom/T-11_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-12_mini.jpg", "portfolio/taller/zoom/T-12_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);

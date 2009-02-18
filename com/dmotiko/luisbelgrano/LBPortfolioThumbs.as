@@ -13,7 +13,8 @@
 		
 		private var mcContainer:MovieClip;
 		private var tContainer:Tween;
-		private var aPos:Array;
+		private var tBtnPrev:Tween;
+		private var tBtnNext:Tween;
 		
 		public function LBPortfolioThumbs() {
 			super();
@@ -41,12 +42,34 @@
 		}
 		
 		private function checkScroll( evnt:TweenEvent = undefined ):void {
-			var bWidth:Boolean = mcContainer.height > mcMask.height;
-			var bPrev:Boolean = mcContainer.y < 0;
-			var bNext:Boolean = mcContainer.y > mcContainer.y - mcContainer.height + mcMask.y + mcMask.height;
+			var nDif:Number = mcContainer.height - mcMask.height;
+			var bPrev:Boolean = nDif > 0 && mcContainer.y < mcMask.y;
+			var bNext:Boolean = nDif > 0 && mcContainer.y > mcMask.y - nDif;
 			
-			mcPrev.visible = bWidth && bPrev;
-			mcNext.visible = bWidth && bNext;
+			function btnOff( evnt:TweenEvent ) {
+				((evnt.currentTarget as Tween).obj as DisplayObject).visible = false;
+			}
+			
+			if (bPrev) {
+				mcPrev.visible = true;
+				if (mcPrev.alpha < 1 ) {
+					tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 1, 1, true);
+				}
+			} else if( mcPrev.visible && mcPrev.alpha > 0) {
+				tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 0, 1, true);
+				tBtnPrev.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
+			}
+			
+			if (bNext) {
+				mcNext.visible = true;
+				if (mcNext.alpha < 1 ) {
+					tBtnPrev = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 1, 1, true);
+				}
+			} else if( mcNext.visible && mcNext.alpha > 0) {
+				tBtnNext = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 0, 1, true);
+				tBtnNext.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
+			}
+			
 		}
 						
 		override protected function layout():void {

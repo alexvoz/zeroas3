@@ -26,11 +26,12 @@
 			}
 			mcPhoto.mask = mcMask;
 			btnZoom.visible = false;
-			btnClose.addEventListener( MouseEvent.CLICK, btnCloseClick);
+			if(btnClose) btnClose.addEventListener( MouseEvent.CLICK, btnCloseClick);
 			btnPrev.addEventListener( MouseEvent.CLICK, btnClick);
 			btnNext.addEventListener( MouseEvent.CLICK, btnClick);
 			
-			btnClose.alpha = btnPrev.alpha = btnNext.alpha = btnZoom.alpha = 0;
+			if (btnClose) btnClose.alpha = 0;
+			btnPrev.alpha = btnNext.alpha = btnZoom.alpha = 0;
 			
 		}
 		
@@ -95,12 +96,14 @@
 			offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
 			_tweens.push( alphaTween, offsetTween);
 			
-			btn = btnClose;
-			prop = "y";
-			offset = 20;
-			alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 0.5, true);
-			offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
-			_tweens.push( alphaTween, offsetTween);
+			if( btnClose ){
+				btn = btnClose;
+				prop = "y";
+				offset = 20;
+				alphaTween = new Tween( btn, "alpha", Regular.easeOut, btn.alpha, 1, 0.5, true);
+				offsetTween = new Tween( btn, prop, Elastic.easeOut, btn[prop] + offset, btn[prop], 1, true);
+				_tweens.push( alphaTween, offsetTween);
+			}
 			
 			btn = btnZoom;
 			prop = "y";
