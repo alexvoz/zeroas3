@@ -52,21 +52,25 @@
 			}
 			
 			if (bPrev) {
+				mcPrev.mouseEnabled = true;
 				mcPrev.visible = true;
 				if (mcPrev.alpha < 1 ) {
 					tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 1, 1, true);
 				}
 			} else if( mcPrev.visible && mcPrev.alpha > 0) {
+				mcPrev.mouseEnabled = false;
 				tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 0, 1, true);
 				tBtnPrev.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
 			}
 			
 			if (bNext) {
+				mcNext.mouseEnabled = true;
 				mcNext.visible = true;
 				if (mcNext.alpha < 1 ) {
 					tBtnPrev = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 1, 1, true);
 				}
 			} else if( mcNext.visible && mcNext.alpha > 0) {
+				mcNext.mouseEnabled = false;
 				tBtnNext = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 0, 1, true);
 				tBtnNext.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
 			}
