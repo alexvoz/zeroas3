@@ -4,20 +4,26 @@ package com.dmotiko.selu {
 	import flash.text.*;
 	import flash.geom.*;
 	import flash.events.*;
-	import FLA.ContactoOver;
+	import FLA.*;
 	
 	public class SeluButtonBar
 	extends BaseMenu {
 				
 		override protected function initClip():void {
 			bVertical = true;
-			nSpace = 5;
+			nSpace = 9;
 			nOffset = 0;
 			setVertical(false);
 			setView( SeluButton );
 			setData( [ 
-				{ label: "contacto", over: new ContactoOver() },
-				{ label: "nocasting", over: new ContactoOver() }
+				{ label: "coleccion", over: new ColeccionOver(), section: SeluSite.COLECCION },
+				{ label: "backstage", over: new BackstageOver(), section: SeluSite.BACKSTAGE },
+				{ label: "puntos de venta", over: new PuntosDeVentaOver(), section: SeluSite.PUNTOVENTA },
+				{ label: "novedades", over: new NovedadesOver(), section: SeluSite.NOVEDADES },
+				{ label: "sexies", over: new SexiesOver(), section: SeluSite.SEXIES },
+				{ label: "prensa", over: new PrensaOver(), section: SeluSite.PRENSA },
+				{ label: "contacto", over: new ContactoOver(), section: SeluSite.CONTACTO },
+				{ label: "nocasting", section: SeluSite.NOCASTING }
 			]);
 		}
 		
@@ -37,14 +43,22 @@ package com.dmotiko.selu {
 		override protected function layout():void {
 			for (var i:uint = 0; i < aBtns.length; i++){
 				var item:BaseMenuBtn = aBtns[i];
+				var separator:SeluButtonSeparator;
 				if (bVertical) {
 					item.y = nOffset;
 					nOffset += item.height + nSpace;
 				} else {
 					item.x = nOffset;
-					nOffset += item.height + nSpace;
+					if (i < aBtns.length - 1) {
+						separator = new SeluButtonSeparator();
+						separator.x = item.x + item.width;
+						nOffset += item.width + separator.width + nSpace;
+					} else {
+						nOffset += item.width + nSpace;
+					}
 				}
 				this.addChild(item);
+				if (separator) this.addChild(separator);
 			}
 		}
 		
