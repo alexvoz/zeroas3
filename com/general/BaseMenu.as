@@ -11,6 +11,7 @@ package com.general {
 		protected var aBtns:Array;
 		protected var bVertical:Boolean;		
 		protected var nSpace:Number;
+		protected var nOffset:Number;
 				
 		public function BaseMenu() {
 			super();
@@ -19,6 +20,7 @@ package com.general {
 		override protected function initClip():void {
 			bVertical = true;
 			nSpace = 0;
+			nOffset = 0;
 		}
 		
 		public function setView(view:Class):void {
@@ -41,8 +43,7 @@ package com.general {
 		}
 		
 		protected function layout():void {
-			var nOffset:Number = 0;
-			for (var i:int = 0; i < aBtns.length; i++){
+			for (var i:uint = 0; i < aBtns.length; i++){
 				var item:BaseMenuBtn = aBtns[i];
 				if (bVertical) {
 					item.y = nOffset;
@@ -74,6 +75,13 @@ package com.general {
 		}
 		public function getActiveButton():BaseMenuBtn {
 			return this.activeButton;
+		}
+		
+		public function getOffset():Number { return nOffset; }
+		
+		public function setOffset(value:Number):void 
+		{
+			nOffset = value;
 		}
 		
 	}
