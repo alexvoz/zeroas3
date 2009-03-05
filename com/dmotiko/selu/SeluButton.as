@@ -32,7 +32,13 @@ package com.dmotiko.selu {
 		override public function rollOver( evnt:MouseEvent ):void {
 			spBack.visible = true;
 			txtLabel.textColor = 0xFFFFFF;
-			if ( _overAnimation ) _overAnimation.gotoAndPlay("show");
+			if ( _overAnimation ) {
+				var p:Point = new Point( 0, 0);
+				p = this.localToGlobal( p );
+				_overAnimation.x =  p.x;
+				_overAnimation.y = p.y - _overAnimation.height - 15;
+				_overAnimation.gotoAndPlay("show");
+			}
 		}
 		
 		override public function rollOut( evnt:MouseEvent ):void {
@@ -53,13 +59,14 @@ package com.dmotiko.selu {
 			if(data.over) this.setOverAnimation( data.over );
 		}
 		
-		public function getOverAnimation():MovieClip { return _overAnimation; }
+		public function getOverAnimation():MovieClip { 
+			return _overAnimation; 
+		}
 		
-		public function setOverAnimation(value:MovieClip):void 
-		{
+		public function setOverAnimation(value:MovieClip):void {
 			_overAnimation = value;
-			this.addChild(_overAnimation);
-			_overAnimation.y = -_overAnimation.height - 15;
+			if ( !SeluSite.getApp() ) return;
+			SeluSite.getApp().getTopClip().addChild(_overAnimation);
 		}
 		
 	}
