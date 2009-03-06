@@ -23,7 +23,7 @@ package com.dmotiko.selu {
 				{ label: "sexies", over: new SexiesOver(), section: SeluSite.SEXIES },
 				{ label: "prensa", over: new PrensaOver(), section: SeluSite.PRENSA },
 				{ label: "contacto", over: new ContactoOver(), section: SeluSite.CONTACTO },
-				{ label: "nocasting", section: SeluSite.NOCASTING }
+				{ label: "nocasting", over: new NoCastingOver(), section: SeluSite.NOCASTING }
 			]);
 		}
 		

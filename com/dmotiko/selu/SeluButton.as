@@ -12,6 +12,7 @@ package com.dmotiko.selu {
 		private var spBack:Sprite;
 		//private var txtLabel:TextField;
 		protected var nColor:Number;
+		private var pBtn:Point;
 		
 		public function SeluButton() {
 			super();
@@ -33,10 +34,12 @@ package com.dmotiko.selu {
 			spBack.visible = true;
 			txtLabel.textColor = 0xFFFFFF;
 			if ( _overAnimation ) {
-				var p:Point = new Point( 0, 0);
-				p = this.localToGlobal( p );
-				_overAnimation.x =  p.x;
-				_overAnimation.y = p.y - _overAnimation.height - 15;
+				if(!pBtn){
+					pBtn = new Point( 0, 0);
+					pBtn = this.localToGlobal( pBtn );
+					_overAnimation.x =  pBtn.x;
+					_overAnimation.y = pBtn.y - _overAnimation.height - 5;
+				}
 				_overAnimation.gotoAndPlay("show");
 			}
 		}

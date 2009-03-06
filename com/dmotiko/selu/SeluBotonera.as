@@ -1,9 +1,8 @@
 ﻿package com.dmotiko.selu {
 	import com.general.*;
 	import flash.display.*;
-	import flash.events.Event;
-	import flash.events.MouseEvent;
-
+	import flash.events.*;
+	
 	public class SeluBotonera
 	extends BaseClip {
 		private var navBar:SeluButtonBar;
@@ -28,6 +27,7 @@
 			navBar = new SeluButtonBar();
 			navBar.x = 27;
 			navBar.y = 200;
+			navBar.addEventListener( Event.CHANGE, btnBarChange);
 			this.addChild(navBar);
 						
 			if (SeluSite.getApp()) {
@@ -36,6 +36,10 @@
 			} else {
 				homeBtn.visible = true;
 			}
+		}
+		
+		private function btnBarChange(evnt):void {
+			SeluSite.getApp().setSection( navBar.getActiveButton().getData().section );			
 		}
 		
 		private function rightButtonOut(e:MouseEvent):void 
@@ -54,7 +58,7 @@
 		}
 		
 		private function sectionChanged(e:Event):void {
-			if ( SeluSite.getApp().getSection() == SeluSite.NOCASTING ) {
+			if ( !e || SeluSite.getApp().getSection() == SeluSite.HOME) {
 				menuBtn.visible = true;
 				homeBtn.visible = false;
 				
