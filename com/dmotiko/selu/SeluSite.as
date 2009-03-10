@@ -1,8 +1,7 @@
 ﻿package com.dmotiko.selu {
 	import com.general.*;
-	import flash.display.Loader;
-	import flash.display.Sprite;
-	import flash.events.Event;
+	import flash.display.*;
+	import flash.events.*;
 	import flash.net.URLRequest;
 	
 	public class SeluSite
@@ -26,7 +25,15 @@
 						
 		public function SeluSite() {
 			super();
+			getChildByName("mcCenter").visible = false;
+			setCenterClip(getChildByName("mcCenter"));
+			//this.addEventListener( MouseEvent.MOUSE_DOWN, checkMouse);
 			isFullFlash();
+		}
+		
+		private function checkMouse(e:MouseEvent):void 
+		{
+			log("SeluSite checkMouse = "+e.stageX + " | "+ e.stageY);
 		}
 		
 		override protected function initSite():void {

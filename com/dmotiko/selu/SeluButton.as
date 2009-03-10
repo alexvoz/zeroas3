@@ -37,6 +37,7 @@ package com.dmotiko.selu {
 				if(!pBtn){
 					pBtn = new Point( 0, 0);
 					pBtn = this.localToGlobal( pBtn );
+					pBtn = SeluSite.getApp().getTopClip().globalToLocal( pBtn );
 					_overAnimation.x =  pBtn.x;
 					_overAnimation.y = pBtn.y - _overAnimation.height - 5;
 				}
