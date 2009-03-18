@@ -27,15 +27,9 @@
 			super();
 			getChildByName("mcCenter").visible = false;
 			setCenterClip(getChildByName("mcCenter"));
-			//this.addEventListener( MouseEvent.MOUSE_DOWN, checkMouse);
 			isFullFlash();
 		}
-		
-		private function checkMouse(e:MouseEvent):void 
-		{
-			log("SeluSite checkMouse = "+e.stageX + " | "+ e.stageY);
-		}
-		
+				
 		override protected function initSite():void {
 			mainContent = this.addChild( new Sprite() ) as Sprite;
 			topClip = this.addChild( new Sprite() ) as Sprite;

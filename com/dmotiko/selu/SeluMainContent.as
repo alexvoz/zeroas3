@@ -13,6 +13,7 @@
 		
 		private var homeSection:MovieClip;
 		private var coleccionSection:MovieClip;
+		private var comprasSection:MovieClip;
 		private var backstageSection:MovieClip;
 		private var nocastingSection:MovieClip;
 		private var puntosVentaSection:MovieClip;
@@ -25,20 +26,22 @@
 		private var initPositions:Array;
 		private var nSectionCount:Number;
 		private var timerSections:Timer;
-			
+					
 		override protected function initClip():void {
 			var nOffset = 700;
 			initPositions = [ new Point( 0, -nOffset), new Point(nOffset, -nOffset), new Point(nOffset, 0), new Point( nOffset, nOffset), new Point(0, nOffset), new Point( -nOffset, nOffset), new Point( -nOffset, 0) ];
 			initPositions.push( initPositions[0] );
 			initPositions.push( initPositions[1] );
+			initPositions.push( initPositions[2] );
 			initPositions = ArrayUtil.randomArray(initPositions);
 						
 			aSections = new Array();
 			homeSection = this.getChildByName("mcHome") as MovieClip;
 			aSections.push( homeSection );
 			nocastingSection = this.getChildByName("mcNoCasting") as MovieClip;
-					
 			aSections.push( nocastingSection );
+			comprasSection = this.getChildByName("mcCompras") as MovieClip;
+			aSections.push( comprasSection );
 			coleccionSection = this.getChildByName("mcColeccion") as MovieClip;
 			aSections.push( coleccionSection );
 			backstageSection = this.getChildByName("mcBackstage") as MovieClip;
