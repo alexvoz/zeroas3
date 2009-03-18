@@ -50,6 +50,11 @@
 				case SeluSite.CONTACTO:
 				p = new Point( 12, 470);
 				break;
+				
+				case SeluSite.NOCASTING:
+				p = new Point(47, 320);
+				break;
+				
 			}
 			//this.killTween("moveClipX");
 			tX = new Tween( this, "x", Regular.easeOut, this.x, p.x, 0.5, true);

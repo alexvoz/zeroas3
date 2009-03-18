@@ -15,7 +15,7 @@
 		private var coleccionSection:MovieClip;
 		private var comprasSection:MovieClip;
 		private var backstageSection:MovieClip;
-		private var nocastingSection:MovieClip;
+		private var nocastingSection:SeluBotonera;
 		private var puntosVentaSection:MovieClip;
 		private var novedadesSection:MovieClip;
 		private var sexiesSection:MovieClip;
@@ -38,7 +38,7 @@
 			aSections = new Array();
 			homeSection = this.getChildByName("mcHome") as MovieClip;
 			aSections.push( homeSection );
-			nocastingSection = this.getChildByName("mcNoCasting") as MovieClip;
+			nocastingSection = this.getChildByName("mcNoCasting") as SeluBotonera;
 			aSections.push( nocastingSection );
 			comprasSection = this.getChildByName("mcCompras") as MovieClip;
 			aSections.push( comprasSection );
@@ -73,7 +73,7 @@
 		}
 				
 		private function nextSection(e:TimerEvent):void {
-			var nSections = (nSectionCount == 0) ? 1 : 4;
+			var nSections = (nSectionCount == -1) ? 1 : 4;
 			for (var i:int = 0; i < nSections; i++) {
 				var theSection = aSections[nSectionCount];
 				if (theSection) {
@@ -126,14 +126,18 @@
 			}
 			var tween:Tween;
 			if( tweenSection != nocastingSection){
-				tween = new Tween( tweenSection, "y", Regular.easeOut, tweenSection.y, tweenSection.y-tweenSection.height, 0.5, true);
+				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y-tweenSection.height, 0.4, true);
 			} else {
-				tween = new Tween( tweenSection, "y", Regular.easeOut, tweenSection.y, tweenSection.y+tweenSection.height, 0.5, true);
+				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y + tweenSection.height, 0.4, true);
+			}
+			if (tweenSection != homeSection) {
+				var tween2:Tween = new Tween( homeSection, "y", Strong.easeOut, homeSection.y, homeSection.y - homeSection.height, 0.4, true);
+				tween2.addEventListener( TweenEvent.MOTION_FINISH, homeSectionMoveEnd);
 			}
 			tween.addEventListener( TweenEvent.MOTION_FINISH, activeSectionMoveEnd);
-			registerTween( "activeSectionMove", tween);
+			registerTween("activeSectionMove", tween);
 		}
-		
+				
 		private function activeSectionMoveEnd(e:TweenEvent):void {
 			var old = activeSection;
 			activeSection = (e.currentTarget as Tween).obj as MovieClip;
@@ -141,10 +145,7 @@
 			(e.currentTarget as Tween).yoyo();
 			(e.currentTarget as Tween).removeEventListener( TweenEvent.MOTION_FINISH, activeSectionMoveEnd);
 			(e.currentTarget as Tween).addEventListener( TweenEvent.MOTION_FINISH, activeSectionYoYoEnd);
-			if (activeSection != homeSection) {
-				var tween:Tween = new Tween( homeSection, "y", Regular.easeOut, homeSection.y, homeSection.y - homeSection.height, 0.5, true);
-				tween.addEventListener( TweenEvent.MOTION_FINISH, homeSectionMoveEnd);
-			}
+			
 		}
 		
 		private function activeSectionYoYoEnd(e:TweenEvent):void 
@@ -152,6 +153,7 @@
 			
 			if (activeSection != nocastingSection) {
 				setChildIndex( nocastingSection, getChildIndex( homeSection ) - 1 );
+				nocastingSection.checkSection();
 			}
 			
 		}
@@ -159,8 +161,8 @@
 		private function homeSectionMoveEnd(e:TweenEvent):void {
 			(e.currentTarget as Tween).yoyo();
 			setChildIndex( homeSection, getChildIndex( activeSection ) - 1 );
+			setChildIndex( comprasSection, getChildIndex( activeSection ) - 1 );
 			(e.currentTarget as Tween).removeEventListener( TweenEvent.MOTION_FINISH, homeSectionMoveEnd);
-		
 		}
 		
 	}

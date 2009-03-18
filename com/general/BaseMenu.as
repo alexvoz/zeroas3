@@ -70,11 +70,20 @@ package com.general {
 		public function activeBtn( evnt:MouseEvent ):void {
 			if(activeButton) activeButton.setActive(false);
 			activeButton = evnt.currentTarget as BaseMenuBtn;
-			evnt.currentTarget.setActive( true );
+			activeButton.setActive( true );
 			this.dispatchEvent( new Event( Event.CHANGE ) );
 		}
 		public function getActiveButton():BaseMenuBtn {
 			return this.activeButton;
+		}
+		public function setActiveButton( btn:BaseMenuBtn ):void {
+			if( activeButton ) this.activeButton.setActive(false);
+			if ( !btn ) {
+				this.activeButton = undefined;
+			} else {
+				var n = aBtns.indexOf( btn );
+				if ( n >= 0) this.aBtns[n].setActive(true);
+			}
 		}
 		
 		public function getOffset():Number { return nOffset; }

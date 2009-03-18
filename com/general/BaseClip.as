@@ -12,7 +12,7 @@
 		public static var CLIP_SHOWED:String = "baseclip_showed";
 		public static var CLIP_HIDDEN:String = "baseclip_hidden";
 		public static var CLIP_RESIZED:String = "baseclip_resized";
-		
+				
 		protected var data:Object;
 		protected var tweens:Array;
 		protected var bShowed:Boolean;
@@ -148,6 +148,10 @@
 			
 		}
 		
+		/**
+		 * 
+		 * @param	arg | you can pass a Tween or a String/key
+		 */
 		protected function killTween(arg:*):void {
 			return;
 			var tween:Tween;

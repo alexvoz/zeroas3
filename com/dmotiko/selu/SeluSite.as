@@ -33,7 +33,7 @@
 		override protected function initSite():void {
 			mainContent = this.addChild( new Sprite() ) as Sprite;
 			topClip = this.addChild( new Sprite() ) as Sprite;
-			
+			this.sSection = SeluSite.HOME;
 			super.initSite();
 			
 		}
