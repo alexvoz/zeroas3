@@ -148,13 +148,22 @@
 			
 		}
 		
-		protected function killTween(tween:Tween):void {
+		protected function killTween(arg:*):void {
+			return;
+			var tween:Tween;
+			if (arg is Tween) tween = arg;
+			else tween = getTween(arg as String);
+			if ( !tween ) return;
 			// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
 			for (var i:Number = 0; i < tweens.length ; i++) {
-				if ( tweens[i].tween == tween ) tweens.splice( i, 1 );
+				if ( tweens[i].tween == tween ) {
+					//(tweens[i] as Tween).stop();
+					tweens.splice( i, 1 );
+				}
 			}
 		}
 		protected function getTween(key:String):Tween {
+			if ( !tweens ) return undefined;
 			// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
 			for (var i:Number = 0; i < tweens.length ; i++) {
 				if ( tweens[i].key == key ) return tweens[i].tween;

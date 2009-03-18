@@ -102,7 +102,7 @@ package com.general {
 		}
 		public function setSection(sSection:String):void {
 			this.sSection = sSection;
-			log( "WebSite | setSection= "+sSection, true);
+			log( "WebSite | setSection= " + sSection, true);
 			dispatchEvent( new Event( WebSite.SECTION_CHANGED ) );
 			if ( this.loaderInfo.parameters["analytics"] ) {
 				var url:String = this.loaderInfo.parameters["analytics"]+"('"+sSection+"')";
