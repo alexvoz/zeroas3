@@ -12,6 +12,7 @@
 	extends BaseClip {
 		
 		private var homeSection:MovieClip;
+		private var soundSection:MovieClip;
 		private var coleccionSection:MovieClip;
 		private var comprasSection:MovieClip;
 		private var backstageSection:MovieClip;
@@ -26,18 +27,21 @@
 		private var initPositions:Array;
 		private var nSectionCount:Number;
 		private var timerSections:Timer;
-					
+							
 		override protected function initClip():void {
 			var nOffset = 700;
 			initPositions = [ new Point( 0, -nOffset), new Point(nOffset, -nOffset), new Point(nOffset, 0), new Point( nOffset, nOffset), new Point(0, nOffset), new Point( -nOffset, nOffset), new Point( -nOffset, 0) ];
 			initPositions.push( initPositions[0] );
 			initPositions.push( initPositions[1] );
 			initPositions.push( initPositions[2] );
+			initPositions.push( initPositions[3] );
 			initPositions = ArrayUtil.randomArray(initPositions);
 						
 			aSections = new Array();
 			homeSection = this.getChildByName("mcHome") as MovieClip;
 			aSections.push( homeSection );
+			soundSection = this.getChildByName("mcSound") as MovieClip;
+			aSections.push( soundSection );
 			nocastingSection = this.getChildByName("mcNoCasting") as SeluBotonera;
 			aSections.push( nocastingSection );
 			comprasSection = this.getChildByName("mcCompras") as MovieClip;
@@ -160,6 +164,7 @@
 				
 		private function homeSectionMoveEnd(e:TweenEvent):void {
 			(e.currentTarget as Tween).yoyo();
+			setChildIndex( soundSection, getChildIndex( activeSection ) - 1 );
 			setChildIndex( homeSection, getChildIndex( activeSection ) - 1 );
 			setChildIndex( comprasSection, getChildIndex( activeSection ) - 1 );
 			(e.currentTarget as Tween).removeEventListener( TweenEvent.MOTION_FINISH, homeSectionMoveEnd);

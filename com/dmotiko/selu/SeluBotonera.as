@@ -86,7 +86,6 @@
 		}
 		
 		override protected function tweenFinished(key:String, tween:Tween):void {
-			trace("tweenFinished= "+bIsDown);
 			navBar.mouseChildren = navBar.mouseEnabled = bIsDown;
 		}
 		
