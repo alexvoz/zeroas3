@@ -18,6 +18,7 @@
 		public static const NOCASTING:String = "SELU_NOCASTING";
 		private var mainContent:Sprite;
 		private var topClip:Sprite;
+		private var seluLoader:SeluLoader;
 				
 		public static function getApp():SeluSite {
 			return SeluSite(app);
@@ -39,15 +40,27 @@
 		}
 		
 		override protected function externalContentLoaded( evnt:Event = undefined):void {
+			getChildByName("mcSeluLoader").addEventListener( Event.CHANGE, hideLoader);
 			var mLoader:Loader = new Loader(); 
 			var mRequest:URLRequest = new URLRequest("mainContent.swf"+getNoCache()); 
 			mLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandler); 
+			mLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgressHandler);
 			mLoader.load(mRequest);
-			function onCompleteHandler(loadEvent:Event) {         
-				mainContent.addChild(loadEvent.currentTarget.content);
-			}
 			
-			
+		}
+		
+		private function hideLoader(e:Event):void {
+			//getChildByName("mcSeluLoader").visible = false;
+			removeChild( getChildByName("mcSeluLoader") );
+		}
+		
+		private function onProgressHandler(evnt:ProgressEvent) {         
+			var nP:Number = Math.round( evnt.bytesLoaded * 100 / evnt.bytesTotal );
+			(getChildByName("mcSeluLoader") as SeluLoader).setPos( nP );
+		}
+		
+		private function onCompleteHandler(loadEvent:Event) {         
+			mainContent.addChild(loadEvent.currentTarget.content);
 		}
 		
 		public function getTopClip():Sprite { return topClip; }

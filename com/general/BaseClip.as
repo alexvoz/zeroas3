@@ -24,12 +24,12 @@
 			var p:BaseClip = parent as BaseClip;
 			if ( p ) {
 				addEventListener( CLIP_LOADED, p.childLoaded );
-				function dispatch(evnt) {
-					removeEventListener( Event.ENTER_FRAME, dispatch );
-					dispatchEvent( new Event( CLIP_LOADED ) );
-				}
-				addEventListener( Event.ENTER_FRAME, dispatch);
 			}
+			function dispatch(evnt) {
+				removeEventListener( Event.ENTER_FRAME, dispatch );
+				dispatchEvent( new Event( CLIP_LOADED ) );
+			}
+			addEventListener( Event.ENTER_FRAME, dispatch);
 		}
 		
 		/**
