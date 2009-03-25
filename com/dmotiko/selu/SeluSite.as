@@ -2,8 +2,8 @@
 	import com.general.*;
 	import flash.display.*;
 	import flash.events.*;
-	import flash.net.URLRequest;
-	
+	import flash.net.*;
+		
 	public class SeluSite
 	extends WebSite {
 		
@@ -19,6 +19,7 @@
 		private var mainContent:Sprite;
 		private var topClip:Sprite;
 		private var seluLoader:SeluLoader;
+		private var coleccionXMLList:XMLList;
 				
 		public static function getApp():SeluSite {
 			return SeluSite(app);
@@ -37,6 +38,27 @@
 			this.sSection = SeluSite.HOME;
 			super.initSite();
 			
+		}
+		
+		override protected function loadExternalContent():void {
+			var loaderXML:URLLoader = new URLLoader();
+			loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
+			loaderXML.addEventListener( Event.COMPLETE, coleccionLoaded );
+			loaderXML.load( new URLRequest( "coleccion.xml" ) );
+		}
+		
+		private function coleccionLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				coleccionXMLList = myXML.children()[0].child("photo");
+				externalContentLoaded( undefined );
+								
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				trace("Could not parse the XML")
+				trace(e.message)
+			}
 		}
 		
 		override protected function externalContentLoaded( evnt:Event = undefined):void {
@@ -64,6 +86,8 @@
 		}
 		
 		public function getTopClip():Sprite { return topClip; }
+		
+		public function getCollectionData():XMLList { return coleccionXMLList;	}
 		
 	}
 	
