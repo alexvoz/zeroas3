@@ -19,7 +19,10 @@
 		private var mainContent:Sprite;
 		private var topClip:Sprite;
 		private var seluLoader:SeluLoader;
-		private var coleccionXMLList:XMLList;
+		private var collectionXMLList:XMLList;
+		private var collection_loaderXML:URLLoader;
+		private var lastCollection_loaderXML:URLLoader;
+		private var lastCollectionXMLList:XMLList;
 				
 		public static function getApp():SeluSite {
 			return SeluSite(app);
@@ -41,18 +44,43 @@
 		}
 		
 		override protected function loadExternalContent():void {
-			var loaderXML:URLLoader = new URLLoader();
-			loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
-			loaderXML.addEventListener( Event.COMPLETE, coleccionLoaded );
-			loaderXML.load( new URLRequest( "coleccion.xml" ) );
+			collection_loaderXML = new URLLoader();
+			collection_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
+			collection_loaderXML.addEventListener( Event.COMPLETE, collectionLoaded );
+			collection_loaderXML.load( new URLRequest( "collection.xml" ) );
+			
+			lastCollection_loaderXML = new URLLoader();
+			lastCollection_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
+			lastCollection_loaderXML.addEventListener( Event.COMPLETE, lastCollectionLoaded );
+			lastCollection_loaderXML.load( new URLRequest( "lastCollection.xml" ) );
 		}
 		
-		private function coleccionLoaded(e:Event):void {
+		private function lastCollectionLoaded(e:Event):void {
 			try{
 				//Convert the downloaded text into an XML
 				var myXML:XML = new XML(e.target.data)
-				coleccionXMLList = myXML.children()[0].child("photo");
+				lastCollectionXMLList = myXML.children()[0].child("photo");
+				checkXML();
+												
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				trace("Could not parse the XML")
+				trace(e.message)
+			}
+		}
+		
+		private function checkXML():void {
+			if ( lastCollectionXMLList && collectionXMLList ) {
 				externalContentLoaded( undefined );
+			}
+		}
+		
+		private function collectionLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				collectionXMLList = myXML.children()[0].child("photo");
+				checkXML();
 								
 			} catch (e:TypeError){
 				//Could not convert the data, probavlu because is not formated correctly
@@ -87,7 +115,8 @@
 		
 		public function getTopClip():Sprite { return topClip; }
 		
-		public function getCollectionData():XMLList { return coleccionXMLList;	}
+		public function getCollectionData():XMLList { return collectionXMLList;	}
+		public function getLastCollectionData():XMLList { return lastCollectionXMLList;	}
 		
 	}
 	

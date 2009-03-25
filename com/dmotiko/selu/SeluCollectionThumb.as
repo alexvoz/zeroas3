@@ -10,43 +10,40 @@ package com.dmotiko.selu {
 	extends BaseMenuBtn {
 		
 		private var loader:Loader;
-		private var shadowAlpha:Tween;
 		private var clipAlpha:Tween;
+		private var mcPhoto:Sprite;
 		
 		override protected function initClip():void {
-			mcShadow.alpha = 0.6;
-			mcShadow.buttonMode = true;
-			mcShadow.useHandCursor = true;
-			mcShadow.addEventListener( MouseEvent.ROLL_OVER, rollOver);
-			mcShadow.addEventListener( MouseEvent.ROLL_OUT, rollOut);
-			mcPhoto.mask = mcMask;
+			mcPhoto = this.addChild( new Sprite() ) as Sprite;
+			mcPhoto.graphics.drawRect(0, 0, 63, 63);
+			mcPhoto.buttonMode = true;
+			mcPhoto.addEventListener( MouseEvent.ROLL_OVER, rollOver);
+			mcPhoto.addEventListener( MouseEvent.ROLL_OUT, rollOut);
+			
 		}
 		
 		override protected function refreshData():void {
-			trace( data );
-			/*
 			var sNoCache:String = ( SeluSite.getApp() ) ? SeluSite.getApp().getNoCache() : "";
-			var request:URLRequest = new URLRequest( photo.getIcon() + sNoCache );
+			var request:URLRequest = new URLRequest( (data as XML).attribute("mini") + sNoCache );
 			this.loader = new Loader();
 			this.loader.load( request );
 			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
 			mcPhoto.addChild( this.loader );
-			*/
 		}
 		
 		override public function rollOver( evnt:MouseEvent):void {
-			if (shadowAlpha) shadowAlpha.stop();
-			shadowAlpha = new Tween( mcShadow, "alpha", Regular.easeIn, mcShadow.alpha, 0, 1, true);
+			if (clipAlpha) clipAlpha.stop();
+			clipAlpha = new Tween( mcPhoto, "alpha", Regular.easeIn, mcPhoto.alpha, 1, 0.3, true);
 		}
 		override public function rollOut( evnt:MouseEvent):void {
 			if ( bActive ) return;
-			if (shadowAlpha) shadowAlpha.stop();
-			shadowAlpha = new Tween( mcShadow, "alpha", Regular.easeOut, mcShadow.alpha, 0.6, 1, true);
+			if (clipAlpha) clipAlpha.stop();
+			clipAlpha = new Tween( mcPhoto, "alpha", Regular.easeIn, mcPhoto.alpha, 0.2, 0.3, true);
 		}
 		
 		private function thumbInit( evnt:Event ):void {
-			mcPhoto.alpha = 0;
-			clipAlpha = new Tween( mcPhoto, "alpha", Regular.easeOut, 0, 1, 1, true);
+			mcPhoto.alpha = 0.2;
+			//clipAlpha = new Tween( mcPhoto, "alpha", Regular.easeOut, 0, 0.2, 1, true);
 		}
 	}
 	

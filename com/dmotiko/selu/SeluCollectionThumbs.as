@@ -6,11 +6,15 @@
 	import fl.transitions.easing.*;
 	import flash.display.*;
 	import flash.events.*;
+	import flash.geom.Point;
 	
 	public class SeluCollectionThumbs
 	extends BaseMenu {
 		
 		private var mcContainer:MovieClip;
+		private var tBtnPrev:Tween;
+		private var tBtnNext:Tween;
+		private var tContainer:Tween;
 		
 		override protected function initClip():void {
 			super.initClip();
@@ -28,12 +32,26 @@
 			mcPrev.addEventListener( MouseEvent.CLICK, scrollThumbs);
 			mcNext.addEventListener( MouseEvent.CLICK, scrollThumbs);
 			
-			mcNext.visible = mcPrev.visible = false;
+			mcDrag.visible = mcBar.visible = mcNext.visible = mcPrev.visible = false;
 			
 			nSpace = 7;
 			setView( SeluCollectionThumb );
+			
 		}
 		
+		override protected function refreshData():void {
+			trace("SeluCollectionThumbs refreshData");
+			aBtns = new Array();
+			var oData:XMLList = getData() as XMLList;			
+			for ( var i:int = 0; i < oData.length(); i++) {
+				var item:BaseMenuBtn = new view();
+				item.setData( oData[i] );
+				item.addEventListener( MouseEvent.CLICK, activeBtn );
+				aBtns.push(item);
+			}
+			layout();
+		}
+						
 		private function checkScroll( evnt:TweenEvent = undefined ):void {
 			var nDif:Number = mcContainer.height - mcMask.height;
 			var bPrev:Boolean = nDif > 0 && mcContainer.y < mcMask.y;
@@ -47,11 +65,11 @@
 				mcPrev.mouseEnabled = true;
 				mcPrev.visible = true;
 				if (mcPrev.alpha < 1 ) {
-					tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 1, 1, true);
+					tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 1, 0.5, true);
 				}
 			} else if( mcPrev.visible && mcPrev.alpha > 0) {
 				mcPrev.mouseEnabled = false;
-				tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 0, 1, true);
+				tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 0, 0.5, true);
 				tBtnPrev.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
 			}
 			
@@ -59,11 +77,11 @@
 				mcNext.mouseEnabled = true;
 				mcNext.visible = true;
 				if (mcNext.alpha < 1 ) {
-					tBtnPrev = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 1, 1, true);
+					tBtnPrev = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 1, 0.5, true);
 				}
 			} else if( mcNext.visible && mcNext.alpha > 0) {
 				mcNext.mouseEnabled = false;
-				tBtnNext = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 0, 1, true);
+				tBtnNext = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 0, 0.5, true);
 				tBtnNext.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
 			}
 			
@@ -77,23 +95,25 @@
 			
 			var nY:Number = 0;
 			var nX:Number = 0;
-			var nLimit:Number = ( aBtns.length >= 8) ? aBtns.length : 8;
+			var nLimit:Number = aBtns.length;
 			for (var i:int = 0; i < nLimit; i++){
 				var item:Sprite;
-				if (aBtns[i]) item = aBtns[i];
-				else item = new PortfolioThumbEmpty();
+				item = aBtns[i];
 				
-				if ( i != 0 && i % 4 == 0) {
+				//si es multiplo de 2 y no es el primero bajo de linea
+				if ( i != 0 && i % 2 == 0) {
 					nX = 0;
 					nY += item.height + nSpace;
 				}
+				
 				item.x = nX;
 				item.y = nY;
 				nX += item.width + nSpace;
+				
 				if( aBtns[i] ) item.addEventListener( MouseEvent.CLICK, activeBtn);
 				mcContainer.addChild(item);
 			}
-			
+			this.dispatchEvent( new Event( Event.COMPLETE ) );
 			checkScroll();
 		}
 		
@@ -122,7 +142,8 @@
 		}
 		
 		override public function activeBtn( evnt:MouseEvent ):void {
-			super.activeBtn( evnt );
+			if (getActiveButton() == evnt.currentTarget as BaseMenuBtn) return;
+			super.activeBtn(evnt);		
 			var btn:DisplayObject = (evnt.currentTarget as DisplayObject);
 			var check:Boolean = mcMask.hitTestObject( btn );
 			if ( !check ) {

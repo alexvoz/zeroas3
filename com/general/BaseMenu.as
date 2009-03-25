@@ -54,6 +54,7 @@ package com.general {
 				}
 				this.addChild(item);
 			}
+			this.dispatchEvent( new Event( Event.COMPLETE ) );
 		}
 		
 		public function setVertical(value:Boolean):void {
@@ -82,7 +83,7 @@ package com.general {
 				this.activeButton = undefined;
 			} else {
 				var n = aBtns.indexOf( btn );
-				if ( n >= 0) this.aBtns[n].setActive(true);
+				if ( n >= 0) (this.aBtns[n] as BaseMenuBtn).setActive(true);
 			}
 		}
 		
