@@ -9,6 +9,8 @@
 	extends BaseClip {
 		
 		override protected function initClip():void {
+			visible = false;
+			alpha = 0;
 			if ( SeluSite.getApp() ) {
 				SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			}
@@ -18,6 +20,8 @@
 			var tX:Tween;
 			var tY:Tween;
 			var p:Point;
+			visible = false;
+			alpha = 0;
 			switch( SeluSite.getApp().getSection() ) {
 				case SeluSite.HOME:
 				p = new Point( 47, 320);
@@ -32,7 +36,9 @@
 				break;
 				
 				case SeluSite.PUNTOVENTA:
-				p = new Point( 12, 470);
+				p = new Point( 75, 445);
+				visible = true;
+				alpha = 1;
 				break;
 				
 				case SeluSite.NOVEDADES:

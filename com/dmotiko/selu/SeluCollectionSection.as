@@ -40,8 +40,8 @@
 		}
 		
 		private function thumbs_complete(e:Event):void {
-			(thumbs.getButtons()[0] as BaseMenuBtn).rollOver( undefined );
-			(thumbs.getButtons()[0] as BaseMenuBtn).dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+			thumbs.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+			thumbs.getButtons()[0].rollOver( undefined );
 		}
 		
 		private function toggle_collection(e:MouseEvent):void {

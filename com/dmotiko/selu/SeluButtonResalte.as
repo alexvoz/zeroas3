@@ -31,11 +31,11 @@
 			txt.autoSize = TextFieldAutoSize.LEFT;
 			rect.addEventListener( MouseEvent.ROLL_OUT, rollOut);
 			rect.addEventListener( MouseEvent.ROLL_OVER, rollOver);
+			
 		}
 		
 		override protected function refreshData():void {
-			if ( data.space ) return;
-			txt.text = (data.label as String).toUpperCase();
+			txt.text = data.label.toUpperCase();
 			rect.width = txt.width;
 			overAnimation.x = txt.x;
 			overAnimation.y = txt.y + 0;
@@ -46,12 +46,12 @@
 		override public function rollOut( e:MouseEvent ):void {
 			if ( bActive ) return;
 			var _mask:MovieClip = overAnimation.getChildByName("mcMask") as MovieClip;
+			_mask.removeEventListener(Event.ENTER_FRAME, foward);
 			_mask.addEventListener( Event.ENTER_FRAME, rewind);
 		}
 		
 		private function rewind(e:Event):void {
 			var _mask:MovieClip = e.currentTarget as MovieClip;
-			_mask.removeEventListener(Event.ENTER_FRAME, foward);
 			if ( _mask.currentFrame == 1) {
 				_mask.removeEventListener(Event.ENTER_FRAME, rewind);
 			} else {
@@ -60,12 +60,12 @@
 		}
 		override public function rollOver( e:MouseEvent ):void {
 			var _mask:MovieClip = overAnimation.getChildByName("mcMask") as MovieClip;
+			_mask.removeEventListener(Event.ENTER_FRAME, rewind);
 			_mask.addEventListener( Event.ENTER_FRAME, foward);
 		}
 		
 		private function foward(e:Event):void {
 			var _mask:MovieClip = e.currentTarget as MovieClip;
-			_mask.removeEventListener(Event.ENTER_FRAME, rewind);
 			if ( _mask.currentFrame == _mask.totalFrames) {
 				_mask.removeEventListener(Event.ENTER_FRAME, foward);
 			} else {

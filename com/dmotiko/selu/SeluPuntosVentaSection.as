@@ -5,9 +5,12 @@
 	import flash.display.*;
 	import flash.events.*
 	import com.general.*
+	import flash.xml.XMLNode;
 		
 	public class SeluPuntosVentaSection
 	extends BaseClip {
+		private var btnBar:SeluPuntosVentaMenu;
+		private var info:SeluPuntosVentaInfo;
 						
 		override protected function initClip():void {
 			super.initClip();
@@ -16,29 +19,34 @@
 			SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			
 			//recolecto los movieclips que están en el fla
-						
+			info = getChildByName("mcInfo") as SeluPuntosVentaInfo;
+			
 			//inicializo los clips
-			var btnBar:SeluPuntosVentaMenu = new SeluPuntosVentaMenu();
+			btnBar = new SeluPuntosVentaMenu();
 			addChild(btnBar);
 			btnBar.x = 515;
 			btnBar.y = 75;
 			btnBar.setView( SeluButtonResalte );
-			
-			var aData:Array = new Array();
-			aData.push( { label: "Exclusivos", data: "EXCLUSIVOS" } );
-			aData.push( { space: true } );
-			aData.push( { label: "Capital Federal", data: "EXCLUSIVOS" } );
-			aData.push( { label: "Zona Sur", data: "EXCLUSIVOS" } );
-			
-			btnBar.setData( aData );
-			//var btn:SeluButtonResalte = new SeluButtonResalte();
-			//btn.setData( { label: "Pedazo de puto", data: "silvio" } );
-			//btnBar.addChild( btn );
-			
+			btnBar.addEventListener( Event.CHANGE, menu_changed);
+						
+			btnBar.setData( new XML( "<root>" + SeluSite.getApp().getStoresData().toXMLString() + "</root>" ) );
+		}
+		
+		private function menu_changed(e:Event):void {
+			var list:XMLList = SeluSite.getApp().getStoresData();
+			var stores:XML = new XML( "<root>" + list.toXMLString() + "</root>" );
+			var theNode:XML;
+			for each(var nodo:XML in stores.elements()){
+				if(nodo.@id == btnBar.getActiveButton().getData().data ) theNode = nodo;
+			}
+			info.setData( theNode );			
 		}
 		
 		private function section_changed(e:Event):void {
-			
+			if ( SeluSite.getApp().getSection() == SeluSite.PUNTOVENTA ) {
+				btnBar.getButtons()[0].rollOver(undefined);
+				btnBar.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+			}
 		}
 		
 	}

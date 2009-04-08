@@ -49,7 +49,7 @@
 			if ( SeluSite.getApp().getSection() == SeluSite.BACKSTAGE ) {
 				videoPlayer.play();
 			} else {
-				videoPlayer.seekPercent(0);
+				videoPlayer.seek(0);
 				videoPlayer.stop();
 			}
 		}

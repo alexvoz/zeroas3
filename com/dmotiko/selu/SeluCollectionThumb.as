@@ -42,7 +42,7 @@ package com.dmotiko.selu {
 		}
 		
 		private function thumbInit( evnt:Event ):void {
-			mcPhoto.alpha = 0.2;
+			if(!bActive) mcPhoto.alpha = 0.2;
 			//clipAlpha = new Tween( mcPhoto, "alpha", Regular.easeOut, 0, 0.2, 1, true);
 		}
 	}

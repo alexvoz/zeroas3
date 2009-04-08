@@ -135,7 +135,7 @@
 		
 		// TODO esto vuela más tarde
 		override public function setSection( s:String ):void {
-			if ( s == SeluSite.NOVEDADES || s == SeluSite.PRENSA ) return;
+			if ( s == SeluSite.NOVEDADES || s == SeluSite.PRENSA || s== SeluSite.SEXIES ) return;
 			super.setSection( s );
 		}
 		
