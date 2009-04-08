@@ -40,9 +40,10 @@
 		}
 		
 		override protected function refreshData():void {
-			trace("SeluCollectionThumbs refreshData");
+			//trace("SeluCollectionThumbs refreshData");
 			aBtns = new Array();
-			var oData:XMLList = getData() as XMLList;			
+			var oData:XMLList = getData() as XMLList;
+			//SeluSite.getApp().log( "SeluCollectionThumbs | refreshData= " + oData.length() );
 			for ( var i:int = 0; i < oData.length(); i++) {
 				var item:BaseMenuBtn = new view();
 				item.setData( oData[i] );
@@ -128,11 +129,11 @@
 			var nScroll:Number = mcContainer.getChildAt(0).height + nSpace;
 			if ( evnt.currentTarget == mcPrev) {
 				nEnd = mcContainer.y + nScroll;
-				if (nEnd > 0) return;
+				//if (nEnd > 0) return;
 				
 			} else if ( evnt.currentTarget == mcNext) {
 				nEnd = mcContainer.y - nScroll;
-				if (nEnd < -mcMask.width) return;
+				//if (nEnd < -mcMask.height) return;
 			}
 			if (tContainer){  tContainer.stop(); }
 			tContainer = new Tween( mcContainer, "y", Strong.easeOut, mcContainer.y, nEnd, 1.5, true);

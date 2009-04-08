@@ -114,9 +114,11 @@
 				break;
 				case SeluSite.NOVEDADES:
 				tweenSection = novedadesSection;
+				return;
 				break;
 				case SeluSite.PRENSA:
 				tweenSection = prensaSection;
+				return;
 				break;
 				case SeluSite.SEXIES:
 				tweenSection = sexiesSection;

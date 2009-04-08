@@ -19,11 +19,18 @@
 		private var mainContent:Sprite;
 		private var topClip:Sprite;
 		private var seluLoader:SeluLoader;
-		private var collectionXMLList:XMLList;
+		
+		/* data XML */
 		private var collection_loaderXML:URLLoader;
-		private var lastCollection_loaderXML:URLLoader;
-		private var lastCollectionXMLList:XMLList;
-				
+		private var collectionBasic_loaderXML:URLLoader;
+		private var stores_loaderXML:URLLoader;
+		private var sexies_loaderXML:URLLoader;
+		private var collectionXMLList:XMLList;
+		private var collectionBasicXMLList:XMLList;
+		private var storesXMLList:XMLList;
+		private var sexiesXMLList:XMLList;		
+		/* end data XML*/
+						
 		public static function getApp():SeluSite {
 			return SeluSite(app);
 		}
@@ -49,17 +56,40 @@
 			collection_loaderXML.addEventListener( Event.COMPLETE, collectionLoaded );
 			collection_loaderXML.load( new URLRequest( "collection.xml" ) );
 			
-			lastCollection_loaderXML = new URLLoader();
-			lastCollection_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
-			lastCollection_loaderXML.addEventListener( Event.COMPLETE, lastCollectionLoaded );
-			lastCollection_loaderXML.load( new URLRequest( "lastCollection.xml" ) );
+			collectionBasic_loaderXML = new URLLoader();
+			collectionBasic_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
+			collectionBasic_loaderXML.addEventListener( Event.COMPLETE, collectionBasicLoaded );
+			collectionBasic_loaderXML.load( new URLRequest( "collectionBasic.xml" ) );
+			
+			stores_loaderXML = new URLLoader();
+			stores_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
+			stores_loaderXML.addEventListener( Event.COMPLETE, storesLoaded );
+			stores_loaderXML.load( new URLRequest( "stores.xml" ) );
+			
+			sexies_loaderXML = new URLLoader();
+			sexies_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
+			sexies_loaderXML.addEventListener( Event.COMPLETE, sexiesLoaded );
+			sexies_loaderXML.load( new URLRequest( "sexies.xml" ) );
 		}
 		
-		private function lastCollectionLoaded(e:Event):void {
+		private function sexiesLoaded(e:Event):void {
 			try{
 				//Convert the downloaded text into an XML
 				var myXML:XML = new XML(e.target.data)
-				lastCollectionXMLList = myXML.children()[0].child("photo");
+				sexiesXMLList = myXML.child("locales");
+				checkXML();
+												
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				trace("Could not parse the XML")
+				trace(e.message)
+			}
+		}
+		private function storesLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				storesXMLList = myXML.child("locales");
 				checkXML();
 												
 			} catch (e:TypeError){
@@ -69,9 +99,17 @@
 			}
 		}
 		
-		private function checkXML():void {
-			if ( lastCollectionXMLList && collectionXMLList ) {
-				externalContentLoaded( undefined );
+		private function collectionBasicLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				collectionBasicXMLList = myXML.children()[0].child("photo");
+				checkXML();
+												
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				trace("Could not parse the XML")
+				trace(e.message)
 			}
 		}
 		
@@ -87,6 +125,18 @@
 				trace("Could not parse the XML")
 				trace(e.message)
 			}
+		}
+		
+		private function checkXML():void {
+			if ( collectionBasicXMLList && collectionXMLList && storesXMLList && sexiesXMLList ) {
+				externalContentLoaded( undefined );
+			}
+		}
+		
+		// TODO esto vuela más tarde
+		override public function setSection( s:String ):void {
+			if ( s == SeluSite.NOVEDADES || s == SeluSite.PRENSA ) return;
+			super.setSection( s );
 		}
 		
 		override protected function externalContentLoaded( evnt:Event = undefined):void {
@@ -116,7 +166,8 @@
 		public function getTopClip():Sprite { return topClip; }
 		
 		public function getCollectionData():XMLList { return collectionXMLList;	}
-		public function getLastCollectionData():XMLList { return lastCollectionXMLList;	}
+		public function getCollectionBasicData():XMLList { return collectionBasicXMLList;	}
+		public function getStoresData():XMLList { return storesXMLList;	}
 		
 	}
 	

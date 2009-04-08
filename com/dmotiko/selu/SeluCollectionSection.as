@@ -1,5 +1,7 @@
 ﻿package com.dmotiko.selu {
 	
+	import fl.transitions.easing.Regular;
+	import fl.transitions.Tween;
 	import flash.display.*;
 	import flash.events.*
 	import com.general.*
@@ -10,6 +12,7 @@
 		private var thumbs:SeluCollectionThumbs;
 		private var info:SeluCollectionInfo;
 		private var btnBasicos:MovieClip;
+		private var btnColeccion09:MovieClip;
 		private var btnColeccionAnterior:MovieClip;
 		private var photo:SeluCollectionPhoto;
 		
@@ -23,9 +26,13 @@
 			photo = getChildByName("mcPhoto") as SeluCollectionPhoto;
 			btnBasicos = getChildByName("mcSeluBasicos") as MovieClip;
 			btnColeccionAnterior = getChildByName("mcColeccionAnterior") as MovieClip;
+			btnColeccion09 = getChildByName("mcSeluCollection") as MovieClip;
 			
-			btnColeccionAnterior.buttonMode = true;
-			btnColeccionAnterior.addEventListener( MouseEvent.CLICK, toggle_collection);
+			btnBasicos.buttonMode = btnColeccion09.buttonMode = true;
+			btnBasicos.addEventListener( MouseEvent.CLICK, toggle_collection);
+			btnColeccion09.visible = false;
+			btnColeccion09.alpha = 0;
+			btnColeccion09.addEventListener( MouseEvent.CLICK, toggle_collection);
 			
 			thumbs.addEventListener( Event.CHANGE, thumbs_changed);
 			thumbs.addEventListener( Event.COMPLETE, thumbs_complete);
@@ -38,14 +45,35 @@
 		}
 		
 		private function toggle_collection(e:MouseEvent):void {
-			if ( e.currentTarget as MovieClip == btnColeccionAnterior ) {
-				thumbs.setData( SeluSite.getApp().getLastCollectionData() );
+			if ( e.currentTarget as MovieClip == btnBasicos ) {
+				thumbs.setData( SeluSite.getApp().getCollectionBasicData() );
+				
+				killTween( "basicFade" );
+				registerTween( "basicFade", new Tween( btnBasicos, "alpha", Regular.easeOut, btnBasicos.alpha, 0, 0.5, true), false, true );
+				btnColeccion09.visible = true;
+				killTween( "collectionFade" )
+				registerTween( "collectionFade", new Tween( btnColeccion09, "alpha", Regular.easeOut, btnColeccion09.alpha, 1, 0.5, true));
+				
+			} else if ( e.currentTarget as MovieClip == btnColeccion09 ) {
+				thumbs.setData( SeluSite.getApp().getCollectionData() );
+				
+				btnBasicos.visible = true;
+				killTween( "basicFade" );
+				registerTween( "basicFade", new Tween( btnBasicos, "alpha", Regular.easeOut, btnBasicos.alpha, 1, 0.5, true));
+				
+				killTween( "collectionFade" )
+				registerTween( "collectionFade", new Tween( btnColeccion09, "alpha", Regular.easeOut, btnColeccion09.alpha, 0, 0.5, true), false, true );
 			}
 		}
 				
 		private function thumbs_changed(e:Event):void {
 			info.setData( thumbs.getActiveButton().getData() );
 			photo.setData( thumbs.getActiveButton().getData() );
+		}
+		
+		override protected function tweenFinished( key:String, tween:Tween):void {
+			if ( key == "basicFade" && btnBasicos.alpha == 0 ) btnBasicos.visible = false;
+			if ( key == "collectionFade" && btnColeccion09.alpha == 0 ) btnColeccion09.visible = false;
 		}
 		
 	}
