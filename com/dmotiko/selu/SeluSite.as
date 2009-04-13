@@ -1,7 +1,12 @@
 ﻿package com.dmotiko.selu {
 	import com.general.*;
+	import fl.transitions.*;
+	import fl.transitions.easing.*;
 	import flash.display.*;
 	import flash.events.*;
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
+	import flash.media.SoundTransform;
 	import flash.net.*;
 		
 	public class SeluSite
@@ -19,6 +24,10 @@
 		private var mainContent:Sprite;
 		private var topClip:Sprite;
 		private var seluLoader:SeluLoader;
+		private var music:Sound;
+		private var musicChannel:SoundChannel;
+		private var soundTween:Tween;
+		private var soundController:Object;
 		
 		/* data XML */
 		private var collection_loaderXML:URLLoader;
@@ -51,6 +60,12 @@
 		}
 		
 		override protected function loadExternalContent():void {
+			music = new Sound( new URLRequest( "music2009.mp3" ) );
+			musicChannel = music.play();
+			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
+			soundController = new Object();
+			soundController.volume = 1;
+						
 			collection_loaderXML = new URLLoader();
 			collection_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
 			collection_loaderXML.addEventListener( Event.COMPLETE, collectionLoaded );
@@ -70,6 +85,11 @@
 			sexies_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
 			sexies_loaderXML.addEventListener( Event.COMPLETE, sexiesLoaded );
 			sexies_loaderXML.load( new URLRequest( "sexies.xml" ) );
+		}
+		
+		private function loop_music(e:Event):void {
+			musicChannel.stop();
+			musicChannel = music.play(0);
 		}
 		
 		private function sexiesLoaded(e:Event):void {
@@ -168,6 +188,28 @@
 		public function getCollectionData():XMLList { return collectionXMLList;	}
 		public function getCollectionBasicData():XMLList { return collectionBasicXMLList;	}
 		public function getStoresData():XMLList { return storesXMLList;	}
+		
+		public function getMusic():Sound { return music; }
+		public function getMusicChannel():SoundChannel { return musicChannel; }
+		public function fadeOutMusic():void {
+			if ( soundController.volume == 0) return;
+			if (soundTween) soundTween.stop();
+			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 0, 2, true);
+			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);
+		}
+		public function fadeInMusic():void {
+			if ( soundController.volume == 1) return;
+			if (soundTween) soundTween.stop();
+			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 1, 2, true);
+			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);
+		}
+		
+		private function refresh_fade(e:TweenEvent):void {
+			//log( "SeluSite | refresh_fade= " + soundController.volume);
+			var transform:SoundTransform = getMusicChannel().soundTransform;
+			transform.volume = soundController.volume;
+			getMusicChannel().soundTransform = transform;
+		}
 		
 	}
 	

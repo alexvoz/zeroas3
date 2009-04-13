@@ -103,13 +103,12 @@
 				mcDrag.visible = mcBar.visible = true;
 				mcDrag.y = mcBar.y;
 				mcDrag.addEventListener( MouseEvent.MOUSE_DOWN, start_drag);
-				mcDrag.addEventListener( MouseEvent.MOUSE_UP, stop_drag);
-				mcDrag.addEventListener( MouseEvent.MOUSE_OUT, stop_drag);
-												
+				mcDrag.stage.addEventListener( MouseEvent.MOUSE_UP, stop_drag);
+															
 			} else {
 				mcDrag.visible = mcBar.visible = false;
 				mcDrag.removeEventListener( MouseEvent.MOUSE_DOWN, start_drag);
-				mcDrag.removeEventListener( MouseEvent.MOUSE_UP, stop_drag);
+				mcDrag.stage.removeEventListener( MouseEvent.MOUSE_UP, stop_drag);
 			}
 		}
 		
