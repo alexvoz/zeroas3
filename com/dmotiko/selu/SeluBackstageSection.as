@@ -40,13 +40,15 @@
 			videoPlayer.playButton = playButton;
 			videoPlayer.pauseButton = pauseButton;
 			videoPlayer.stopButton = stopButton;
-			videoPlayer.source = "backstage.flv";
+			videoPlayer.source = null;
+			//videoPlayer.source = "backstage.flv";
 			videoPlayer.stop();
 			
 		}
 		
 		private function section_changed(e:Event):void {
 			if ( SeluSite.getApp().getSection() == SeluSite.BACKSTAGE ) {
+				if(!videoPlayer.source) videoPlayer.source = "backstage.flv";
 				videoPlayer.play();
 			} else {
 				videoPlayer.seek(0);

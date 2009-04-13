@@ -64,8 +64,8 @@
 			var aFinalItems:Array = new Array();
 			var actualItem:Array = new Array();
 			for (var i:Number = 0; i < aItems.length; i++) {
-				var a = aItems[i];
-				if (i != aItems.length - 1) a = a.substr(0, a.length - 1);
+				var a:String = aItems[i] as String;
+				if (i != aItems.length - 1 && a.charCodeAt( a.length - 1 ) == 13) a = a.substr(0, a.length - 1);
 				if ( a != "") {
 					actualItem.push( a );
 					if (i == aItems.length - 1) {
@@ -105,12 +105,11 @@
 				mcDrag.addEventListener( MouseEvent.MOUSE_DOWN, start_drag);
 				mcDrag.addEventListener( MouseEvent.MOUSE_UP, stop_drag);
 				mcDrag.addEventListener( MouseEvent.MOUSE_OUT, stop_drag);
-									
+												
 			} else {
 				mcDrag.visible = mcBar.visible = false;
 				mcDrag.removeEventListener( MouseEvent.MOUSE_DOWN, start_drag);
 				mcDrag.removeEventListener( MouseEvent.MOUSE_UP, stop_drag);
-				mcDrag.removeEventListener( MouseEvent.MOUSE_OUT, stop_drag);
 			}
 		}
 		

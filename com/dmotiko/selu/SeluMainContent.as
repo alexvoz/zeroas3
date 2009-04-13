@@ -27,6 +27,8 @@
 		private var initPositions:Array;
 		private var nSectionCount:Number;
 		private var timerSections:Timer;
+		private var tween2:Tween;
+		private var tween:Tween;
 							
 		override protected function initClip():void {
 			var nOffset = 700;
@@ -130,18 +132,23 @@
 				tweenSection = contactoSection;
 				break;
 			}
-			var tween:Tween;
+			
 			if( tweenSection != nocastingSection){
 				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y-tweenSection.height, 0.4, true);
 			} else {
 				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y + tweenSection.height, 0.4, true);
 			}
 			if (tweenSection != homeSection) {
-				var tween2:Tween = new Tween( homeSection, "y", Strong.easeOut, homeSection.y, homeSection.y - homeSection.height, 0.4, true);
+				tween2 = new Tween( homeSection, "y", Strong.easeOut, homeSection.y, homeSection.y - homeSection.height, 0.4, true);
 				tween2.addEventListener( TweenEvent.MOTION_FINISH, homeSectionMoveEnd);
 			}
 			tween.addEventListener( TweenEvent.MOTION_FINISH, activeSectionMoveEnd);
-			registerTween("activeSectionMove", tween);
+			var sKey:String = "actionSectionMove";
+			var nKey:Number = 0;
+			while ( getTween("actionSectionMove" + nKey) ) {
+				nKey++;
+			}
+			registerTween("activeSectionMove"+nKey, tween);
 		}
 				
 		private function activeSectionMoveEnd(e:TweenEvent):void {
