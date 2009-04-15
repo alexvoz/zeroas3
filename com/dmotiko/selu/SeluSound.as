@@ -10,18 +10,20 @@
 			super.initClip();
 			this.buttonMode = true;
 			this.addEventListener( MouseEvent.CLICK, toggle_sound );
+			SeluSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
+		}
+		
+		private function sound_changed(e:Event):void {
+			if ( SeluSite.getApp().getSound() ) {
+				this.gotoAndStop(1);
+			} else {
+				this.gotoAndStop(2);
+			}
 		}
 		
 		private function toggle_sound(e:MouseEvent):void 
 		{
-			if (this.currentFrame == 1) {
-				this.gotoAndStop(2);
-				SeluSite.getApp().fadeOutMusic();
-			} else {
-				if ( SeluSite.getApp().getSection() == SeluSite.BACKSTAGE) return;
-				this.gotoAndStop(1);
-				SeluSite.getApp().fadeInMusic();	
-			}
+			SeluSite.getApp().setSound( !SeluSite.getApp().getSound());
 		}
 		
 	}

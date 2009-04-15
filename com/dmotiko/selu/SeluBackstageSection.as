@@ -23,6 +23,7 @@
 			//trace("SeluBackstageSection initClip "+this);
 			
 			SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+			SeluSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
 			
 			//recolecto los movieclips que están en el fla
 			playButton = getChildByName("mcPlay") as Sprite;
@@ -49,7 +50,19 @@
 			videoPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
 			videoPlayer.load("backstage.flv");
 			volumeController = new Object();
-			volumeController.volume = 1;
+			if ( SeluSite.getApp().getSound() ) volumeController.volume = 1;
+			else volumeController.volume = 0;
+		}
+		
+		private function sound_changed(e:Event):void {
+			if ( SeluSite.getApp().getSection() != SeluSite.BACKSTAGE) return;
+			if ( SeluSite.getApp().getSound() ) {
+				//volumeController.volume = 1;
+				videoFadeIn();
+			} else {
+				videoFadeOut();
+			}
+			
 		}
 						
 		private function video_change(e:VideoEvent):void {
@@ -59,19 +72,32 @@
 		private function section_changed(e:Event):void {
 			if ( SeluSite.getApp().getSection() == SeluSite.BACKSTAGE ) {
 				videoPlayer.playWhenEnoughDownloaded();
-				if ( tVolume ) tVolume.stop();
-				tVolume = new Tween(volumeController, "volume", Regular.easeOut, volumeController.volume, 1, 2, true);
-				tVolume.addEventListener( TweenEvent.MOTION_CHANGE, refresh_volume);
-				SeluSite.getApp().fadeOutMusic();
+				if ( !SeluSite.getApp().getSound() ) return;
+				videoFadeIn();
 			} else {
 				if( videoPlayer.state != "stopped"){
-					if ( tVolume ) tVolume.stop();
-					tVolume = new Tween(volumeController, "volume", Regular.easeOut, volumeController.volume, 0, 2, true);
-					tVolume.addEventListener( TweenEvent.MOTION_CHANGE, refresh_volume);
-					tVolume.addEventListener( TweenEvent.MOTION_FINISH, stop_flv);
+					if ( !SeluSite.getApp().getSound() ) {
+						stop_flv(undefined);
+						return;
+					}
+					videoFadeOut();
 				}
 				SeluSite.getApp().fadeInMusic();
 			}
+		}
+		
+		private function videoFadeOut():void {
+			if ( tVolume ) tVolume.stop();
+			tVolume = new Tween(volumeController, "volume", Regular.easeOut, volumeController.volume, 0, 2, true);
+			tVolume.addEventListener( TweenEvent.MOTION_CHANGE, refresh_volume);
+			tVolume.addEventListener( TweenEvent.MOTION_FINISH, stop_flv);
+		}
+		
+		private function videoFadeIn():void	{
+			if ( tVolume ) tVolume.stop();
+			tVolume = new Tween(volumeController, "volume", Regular.easeOut, volumeController.volume, 1, 2, true);
+			tVolume.addEventListener( TweenEvent.MOTION_CHANGE, refresh_volume);
+			SeluSite.getApp().fadeOutMusic();
 		}
 		
 		private function refresh_volume(e:TweenEvent):void {

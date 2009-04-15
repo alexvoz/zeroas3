@@ -55,6 +55,7 @@
 			mainContent = this.addChild( new Sprite() ) as Sprite;
 			topClip = this.addChild( new Sprite() ) as Sprite;
 			this.sSection = SeluSite.HOME;
+			this.bSound = true;
 			super.initSite();
 			
 		}
@@ -65,6 +66,7 @@
 			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
 			soundController = new Object();
 			soundController.volume = 1;
+			soundController.position = 0;
 						
 			collection_loaderXML = new URLLoader();
 			collection_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
@@ -89,7 +91,8 @@
 		
 		private function loop_music(e:Event):void {
 			musicChannel.stop();
-			musicChannel = music.play(0);
+			soundController.position = 0;
+			musicChannel = music.play( soundController.position );
 		}
 		
 		private function sexiesLoaded(e:Event):void {
@@ -191,24 +194,38 @@
 		
 		public function getMusic():Sound { return music; }
 		public function getMusicChannel():SoundChannel { return musicChannel; }
+		
+		override public function setSound(bSound:Boolean):void {
+			super.setSound(bSound);
+			if (!bSound) fadeOutMusic();
+			else fadeInMusic();
+		}
+		
 		public function fadeOutMusic():void {
 			if ( soundController.volume == 0) return;
 			if (soundTween) soundTween.stop();
 			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 0, 2, true);
 			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);
+			soundTween.addEventListener(TweenEvent.MOTION_FINISH, stop_music);
 		}
+			
 		public function fadeInMusic():void {
-			if ( soundController.volume == 1) return;
+			if ( !getSound() || getSection() == SeluSite.BACKSTAGE || soundController.volume == 1) return;
+			musicChannel = music.play( soundController.position );
 			if (soundTween) soundTween.stop();
 			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 1, 2, true);
 			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);
 		}
 		
 		private function refresh_fade(e:TweenEvent):void {
-			//log( "SeluSite | refresh_fade= " + soundController.volume);
 			var transform:SoundTransform = getMusicChannel().soundTransform;
 			transform.volume = soundController.volume;
 			getMusicChannel().soundTransform = transform;
+		}
+		
+		private function stop_music(e:TweenEvent):void 	{
+			soundController.position = getMusicChannel().position;
+			getMusicChannel().stop();
 		}
 		
 	}

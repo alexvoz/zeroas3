@@ -9,11 +9,13 @@ package com.general {
 		
 		public static var SECTION_CHANGED:String = "website_sectionChanged";
 		public static var LANGUAGE_CHANGED:String = "website_languageChanged";
+		public static var SOUND_CHANGED:String = "website_soundChanged";
 		
 		protected static var app:WebSite;
 		
 		protected var sLanguage:String;
 		protected var sSection:String;
+		protected var bSound:Boolean;
 		
 		protected var txtConsole:WebSiteConsole;
 		protected var mcCenterClip:DisplayObject;
@@ -122,6 +124,13 @@ package com.general {
 		public function setLanguage(sLanguage:String):void {
 			this.sLanguage = sLanguage;
 			dispatchEvent( new Event( WebSite.LANGUAGE_CHANGED ) );
+		}
+		
+		public function getSound():Boolean { return bSound; }
+		
+		public function setSound(value:Boolean):void {
+			bSound = value;
+			dispatchEvent( new Event( WebSite.SOUND_CHANGED ) );
 		}
 		
 		/**

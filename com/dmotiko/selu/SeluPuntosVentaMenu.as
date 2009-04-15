@@ -14,7 +14,7 @@
 			var xml:XML = getData() as XML;
 			for each(var nodo:XML in xml.elements()){
 				var item:BaseMenuBtn = new view();
-				item.setData( { label: new String(nodo.@label), data: new String(nodo.@id) } );
+				item.setData( { label: new String(nodo.@label), data: new String(nodo.@id), special: new String(nodo.@special) } );
 				item.addEventListener( MouseEvent.CLICK, activeBtn );
 				aBtns.push(item);
 			}

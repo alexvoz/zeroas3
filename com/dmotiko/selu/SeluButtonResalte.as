@@ -35,6 +35,8 @@
 		}
 		
 		override protected function refreshData():void {
+			if (data.special == "yes") txt.textColor = 0;
+			else txt.textColor = 0x333333;
 			txt.text = data.label.toUpperCase();
 			rect.width = txt.width;
 			overAnimation.x = txt.x;
