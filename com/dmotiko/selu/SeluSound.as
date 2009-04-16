@@ -11,6 +11,13 @@
 			this.buttonMode = true;
 			this.addEventListener( MouseEvent.CLICK, toggle_sound );
 			SeluSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
+			SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+		}
+		
+		private function section_changed(e:Event):void {
+			if ( SeluSite.getApp().getSection() == SeluSite.BACKSTAGE && !SeluSite.getApp().getSound()) {
+				SeluSite.getApp().setSound(true);
+			}
 		}
 		
 		private function sound_changed(e:Event):void {
