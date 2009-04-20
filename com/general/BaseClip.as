@@ -105,8 +105,9 @@
 		
 		protected function registerTween( key:String, tween:Tween, keepAlive:Boolean=false, listenEnd:Boolean=false, listenChange:Boolean=false ):void {
 			if ( !tweens ) tweens = new Array();
+			killTween(key);
 			tweens.push( { key: key, tween: tween } );
-			
+			//trace(this+" | registerTween | "+tweens.length);
 			var oListener:Object = new Object();
 			var root = this;
 			if( listenChange ){
@@ -153,7 +154,6 @@
 		 * @param	arg | you can pass a Tween or a String/key
 		 */
 		protected function killTween(arg:*):void {
-			return;
 			var tween:Tween;
 			if (arg is Tween) tween = arg;
 			else tween = getTween(arg as String);
@@ -161,7 +161,7 @@
 			// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
 			for (var i:Number = 0; i < tweens.length ; i++) {
 				if ( tweens[i].tween == tween ) {
-					//(tweens[i] as Tween).stop();
+					tween.stop();
 					tweens.splice( i, 1 );
 				}
 			}
