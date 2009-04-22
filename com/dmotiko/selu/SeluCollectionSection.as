@@ -5,6 +5,8 @@
 	import flash.display.*;
 	import flash.events.*
 	import com.general.*
+	import flash.net.navigateToURL;
+	import flash.net.URLRequest;
 	
 	public class SeluCollectionSection
 	extends BaseClip {
@@ -18,7 +20,7 @@
 		
 		override protected function initClip():void {
 			super.initClip();
-			trace("SeluCollectionSection initClip "+this);
+			//trace("SeluCollectionSection initClip "+this);
 			
 			//recolecto los movieclips que están en el fla
 			thumbs = getChildByName("mcThumbs") as SeluCollectionThumbs;
@@ -28,17 +30,29 @@
 			btnColeccionAnterior = getChildByName("mcColeccionAnterior") as MovieClip;
 			btnColeccion09 = getChildByName("mcSeluCollection") as MovieClip;
 			
+			//inicializo
 			btnBasicos.buttonMode = btnColeccion09.buttonMode = true;
 			btnBasicos.addEventListener( MouseEvent.CLICK, toggle_collection);
 			btnColeccion09.visible = false;
 			btnColeccion09.alpha = 0;
 			btnColeccion09.addEventListener( MouseEvent.CLICK, toggle_collection);
+			btnColeccionAnterior.addEventListener( MouseEvent.CLICK, gotoLastCollection );
 			
 			thumbs.addEventListener( Event.CHANGE, thumbs_changed);
 			thumbs.addEventListener( Event.COMPLETE, thumbs_complete);
 			thumbs.setData( SeluSite.getApp().getCollectionData() );
 		}
 		
+		private function gotoLastCollection(e:MouseEvent):void {
+			var url:String = "http://www.selu.com.ar/backup09";
+			var request:URLRequest = new URLRequest(url);
+			try {
+			  navigateToURL(request, '_blank'); // second argument is target
+			} catch (e:Error) {
+			  trace("Error occurred!");
+			}
+		}
+				
 		private function thumbs_complete(e:Event):void {
 			thumbs.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 			thumbs.getButtons()[0].rollOver( undefined );
