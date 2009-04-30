@@ -11,20 +11,21 @@ package com.zero.dske {
 	extends BaseClip {
 		
 		public var mcStar:MovieClip;
-		private var txtLabel:TextField;
+		public var txtLabel:TextField;
 		
 		override protected function initClip():void {
 			mcStar.stop();
 		}
-		
+						
 		override protected function refreshData():void {
 			txtLabel.text = data.title;
-			if ( data.success ) {
+			txtLabel.mouseEnabled = false;
+			if ( data.successHREF ) {
 				mcStar.gotoAndStop(2);
-				mcStar.addEventListener( MouseEvent.ROLL_OVER, star_over);
-				mcStar.addEventListener( MouseEvent.ROLL_OUT, star_out);
-				mcStar.addEventListener( MouseEvent.CLICK, star_selected);
-				mcStar.buttonMode = true;
+				this.addEventListener( MouseEvent.ROLL_OVER, star_over);
+				this.addEventListener( MouseEvent.ROLL_OUT, star_out);
+				this.addEventListener( MouseEvent.CLICK, star_selected);
+				this.buttonMode = true;
 			}
 		}
 		
@@ -32,11 +33,11 @@ package com.zero.dske {
 			navigateToURL( new URLRequest(data.successHREF) );
 		}
 				
-		private function star_out(e:Event):void {
+		private function star_out(e:MouseEvent):void {
 			mcStar.gotoAndStop(2);
 		}
 		
-		private function star_over(e:Event):void {
+		private function star_over(e:MouseEvent):void {
 			mcStar.gotoAndStop(3);
 		}
 		
