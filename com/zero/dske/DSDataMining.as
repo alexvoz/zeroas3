@@ -8,7 +8,7 @@ package com.zero.dske {
 	import flash.text.TextField;
 	import flash.utils.Timer;
 	
-	public class DSAutomatizacion
+	public class DSDataMining
 	extends BaseClip {
 		
 		public var txtParagraph:TextField;

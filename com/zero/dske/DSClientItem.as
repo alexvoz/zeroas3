@@ -30,7 +30,7 @@ package com.zero.dske {
 		}
 		
 		private function star_selected(e:MouseEvent):void {
-			navigateToURL( new URLRequest(data.successHREF) );
+			navigateToURL( new URLRequest(data.successHREF), "_self" );
 		}
 				
 		private function star_out(e:MouseEvent):void {
