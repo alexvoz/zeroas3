@@ -26,7 +26,7 @@ package com.general {
 		
 		public function WebSite() {
 			app = this;
-			if ( this.loaderInfo.parameters["CONSOLE"]) {
+			if ( this.loaderInfo.parameters["CONSOLE"] ) {
 				
 				this.txtConsole = new WebSiteConsole();
 				this.txtConsole.x = 0;
@@ -162,7 +162,7 @@ package com.general {
 			}
 		}
 		
-		public function log(msg:String, toConsole:Boolean=false ):void {
+		public function log(msg:*, toConsole:Boolean=false ):void {
 			
 			if ( this.loaderInfo.parameters["CONSOLE"]) {
 				this.removeChild( txtConsole );
@@ -171,7 +171,10 @@ package com.general {
 				txtConsole.text += "\n";
 				txtConsole.scrollV = txtConsole.maxScrollV;
 				txtConsole.nLine ++;
-			} else if( !toConsole) {
+			} else if ( this.loaderInfo.parameters["FIREBUG"] ) {
+				navigateToURL( new URLRequest("javascript:console.log('" + msg + "');"), "_self" );
+				
+			}else if( !toConsole) {
 				trace(msg);
 			}
 		}

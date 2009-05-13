@@ -8,6 +8,7 @@
 	import flash.media.SoundChannel;
 	import flash.media.SoundTransform;
 	import flash.net.*;
+	import flash.utils.getTimer;
 		
 	public class SeluSite
 	extends WebSite {
@@ -55,19 +56,19 @@
 			mainContent = this.addChild( new Sprite() ) as Sprite;
 			topClip = this.addChild( new Sprite() ) as Sprite;
 			this.sSection = SeluSite.HOME;
-			this.bSound = true;
 			super.initSite();
 			
 		}
 		
 		override protected function loadExternalContent():void {
-			music = new Sound( new URLRequest( "music2009.mp3" ) );
-			musicChannel = music.play();
-			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
+			music = new Sound( new URLRequest( "http://www.d-motiko.com.ar/clients/selu/production/music2009.mp3" ) );
+			music.addEventListener( Event.COMPLETE, snd_complete );
+			music.addEventListener( ProgressEvent.PROGRESS, snd_progress );
 			soundController = new Object();
 			soundController.volume = 1;
 			soundController.position = 0;
-						
+			soundController.startDownload = getTimer();
+									
 			collection_loaderXML = new URLLoader();
 			collection_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
 			collection_loaderXML.addEventListener( Event.COMPLETE, collectionLoaded );
@@ -87,6 +88,20 @@
 			sexies_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
 			sexies_loaderXML.addEventListener( Event.COMPLETE, sexiesLoaded );
 			sexies_loaderXML.load( new URLRequest( "sexies.xml" ) );
+		}
+		
+		private function snd_progress(e:ProgressEvent):void {
+			var p:int = Math.round(e.bytesLoaded * 100 / e.bytesTotal );
+			if (p > 50) {
+				music.removeEventListener( ProgressEvent.PROGRESS, snd_progress);
+				musicChannel = music.play();
+				musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
+				setSound(true);
+			}
+		}
+		
+		private function snd_complete(e:Event):void {
+			SeluSite.getApp().log("snd complete");
 		}
 		
 		private function loop_music(e:Event):void {

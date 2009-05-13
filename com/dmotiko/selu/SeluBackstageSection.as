@@ -48,7 +48,7 @@
 			videoPlayer.seekBar = seekBar;
 			videoPlayer.autoPlay = false;
 			videoPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
-			videoPlayer.load("backstage.flv");
+			videoPlayer.load("http://www.d-motiko.com.ar/clients/selu/production/backstage.flv");
 			volumeController = new Object();
 			if ( SeluSite.getApp().getSound() ) volumeController.volume = 1;
 			else volumeController.volume = 0;

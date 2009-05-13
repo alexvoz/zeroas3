@@ -23,11 +23,11 @@
 			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
 			mcImg.addChild( this.loader );
 		}
+				
 		private function thumbInit( evnt:Event ):void {
-			mcImg.alpha = 0;
+			//mcImg.alpha = 0;
 			(loader.content as Bitmap).smoothing = true;
-			registerTween("photoFade", new Tween( mcImg, "alpha", Regular.easeOut, 0, 1, 0.5, true));
-			//clipAlpha = new Tween( mcPhoto, "alpha", Regular.easeOut, 0, 0.2, 1, true);
+			//registerTween("photoFade", new Tween( mcImg, "alpha", Regular.easeOut, 0, 1, 0.5, true));
 		}
 		
 	}
