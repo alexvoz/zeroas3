@@ -3,6 +3,7 @@
 	import fl.transitions.*;
 	import fl.transitions.easing.*;
 	import flash.events.*;
+	import flash.system.LoaderContext;
 	import flash.text.*;
 	import flash.display.*;
 	import flash.net.*;
@@ -19,7 +20,9 @@
 			var sNoCache:String = ( SeluSite.getApp() ) ? SeluSite.getApp().getNoCache() : "";
 			var request:URLRequest = new URLRequest( (data as XML).attribute("big") + sNoCache );
 			this.loader = new Loader();
-			this.loader.load( request );
+			var context:LoaderContext = new LoaderContext(); 
+			context.checkPolicyFile = true;
+			this.loader.load( request, context );
 			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
 			mcImg.addChild( this.loader );
 		}
