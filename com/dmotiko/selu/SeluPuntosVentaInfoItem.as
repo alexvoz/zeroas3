@@ -10,6 +10,8 @@
 		
 	public class SeluPuntosVentaInfoItem
 	extends BaseClip {
+		public var txtContent:TextField;
+		public var mcStroke:Sprite;
 				
 		override protected function initClip():void {
 			super.initClip();
@@ -18,15 +20,7 @@
 		}
 		
 		override protected function refreshData():void {
-			//trace("SeluPuntosVentaInfoItem | refreshData");
 			for each( var item in data) {
-				/*
-				var aWords:Array = (item as String).split(" ");
-				for ( var i:Number = 0; i < aWords.length; i++) {
-					aWords[i] = (aWords[i] as String).substr(0,1).toUpperCase()+(aWords[i] as String).substr(1).toLowerCase();
-				}
-				item = aWords.join(" ");
-				*/
 				txtContent.appendText( item + "\n" );
 			}
 			mcStroke.y = txtContent.y + txtContent.height + 2;

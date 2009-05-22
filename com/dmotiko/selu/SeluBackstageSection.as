@@ -10,45 +10,37 @@
 	public class SeluBackstageSection
 	extends BaseClip {
 		
-		private var videoPlayer:FLVPlayback;
-		private var playButton:Sprite;
-		private var pauseButton:Sprite;
-		private var stopButton:Sprite;
-		private var seekBar:Sprite;
+		public var flvPlayer:FLVPlayback;
+		public var spPlay:Sprite;
+		public var spPause:Sprite;
+		public var spStop:Sprite;
+		public var spSeek:Sprite;
 		private var volumeController:Object;
 		private var tVolume:Tween;
 				
 		override protected function initClip():void {
 			super.initClip();
-			//trace("SeluBackstageSection initClip "+this);
 			
 			SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			SeluSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
-			
-			//recolecto los movieclips que están en el fla
-			playButton = getChildByName("mcPlay") as Sprite;
-			pauseButton = getChildByName("mcPause") as Sprite;
-			stopButton = getChildByName("mcStop") as Sprite;
-			seekBar = getChildByName("mcSeek") as Sprite;
-			videoPlayer = getChildByName("flvPlayer") as FLVPlayback;
-						
+												
 			//inicializo los clips
-			playButton.buttonMode = pauseButton.buttonMode = stopButton.buttonMode = true;
-			playButton.addEventListener( MouseEvent.ROLL_OVER, btn_over );
-			playButton.addEventListener( MouseEvent.ROLL_OUT, btn_out);
-			pauseButton.addEventListener( MouseEvent.ROLL_OVER, btn_over );
-			pauseButton.addEventListener( MouseEvent.ROLL_OUT, btn_out);
-			stopButton.addEventListener( MouseEvent.ROLL_OVER, btn_over );
-			stopButton.addEventListener( MouseEvent.ROLL_OUT, btn_out);
-			stopButton.addEventListener( MouseEvent.CLICK, reset_video);
+			spPlay.buttonMode = spPause.buttonMode = spStop.buttonMode = true;
+			spPlay.addEventListener( MouseEvent.ROLL_OVER, btn_over );
+			spPlay.addEventListener( MouseEvent.ROLL_OUT, btn_out);
+			spPause.addEventListener( MouseEvent.ROLL_OVER, btn_over );
+			spPause.addEventListener( MouseEvent.ROLL_OUT, btn_out);
+			spStop.addEventListener( MouseEvent.ROLL_OVER, btn_over );
+			spStop.addEventListener( MouseEvent.ROLL_OUT, btn_out);
+			spStop.addEventListener( MouseEvent.CLICK, reset_video);
 			
-			videoPlayer.playButton = playButton;
-			videoPlayer.pauseButton = pauseButton;
-			videoPlayer.stopButton = stopButton;
-			videoPlayer.seekBar = seekBar;
-			videoPlayer.autoPlay = false;
-			videoPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
-			videoPlayer.load("http://www.d-motiko.com.ar/clients/selu/production/backstage.flv");
+			flvPlayer.playButton = spPlay;
+			flvPlayer.pauseButton = spPause;
+			flvPlayer.stopButton = spStop;
+			flvPlayer.seekBar = spSeek;
+			flvPlayer.autoPlay = false;
+			flvPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
+			flvPlayer.load("http://www.d-motiko.com.ar/clients/selu/production/backstage.flv");
 			volumeController = new Object();
 			if ( SeluSite.getApp().getSound() ) volumeController.volume = 1;
 			else volumeController.volume = 0;
@@ -71,11 +63,11 @@
 		
 		private function section_changed(e:Event):void {
 			if ( SeluSite.getApp().getSection() == SeluSite.BACKSTAGE ) {
-				videoPlayer.playWhenEnoughDownloaded();
+				flvPlayer.playWhenEnoughDownloaded();
 				if ( !SeluSite.getApp().getSound() ) return;
 				videoFadeIn();
 			} else {
-				if( videoPlayer.state != "stopped"){
+				if( flvPlayer.state != "stopped"){
 					if ( !SeluSite.getApp().getSound() ) {
 						stop_flv(undefined);
 						return;
@@ -101,16 +93,16 @@
 		}
 		
 		private function refresh_volume(e:TweenEvent):void {
-			videoPlayer.volume = volumeController.volume;
+			flvPlayer.volume = volumeController.volume;
 		}
 		
 		private function stop_flv(e:TweenEvent):void {
-			videoPlayer.seek(0);
-			videoPlayer.stop();
+			flvPlayer.seek(0);
+			flvPlayer.stop();
 		}
 		
 		private function reset_video(e:MouseEvent):void {
-			videoPlayer.seekPercent(0);
+			flvPlayer.seekPercent(0);
 		}
 		
 		private function btn_over( e:MouseEvent ):void {

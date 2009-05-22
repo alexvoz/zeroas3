@@ -39,6 +39,9 @@
 		private var collectionBasicXMLList:XMLList;
 		private var storesXMLList:XMLList;
 		private var sexiesXMLList:XMLList;		
+		
+		private var news_loaderXML:URLLoader;
+		private var newsXMLList:XMLList;
 		/* end data XML*/
 						
 		public static function getApp():SeluSite {
@@ -88,6 +91,81 @@
 			sexies_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
 			sexies_loaderXML.addEventListener( Event.COMPLETE, sexiesLoaded );
 			sexies_loaderXML.load( new URLRequest( "sexies.xml" ) );
+			
+			news_loaderXML = new URLLoader();
+			news_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
+			news_loaderXML.addEventListener( Event.COMPLETE, newsLoaded );
+			news_loaderXML.load( new URLRequest( "news.xml" ) );
+		}
+		
+		private function newsLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				newsXMLList = myXML.child("news");
+				checkXML();
+												
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				log("Could not parse the news XML | "+e.message)
+			}
+		}
+		
+		private function sexiesLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				sexiesXMLList = myXML.child("photo");
+				checkXML();
+												
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				log("Could not parse the sexies XML | "+e.message)
+			}
+		}
+		private function storesLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				storesXMLList = myXML.child("locales");
+				checkXML();
+												
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				log("Could not parse the stores XML | "+e.message)
+			}
+		}
+		
+		private function collectionBasicLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				collectionBasicXMLList = myXML.children()[0].child("photo");
+				checkXML();
+												
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				log("Could not parse the collectionBasics XML | "+e.message)
+			}
+		}
+		
+		private function collectionLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				collectionXMLList = myXML.children()[0].child("photo");
+				checkXML();
+								
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				log("Could not parse the collection XML | "+e.message)
+			}
+		}
+		
+		private function checkXML():void {
+			if ( collectionBasicXMLList && collectionXMLList && storesXMLList && sexiesXMLList && newsXMLList ) {
+				externalContentLoaded( undefined );
+			}
 		}
 		
 		private function snd_progress(e:ProgressEvent):void {
@@ -109,71 +187,10 @@
 			soundController.position = 0;
 			musicChannel = music.play( soundController.position );
 		}
-		
-		private function sexiesLoaded(e:Event):void {
-			try{
-				//Convert the downloaded text into an XML
-				var myXML:XML = new XML(e.target.data)
-				sexiesXMLList = myXML.child("locales");
-				checkXML();
-												
-			} catch (e:TypeError){
-				//Could not convert the data, probavlu because is not formated correctly
-				trace("Could not parse the XML")
-				trace(e.message)
-			}
-		}
-		private function storesLoaded(e:Event):void {
-			try{
-				//Convert the downloaded text into an XML
-				var myXML:XML = new XML(e.target.data)
-				storesXMLList = myXML.child("locales");
-				checkXML();
-												
-			} catch (e:TypeError){
-				//Could not convert the data, probavlu because is not formated correctly
-				trace("Could not parse the XML")
-				trace(e.message)
-			}
-		}
-		
-		private function collectionBasicLoaded(e:Event):void {
-			try{
-				//Convert the downloaded text into an XML
-				var myXML:XML = new XML(e.target.data)
-				collectionBasicXMLList = myXML.children()[0].child("photo");
-				checkXML();
-												
-			} catch (e:TypeError){
-				//Could not convert the data, probavlu because is not formated correctly
-				trace("Could not parse the XML")
-				trace(e.message)
-			}
-		}
-		
-		private function collectionLoaded(e:Event):void {
-			try{
-				//Convert the downloaded text into an XML
-				var myXML:XML = new XML(e.target.data)
-				collectionXMLList = myXML.children()[0].child("photo");
-				checkXML();
-								
-			} catch (e:TypeError){
-				//Could not convert the data, probavlu because is not formated correctly
-				trace("Could not parse the XML")
-				trace(e.message)
-			}
-		}
-		
-		private function checkXML():void {
-			if ( collectionBasicXMLList && collectionXMLList && storesXMLList && sexiesXMLList ) {
-				externalContentLoaded( undefined );
-			}
-		}
-		
+			
 		// TODO esto vuela más tarde
 		override public function setSection( s:String ):void {
-			if ( s == SeluSite.NOVEDADES || s == SeluSite.PRENSA || s== SeluSite.SEXIES ) return;
+			if ( /*s == SeluSite.NOVEDADES ||*/ s == SeluSite.PRENSA || s== SeluSite.SEXIES ) return;
 			super.setSection( s );
 		}
 		

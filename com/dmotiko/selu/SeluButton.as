@@ -10,7 +10,7 @@ package com.dmotiko.selu {
 		
 		private var _overAnimation:MovieClip;
 		private var spBack:Sprite;
-		//private var txtLabel:TextField;
+		public var txtLabel:TextField;
 		protected var nColor:Number;
 		private var pBtn:Point;
 		

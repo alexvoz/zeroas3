@@ -11,17 +11,17 @@
 	public class SeluMainContent
 	extends BaseClip {
 		
-		private var homeSection:MovieClip;
-		private var soundSection:MovieClip;
-		private var coleccionSection:MovieClip;
-		private var comprasSection:MovieClip;
-		private var backstageSection:MovieClip;
-		private var nocastingSection:SeluBotonera;
-		private var puntosVentaSection:MovieClip;
-		private var novedadesSection:MovieClip;
-		private var sexiesSection:MovieClip;
-		private var prensaSection:MovieClip;
-		private var contactoSection:MovieClip;
+		public var mcHome:MovieClip;
+		public var mcSound:MovieClip;
+		public var mcColeccion:MovieClip;
+		public var mcCompras:MovieClip;
+		public var mcBackstage:MovieClip;
+		public var mcNoCasting:SeluBotonera;
+		public var mcPuntosVenta:MovieClip;
+		public var mcNovedades:MovieClip;
+		public var mcSexies:MovieClip;
+		public var mcPrensa:MovieClip;
+		public var mcContacto:MovieClip;
 		private var activeSection:MovieClip;
 		private var aSections:Array;
 		private var initPositions:Array;
@@ -38,30 +38,21 @@
 			initPositions.push( initPositions[2] );
 			initPositions.push( initPositions[3] );
 			initPositions = ArrayUtil.randomArray(initPositions);
-						
+			
+			trace( mcHome );
+			
 			aSections = new Array();
-			homeSection = this.getChildByName("mcHome") as MovieClip;
-			aSections.push( homeSection );
-			soundSection = this.getChildByName("mcSound") as MovieClip;
-			aSections.push( soundSection );
-			nocastingSection = this.getChildByName("mcNoCasting") as SeluBotonera;
-			aSections.push( nocastingSection );
-			comprasSection = this.getChildByName("mcCompras") as MovieClip;
-			aSections.push( comprasSection );
-			coleccionSection = this.getChildByName("mcColeccion") as MovieClip;
-			aSections.push( coleccionSection );
-			backstageSection = this.getChildByName("mcBackstage") as MovieClip;
-			aSections.push( backstageSection );
-			puntosVentaSection = this.getChildByName("mcPuntosVenta") as MovieClip;
-			aSections.push( puntosVentaSection );
-			novedadesSection = this.getChildByName("mcNovedades") as MovieClip;
-			aSections.push( novedadesSection );
-			sexiesSection = this.getChildByName("mcSexies") as MovieClip;
-			aSections.push( sexiesSection );
-			prensaSection = this.getChildByName("mcPrensa") as MovieClip;
-			aSections.push( prensaSection );
-			contactoSection = this.getChildByName("mcContacto") as MovieClip;
-			aSections.push( contactoSection );
+			aSections.push( mcHome );
+			aSections.push( mcSound );
+			aSections.push( mcNoCasting );
+			aSections.push( mcCompras );
+			aSections.push( mcColeccion );
+			aSections.push( mcBackstage );
+			aSections.push( mcPuntosVenta );
+			aSections.push( mcNovedades );
+			aSections.push( mcSexies );
+			aSections.push( mcPrensa );
+			aSections.push( mcContacto );
 			
 			aSections.forEach( function(item) { item.visible = false; }	);
 						
@@ -71,8 +62,7 @@
 			timerSections.dispatchEvent( new TimerEvent( TimerEvent.TIMER ) );
 			timerSections.start();
 			
-			activeSection = homeSection;
-					
+			activeSection = mcHome;
 						
 			if (!SeluSite.getApp()) return;
 			SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
@@ -103,44 +93,43 @@
 			var tweenSection:MovieClip;			
 			switch( SeluSite.getApp().getSection() ) {
 				case SeluSite.HOME:
-				tweenSection = homeSection;
+				tweenSection = mcHome;
 				break;
 				case SeluSite.COLECCION:
-				tweenSection = coleccionSection;
+				tweenSection = mcColeccion;
 				break;
 				case SeluSite.BACKSTAGE:
-				tweenSection = backstageSection;
+				tweenSection = mcBackstage;
 				break;
 				case SeluSite.PUNTOVENTA:
-				tweenSection = puntosVentaSection;
+				tweenSection = mcPuntosVenta;
 				break;
 				case SeluSite.NOVEDADES:
-				tweenSection = novedadesSection;
-				return;
+				tweenSection = mcNovedades;
 				break;
 				case SeluSite.PRENSA:
-				tweenSection = prensaSection;
+				tweenSection = mcPrensa;
 				return;
 				break;
 				case SeluSite.SEXIES:
-				tweenSection = sexiesSection;
+				tweenSection = mcSexies;
 				break;
 				case SeluSite.NOCASTING:
-				tweenSection = nocastingSection;
+				tweenSection = mcNoCasting;
 				break;
 				case SeluSite.CONTACTO:
-				tweenSection = contactoSection;
+				tweenSection = mcContacto;
 				break;
 			}
 			
-			if( tweenSection != nocastingSection){
+			if( tweenSection != mcNoCasting){
 				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y-tweenSection.height, 0.4, true);
 			} else {
 				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y + tweenSection.height, 0.4, true);
 			}
-			if (tweenSection != homeSection) {
-				tween2 = new Tween( homeSection, "y", Strong.easeOut, homeSection.y, homeSection.y - homeSection.height, 0.4, true);
-				tween2.addEventListener( TweenEvent.MOTION_FINISH, homeSectionMoveEnd);
+			if (tweenSection != mcHome) {
+				tween2 = new Tween( mcHome, "y", Strong.easeOut, mcHome.y, mcHome.y - mcHome.height, 0.4, true);
+				tween2.addEventListener( TweenEvent.MOTION_FINISH, mcHomeMoveEnd);
 			}
 			tween.addEventListener( TweenEvent.MOTION_FINISH, activeSectionMoveEnd);
 			var sKey:String = "actionSectionMove";
@@ -164,19 +153,19 @@
 		private function activeSectionYoYoEnd(e:TweenEvent):void 
 		{
 			
-			if (activeSection != nocastingSection) {
-				setChildIndex( nocastingSection, getChildIndex( homeSection ) - 1 );
-				nocastingSection.checkSection();
+			if (activeSection != mcNoCasting) {
+				setChildIndex( mcNoCasting, getChildIndex( mcHome ) - 1 );
+				mcNoCasting.checkSection();
 			}
 			
 		}
 				
-		private function homeSectionMoveEnd(e:TweenEvent):void {
+		private function mcHomeMoveEnd(e:TweenEvent):void {
 			(e.currentTarget as Tween).yoyo();
-			setChildIndex( soundSection, getChildIndex( activeSection ) - 1 );
-			setChildIndex( homeSection, getChildIndex( activeSection ) - 1 );
-			setChildIndex( comprasSection, getChildIndex( activeSection ) - 1 );
-			(e.currentTarget as Tween).removeEventListener( TweenEvent.MOTION_FINISH, homeSectionMoveEnd);
+			setChildIndex( mcSound, getChildIndex( activeSection ) - 1 );
+			setChildIndex( mcHome, getChildIndex( activeSection ) - 1 );
+			setChildIndex( mcCompras, getChildIndex( activeSection ) - 1 );
+			(e.currentTarget as Tween).removeEventListener( TweenEvent.MOTION_FINISH, mcHomeMoveEnd);
 		}
 		
 	}

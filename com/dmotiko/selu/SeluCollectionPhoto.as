@@ -11,6 +11,8 @@
 	public class SeluCollectionPhoto
 	extends BaseClip {
 		private var loader:Loader;
+		public var mcImg:Sprite;
+		public var mcMask:Sprite;
 		
 		override protected function initClip():void {
 			mcImg.mask = mcMask;

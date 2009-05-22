@@ -10,44 +10,40 @@
 		
 	public class SeluButtonResalte
 	extends BaseMenuBtn {
-		private var txt:TextField;
-		private var overAnimation:MovieClip;
-		private var rect:MovieClip;
+		public var txtLabel:TextField;
+		public var mcResalte:MovieClip;
+		public var mcRect:MovieClip;
 						
 		override protected function initClip():void {
 			super.initClip();
-			//recolecto los movieclips que están en el fla
-			txt = getChildByName("txtLabel") as TextField;
-			overAnimation = getChildByName("mcResalte") as MovieClip;
-			rect = getChildByName("mcRect") as MovieClip;
-						
+								
 			//inicializo los clips
 			this.mouseEnabled = false;
-			rect.buttonMode = true;
-			rect.alpha = 0;
-			overAnimation.mouseEnabled = overAnimation.mouseChildren = false;
-			txt.mouseEnabled = false;
-			txt.embedFonts = true;
-			txt.autoSize = TextFieldAutoSize.LEFT;
-			rect.addEventListener( MouseEvent.ROLL_OUT, rollOut);
-			rect.addEventListener( MouseEvent.ROLL_OVER, rollOver);
+			mcRect.buttonMode = true;
+			mcRect.alpha = 0;
+			mcResalte.mouseEnabled = mcResalte.mouseChildren = false;
+			txtLabel.mouseEnabled = false;
+			txtLabel.embedFonts = true;
+			txtLabel.autoSize = TextFieldAutoSize.LEFT;
+			mcRect.addEventListener( MouseEvent.ROLL_OUT, rollOut);
+			mcRect.addEventListener( MouseEvent.ROLL_OVER, rollOver);
 			
 		}
 		
 		override protected function refreshData():void {
-			if (data.special == "yes") txt.textColor = 0;
-			else txt.textColor = 0x333333;
-			txt.text = data.label.toUpperCase();
-			rect.width = txt.width;
-			overAnimation.x = txt.x;
-			overAnimation.y = txt.y + 0;
-			overAnimation.height = rect.height + 10;
-			overAnimation.width = txt.width + 25;
+			if (data.special == "yes") txtLabel.textColor = 0;
+			else txtLabel.textColor = 0x333333;
+			txtLabel.text = data.label.toUpperCase();
+			mcRect.width = txtLabel.width;
+			mcResalte.x = txtLabel.x;
+			mcResalte.y = txtLabel.y + 0;
+			mcResalte.height = mcRect.height + 10;
+			mcResalte.width = txtLabel.width + 25;
 		}
 		
 		override public function rollOut( e:MouseEvent ):void {
 			if ( bActive ) return;
-			var _mask:MovieClip = overAnimation.getChildByName("mcMask") as MovieClip;
+			var _mask:MovieClip = mcResalte.getChildByName("mcMask") as MovieClip;
 			_mask.removeEventListener(Event.ENTER_FRAME, foward);
 			_mask.addEventListener( Event.ENTER_FRAME, rewind);
 		}
@@ -61,7 +57,7 @@
 			}
 		}
 		override public function rollOver( e:MouseEvent ):void {
-			var _mask:MovieClip = overAnimation.getChildByName("mcMask") as MovieClip;
+			var _mask:MovieClip = mcResalte.getChildByName("mcMask") as MovieClip;
 			_mask.removeEventListener(Event.ENTER_FRAME, rewind);
 			_mask.addEventListener( Event.ENTER_FRAME, foward);
 		}

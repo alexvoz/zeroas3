@@ -11,25 +11,16 @@
 	public class SeluCollectionSection
 	extends BaseClip {
 		
-		private var thumbs:SeluCollectionThumbs;
-		private var info:SeluCollectionInfo;
-		private var btnBasicos:MovieClip;
-		private var btnColeccion09:MovieClip;
-		private var btnColeccionAnterior:MovieClip;
-		private var photo:SeluCollectionPhoto;
+		public var mcThumbs:SeluCollectionThumbs;
+		public var mcInfo:SeluCollectionInfo;
+		public var btnBasicos:MovieClip;
+		public var btnColeccion09:MovieClip;
+		public var btnColeccionAnterior:MovieClip;
+		public var mcPhoto:SeluCollectionPhoto;
 		
 		override protected function initClip():void {
 			super.initClip();
-			//trace("SeluCollectionSection initClip "+this);
-			
-			//recolecto los movieclips que están en el fla
-			thumbs = getChildByName("mcThumbs") as SeluCollectionThumbs;
-			info = getChildByName("mcInfo") as SeluCollectionInfo;
-			photo = getChildByName("mcPhoto") as SeluCollectionPhoto;
-			btnBasicos = getChildByName("mcSeluBasicos") as MovieClip;
-			btnColeccionAnterior = getChildByName("mcColeccionAnterior") as MovieClip;
-			btnColeccion09 = getChildByName("mcSeluCollection") as MovieClip;
-			
+						
 			//inicializo
 			btnBasicos.buttonMode = btnColeccion09.buttonMode = true;
 			btnBasicos.addEventListener( MouseEvent.CLICK, toggle_collection);
@@ -38,9 +29,9 @@
 			btnColeccion09.addEventListener( MouseEvent.CLICK, toggle_collection);
 			btnColeccionAnterior.addEventListener( MouseEvent.CLICK, gotoLastCollection );
 			
-			thumbs.addEventListener( Event.CHANGE, thumbs_changed);
-			thumbs.addEventListener( Event.COMPLETE, thumbs_complete);
-			thumbs.setData( SeluSite.getApp().getCollectionData() );
+			mcThumbs.addEventListener( Event.CHANGE, mcThumbs_changed);
+			mcThumbs.addEventListener( Event.COMPLETE, mcThumbs_complete);
+			mcThumbs.setData( SeluSite.getApp().getCollectionData() );
 		}
 		
 		private function gotoLastCollection(e:MouseEvent):void {
@@ -53,14 +44,14 @@
 			}
 		}
 				
-		private function thumbs_complete(e:Event):void {
-			thumbs.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
-			thumbs.getButtons()[0].rollOver( undefined );
+		private function mcThumbs_complete(e:Event):void {
+			mcThumbs.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+			mcThumbs.getButtons()[0].rollOver( undefined );
 		}
 		
 		private function toggle_collection(e:MouseEvent):void {
 			if ( e.currentTarget as MovieClip == btnBasicos ) {
-				thumbs.setData( SeluSite.getApp().getCollectionBasicData() );
+				mcThumbs.setData( SeluSite.getApp().getCollectionBasicData() );
 				
 				killTween( "basicFade" );
 				registerTween( "basicFade", new Tween( btnBasicos, "alpha", Regular.easeOut, btnBasicos.alpha, 0, 0.5, true), false, true );
@@ -69,7 +60,7 @@
 				registerTween( "collectionFade", new Tween( btnColeccion09, "alpha", Regular.easeOut, btnColeccion09.alpha, 1, 0.5, true));
 				
 			} else if ( e.currentTarget as MovieClip == btnColeccion09 ) {
-				thumbs.setData( SeluSite.getApp().getCollectionData() );
+				mcThumbs.setData( SeluSite.getApp().getCollectionData() );
 				
 				btnBasicos.visible = true;
 				killTween( "basicFade" );
@@ -80,9 +71,9 @@
 			}
 		}
 				
-		private function thumbs_changed(e:Event):void {
-			info.setData( thumbs.getActiveButton().getData() );
-			photo.setData( thumbs.getActiveButton().getData() );
+		private function mcThumbs_changed(e:Event):void {
+			mcInfo.setData( mcThumbs.getActiveButton().getData() );
+			mcPhoto.setData( mcThumbs.getActiveButton().getData() );
 		}
 		
 		override protected function tweenFinished( key:String, tween:Tween):void {

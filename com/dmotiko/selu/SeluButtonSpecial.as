@@ -7,7 +7,7 @@ package com.dmotiko.selu {
 	
 	public class SeluButtonSpecial
 	extends SeluButton {
-				
+			
 		override protected function initClip():void {
 			this.useHandCursor = true;
 			this.buttonMode = true;

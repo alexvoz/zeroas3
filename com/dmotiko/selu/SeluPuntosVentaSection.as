@@ -10,16 +10,12 @@
 	public class SeluPuntosVentaSection
 	extends BaseClip {
 		private var btnBar:SeluPuntosVentaMenu;
-		private var info:SeluPuntosVentaInfo;
+		public var mcInfo:SeluPuntosVentaInfo;
 						
 		override protected function initClip():void {
 			super.initClip();
-			trace("SeluPuntosVentaSection initClip "+this);
-			
+					
 			SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
-			
-			//recolecto los movieclips que están en el fla
-			info = getChildByName("mcInfo") as SeluPuntosVentaInfo;
 			
 			//inicializo los clips
 			btnBar = new SeluPuntosVentaMenu();
@@ -39,7 +35,7 @@
 			for each(var nodo:XML in stores.elements()){
 				if(nodo.@id == btnBar.getActiveButton().getData().data ) theNode = nodo;
 			}
-			info.setData( theNode );			
+			mcInfo.setData( theNode );			
 		}
 		
 		private function section_changed(e:Event):void {

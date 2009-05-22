@@ -19,7 +19,7 @@ package com.dmotiko.selu {
 				{ label: "coleccion", over: new ColeccionOver(), section: SeluSite.COLECCION },
 				{ label: "backstage", over: new BackstageOver(), section: SeluSite.BACKSTAGE },
 				{ label: "puntos de venta", over: new PuntosDeVentaOver(), section: SeluSite.PUNTOVENTA },
-				{ label: "novedades", over: new PrensaOver(), section: SeluSite.NOVEDADES }, // TODO: Poner el over de novedades
+				{ label: "novedades", over: new NovedadesOver(), section: SeluSite.NOVEDADES }, // TODO: Poner el over de novedades
 				{ label: "sexies", /*over: new SexiesOver()*/over: new PrensaOver(), section: SeluSite.SEXIES },
 				{ label: "prensa", over: new PrensaOver(), section: SeluSite.PRENSA },
 				{ label: "contacto", over: new ContactoOver(), section: SeluSite.CONTACTO },

@@ -11,16 +11,21 @@
 	public class SeluCollectionThumbs
 	extends BaseMenu {
 		
-		private var mcContainer:MovieClip;
+		private var mcContainer:Sprite
 		private var tBtnPrev:Tween;
 		private var tBtnNext:Tween;
 		private var tContainer:Tween;
+		public var mcPrev:Sprite;
+		public var mcNext:Sprite;
+		public var mcDrag:Sprite;
+		public var mcMask:Sprite;
+		public var mcBar:Sprite;
 		
 		override protected function initClip():void {
 			super.initClip();
 			setSize( new Point( this.width, mcMask.height ) );
 			
-			mcContainer = new MovieClip();
+			mcContainer = new Sprite();
 			this.addChild(mcContainer);
 			mcContainer.mask = mcMask;
 			mcPrev.buttonMode = mcNext.buttonMode = true;
@@ -90,7 +95,7 @@
 						
 		override protected function layout():void {
 			removeChild(mcContainer);
-			mcContainer = new MovieClip();
+			mcContainer = new Sprite();
 			this.addChild(mcContainer);
 			mcContainer.mask = mcMask;
 			

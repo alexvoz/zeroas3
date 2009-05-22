@@ -7,27 +7,23 @@
 	
 	public class SeluBotonera
 	extends BaseClip {
-		private var navBar:SeluButtonBar;
-		private var menuBtn:MovieClip;
-		private var homeBtn:MovieClip;
-		private var closeBtn:MovieClip;
+		public var navBar:SeluButtonBar;
+		public var mcMenu:MovieClip;
+		public var mcHome:MovieClip;
+		public var mcCloseBtn:MovieClip;
 		private var nInitY:Number;
 		private var nHomeY:Number;
 		private var bIsDown:Boolean;
 		
 		override protected function initClip():void {
-			menuBtn = this.getChildByName("mcMenu") as MovieClip;
-			homeBtn = this.getChildByName("mcHome") as MovieClip;
-			closeBtn = this.getChildByName("mcCloseBtn") as MovieClip;
+			mcMenu.visible = mcHome.visible = false;
+			mcHome.buttonMode = true;
+			mcCloseBtn.buttonMode = true;
 			
-			menuBtn.visible = homeBtn.visible = false;
-			homeBtn.buttonMode = true;
-			closeBtn.buttonMode = true;
-			
-			homeBtn.addEventListener( MouseEvent.CLICK, rightButtonClick);
-			homeBtn.addEventListener( MouseEvent.ROLL_OVER, rightButtonOver);
-			homeBtn.addEventListener( MouseEvent.ROLL_OUT, rightButtonOut);
-			closeBtn.addEventListener( MouseEvent.CLICK, rightButtonClick);
+			mcHome.addEventListener( MouseEvent.CLICK, rightButtonClick);
+			mcHome.addEventListener( MouseEvent.ROLL_OVER, rightButtonOver);
+			mcHome.addEventListener( MouseEvent.ROLL_OUT, rightButtonOut);
+			mcCloseBtn.addEventListener( MouseEvent.CLICK, rightButtonClick);
 			
 			navBar = new SeluButtonBar();
 			navBar.x = 27;
@@ -45,7 +41,7 @@
 				sectionChanged( undefined );
 				checkSection();
 			} else {
-				homeBtn.visible = true;
+				mcHome.visible = true;
 			}
 		}
 		
@@ -95,12 +91,12 @@
 		
 		private function rightButtonOut(e:MouseEvent):void 
 		{
-			homeBtn.gotoAndPlay("hide");
+			mcHome.gotoAndPlay("hide");
 		}
 		
 		private function rightButtonOver(e:MouseEvent):void 
 		{
-			homeBtn.gotoAndPlay("show");
+			mcHome.gotoAndPlay("show");
 		}
 		
 		private function rightButtonClick(e:MouseEvent):void 
@@ -110,12 +106,12 @@
 		
 		private function sectionChanged(e:Event):void {
 			if ( !e || SeluSite.getApp().getSection() == SeluSite.HOME) {
-				menuBtn.visible = true;
-				homeBtn.visible = false;
+				mcMenu.visible = true;
+				mcHome.visible = false;
 				
 			} else {
-				homeBtn.visible = true;
-				menuBtn.visible = false;
+				mcHome.visible = true;
+				mcMenu.visible = false;
 				
 			}
 		}
