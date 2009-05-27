@@ -8,7 +8,7 @@
 	import flash.events.*;
 	import flash.geom.Point;
 	
-	public class SeluTeensCollectionThumbs
+	public class STCollectionThumbs
 	extends BaseMenu {
 		
 		private var mcContainer:Sprite
@@ -40,15 +40,15 @@
 			mcDrag.visible = mcBar.visible = mcNext.visible = mcPrev.visible = false;
 			
 			nSpace = 7;
-			setView( SeluTeensCollectionThumb );
+			setView( STCollectionThumb );
 			
 		}
 		
 		override protected function refreshData():void {
-			//trace("SeluTeensCollectionThumbs refreshData");
+			//trace("STCollectionThumbs refreshData");
 			aBtns = new Array();
 			var oData:XMLList = getData() as XMLList;
-			//SeluTeensSite.getApp().log( "SeluTeensCollectionThumbs | refreshData= " + oData.length() );
+			//STSite.getApp().log( "STCollectionThumbs | refreshData= " + oData.length() );
 			for ( var i:int = 0; i < oData.length(); i++) {
 				var item:BaseMenuBtn = new view();
 				item.setData( oData[i] );

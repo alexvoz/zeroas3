@@ -8,15 +8,15 @@
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
 	
-	public class SeluTeensCollectionSection
+	public class STCollectionSection
 	extends BaseClip {
 		
-		public var mcThumbs:SeluTeensCollectionThumbs;
-		public var mcInfo:SeluTeensCollectionInfo;
+		public var mcThumbs:STCollectionThumbs;
+		public var mcInfo:STCollectionInfo;
 		public var btnBasicos:MovieClip;
 		public var btnColeccion09:MovieClip;
 		public var btnColeccionAnterior:MovieClip;
-		public var mcPhoto:SeluTeensCollectionPhoto;
+		public var mcPhoto:STCollectionPhoto;
 		
 		override protected function initClip():void {
 			super.initClip();
@@ -31,7 +31,7 @@
 			
 			mcThumbs.addEventListener( Event.CHANGE, mcThumbs_changed);
 			mcThumbs.addEventListener( Event.COMPLETE, mcThumbs_complete);
-			mcThumbs.setData( SeluTeensSite.getApp().getCollectionData() );
+			mcThumbs.setData( STSite.getApp().getCollectionData() );
 		}
 		
 		private function gotoLastCollection(e:MouseEvent):void {
@@ -51,7 +51,7 @@
 		
 		private function toggle_collection(e:MouseEvent):void {
 			if ( e.currentTarget as MovieClip == btnBasicos ) {
-				mcThumbs.setData( SeluTeensSite.getApp().getCollectionBasicData() );
+				mcThumbs.setData( STSite.getApp().getCollectionBasicData() );
 				
 				killTween( "basicFade" );
 				registerTween( "basicFade", new Tween( btnBasicos, "alpha", Regular.easeOut, btnBasicos.alpha, 0, 0.5, true), false, true );
@@ -60,7 +60,7 @@
 				registerTween( "collectionFade", new Tween( btnColeccion09, "alpha", Regular.easeOut, btnColeccion09.alpha, 1, 0.5, true));
 				
 			} else if ( e.currentTarget as MovieClip == btnColeccion09 ) {
-				mcThumbs.setData( SeluTeensSite.getApp().getCollectionData() );
+				mcThumbs.setData( STSite.getApp().getCollectionData() );
 				
 				btnBasicos.visible = true;
 				killTween( "basicFade" );

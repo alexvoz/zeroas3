@@ -13,7 +13,7 @@
 	import com.general.*
 	import flash.xml.XMLNode;
 		
-	public class SeluTeensContactoSection
+	public class STContactoSection
 	extends BaseClip {
 		private var btnBar:BaseMenu;
 		private var sArea:String;
@@ -29,7 +29,7 @@
 		override protected function initClip():void {
 			super.initClip();
 					
-			SeluTeensSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 						
 			//inicializo los clips
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;
@@ -40,7 +40,7 @@
 			btnBar.x = 66;
 			btnBar.y = 285;
 			btnBar.rotation = -3;
-			btnBar.setView( SeluTeensButtonResalte );
+			btnBar.setView( STButtonResalte );
 			btnBar.addEventListener( Event.CHANGE, menu_changed);
 			btnBar.setSpace( -10 );
 			
@@ -111,7 +111,7 @@
 		}
 		
 		private function section_changed(e:Event):void {
-			if ( SeluTeensSite.getApp().getSection() == SeluTeensSite.CONTACTO ) {
+			if ( STSite.getApp().getSection() == STSite.CONTACTO ) {
 				btnBar.getButtons()[0].rollOver(undefined);
 				btnBar.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 				inputName.text = inputMail.text = inputMessage.text = "";

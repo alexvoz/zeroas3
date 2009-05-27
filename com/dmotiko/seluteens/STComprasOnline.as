@@ -5,14 +5,14 @@
 	import flash.events.Event;
 	import flash.geom.Point;
 	
-	public class SeluTeensComprasOnline
+	public class STComprasOnline
 	extends BaseClip {
 		
 		override protected function initClip():void {
 			visible = false;
 			alpha = 0;
-			if ( SeluTeensSite.getApp() ) {
-				SeluTeensSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+			if ( STSite.getApp() ) {
+				STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			}
 		}
 		
@@ -22,42 +22,42 @@
 			var p:Point;
 			visible = false;
 			alpha = 0;
-			switch( SeluTeensSite.getApp().getSection() ) {
-				case SeluTeensSite.HOME:
+			switch( STSite.getApp().getSection() ) {
+				case STSite.HOME:
 				p = new Point( 47, 320);
 				break;
 				
-				case SeluTeensSite.COLECCION:
+				case STSite.COLECCION:
 				p = new Point( 12, 470);
 				break;
 				
-				case SeluTeensSite.BACKSTAGE:
+				case STSite.BACKSTAGE:
 				p = new Point( 47, 320);
 				break;
 				
-				case SeluTeensSite.PUNTOVENTA:
+				case STSite.PUNTOVENTA:
 				p = new Point( 75, 445);
 				visible = true;
 				alpha = 1;
 				break;
 				
-				case SeluTeensSite.NOVEDADES:
+				case STSite.NOVEDADES:
 				p = new Point( 463, 323);
 				break;
 				
-				case SeluTeensSite.SEXIES:
+				case STSite.SEXIES:
 				p = new Point( 12, 457);
 				break;
 				
-				case SeluTeensSite.PRENSA:
+				case STSite.PRENSA:
 				p = new Point( 12, 470);
 				break;
 				
-				case SeluTeensSite.CONTACTO:
+				case STSite.CONTACTO:
 				p = new Point( 12, 470);
 				break;
 				
-				case SeluTeensSite.NOCASTING:
+				case STSite.NOCASTING:
 				p = new Point(47, 320);
 				break;
 				

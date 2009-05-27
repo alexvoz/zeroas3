@@ -7,29 +7,29 @@
 	import com.general.*
 	import flash.xml.XMLNode;
 		
-	public class SeluTeensPuntosVentaSection
+	public class STPuntosVentaSection
 	extends BaseClip {
-		private var btnBar:SeluTeensPuntosVentaMenu;
-		public var mcInfo:SeluTeensPuntosVentaInfo;
+		private var btnBar:STPuntosVentaMenu;
+		public var mcInfo:STPuntosVentaInfo;
 						
 		override protected function initClip():void {
 			super.initClip();
 					
-			SeluTeensSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			
 			//inicializo los clips
-			btnBar = new SeluTeensPuntosVentaMenu();
+			btnBar = new STPuntosVentaMenu();
 			addChild(btnBar);
 			btnBar.x = 515;
 			btnBar.y = 75;
-			btnBar.setView( SeluTeensButtonResalte );
+			btnBar.setView( STButtonResalte );
 			btnBar.addEventListener( Event.CHANGE, menu_changed);
 						
-			btnBar.setData( new XML( "<root>" + SeluTeensSite.getApp().getStoresData().toXMLString() + "</root>" ) );
+			btnBar.setData( new XML( "<root>" + STSite.getApp().getStoresData().toXMLString() + "</root>" ) );
 		}
 		
 		private function menu_changed(e:Event):void {
-			var list:XMLList = SeluTeensSite.getApp().getStoresData();
+			var list:XMLList = STSite.getApp().getStoresData();
 			var stores:XML = new XML( "<root>" + list.toXMLString() + "</root>" );
 			var theNode:XML;
 			for each(var nodo:XML in stores.elements()){
@@ -39,7 +39,7 @@
 		}
 		
 		private function section_changed(e:Event):void {
-			if ( SeluTeensSite.getApp().getSection() == SeluTeensSite.PUNTOVENTA ) {
+			if ( STSite.getApp().getSection() == STSite.PUNTOVENTA ) {
 				btnBar.getButtons()[0].rollOver(undefined);
 				btnBar.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 			}

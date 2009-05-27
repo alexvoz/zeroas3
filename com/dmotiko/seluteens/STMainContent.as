@@ -8,20 +8,22 @@
 	import flash.geom.Point;
 	import flash.utils.*;
 	
-	public class SeluTeensMainContent
+	public class STMainContent
 	extends BaseClip {
 		
+		//FLA Clips
 		public var mcHome:MovieClip;
 		public var mcSound:MovieClip;
 		public var mcColeccion:MovieClip;
 		public var mcCompras:MovieClip;
 		public var mcBackstage:MovieClip;
-		public var mcNoCasting:SeluTeensBotonera;
+		public var mcNoCasting:STBotonera;
 		public var mcPuntosVenta:MovieClip;
 		public var mcNovedades:MovieClip;
 		public var mcSexies:MovieClip;
 		public var mcPrensa:MovieClip;
 		public var mcContacto:MovieClip;
+		
 		private var activeSection:MovieClip;
 		private var aSections:Array;
 		private var initPositions:Array;
@@ -31,41 +33,32 @@
 		private var tween:Tween;
 							
 		override protected function initClip():void {
-			var nOffset = 700;
-			initPositions = [ new Point( 0, -nOffset), new Point(nOffset, -nOffset), new Point(nOffset, 0), new Point( nOffset, nOffset), new Point(0, nOffset), new Point( -nOffset, nOffset), new Point( -nOffset, 0) ];
-			initPositions.push( initPositions[0] );
-			initPositions.push( initPositions[1] );
-			initPositions.push( initPositions[2] );
-			initPositions.push( initPositions[3] );
-			initPositions = ArrayUtil.randomArray(initPositions);
-			
-			trace( mcHome );
-			
+						
 			aSections = new Array();
-			aSections.push( mcHome );
-			aSections.push( mcSound );
-			aSections.push( mcNoCasting );
-			aSections.push( mcCompras );
-			aSections.push( mcColeccion );
-			aSections.push( mcBackstage );
-			aSections.push( mcPuntosVenta );
-			aSections.push( mcNovedades );
-			aSections.push( mcSexies );
-			aSections.push( mcPrensa );
-			aSections.push( mcContacto );
+			//aSections.push( mcHome );
+			//aSections.push( mcSound );
+			//aSections.push( mcNoCasting );
+			//aSections.push( mcCompras );
+			//aSections.push( mcColeccion );
+			//aSections.push( mcBackstage );
+			//aSections.push( mcPuntosVenta );
+			//aSections.push( mcNovedades );
+			//aSections.push( mcSexies );
+			//aSections.push( mcPrensa );
+			//aSections.push( mcContacto );
 			
-			aSections.forEach( function(item) { item.visible = false; }	);
+			//aSections.forEach( function(item) { item.visible = false; }	);
 						
-			nSectionCount= 0;
-			timerSections = new Timer(500);
-			timerSections.addEventListener( TimerEvent.TIMER, nextSection );
-			timerSections.dispatchEvent( new TimerEvent( TimerEvent.TIMER ) );
-			timerSections.start();
+			//nSectionCount= 0;
+			//timerSections = new Timer(500);
+			//timerSections.addEventListener( TimerEvent.TIMER, nextSection );
+			//timerSections.dispatchEvent( new TimerEvent( TimerEvent.TIMER ) );
+			//timerSections.start();
 			
-			activeSection = mcHome;
+			//activeSection = mcHome;
 						
-			if (!SeluTeensSite.getApp()) return;
-			SeluTeensSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
+			if (!STSite.getApp()) return;
+			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
 		}
 				
 		private function nextSection(e:TimerEvent):void {
@@ -91,32 +84,26 @@
 		
 		private function sectionChanged(e:Event):void {
 			var tweenSection:MovieClip;			
-			switch( SeluTeensSite.getApp().getSection() ) {
-				case SeluTeensSite.HOME:
+			switch( STSite.getApp().getSection() ) {
+				case STSite.HOME:
 				tweenSection = mcHome;
 				break;
-				case SeluTeensSite.COLECCION:
+				case STSite.COLECCION:
 				tweenSection = mcColeccion;
 				break;
-				case SeluTeensSite.BACKSTAGE:
-				tweenSection = mcBackstage;
-				break;
-				case SeluTeensSite.PUNTOVENTA:
+				case STSite.PUNTOVENTA:
 				tweenSection = mcPuntosVenta;
 				break;
-				case SeluTeensSite.NOVEDADES:
+				case STSite.NOVEDADES:
 				tweenSection = mcNovedades;
 				break;
-				case SeluTeensSite.PRENSA:
+				case STSite.PRENSA:
 				tweenSection = mcPrensa;
 				break;
-				case SeluTeensSite.SEXIES:
-				tweenSection = mcSexies;
-				break;
-				case SeluTeensSite.NOCASTING:
+				case STSite.NOCASTING:
 				tweenSection = mcNoCasting;
 				break;
-				case SeluTeensSite.CONTACTO:
+				case STSite.CONTACTO:
 				tweenSection = mcContacto;
 				break;
 			}
@@ -149,8 +136,7 @@
 			
 		}
 		
-		private function activeSectionYoYoEnd(e:TweenEvent):void 
-		{
+		private function activeSectionYoYoEnd(e:TweenEvent):void {
 			
 			if (activeSection != mcNoCasting) {
 				setChildIndex( mcNoCasting, getChildIndex( mcHome ) - 1 );

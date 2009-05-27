@@ -8,7 +8,7 @@
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
 		
-	public class SeluTeensButtonResalte
+	public class STButtonResalte
 	extends BaseMenuBtn {
 		public var txtLabel:TextField;
 		public var mcResalte:MovieClip;

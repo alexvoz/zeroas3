@@ -8,7 +8,7 @@
 	import flash.display.*;
 	import flash.net.*;
 	
-	public class SeluTeensCollectionPhoto
+	public class STCollectionPhoto
 	extends BaseClip {
 		private var loader:Loader;
 		public var mcImg:Sprite;
@@ -19,7 +19,7 @@
 		}
 		
 		override protected function refreshData():void {
-			var sNoCache:String = ( SeluTeensSite.getApp() ) ? SeluTeensSite.getApp().getNoCache() : "";
+			var sNoCache:String = ( STSite.getApp() ) ? STSite.getApp().getNoCache() : "";
 			var request:URLRequest = new URLRequest( (data as XML).attribute("big") + sNoCache );
 			this.loader = new Loader();
 			var context:LoaderContext = new LoaderContext(); 

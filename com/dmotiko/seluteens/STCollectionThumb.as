@@ -6,7 +6,7 @@ package com.dmotiko.seluteens {
 	import flash.events.*;
 	import flash.net.*;
 		
-	public class SeluTeensCollectionThumb
+	public class STCollectionThumb
 	extends BaseMenuBtn {
 		
 		private var loader:Loader;
@@ -37,7 +37,7 @@ package com.dmotiko.seluteens {
 		}
 		
 		override protected function refreshData():void {
-			var sNoCache:String = ( SeluTeensSite.getApp() ) ? SeluTeensSite.getApp().getNoCache() : "";
+			var sNoCache:String = ( STSite.getApp() ) ? STSite.getApp().getNoCache() : "";
 			var request:URLRequest = new URLRequest( (data as XML).attribute("mini") + sNoCache );
 			this.loader = new Loader();
 			this.loader.load( request );
@@ -49,13 +49,13 @@ package com.dmotiko.seluteens {
 		
 		override protected function tweenFinished( key:String, tween:Tween ):void {
 			if ( key == "progressFade" ) {
-				SeluTeensSite.getApp().log("SeluTeensCollectionThumb | tweenFinished " + key);
+				STSite.getApp().log("STCollectionThumb | tweenFinished " + key);
 				tween.yoyo();
 			}
 		}
 		
 		private function thumbInit( evnt:Event ):void {
-			SeluTeensSite.getApp().log("SeluTeensCollectionThumb | " + evnt.currentTarget.url + " | thumbInit");
+			STSite.getApp().log("STCollectionThumb | " + evnt.currentTarget.url + " | thumbInit");
 			killTween( "progressFade" );
 			removeChild(spProgress);
 			var nAlpha:Number = 1;

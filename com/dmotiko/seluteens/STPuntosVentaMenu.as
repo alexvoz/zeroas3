@@ -6,7 +6,7 @@
 	import flash.events.*
 	import com.general.*
 			
-	public class SeluTeensPuntosVentaMenu
+	public class STPuntosVentaMenu
 	extends BaseMenu {
 		
 		override protected function refreshData():void {

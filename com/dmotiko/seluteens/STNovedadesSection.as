@@ -6,7 +6,7 @@
 	import flash.events.*
 	import com.general.*
 	
-	public class SeluTeensNovedadesSection
+	public class STNovedadesSection
 	extends BaseClip {
 		
 		public var mcNews:MovieClip;

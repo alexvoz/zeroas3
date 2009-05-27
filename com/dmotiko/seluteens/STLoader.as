@@ -6,7 +6,7 @@
 	import flash.events.*;
 	import flash.utils.Timer;
 	
-	public class SeluTeensLoader
+	public class STLoader
 	extends BaseClip {
 		
 		private var nPos:Number;

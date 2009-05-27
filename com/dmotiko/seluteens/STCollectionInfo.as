@@ -3,7 +3,7 @@
 	import flash.text.*;
 	import flash.display.*;
 	
-	public class SeluTeensCollectionInfo
+	public class STCollectionInfo
 	extends BaseClip {
 		
 		public var txtContent:TextField;

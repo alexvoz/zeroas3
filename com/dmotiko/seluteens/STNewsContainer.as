@@ -8,7 +8,7 @@
 	import flash.geom.Rectangle;
 	import flash.xml.XMLNode;
 		
-	public class SeluTeensNewsContainer
+	public class STNewsContainer
 	extends BaseClip {
 		
 		public var mcContainer:MovieClip;

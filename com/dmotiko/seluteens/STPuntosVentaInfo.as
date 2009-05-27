@@ -8,7 +8,7 @@
 	import flash.geom.Rectangle;
 	import flash.xml.XMLNode;
 		
-	public class SeluTeensPuntosVentaInfo
+	public class STPuntosVentaInfo
 	extends BaseClip {
 		
 		private var mcContainer:Sprite;
@@ -82,7 +82,7 @@
 			var nY:Number = 0;
 			var nLimit:Number = aFinalItems.length;
 			for (var i2:int = 0; i2 < nLimit; i2++){
-				var item:SeluTeensPuntosVentaInfoItem = new SeluTeensPuntosVentaInfoItem();
+				var item:STPuntosVentaInfoItem = new STPuntosVentaInfoItem();
 				item.setData( aFinalItems[i2] );
 				item.y = nY;
 				nY += item.height + 2;

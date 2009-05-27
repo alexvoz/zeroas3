@@ -5,9 +5,9 @@
 	import flash.display.*;
 	import flash.events.*;
 	
-	public class SeluTeensBotonera
+	public class STBotonera
 	extends BaseClip {
-		public var navBar:SeluTeensButtonBar;
+		public var navBar:STButtonBar;
 		public var mcMenu:MovieClip;
 		public var mcHome:MovieClip;
 		public var mcCloseBtn:MovieClip;
@@ -25,7 +25,7 @@
 			mcHome.addEventListener( MouseEvent.ROLL_OUT, rightButtonOut);
 			mcCloseBtn.addEventListener( MouseEvent.CLICK, rightButtonClick);
 			
-			navBar = new SeluTeensButtonBar();
+			navBar = new STButtonBar();
 			navBar.x = 27;
 			navBar.y = 200;
 			navBar.mouseEnabled = false;
@@ -36,8 +36,8 @@
 			nInitY = this.y;
 			nHomeY = this.y - 30;
 					
-			if (SeluTeensSite.getApp()) {
-				SeluTeensSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
+			if (STSite.getApp()) {
+				STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
 				sectionChanged( undefined );
 				checkSection();
 			} else {
@@ -47,7 +47,7 @@
 		
 		public function checkSection():void {
 			var tween:Tween;
-			if ( SeluTeensSite.getApp().getSection() == SeluTeensSite.HOME ) {
+			if ( STSite.getApp().getSection() == STSite.HOME ) {
 				killTween("moveY");
 				tween =  new Tween( this, "y", Regular.easeOut, this.y, nHomeY, 0.5, true );
 				registerTween("moveY", tween);
@@ -86,7 +86,7 @@
 		}
 		
 		private function btnBarChange(evnt):void {
-			SeluTeensSite.getApp().setSection( navBar.getActiveButton().getData().section );			
+			STSite.getApp().setSection( navBar.getActiveButton().getData().section );			
 		}
 		
 		private function rightButtonOut(e:MouseEvent):void 
@@ -101,11 +101,11 @@
 		
 		private function rightButtonClick(e:MouseEvent):void 
 		{
-			SeluTeensSite.getApp().setSection( SeluTeensSite.HOME );
+			STSite.getApp().setSection( STSite.HOME );
 		}
 		
 		private function sectionChanged(e:Event):void {
-			if ( !e || SeluTeensSite.getApp().getSection() == SeluTeensSite.HOME) {
+			if ( !e || STSite.getApp().getSection() == STSite.HOME) {
 				mcMenu.visible = true;
 				mcHome.visible = false;
 				

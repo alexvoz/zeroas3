@@ -5,8 +5,8 @@ package com.dmotiko.seluteens {
 	import flash.geom.*;
 	import flash.events.*;
 	
-	public class SeluTeensButtonSpecial
-	extends SeluTeensButton {
+	public class STButtonSpecial
+	extends STButton {
 			
 		override protected function initClip():void {
 			this.useHandCursor = true;

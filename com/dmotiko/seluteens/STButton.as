@@ -5,7 +5,7 @@ package com.dmotiko.seluteens {
 	import flash.geom.*;
 	import flash.events.*;
 	
-	public class SeluTeensButton
+	public class STButton
 	extends BaseMenuBtn {
 		
 		private var _overAnimation:MovieClip;
@@ -14,7 +14,7 @@ package com.dmotiko.seluteens {
 		protected var nColor:Number;
 		private var pBtn:Point;
 		
-		public function SeluTeensButton() {
+		public function STButton() {
 			super();
 		}
 		
@@ -37,7 +37,7 @@ package com.dmotiko.seluteens {
 				if(!pBtn){
 					pBtn = new Point( 0, 0);
 					pBtn = this.localToGlobal( pBtn );
-					pBtn = SeluTeensSite.getApp().getTopClip().globalToLocal( pBtn );
+					pBtn = STSite.getApp().getTopClip().globalToLocal( pBtn );
 					_overAnimation.x =  pBtn.x;
 					_overAnimation.y = pBtn.y - _overAnimation.height - 5;
 				}
@@ -69,8 +69,8 @@ package com.dmotiko.seluteens {
 		
 		public function setOverAnimation(value:MovieClip):void {
 			_overAnimation = value;
-			if ( !SeluTeensSite.getApp() ) return;
-			SeluTeensSite.getApp().getTopClip().addChild(_overAnimation);
+			if ( !STSite.getApp() ) return;
+			STSite.getApp().getTopClip().addChild(_overAnimation);
 		}
 		
 	}

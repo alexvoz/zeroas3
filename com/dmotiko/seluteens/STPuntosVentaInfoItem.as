@@ -8,7 +8,7 @@
 	import com.general.*
 	import flash.xml.XMLNode;
 		
-	public class SeluTeensPuntosVentaInfoItem
+	public class STPuntosVentaInfoItem
 	extends BaseClip {
 		public var txtContent:TextField;
 		public var mcStroke:Sprite;
