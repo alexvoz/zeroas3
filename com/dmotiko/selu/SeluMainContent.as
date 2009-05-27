@@ -109,7 +109,6 @@
 				break;
 				case SeluSite.PRENSA:
 				tweenSection = mcPrensa;
-				return;
 				break;
 				case SeluSite.SEXIES:
 				tweenSection = mcSexies;

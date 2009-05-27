@@ -39,9 +39,10 @@
 		private var collectionBasicXMLList:XMLList;
 		private var storesXMLList:XMLList;
 		private var sexiesXMLList:XMLList;		
-		
 		private var news_loaderXML:URLLoader;
 		private var newsXMLList:XMLList;
+		private var press_loaderXML:URLLoader;
+		private var pressXMLList:XMLList;
 		/* end data XML*/
 						
 		public static function getApp():SeluSite {
@@ -96,6 +97,11 @@
 			news_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
 			news_loaderXML.addEventListener( Event.COMPLETE, newsLoaded );
 			news_loaderXML.load( new URLRequest( "news.xml" ) );
+			
+			press_loaderXML = new URLLoader();
+			press_loaderXML.dataFormat = URLLoaderDataFormat.TEXT;
+			press_loaderXML.addEventListener( Event.COMPLETE, pressLoaded );
+			press_loaderXML.load( new URLRequest( "press.xml" ) );
 		}
 		
 		private function newsLoaded(e:Event):void {
@@ -162,8 +168,21 @@
 			}
 		}
 		
+		private function pressLoaded(e:Event):void {
+			try{
+				//Convert the downloaded text into an XML
+				var myXML:XML = new XML(e.target.data)
+				pressXMLList = myXML.children()[0].child("media");
+				checkXML();
+								
+			} catch (e:TypeError){
+				//Could not convert the data, probavlu because is not formated correctly
+				log("Could not parse the press XML | "+e.message)
+			}
+		}
+		
 		private function checkXML():void {
-			if ( collectionBasicXMLList && collectionXMLList && storesXMLList && sexiesXMLList && newsXMLList ) {
+			if ( collectionBasicXMLList && collectionXMLList && storesXMLList && sexiesXMLList && newsXMLList && pressXMLList ) {
 				externalContentLoaded( undefined );
 			}
 		}
@@ -190,7 +209,7 @@
 			
 		// TODO esto vuela más tarde
 		override public function setSection( s:String ):void {
-			if ( /*s == SeluSite.NOVEDADES ||*/ s == SeluSite.PRENSA || s== SeluSite.SEXIES ) return;
+			if ( /*s == SeluSite.NOVEDADES || s == SeluSite.PRENSA || */ s== SeluSite.SEXIES ) return;
 			super.setSection( s );
 		}
 		
