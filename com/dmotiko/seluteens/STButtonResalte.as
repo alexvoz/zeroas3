@@ -31,23 +31,32 @@
 		}
 		
 		override protected function refreshData():void {
+			/*
 			if (data.special == "yes") txtLabel.textColor = 0;
 			else txtLabel.textColor = 0x333333;
-			txtLabel.text = data.label.toUpperCase();
+			*/
+			txtLabel.text = data.label;
 			mcRect.width = txtLabel.width;
-			mcResalte.x = txtLabel.x;
-			mcResalte.y = txtLabel.y + 0;
+			mcResalte.x = txtLabel.x - 3;
+			mcResalte.y = txtLabel.y + 5;
 			mcResalte.height = mcRect.height + 10;
 			mcResalte.width = txtLabel.width + 25;
 		}
 		
 		override public function rollOut( e:MouseEvent ):void {
+			//STSite.log( "STButtonResalte rollOut" );
 			if ( bActive ) return;
 			var _mask:MovieClip = mcResalte.getChildByName("mcMask") as MovieClip;
 			_mask.removeEventListener(Event.ENTER_FRAME, foward);
 			_mask.addEventListener( Event.ENTER_FRAME, rewind);
 		}
-		
+				
+		override public function rollOver( e:MouseEvent ):void {
+			//STSite.log( "STButtonResalte rollOver" );
+			var _mask:MovieClip = mcResalte.getChildByName("mcMask") as MovieClip;
+			_mask.removeEventListener(Event.ENTER_FRAME, rewind);
+			_mask.addEventListener( Event.ENTER_FRAME, foward);
+		}
 		private function rewind(e:Event):void {
 			var _mask:MovieClip = e.currentTarget as MovieClip;
 			if ( _mask.currentFrame == 1) {
@@ -55,11 +64,6 @@
 			} else {
 				_mask.prevFrame();
 			}
-		}
-		override public function rollOver( e:MouseEvent ):void {
-			var _mask:MovieClip = mcResalte.getChildByName("mcMask") as MovieClip;
-			_mask.removeEventListener(Event.ENTER_FRAME, rewind);
-			_mask.addEventListener( Event.ENTER_FRAME, foward);
 		}
 		
 		private function foward(e:Event):void {

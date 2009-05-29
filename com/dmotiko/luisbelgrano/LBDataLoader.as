@@ -1,5 +1,6 @@
 ﻿package com.dmotiko.luisbelgrano {
 	import com.general.DataXMLLoader;
+	import com.general.WebSite;
 	import flash.xml.*
 	import flash.net.*
 	import flash.events.*
@@ -26,10 +27,8 @@
 			} catch (e:TypeError){
 				//Could not convert the data, probavlu because
 				//because is not formated correctly
-				if( LBSite.getApp() ){
-					LBSite.getApp().log("Could not parse the XML");
-					LBSite.getApp().log(e.message);
-				}
+				LBSite as WebSite.log("Could not parse the XML");
+				LBSite as WebSite.log(e.message);
 			}
 		}
 		

@@ -48,7 +48,7 @@
 			//trace("STCollectionThumbs refreshData");
 			aBtns = new Array();
 			var oData:XMLList = getData() as XMLList;
-			//STSite.getApp().log( "STCollectionThumbs | refreshData= " + oData.length() );
+			//STSite.log( "STCollectionThumbs | refreshData= " + oData.length() );
 			for ( var i:int = 0; i < oData.length(); i++) {
 				var item:BaseMenuBtn = new view();
 				item.setData( oData[i] );

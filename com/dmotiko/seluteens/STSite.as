@@ -28,19 +28,29 @@
 		private var xmlContent:STXMLContent;
 		private var sndController:STSoundController;
 								
+		//para evitar imports innecesarios
+		public static function log( msg:*, toConsole:Boolean = false ):void {
+			if ( getApp() ) getApp().internalLog( msg, toConsole );
+			else if (!toConsole) trace( msg );
+		}
+		
 		public static function getApp():STSite {
 			return STSite(app);
 		}
 						
 		public function STSite() {
 			super();
+			//creo el clip que centra el contenido
 			var sCenterClip:Sprite = new Sprite();
 			sCenterClip.graphics.beginFill(0xFF0000);
 			sCenterClip.graphics.drawRect(0, 0, 1005, 600);
 			sCenterClip.graphics.endFill();
 			sCenterClip.visible = false;
+			//lo agrego al displayList
 			this.addChild( sCenterClip );
+			//lo seteo como referencia para WebSite
 			setCenterClip( sCenterClip );
+			
 			isFullFlash();
 		}
 				
@@ -81,7 +91,7 @@
 			
 		// TODO esto vuela más tarde
 		override public function setSection( s:String ):void {
-			if ( /*s == STSite.NOVEDADES || s == STSite.PRENSA || */ s== STSite.SEXIES ) return;
+			//if ( STSite.NOVEDADES || s == STSite.PRENSA ) return;
 			super.setSection( s );
 		}
 		

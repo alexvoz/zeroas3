@@ -28,10 +28,10 @@
 		
 		private function sound_changed(e:Event=undefined):void {
 			if ( STSite.getApp().getSound() ) {
-				STSite.getApp().log( "STSite.getSound true");
+				STSite.log( "STSite.getSound true");
 				this.gotoAndStop(1);
 			} else {
-				STSite.getApp().log( "STSite.getSound false");
+				STSite.log( "STSite.getSound false");
 				this.gotoAndStop(2);
 			}
 		}

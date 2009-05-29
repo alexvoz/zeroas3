@@ -20,6 +20,11 @@ package com.general {
 		protected var txtConsole:WebSiteConsole;
 		protected var mcCenterClip:DisplayObject;
 		
+		public static function log( msg:*, toConsole:Boolean = false ):void {
+			if ( getApp() ) getApp().internalLog( msg, toConsole );
+			else if (!toConsole) trace( msg );
+		}
+		
 		public static function getApp():WebSite {
 			return app;
 		}
@@ -39,10 +44,10 @@ package com.general {
 				this.txtConsole.backgroundColor = 0xFFFFFF;
 				this.txtConsole.borderColor = 0;
 				this.addChild(this.txtConsole);
-				this.log("WebSite | Console Initialized");
+				internalLog("WebSite | Console Initialized");
 				
 			} else {
-				this.log("WebSite | Console disabled");
+				internalLog("WebSite | Console disabled");
 			}
 			this.initSite();
 		}
@@ -162,7 +167,7 @@ package com.general {
 			}
 		}
 		
-		public function log(msg:*, toConsole:Boolean=false ):void {
+		protected function internalLog(msg:*, toConsole:Boolean=false ):void {
 			
 			if ( this.loaderInfo.parameters["CONSOLE"]) {
 				this.removeChild( txtConsole );
@@ -174,7 +179,7 @@ package com.general {
 			} else if ( this.loaderInfo.parameters["FIREBUG"] ) {
 				navigateToURL( new URLRequest("javascript:console.log('" + msg + "');"), "_self" );
 				
-			}else if( !toConsole) {
+			} else if( !toConsole) {
 				trace(msg);
 			}
 		}

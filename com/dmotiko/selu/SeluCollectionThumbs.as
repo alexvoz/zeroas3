@@ -48,7 +48,7 @@
 			//trace("SeluCollectionThumbs refreshData");
 			aBtns = new Array();
 			var oData:XMLList = getData() as XMLList;
-			//SeluSite.getApp().log( "SeluCollectionThumbs | refreshData= " + oData.length() );
+			//SeluSite.log( "SeluCollectionThumbs | refreshData= " + oData.length() );
 			for ( var i:int = 0; i < oData.length(); i++) {
 				var item:BaseMenuBtn = new view();
 				item.setData( oData[i] );

@@ -40,7 +40,7 @@
 			flvPlayer.seekBar = spSeek;
 			flvPlayer.autoPlay = false;
 			flvPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
-			flvPlayer.load("http://www.d-motiko.com.ar/clients/selu/production/backstage.flv");
+			flvPlayer.load( SeluSite.getApp().loaderInfo.parameters["video_src"] );
 			volumeController = new Object();
 			if ( SeluSite.getApp().getSound() ) volumeController.volume = 1;
 			else volumeController.volume = 0;
@@ -58,7 +58,7 @@
 		}
 						
 		private function video_change(e:VideoEvent):void {
-			SeluSite.getApp().log("video_change= " + e.state);
+			SeluSite.log("video_change= " + e.state);
 		}
 		
 		private function section_changed(e:Event):void {

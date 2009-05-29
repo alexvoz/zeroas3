@@ -28,10 +28,10 @@
 		
 		private function sound_changed(e:Event=undefined):void {
 			if ( SeluSite.getApp().getSound() ) {
-				SeluSite.getApp().log( "SeluSite.getSound true");
+				SeluSite.log( "SeluSite.getSound true");
 				this.gotoAndStop(1);
 			} else {
-				SeluSite.getApp().log( "SeluSite.getSound false");
+				SeluSite.log( "SeluSite.getSound false");
 				this.gotoAndStop(2);
 			}
 		}

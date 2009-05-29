@@ -33,7 +33,9 @@
 		private var tween:Tween;
 							
 		override protected function initClip():void {
-						
+			
+			STSite.log( "STMainContent | initClip");
+			
 			aSections = new Array();
 			//aSections.push( mcHome );
 			//aSections.push( mcSound );
@@ -56,9 +58,10 @@
 			//timerSections.start();
 			
 			//activeSection = mcHome;
-						
+			
 			if (!STSite.getApp()) return;
 			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
+			
 		}
 				
 		private function nextSection(e:TimerEvent):void {
@@ -140,7 +143,7 @@
 			
 			if (activeSection != mcNoCasting) {
 				setChildIndex( mcNoCasting, getChildIndex( mcHome ) - 1 );
-				mcNoCasting.checkSection();
+				//mcNoCasting.checkSection();
 			}
 			
 		}

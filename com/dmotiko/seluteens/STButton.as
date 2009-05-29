@@ -1,4 +1,4 @@
-package com.dmotiko.seluteens {
+﻿package com.dmotiko.seluteens {
 	import com.general.*;
 	import flash.display.*;
 	import flash.text.*;
@@ -9,38 +9,20 @@ package com.dmotiko.seluteens {
 	extends BaseMenuBtn {
 		
 		private var _overAnimation:MovieClip;
-		private var spBack:Sprite;
 		public var txtLabel:TextField;
-		protected var nColor:Number;
-		private var pBtn:Point;
-		
-		public function STButton() {
-			super();
-		}
-		
+				
 		override protected function initClip():void {
 			this.useHandCursor = true;
 			this.buttonMode = true;
 			txtLabel.mouseEnabled = false;
 			
-			nColor = 0x474747;
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;
-			txtLabel.textColor = nColor;
 			this.addEventListener( MouseEvent.ROLL_OVER, rollOver);
 			this.addEventListener( MouseEvent.ROLL_OUT, rollOut);
 		}
 		
 		override public function rollOver( evnt:MouseEvent ):void {
-			spBack.visible = true;
-			txtLabel.textColor = 0xFFFFFF;
 			if ( _overAnimation ) {
-				if(!pBtn){
-					pBtn = new Point( 0, 0);
-					pBtn = this.localToGlobal( pBtn );
-					pBtn = STSite.getApp().getTopClip().globalToLocal( pBtn );
-					_overAnimation.x =  pBtn.x;
-					_overAnimation.y = pBtn.y - _overAnimation.height - 5;
-				}
 				_overAnimation.gotoAndPlay("show");
 			}
 		}
@@ -48,18 +30,10 @@ package com.dmotiko.seluteens {
 		override public function rollOut( evnt:MouseEvent ):void {
 			if ( _overAnimation && evnt ) _overAnimation.gotoAndPlay("hide");
 			if ( this.bActive )	return;
-			spBack.visible = false;
-			txtLabel.textColor = nColor;
 		}
 		
 		override protected function refreshData():void {
-			txtLabel.text = data.label.toUpperCase();
-			spBack = new Sprite();
-			spBack.graphics.beginFill(nColor, 1);
-			spBack.graphics.drawRect(-2, -1, txtLabel.width + 4, txtLabel.height);
-			spBack.graphics.endFill();
-			spBack.visible = false;
-			this.addChildAt( spBack, 0);
+			txtLabel.text = data.label;
 			if(data.over) this.setOverAnimation( data.over );
 		}
 		
@@ -69,10 +43,7 @@ package com.dmotiko.seluteens {
 		
 		public function setOverAnimation(value:MovieClip):void {
 			_overAnimation = value;
-			if ( !STSite.getApp() ) return;
-			STSite.getApp().getTopClip().addChild(_overAnimation);
 		}
-		
 	}
 	
 }

@@ -45,6 +45,13 @@
 		private var pressXMLList:XMLList;
 		/* end data XML*/
 						
+		
+		//para evitar imports innecesarios
+		public static function log( msg:*, toConsole:Boolean = false ):void {
+			if ( getApp() ) getApp().internalLog( msg, toConsole );
+			else if (!toConsole) trace( msg );
+		}
+		
 		public static function getApp():SeluSite {
 			return SeluSite(app);
 		}
@@ -65,7 +72,7 @@
 		}
 		
 		override protected function loadExternalContent():void {
-			music = new Sound( new URLRequest( "http://www.d-motiko.com.ar/clients/selu/production/music2009.mp3" ) );
+			music = new Sound( new URLRequest( this.loaderInfo.parameters["music_src"] ) );
 			music.addEventListener( Event.COMPLETE, snd_complete );
 			music.addEventListener( ProgressEvent.PROGRESS, snd_progress );
 			soundController = new Object();
@@ -198,7 +205,7 @@
 		}
 		
 		private function snd_complete(e:Event):void {
-			SeluSite.getApp().log("snd complete");
+			SeluSite.log("snd complete");
 		}
 		
 		private function loop_music(e:Event):void {
@@ -209,7 +216,7 @@
 			
 		// TODO esto vuela más tarde
 		override public function setSection( s:String ):void {
-			if ( /*s == SeluSite.NOVEDADES || s == SeluSite.PRENSA || */ s== SeluSite.SEXIES ) return;
+			if ( /*s == SeluSite.NOVEDADES || */s == SeluSite.PRENSA ||  s== SeluSite.SEXIES ) return;
 			super.setSection( s );
 		}
 		
@@ -219,8 +226,7 @@
 			var mRequest:URLRequest = new URLRequest("mainContent.swf"+getNoCache()); 
 			mLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandler); 
 			mLoader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, onProgressHandler);
-			mLoader.load(mRequest);
-			
+			mLoader.load(mRequest);			
 		}
 		
 		private function hideLoader(e:Event):void {
