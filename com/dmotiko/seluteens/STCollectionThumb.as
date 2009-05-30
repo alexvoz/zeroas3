@@ -9,15 +9,20 @@ package com.dmotiko.seluteens {
 	public class STCollectionThumb
 	extends BaseMenuBtn {
 		
+		//FLA instances
+		public var mcBack:MovieClip;
+		public var mcOver:MovieClip;
+		//
+		
 		private var loader:Loader;
-		private var clipAlpha:Tween;
 		private var spPhoto:Sprite;
 		private var spProgress:Sprite;
 				
 		override protected function initClip():void {
 			spPhoto = new Sprite();
-			spPhoto.graphics.drawRect(0, 0, 63, 63);
 			spPhoto.buttonMode = true;
+			spPhoto.x = 10;
+			spPhoto.y = 10;
 			spPhoto.addEventListener( MouseEvent.ROLL_OVER, rollOver);
 			spPhoto.addEventListener( MouseEvent.ROLL_OUT, rollOut);
 			
@@ -32,8 +37,8 @@ package com.dmotiko.seluteens {
 			this.addChild( spProgress );
 			this.addChild( spPhoto );
 			
-			spProgress.x = (spPhoto.width - spProgress.width) / 2;
-			spProgress.y = (spPhoto.height - spProgress.height) / 2;
+			spProgress.x = spPhoto.x + (spPhoto.width - spProgress.width) / 2;
+			spProgress.y = spPhoto.y +(spPhoto.height - spProgress.height) / 2;
 		}
 		
 		override protected function refreshData():void {
@@ -49,28 +54,27 @@ package com.dmotiko.seluteens {
 		
 		override protected function tweenFinished( key:String, tween:Tween ):void {
 			if ( key == "progressFade" ) {
-				STSite.log("STCollectionThumb | tweenFinished " + key);
+				//STSite.log("STCollectionThumb | tweenFinished " + key);
 				tween.yoyo();
 			}
 		}
 		
 		private function thumbInit( evnt:Event ):void {
-			STSite.log("STCollectionThumb | " + evnt.currentTarget.url + " | thumbInit");
 			killTween( "progressFade" );
 			removeChild(spProgress);
-			var nAlpha:Number = 1;
-			if (!bActive) nAlpha = 0.2; //spPhoto.alpha = 0.2;
-			registerTween("thumbFade", new Tween( spPhoto, "alpha", Regular.easeOut, 0, nAlpha, 0.3, true) );
+			(loader.content as Bitmap).smoothing = true;
 		}
 		
 		override public function rollOver( evnt:MouseEvent):void {
-			if (clipAlpha) clipAlpha.stop();
-			clipAlpha = new Tween( spPhoto, "alpha", Regular.easeIn, spPhoto.alpha, 1, 0.3, true);
+			mcOver.gotoAndStop(2);
 		}
 		override public function rollOut( evnt:MouseEvent):void {
 			if ( bActive ) return;
-			if (clipAlpha) clipAlpha.stop();
-			clipAlpha = new Tween( spPhoto, "alpha", Regular.easeIn, spPhoto.alpha, 0.2, 0.3, true);
+			mcOver.gotoAndStop(3);
+		}
+		
+		override public function setActive(active:Boolean):void {
+			super.setActive( active );
 		}
 		
 	}

@@ -15,6 +15,7 @@
 		private var tBtnPrev:Tween;
 		private var tBtnNext:Tween;
 		private var tContainer:Tween;
+		
 		public var mcPrev:Sprite;
 		public var mcNext:Sprite;
 		public var mcDrag:Sprite;
@@ -27,6 +28,9 @@
 			
 			mcContainer = new Sprite();
 			this.addChild(mcContainer);
+			mcContainer.rotation = mcMask.rotation;
+			mcContainer.x = mcMask.x;
+			mcContainer.y = mcMask.y;			
 			mcContainer.mask = mcMask;
 			mcPrev.buttonMode = mcNext.buttonMode = true;
 			mcPrev.useHandCursor = mcNext.useHandCursor = true;
@@ -37,7 +41,8 @@
 			mcPrev.addEventListener( MouseEvent.CLICK, scrollThumbs);
 			mcNext.addEventListener( MouseEvent.CLICK, scrollThumbs);
 			
-			mcDrag.visible = mcBar.visible = mcNext.visible = mcPrev.visible = false;
+			mcDrag.visible = false;
+			//mcDrag.visible = mcBar.visible = mcNext.visible = mcPrev.visible = false;
 			
 			nSpace = 7;
 			setView( STCollectionThumb );
@@ -75,8 +80,8 @@
 				}
 			} else if( mcPrev.visible && mcPrev.alpha > 0) {
 				mcPrev.mouseEnabled = false;
-				tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 0, 0.5, true);
-				tBtnPrev.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
+				//tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 0, 0.5, true);
+				//tBtnPrev.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
 			}
 			
 			if (bNext) {
@@ -87,8 +92,8 @@
 				}
 			} else if( mcNext.visible && mcNext.alpha > 0) {
 				mcNext.mouseEnabled = false;
-				tBtnNext = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 0, 0.5, true);
-				tBtnNext.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
+				//tBtnNext = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 0, 0.5, true);
+				//tBtnNext.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
 			}
 			
 		}
@@ -97,6 +102,9 @@
 			removeChild(mcContainer);
 			mcContainer = new Sprite();
 			this.addChild(mcContainer);
+			mcContainer.rotation = mcMask.rotation;
+			mcContainer.x = mcMask.x;
+			mcContainer.y = mcMask.y;			
 			mcContainer.mask = mcMask;
 			
 			var nY:Number = 0;
@@ -106,8 +114,8 @@
 				var item:Sprite;
 				item = aBtns[i];
 				
-				//si es multiplo de 2 y no es el primero bajo de linea
-				if ( i != 0 && i % 2 == 0) {
+				//si es multiplo de 3 y no es el primero bajo de linea
+				if ( i != 0 && i % 3 == 0) {
 					nX = 0;
 					nY += item.height + nSpace;
 				}
@@ -131,7 +139,7 @@
 		}
 		private function scrollThumbs( evnt:MouseEvent ):void {
 			var nEnd:Number;
-			var nScroll:Number = mcContainer.getChildAt(0).height + nSpace;
+			var nScroll:Number = mcContainer.getChildAt(0).height + nSpace - 10;
 			if ( evnt.currentTarget == mcPrev) {
 				nEnd = mcContainer.y + nScroll;
 				//if (nEnd > 0) return;
@@ -148,6 +156,7 @@
 		}
 		
 		override public function activeBtn( evnt:MouseEvent ):void {
+			STSite.log( "STCollectionThumbs | activeBtn= " + evnt.currentTarget);
 			if (getActiveButton() == evnt.currentTarget as BaseMenuBtn) return;
 			super.activeBtn(evnt);		
 			var btn:DisplayObject = (evnt.currentTarget as DisplayObject);

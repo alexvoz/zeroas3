@@ -15,6 +15,15 @@
 		public var mcMask:Sprite;
 		
 		override protected function initClip():void {
+			//STSite.log( "STCollectionPhoto | initClip ");
+			
+			if ( !mcImg ) {
+				mcImg = new Sprite();
+				mcImg.x = mcMask.x;
+				mcImg.y = mcMask.y;
+				addChild( mcImg );
+			}
+			
 			mcImg.mask = mcMask;
 		}
 		
@@ -32,6 +41,7 @@
 		private function thumbInit( evnt:Event ):void {
 			//mcImg.alpha = 0;
 			(loader.content as Bitmap).smoothing = true;
+			this.dispatchEvent( new Event(Event.COMPLETE) );
 			//registerTween("photoFade", new Tween( mcImg, "alpha", Regular.easeOut, 0, 1, 0.5, true));
 		}
 		

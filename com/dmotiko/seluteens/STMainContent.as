@@ -14,77 +14,30 @@
 		//FLA Clips
 		public var mcHome:MovieClip;
 		public var mcSound:MovieClip;
-		public var mcColeccion:MovieClip;
+		public var mcCollection:MovieClip;
 		public var mcCompras:MovieClip;
-		public var mcBackstage:MovieClip;
 		public var mcNoCasting:STBotonera;
 		public var mcPuntosVenta:MovieClip;
 		public var mcNovedades:MovieClip;
-		public var mcSexies:MovieClip;
 		public var mcPrensa:MovieClip;
 		public var mcContacto:MovieClip;
+		//
 		
 		private var activeSection:MovieClip;
-		private var aSections:Array;
-		private var initPositions:Array;
-		private var nSectionCount:Number;
-		private var timerSections:Timer;
 		private var tween2:Tween;
 		private var tween:Tween;
 							
 		override protected function initClip():void {
 			
 			STSite.log( "STMainContent | initClip");
-			
-			aSections = new Array();
-			//aSections.push( mcHome );
-			//aSections.push( mcSound );
-			//aSections.push( mcNoCasting );
-			//aSections.push( mcCompras );
-			//aSections.push( mcColeccion );
-			//aSections.push( mcBackstage );
-			//aSections.push( mcPuntosVenta );
-			//aSections.push( mcNovedades );
-			//aSections.push( mcSexies );
-			//aSections.push( mcPrensa );
-			//aSections.push( mcContacto );
-			
-			//aSections.forEach( function(item) { item.visible = false; }	);
-						
-			//nSectionCount= 0;
-			//timerSections = new Timer(500);
-			//timerSections.addEventListener( TimerEvent.TIMER, nextSection );
-			//timerSections.dispatchEvent( new TimerEvent( TimerEvent.TIMER ) );
-			//timerSections.start();
-			
-			//activeSection = mcHome;
+					
+			activeSection = mcHome;
 			
 			if (!STSite.getApp()) return;
 			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
 			
 		}
 				
-		private function nextSection(e:TimerEvent):void {
-			var nSections = (nSectionCount == -1) ? 1 : 4;
-			for (var i:int = 0; i < nSections; i++) {
-				var theSection = aSections[nSectionCount];
-				if (theSection) {
-					var finalX = theSection.x;
-					var finalY = theSection.y;
-					var finalPoint:Point = initPositions[nSectionCount] as Point;
-					theSection.x = finalPoint.x;
-					theSection.y = finalPoint.y;
-					theSection.visible = true;
-					registerTween( theSection.name+"TweenX", new Tween( theSection, "x", Regular.easeOut, finalPoint.x, finalX, 0.6, true) );
-					registerTween( theSection.name + "TweenY", new Tween( theSection, "y", Regular.easeOut, finalPoint.y, finalY, 0.6, true) );
-					nSectionCount++;	
-				} else {
-					timerSections.removeEventListener( TimerEvent.TIMER, nextSection);
-				}
-			}
-			
-		}
-		
 		private function sectionChanged(e:Event):void {
 			var tweenSection:MovieClip;			
 			switch( STSite.getApp().getSection() ) {
@@ -92,7 +45,7 @@
 				tweenSection = mcHome;
 				break;
 				case STSite.COLECCION:
-				tweenSection = mcColeccion;
+				tweenSection = mcCollection;
 				break;
 				case STSite.PUNTOVENTA:
 				tweenSection = mcPuntosVenta;
@@ -140,7 +93,7 @@
 		}
 		
 		private function activeSectionYoYoEnd(e:TweenEvent):void {
-			
+			STSite.log( "STMainContent | activeSectionYoYoEnd ");
 			if (activeSection != mcNoCasting) {
 				setChildIndex( mcNoCasting, getChildIndex( mcHome ) - 1 );
 				//mcNoCasting.checkSection();
@@ -150,9 +103,9 @@
 				
 		private function mcHomeMoveEnd(e:TweenEvent):void {
 			(e.currentTarget as Tween).yoyo();
-			setChildIndex( mcSound, getChildIndex( activeSection ) - 1 );
-			setChildIndex( mcHome, getChildIndex( activeSection ) - 1 );
-			setChildIndex( mcCompras, getChildIndex( activeSection ) - 1 );
+			//setChildIndex( mcSound, getChildIndex( activeSection ) - 1 );
+			//setChildIndex( mcHome, getChildIndex( activeSection ) - 1 );
+			//setChildIndex( mcCompras, getChildIndex( activeSection ) - 1 );
 			(e.currentTarget as Tween).removeEventListener( TweenEvent.MOTION_FINISH, mcHomeMoveEnd);
 		}
 		

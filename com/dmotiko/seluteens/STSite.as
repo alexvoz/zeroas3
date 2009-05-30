@@ -63,18 +63,16 @@
 		}
 		
 		override protected function loadExternalContent():void {
-			/*
-			sndController = new STSoundController();
+			
+			//sndController = new STSoundController();
 			xmlContent = new STXMLContent();
 			xmlContent.addEventListener( Event.COMPLETE, externalContentLoaded);
-			*/
-			externalContentLoaded();
+			
 		}
 		
 		public function getTopClip():Sprite { return topClip; }
 		
 		public function getCollectionData():XMLList { return xmlContent.getCollectionData();	}
-		public function getCollectionBasicData():XMLList { return xmlContent.getCollectionBasicData();	}
 		public function getStoresData():XMLList { return xmlContent.getStoresData(); }
 		public function getPressData():XMLList { return xmlContent.getPressData(); }		
 		public function getNewsData():XMLList { return xmlContent.getNewsData(); }		
@@ -91,7 +89,7 @@
 			
 		// TODO esto vuela más tarde
 		override public function setSection( s:String ):void {
-			//if ( STSite.NOVEDADES || s == STSite.PRENSA ) return;
+			if ( s == STSite.CONTACTO || s == STSite.PUNTOVENTA || s == STSite.NOVEDADES || s == STSite.PRENSA ) return;
 			super.setSection( s );
 		}
 		
