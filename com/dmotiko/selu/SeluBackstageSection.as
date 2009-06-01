@@ -21,8 +21,10 @@
 		override protected function initClip():void {
 			super.initClip();
 			
-			SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
-			SeluSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
+			if( SeluSite.getApp() ){
+				SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+				SeluSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
+			}
 												
 			//inicializo los clips
 			spPlay.buttonMode = spPause.buttonMode = spStop.buttonMode = true;
@@ -40,7 +42,11 @@
 			flvPlayer.seekBar = spSeek;
 			flvPlayer.autoPlay = false;
 			flvPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
-			flvPlayer.load( SeluSite.getApp().loaderInfo.parameters["video_src"] );
+			
+			var sVideoSrc:String = "video.flv";
+			if ( SeluSite.getApp() && SeluSite.getApp().loaderInfo.parameters["video_src"] ) sVideoSrc = SeluSite.getApp().loaderInfo.parameters["video_src"];
+			flvPlayer.load( sVideoSrc );
+			
 			volumeController = new Object();
 			if ( SeluSite.getApp().getSound() ) volumeController.volume = 1;
 			else volumeController.volume = 0;

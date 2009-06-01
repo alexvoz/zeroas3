@@ -49,13 +49,13 @@ package com.dmotiko.selu {
 		
 		override protected function tweenFinished( key:String, tween:Tween ):void {
 			if ( key == "progressFade" ) {
-				SeluSite.log("SeluCollectionThumb | tweenFinished " + key);
+				//SeluSite.log("SeluCollectionThumb | tweenFinished " + key);
 				tween.yoyo();
 			}
 		}
 		
 		private function thumbInit( evnt:Event ):void {
-			SeluSite.log("SeluCollectionThumb | " + evnt.currentTarget.url + " | thumbInit");
+			//SeluSite.log("SeluCollectionThumb | " + evnt.currentTarget.url + " | thumbInit");
 			killTween( "progressFade" );
 			removeChild(spProgress);
 			var nAlpha:Number = 1;

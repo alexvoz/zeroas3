@@ -24,7 +24,7 @@
 			mcDrag.buttonMode = true;
 			
 			//set the x position of the mcDrag
-			mcDrag.x = mcBar.x - (mcDrag.width - mcBar.width) /2;
+			//mcDrag.x = mcBar.x - (mcDrag.width - mcBar.width) /2;
 						
 			//set the drag action of the mcDrag
 			mcDrag.addEventListener(MouseEvent.MOUSE_DOWN, drag_press);
@@ -33,7 +33,14 @@
 			//mcBar.addEventListener(MouseEvent.CLICK, bar_press);
 						
 			//set the mask for the text
-			//mcContent.mask = mcMask;
+			if (!mcContent) {
+				mcContent = new Sprite();
+				mcContent.x = mcMask.x;
+				mcContent.y = mcMask.y;
+				this.addChild( mcContent );
+			}
+			
+			mcContent.mask = mcMask;
 			mcMask.alpha = 0.3;
 			
 			mcBar.visible = mcDrag.visible = false;

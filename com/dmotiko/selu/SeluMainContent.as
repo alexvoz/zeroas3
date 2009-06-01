@@ -39,7 +39,7 @@
 			initPositions.push( initPositions[3] );
 			initPositions = ArrayUtil.randomArray(initPositions);
 			
-			trace( mcHome );
+			//trace( mcHome );
 			
 			aSections = new Array();
 			aSections.push( mcHome );

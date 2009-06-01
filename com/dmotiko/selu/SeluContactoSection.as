@@ -29,7 +29,7 @@
 		override protected function initClip():void {
 			super.initClip();
 					
-			SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+			if( SeluSite.getApp() )SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 						
 			//inicializo los clips
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;

@@ -21,7 +21,7 @@ package com.dmotiko.selu {
 				{ label: "puntos de venta", over: new PuntosDeVentaOver(), section: SeluSite.PUNTOVENTA },
 				{ label: "novedades", over: new NovedadesOver(), section: SeluSite.NOVEDADES },
 				{ label: "sexies", /*over: new SexiesOver()*/over: new Construction(), section: SeluSite.SEXIES },
-				{ label: "prensa", /*over: new PrensaOver()*/over: new Construction(), section: SeluSite.PRENSA },
+				{ label: "prensa", over: new PrensaOver() /*over: new Construction()*/, section: SeluSite.PRENSA },
 				{ label: "contacto", over: new ContactoOver(), section: SeluSite.CONTACTO },
 				{ label: "no casting", over: new NoCastingOver(), section: SeluSite.NOCASTING }
 			]);
