@@ -12,6 +12,7 @@
 		public static var CLIP_SHOWED:String = "baseclip_showed";
 		public static var CLIP_HIDDEN:String = "baseclip_hidden";
 		public static var CLIP_RESIZED:String = "baseclip_resized";
+		public static var CLIP_REFRESHDATA:String = "baseclip_refreshdata";
 				
 		protected var data:Object;
 		protected var tweens:Array;

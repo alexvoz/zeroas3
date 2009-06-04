@@ -26,16 +26,68 @@
 		private var activeSection:MovieClip;
 		private var tween2:Tween;
 		private var tween:Tween;
+		private var aSections:Array;
+		private var initPositions:Array;
+		private var nSectionCount:Number;
+		private var timerSections:Timer;
 							
 		override protected function initClip():void {
 			
 			STSite.log( "STMainContent | initClip");
-					
+			
+			var nOffset = 700;
+			initPositions = [ new Point( 0, -nOffset), new Point(nOffset, -nOffset), new Point(nOffset, 0), new Point( nOffset, nOffset), new Point(0, nOffset), new Point( -nOffset, nOffset), new Point( -nOffset, 0) ];
+			initPositions.push( initPositions[0] );
+			initPositions.push( initPositions[1] );
+			initPositions.push( initPositions[2] );
+			initPositions.push( initPositions[3] );
+			initPositions = ArrayUtil.randomArray(initPositions);
+			
+			aSections = new Array();
+			aSections.push( mcHome );
+			//aSections.push( mcSound );
+			aSections.push( mcNoCasting );
+			//aSections.push( mcCompras );
+			aSections.push( mcCollection );
+			aSections.push( mcPuntosVenta );
+			//aSections.push( mcNovedades );
+			//aSections.push( mcPrensa );
+			aSections.push( mcContacto );
+			
+			aSections.forEach( function(item) { item.visible = false; }	);
+			
+			nSectionCount= 0;
+			timerSections = new Timer(500);
+			timerSections.addEventListener( TimerEvent.TIMER, nextSection );
+			timerSections.dispatchEvent( new TimerEvent( TimerEvent.TIMER ) );
+			timerSections.start();
+			
+			
 			activeSection = mcHome;
 			
 			if (!STSite.getApp()) return;
 			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
 			
+		}
+		
+		private function nextSection(e:TimerEvent):void {
+			var nSections = (nSectionCount == -1) ? 1 : 4;
+			for (var i:int = 0; i < nSections; i++) {
+				var theSection = aSections[nSectionCount];
+				if (theSection) {
+					var finalX = theSection.x;
+					var finalY = theSection.y;
+					var finalPoint:Point = initPositions[nSectionCount] as Point;
+					theSection.x = finalPoint.x;
+					theSection.y = finalPoint.y;
+					theSection.visible = true;
+					registerTween( theSection.name+"TweenX", new Tween( theSection, "x", Regular.easeOut, finalPoint.x, finalX, 0.6, true) );
+					registerTween( theSection.name + "TweenY", new Tween( theSection, "y", Regular.easeOut, finalPoint.y, finalY, 0.6, true) );
+					nSectionCount++;	
+				} else {
+					timerSections.removeEventListener( TimerEvent.TIMER, nextSection);
+				}
+			}
 		}
 				
 		private function sectionChanged(e:Event):void {

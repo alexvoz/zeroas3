@@ -14,7 +14,9 @@
 						
 		override protected function initClip():void {
 			super.initClip();
-					
+			
+			return;
+			
 			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			
 			//inicializo los clips

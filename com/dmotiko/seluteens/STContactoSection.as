@@ -1,5 +1,6 @@
 ﻿package com.dmotiko.seluteens {
 	
+	import com.dmotiko.seluteens.dummy.Combo;
 	import fl.transitions.easing.Regular;
 	import fl.transitions.Tween;
 	import flash.display.*;	
@@ -17,6 +18,9 @@
 	extends BaseClip {
 		private var btnBar:BaseMenu;
 		private var sArea:String;
+		
+		public var mcCombo:Combo;
+		
 		public var mcEnviar:MovieClip;
 		public var errorName:MovieClip;
 		public var errorMail:MovieClip;
@@ -25,33 +29,18 @@
 		public var inputMail:TextField;
 		public var inputMessage:TextField;
 		public var serverMessage:MovieClip;
-								
+									
 		override protected function initClip():void {
 			super.initClip();
-					
-			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 						
+			mcCombo.addEventListener( Event.CHANGE, menu_changed );
+			mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
+			
 			//inicializo los clips
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;
 			mcEnviar.addEventListener(MouseEvent.CLICK, validate);
-						
-			btnBar = new BaseMenu();
-			addChild(btnBar);
-			btnBar.x = 66;
-			btnBar.y = 285;
-			btnBar.rotation = -3;
-			btnBar.setView( STButtonResalte );
-			btnBar.addEventListener( Event.CHANGE, menu_changed);
-			btnBar.setSpace( -10 );
 			
-			var aData:Array = new Array();
-			aData.push( { label: "Administracion", data: "administracion@selu.com.ar" } );
-			aData.push( { label: "Ventas", data: "ventas@selu.com.ar" } );
-			aData.push( { label: "Clientes", data: "clientes@selu.com.ar" } );
-			aData.push( { label: "Exportaciones", data: "export@selu.com.ar" } );
-			aData.push( { label: "Publicidad", data: "publicidad@selu.com.ar" } );
-			
-			btnBar.setData( aData );
+			if(STSite.getApp()) STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			
 		}
 		
@@ -75,6 +64,7 @@
 				registerTween("alphaErrorMail", new Tween( errorMail, "alpha", Regular.easeOut, 1, 0, 3, true));
 			}
 			if ( !bError ) {
+							
 				var request:URLRequest = new URLRequest ("sendMail.php");
 				request.method = URLRequestMethod.POST;
 								
@@ -82,7 +72,7 @@
 				variables.name = inputName.text;
 				variables.mail = inputMail.text;
 				variables.message = inputMessage.text;
-				variables.mailTo = btnBar.getActiveButton().getData().data;
+				variables.mailTo = sArea;
 				request.data = variables;
 								
 				var loader:URLLoader = new URLLoader (request);
@@ -96,8 +86,7 @@
 		
 		private function send_complete(e:Event):void {
 			inputName.text = inputMail.text = inputMessage.text = "";
-			btnBar.getButtons()[0].rollOver(undefined);
-			btnBar.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+			mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
 			if (e.target.data == "OK") {
 				serverMessage.gotoAndStop(2);
 			} else {
@@ -107,13 +96,12 @@
 		}
 		
 		private function menu_changed(e:Event):void {
-			sArea = btnBar.getActiveButton().getData().data;
+			sArea = e.currentTarget.getData().data;
 		}
 		
 		private function section_changed(e:Event):void {
 			if ( STSite.getApp().getSection() == STSite.CONTACTO ) {
-				btnBar.getButtons()[0].rollOver(undefined);
-				btnBar.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+				mcCombo.setData( { label: "Administración", data: "administracion@selu.com.ar" } );
 				inputName.text = inputMail.text = inputMessage.text = "";
 				serverMessage.gotoAndStop(1);
 				serverMessage.alpha = 0;

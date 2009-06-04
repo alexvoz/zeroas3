@@ -19,8 +19,8 @@
 				{ label: "Colección", section: STSite.COLECCION },
 				{ label: "Novedades", section: STSite.HOME },
 				{ label: "Prensa", section: STSite.HOME },
-				{ label: "Puntos de Venta", section: STSite.HOME },
-				{ label: "Contacto", section: STSite.HOME },
+				{ label: "Puntos de Venta", section: STSite.PUNTOVENTA },
+				{ label: "Contacto", section: STSite.CONTACTO },
 				{ label: "No Casting", section: STSite.NOCASTING }
 			]);
 		}
