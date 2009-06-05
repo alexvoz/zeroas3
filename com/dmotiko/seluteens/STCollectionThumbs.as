@@ -80,8 +80,8 @@
 				}
 			} else if( mcPrev.visible && mcPrev.alpha > 0) {
 				mcPrev.mouseEnabled = false;
-				//tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 0, 0.5, true);
-				//tBtnPrev.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
+				tBtnPrev = new Tween( mcPrev, "alpha", Regular.easeOut, mcPrev.alpha, 0, 0.5, true);
+				tBtnPrev.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
 			}
 			
 			if (bNext) {
@@ -92,8 +92,8 @@
 				}
 			} else if( mcNext.visible && mcNext.alpha > 0) {
 				mcNext.mouseEnabled = false;
-				//tBtnNext = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 0, 0.5, true);
-				//tBtnNext.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
+				tBtnNext = new Tween( mcNext, "alpha", Regular.easeOut, mcNext.alpha, 0, 0.5, true);
+				tBtnNext.addEventListener( TweenEvent.MOTION_FINISH, btnOff);
 			}
 			
 		}

@@ -33,7 +33,7 @@
 							
 		override protected function initClip():void {
 			
-			STSite.log( "STMainContent | initClip");
+			//STSite.log( "STMainContent | initClip");
 			
 			var nOffset = 700;
 			initPositions = [ new Point( 0, -nOffset), new Point(nOffset, -nOffset), new Point(nOffset, 0), new Point( nOffset, nOffset), new Point(0, nOffset), new Point( -nOffset, nOffset), new Point( -nOffset, 0) ];
@@ -50,8 +50,8 @@
 			//aSections.push( mcCompras );
 			aSections.push( mcCollection );
 			aSections.push( mcPuntosVenta );
-			//aSections.push( mcNovedades );
-			//aSections.push( mcPrensa );
+			aSections.push( mcNovedades );
+			aSections.push( mcPrensa );
 			aSections.push( mcContacto );
 			
 			aSections.forEach( function(item) { item.visible = false; }	);
@@ -145,7 +145,7 @@
 		}
 		
 		private function activeSectionYoYoEnd(e:TweenEvent):void {
-			STSite.log( "STMainContent | activeSectionYoYoEnd ");
+			//STSite.log( "STMainContent | activeSectionYoYoEnd ");
 			if (activeSection != mcNoCasting) {
 				setChildIndex( mcNoCasting, getChildIndex( mcHome ) - 1 );
 				//mcNoCasting.checkSection();

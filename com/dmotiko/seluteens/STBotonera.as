@@ -8,6 +8,8 @@
 	public class STBotonera
 	extends BaseClip {
 		public var mcCloseBtn:MovieClip;
+		public var mcBackHome:MovieClip;
+		
 		private var navBar:STButtonBar;
 		
 		private var nInitY:Number;
@@ -17,8 +19,13 @@
 		override protected function initClip():void {
 					
 			mcCloseBtn.buttonMode = true;
+			mcBackHome.buttonMode = true;
 				
 			mcCloseBtn.addEventListener( MouseEvent.CLICK, rightButtonClick);
+			mcBackHome.addEventListener( MouseEvent.CLICK, rightButtonClick);
+			
+			mcBackHome.addEventListener( MouseEvent.ROLL_OVER, btn_rotate );
+			mcBackHome.addEventListener( MouseEvent.ROLL_OUT, btn_rotate );
 			
 			navBar = new STButtonBar();
 			navBar.x = 60;
@@ -37,8 +44,14 @@
 			
 		}
 		
+		private function btn_rotate( e:MouseEvent ):void {
+			var nAngle:Number = 0;
+			if ( e.type == MouseEvent.ROLL_OVER ) nAngle = -5;
+			registerTween( "btnHomeRotation", new Tween( mcBackHome, "rotation", Regular.easeOut, mcBackHome.rotation, nAngle, 0.3, true));
+		}
+		
 		private function btnBarChange(evnt):void {
-			STSite.log( "STBotonera btnBarChange= " + evnt.currentTarget);
+			//STSite.log( "STBotonera btnBarChange= " + evnt.currentTarget);
 			STSite.getApp().setSection( navBar.getActiveButton().getData().section );			
 		}
 		

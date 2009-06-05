@@ -89,7 +89,7 @@
 			
 		// TODO esto vuela más tarde
 		override public function setSection( s:String ):void {
-			if ( /*s == STSite.CONTACTO || s == STSite.PUNTOVENTA || */s == STSite.NOVEDADES || s == STSite.PRENSA ) return;
+			//if ( /*s == STSite.CONTACTO || s == STSite.PUNTOVENTA || s == STSite.NOVEDADES || s == STSite.PRENSA ) return;
 			super.setSection( s );
 		}
 		

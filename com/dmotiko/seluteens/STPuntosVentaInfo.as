@@ -98,12 +98,14 @@
 				mcDrag.visible = mcBar.visible = true;
 				mcDrag.y = mcBar.y;
 				mcDrag.addEventListener( MouseEvent.MOUSE_DOWN, start_drag);
-				mcDrag.stage.addEventListener( MouseEvent.MOUSE_UP, stop_drag);
+				if (mcDrag.stage) mcDrag.stage.addEventListener( MouseEvent.MOUSE_UP, stop_drag);
+				else parent.addEventListener( MouseEvent.MOUSE_UP, stop_drag);
 															
 			} else {
 				mcDrag.visible = mcBar.visible = false;
 				mcDrag.removeEventListener( MouseEvent.MOUSE_DOWN, start_drag);
-				mcDrag.stage.removeEventListener( MouseEvent.MOUSE_UP, stop_drag);
+				if (mcDrag.stage) mcDrag.stage.removeEventListener( MouseEvent.MOUSE_UP, stop_drag);
+				else parent.removeEventListener( MouseEvent.MOUSE_UP, stop_drag);
 			}
 		}
 		

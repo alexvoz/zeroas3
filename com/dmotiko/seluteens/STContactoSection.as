@@ -40,6 +40,11 @@
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;
 			mcEnviar.addEventListener(MouseEvent.CLICK, validate);
 			
+			STSite.log( "stage= "+ this.stage );
+			inputName.tabIndex = 0;
+			inputMail.tabIndex = 1;
+			inputMessage.tabIndex = 2;
+			
 			if(STSite.getApp()) STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			
 		}

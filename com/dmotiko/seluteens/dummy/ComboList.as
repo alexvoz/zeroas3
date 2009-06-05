@@ -16,7 +16,7 @@
 		public var mcPublicidad:ComboItem;
 		public var mcClose:Sprite;
 		
-		private var aItems:Array;
+		protected var aItems:Array;
 		
 		override protected function initClip():void {
 			aItems = new Array();
@@ -32,7 +32,7 @@
 				
 				switch(child) {
 					case mcAdministracion:
-					child.setData( { label: "Administracion", data: "administracion@seluteens.com.ar" } );
+					child.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
 					break;
 					
 					case mcVentas:
@@ -56,7 +56,7 @@
 			}
 		}
 		
-		private function child_changed(e:MouseEvent):void {
+		protected function child_changed(e:MouseEvent):void {
 			this.setData( (e.currentTarget as ComboItem).getData() );
 			aItems.forEach( function(item) {
 				new Tween( item, "alpha", Regular.easeOut, item.alpha, 0, 0.3, true ); }
