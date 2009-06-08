@@ -13,18 +13,20 @@
 		private var loader:Loader;
 		public var mcImg:Sprite;
 		public var mcMask:Sprite;
+		public var mcLoader:BaseClip;
 		
 		override protected function initClip():void {
 			//STSite.log( "STCollectionPhoto | initClip ");
 			
 			if ( !mcImg ) {
 				mcImg = new Sprite();
-				mcImg.x = mcMask.x;
-				mcImg.y = mcMask.y;
 				addChild( mcImg );
 			}
-			
-			mcImg.mask = mcMask;
+			if (mcMask) {
+				mcImg.x = mcMask.x;
+				mcImg.y = mcMask.y;
+				mcImg.mask = mcMask;
+			}
 		}
 		
 		override protected function refreshData():void {
@@ -34,12 +36,20 @@
 			var context:LoaderContext = new LoaderContext(); 
 			context.checkPolicyFile = true;
 			this.loader.load( request, context );
+			if (mcLoader) {
+				this.loader.contentLoaderInfo.addEventListener( ProgressEvent.PROGRESS, load_progress);
+			}
 			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
 			mcImg.addChild( this.loader );
+		}
+		
+		protected function load_progress(e:ProgressEvent):void {
+			mcLoader.setData( e );
 		}
 				
 		private function thumbInit( evnt:Event ):void {
 			//mcImg.alpha = 0;
+			if( mcLoader ) mcLoader.setData( evnt );
 			(loader.content as Bitmap).smoothing = true;
 			this.dispatchEvent( new Event(Event.COMPLETE) );
 			//registerTween("photoFade", new Tween( mcImg, "alpha", Regular.easeOut, 0, 1, 0.5, true));
