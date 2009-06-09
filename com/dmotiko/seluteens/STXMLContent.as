@@ -86,7 +86,7 @@
 			try{
 				//Convert the downloaded text into an XML
 				var myXML:XML = new XML(e.target.data)
-				pressXMLList = myXML.children()[0].child("media");
+				pressXMLList = myXML.child("month");
 				checkXML();
 								
 			} catch (e:TypeError){

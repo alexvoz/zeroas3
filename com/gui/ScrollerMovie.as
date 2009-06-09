@@ -34,7 +34,9 @@
 						
 			//set the mask for the text
 			if (!mcContent) {
+				//trace("ScrollerMovie creating mcContent");
 				mcContent = new Sprite();
+				mcContent.name = "mcContent";
 				mcContent.x = mcMask.x;
 				mcContent.y = mcMask.y;
 				this.addChild( mcContent );
@@ -50,6 +52,7 @@
 			
 			//the scrolling animation
 			mcContent.addEventListener( Event.ENTER_FRAME, content_check );
+			trace("new ScrollerMovie() end | "+mcContent);
 		}
 		
 		private function force_drag(e:MouseEvent):void {

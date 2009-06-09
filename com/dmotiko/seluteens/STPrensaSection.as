@@ -10,23 +10,25 @@
 		
 	public class STPrensaSection
 	extends BaseClip {
-						
+		
+		public var mcPressContainer:STPressContainer;
+		public var mcPhoto;
+		
 		override protected function initClip():void {
 			super.initClip();
-			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			
-		}
-		
-		private function menu_changed(e:Event):void {
+			if ( !STSite.getApp() ) return;
+			
+			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			var list:XMLList = STSite.getApp().getPressData();
-			var stores:XML = new XML( "<root>" + list.toXMLString() + "</root>" );
-			var theNode:XML;
-			for each(var nodo:XML in stores.elements()){
-				if(nodo.@id == e.currentTarget.getData().id ) theNode = nodo;
-			}
-			mcInfo.setData( theNode );			
+			mcPressContainer.setData( list );
+			mcPressContainer.addEventListener( Event.CHANGE, press_changed);
 		}
 		
+		private function press_changed(e:Event):void {
+			STSite.log("STPrensaSection | press_changed= " + e.currentTarget.getData());
+		}
+				
 		private function section_changed(e:Event):void {
 			if ( STSite.getApp().getSection() == STSite.PRENSA ) {
 				
