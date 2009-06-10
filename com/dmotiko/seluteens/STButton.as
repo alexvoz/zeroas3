@@ -10,6 +10,7 @@
 		
 		private var _overAnimation:MovieClip;
 		public var txtLabel:TextField;
+		public var mcTrigger:Sprite;
 				
 		override protected function initClip():void {
 			this.useHandCursor = true;
@@ -34,7 +35,8 @@
 		
 		override protected function refreshData():void {
 			txtLabel.text = data.label;
-			if(data.over) this.setOverAnimation( data.over );
+			if (data.over) this.setOverAnimation( data.over );
+			if (mcTrigger) mcTrigger.width = txtLabel.width;
 		}
 		
 		public function getOverAnimation():MovieClip { 

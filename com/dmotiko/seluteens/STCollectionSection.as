@@ -16,13 +16,16 @@
 		public var btnColeccionAnterior:MovieClip;
 		public var mcPhoto:STCollectionPhoto;
 		public var mcPhotoWide:STCollectionPhoto;
-		
+				
 		private var activePhoto:STCollectionPhoto;
 		
 		override protected function initClip():void {
 			super.initClip();
 						
 			//inicializo
+			btnColeccionAnterior.buttonMode = true;
+			btnColeccionAnterior.addEventListener( MouseEvent.ROLL_OUT, rotate_btn );
+			btnColeccionAnterior.addEventListener( MouseEvent.ROLL_OVER, rotate_btn );
 			btnColeccionAnterior.addEventListener( MouseEvent.CLICK, gotoLastCollection );
 			
 			mcThumbs.addEventListener( Event.CHANGE, mcThumbs_changed);
@@ -34,6 +37,14 @@
 						
 			//activePhoto = mcPhoto;
 			mcPhoto.addEventListener( Event.COMPLETE, photo_complete);
+			
+			
+		}
+				
+		private function rotate_btn(e:MouseEvent):void {
+			var nRot:int = -2;
+			if ( e.type == MouseEvent.ROLL_OUT ) nRot = 2;
+			registerTween(e.currentTarget.name + "Rotation", new Tween( e.currentTarget, "rotation", Regular.easeOut, e.currentTarget.rotation, nRot, 0.5, true));
 		}
 				
 		private function gotoLastCollection(e:MouseEvent):void {

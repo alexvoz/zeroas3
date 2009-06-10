@@ -21,6 +21,7 @@
 		public var mcNovedades:MovieClip;
 		public var mcPrensa:MovieClip;
 		public var mcContacto:MovieClip;
+		public var mcDmotiko:Sprite;
 		//
 		
 		private var activeSection:MovieClip;
@@ -64,7 +65,7 @@
 			
 			
 			activeSection = mcHome;
-			
+						
 			if (!STSite.getApp()) return;
 			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
 			
