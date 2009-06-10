@@ -47,7 +47,7 @@
 			try{
 				//Convert the downloaded text into an XML
 				var myXML:XML = new XML(e.target.data)
-				newsXMLList = myXML.child("news");
+				newsXMLList = myXML.child("new");
 				checkXML();
 												
 			} catch (e:TypeError){

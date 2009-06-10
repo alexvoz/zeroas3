@@ -9,6 +9,7 @@
 		
 		private var targY;
 		public var mcDrag:Sprite;
+		public var mcTrigger:Sprite;
 		public var mcBar:Sprite;
 		public var mcContent:Sprite;
 		public var mcMask:Sprite;
@@ -21,13 +22,19 @@
 			//set a variable
 			targY=0;
 			
-			mcDrag.buttonMode = true;
+			if (mcTrigger) {
+				mcTrigger.buttonMode = true;
+				mcTrigger.addEventListener(MouseEvent.MOUSE_DOWN, drag_press);
+			} else {
+				mcDrag.buttonMode = true;
+				mcDrag.addEventListener(MouseEvent.MOUSE_DOWN, drag_press);
+			}
 			
 			//set the x position of the mcDrag
 			//mcDrag.x = mcBar.x - (mcDrag.width - mcBar.width) /2;
 						
 			//set the drag action of the mcDrag
-			mcDrag.addEventListener(MouseEvent.MOUSE_DOWN, drag_press);
+			
 			
 			//por ahora lo anulo
 			//mcBar.addEventListener(MouseEvent.CLICK, bar_press);
@@ -52,7 +59,6 @@
 			
 			//the scrolling animation
 			mcContent.addEventListener( Event.ENTER_FRAME, content_check );
-			trace("new ScrollerMovie() end | "+mcContent);
 		}
 		
 		private function force_drag(e:MouseEvent):void {
@@ -83,7 +89,7 @@
 			is being displayed through the mask and ensures that dragging the mcDrag
 			from top to bottom will reveal all the text.
 			*/
-			scrollAmount=(mcContent.height-(mcMask.height/*/1.3*/))/(mcMask.height-mcDrag.height);
+			scrollAmount=(mcContent.height-(mcMask.height/*/1.3*/))/(mcBar.height-mcDrag.height);
 			//set a new target y position
 			targY =-mcDrag.y*scrollAmount;
 			//set the y of the text to 1/5 of the distance between its current y and the target y
@@ -101,7 +107,7 @@
 		
 		private function drag_press(e:MouseEvent):void {
 			//drag is restricted to the height of the mask
-			mcDrag.startDrag(false, new Rectangle(mcDrag.x, 0, 0, mcMask.height - mcDrag.height));
+			mcDrag.startDrag(false, new Rectangle(mcDrag.x, 0, 0, mcBar.height - mcDrag.height));
 			mcDrag.addEventListener(MouseEvent.MOUSE_UP, drag_release);
 			if (mcDrag.stage) mcDrag.stage.addEventListener( MouseEvent.MOUSE_UP, drag_release );
 			else this.parent.addEventListener( MouseEvent.MOUSE_UP, drag_release );

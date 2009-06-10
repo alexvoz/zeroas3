@@ -8,8 +8,22 @@
 	public class STPressContainer
 	extends BaseClip {
 		
-		public var mcScroller:ScrollerMovie;
-				
+		public var mcScroller:STPressScroller;
+		private var selectedItem:STPressItem;
+		private var firstItem:STPressItem;
+		
+		override protected function initClip():void {
+			if (STSite.getApp()) {
+				STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+			}
+		}
+		
+		private function section_changed(e:Event):void {
+			if ( STSite.getApp().getSection() == STSite.PRENSA ) {
+				firstItem.dispatchEvent( new Event( Event.CHANGE ) );
+			}
+		}
+		
 		override protected function refreshData():void {
 			//STSite.log( "STPressContainer | refreshData= " + data);
 			var nY:int = 0;
@@ -17,38 +31,41 @@
 			var aHeaders:Array = [ STPressHeaderA, STPressHeaderB, STPressHeaderC ];
 			var nHeader:int = 0;
 			for each( var node:XML in (data as XMLList) ) {
-				STSite.log( "STPressContainer | " + node.@name );
 				if (nHeader == aHeaders.length) nHeader = 0;
 				var header:STPressHeader = new aHeaders[nHeader]();
-				STSite.log( "STPressContainer | " + aHeaders[nHeader] );
-				STSite.log( "STPressContainer | " +  mcScroller );
-				STSite.log( "STPressContainer | " +  mcScroller.getChildByName("mcContainer") );
 				nHeader++;
-				/*
-				header.setData( new String(node.@name) );
-				header.y = nY;
-				nY += header.height + 30;
-				container.addChild(header);
-				*/
 				
-				//STSite.log( "STPressContainer | " + node.child("press") );
-				/*
+				header.setData( new String(node.@name) );
+				nY += 5;
+				header.y = nY;
+				nY += header.height + 20;
+				container.addChild(header);
+				
 				for each( var press:XML in node.child("press") ) {
-					STSite.log( "STPressContainer | " + press.@label );
 					var item:STPressItem = new STPressItem();
+					item.addEventListener( Event.CHANGE, item_change);
 					item.setData( { label: press.@label, data: press } );
 					item.y = nY;
 					container.addChild(item);
 					nY += item.height;
+					if (!firstItem) {
+						firstItem = item;
+						item.setActive( true );
+					}
 				}
-				*/				
+				
 			}
-			/*
-			for ( var i:int = 0; i < (data as XML).elements().length() ; i++) {
-				STSite.log( "STPressContainer | refreshData= " + (data as XML).elements()[i] );
-			}
-			*/
+			firstItem.dispatchEvent( new Event( Event.CHANGE ) );
 		}
+		
+		private function item_change(e:Event):void {
+			if (selectedItem) selectedItem.setActive(false);
+			selectedItem = e.currentTarget as STPressItem;
+			selectedItem.setActive(true)
+			dispatchEvent( new Event( Event.CHANGE ) );
+		}
+		
+		public function getSelectedItem():STPressItem { return selectedItem; }
 		
 	}
 	

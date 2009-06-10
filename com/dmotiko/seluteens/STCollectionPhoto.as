@@ -10,7 +10,7 @@
 	
 	public class STCollectionPhoto
 	extends BaseClip {
-		private var loader:Loader;
+		protected var loader:Loader;
 		public var mcImg:Sprite;
 		public var mcMask:Sprite;
 		public var mcLoader:BaseClip;
@@ -47,12 +47,10 @@
 			mcLoader.setData( e );
 		}
 				
-		private function thumbInit( evnt:Event ):void {
-			//mcImg.alpha = 0;
+		protected function thumbInit( evnt:Event ):void {
 			if( mcLoader ) mcLoader.setData( evnt );
 			(loader.content as Bitmap).smoothing = true;
 			this.dispatchEvent( new Event(Event.COMPLETE) );
-			//registerTween("photoFade", new Tween( mcImg, "alpha", Regular.easeOut, 0, 1, 0.5, true));
 		}
 		
 	}

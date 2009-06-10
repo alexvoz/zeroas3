@@ -12,28 +12,22 @@
 	extends BaseClip {
 		
 		public var mcPressContainer:STPressContainer;
-		public var mcPhoto;
+		public var mcPhoto:STPressPhoto;
 		
 		override protected function initClip():void {
 			super.initClip();
 			
 			if ( !STSite.getApp() ) return;
 			
-			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			var list:XMLList = STSite.getApp().getPressData();
-			mcPressContainer.setData( list );
 			mcPressContainer.addEventListener( Event.CHANGE, press_changed);
+			mcPressContainer.setData( list );
 		}
 		
 		private function press_changed(e:Event):void {
-			STSite.log("STPrensaSection | press_changed= " + e.currentTarget.getData());
+			mcPhoto.setData( mcPressContainer.getSelectedItem().getData().data );
 		}
-				
-		private function section_changed(e:Event):void {
-			if ( STSite.getApp().getSection() == STSite.PRENSA ) {
-				
-			}
-		}
+		
 		
 	}
 	
