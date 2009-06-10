@@ -99,18 +99,25 @@
 		}
 		
 		private function drag_release(e:MouseEvent):void {
-			mcDrag.stopDrag();
 			mcDrag.removeEventListener(MouseEvent.MOUSE_UP, drag_release);
+			mcDrag.stopDrag();
+			if (mcTrigger) mcTrigger.removeEventListener( Event.ENTER_FRAME, trigger_pos );
 			if (mcDrag.stage) mcDrag.stage.removeEventListener( MouseEvent.MOUSE_UP, drag_release );
 			else this.parent.removeEventListener( MouseEvent.MOUSE_UP, drag_release );
 		}
 		
 		private function drag_press(e:MouseEvent):void {
 			//drag is restricted to the height of the mask
-			mcDrag.startDrag(false, new Rectangle(mcDrag.x, 0, 0, mcBar.height - mcDrag.height));
+			if (mcTrigger) mcTrigger.addEventListener( Event.ENTER_FRAME, trigger_pos );
 			mcDrag.addEventListener(MouseEvent.MOUSE_UP, drag_release);
+			mcDrag.startDrag(false, new Rectangle(mcDrag.x, 0, 0, mcBar.height - mcDrag.height));
+			
 			if (mcDrag.stage) mcDrag.stage.addEventListener( MouseEvent.MOUSE_UP, drag_release );
 			else this.parent.addEventListener( MouseEvent.MOUSE_UP, drag_release );
+		}
+		
+		private function trigger_pos(e:Event):void {
+			mcTrigger.y = mcDrag.y;
 		}
 		
 	}
