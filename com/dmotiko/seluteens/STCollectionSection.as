@@ -49,6 +49,7 @@
 				
 		private function gotoLastCollection(e:MouseEvent):void {
 			var url:String = STSite.getApp().loaderInfo.parameters["lastCollection_src"];
+			STSite.log( "STCollectionSection gotoLastCollection | URL= "+url );
 			var request:URLRequest = new URLRequest(url);
 			try {
 			  navigateToURL(request, '_blank'); // second argument is target

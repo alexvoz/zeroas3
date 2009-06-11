@@ -156,7 +156,7 @@
 		}
 		
 		override public function activeBtn( evnt:MouseEvent ):void {
-			STSite.log( "STCollectionThumbs | activeBtn= " + evnt.currentTarget);
+			//STSite.log( "STCollectionThumbs | activeBtn= " + evnt.currentTarget);
 			if (getActiveButton() == evnt.currentTarget as BaseMenuBtn) return;
 			super.activeBtn(evnt);		
 			var btn:DisplayObject = (evnt.currentTarget as DisplayObject);

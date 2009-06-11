@@ -17,7 +17,7 @@
 		override protected function refreshData():void {
 			var nY:int = 0;
 			var container:Sprite = mcScroller.getChildByName("mcContent") as Sprite;
-			STSite.log( "STNewsContainer | refreshData= "+ data );			
+			//STSite.log( "STNewsContainer | refreshData= "+ data );			
 			for each( var node:XML in (data as XMLList) ) {
 				
 				var item:STNewsItem = new STNewsItem();

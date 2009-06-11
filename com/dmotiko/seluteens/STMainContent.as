@@ -21,7 +21,6 @@
 		public var mcNovedades:MovieClip;
 		public var mcPrensa:MovieClip;
 		public var mcContacto:MovieClip;
-		public var mcDmotiko:Sprite;
 		//
 		
 		private var activeSection:MovieClip;
@@ -62,15 +61,14 @@
 			timerSections.addEventListener( TimerEvent.TIMER, nextSection );
 			timerSections.dispatchEvent( new TimerEvent( TimerEvent.TIMER ) );
 			timerSections.start();
-			
-			
+					
 			activeSection = mcHome;
 						
 			if (!STSite.getApp()) return;
 			STSite.getApp().addEventListener( WebSite.SECTION_CHANGED, sectionChanged);
 			
 		}
-		
+				
 		private function nextSection(e:TimerEvent):void {
 			var nSections = (nSectionCount == -1) ? 1 : 4;
 			for (var i:int = 0; i < nSections; i++) {

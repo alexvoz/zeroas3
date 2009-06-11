@@ -60,7 +60,7 @@
 		}
 		
 		private function snd_complete(e:Event):void {
-			STSite.log("snd complete");
+			//STSite.log("snd complete");
 		}
 		
 		private function loop_music(e:Event):void {

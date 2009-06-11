@@ -40,7 +40,7 @@
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;
 			mcEnviar.addEventListener(MouseEvent.CLICK, validate);
 			
-			STSite.log( "stage= "+ this.stage );
+			//STSite.log( "stage= "+ this.stage );
 			inputName.tabIndex = 0;
 			inputMail.tabIndex = 1;
 			inputMessage.tabIndex = 2;
