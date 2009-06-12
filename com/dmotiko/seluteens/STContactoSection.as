@@ -34,7 +34,7 @@
 			super.initClip();
 						
 			mcCombo.addEventListener( Event.CHANGE, menu_changed );
-			mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
+			mcCombo.setData( { label: "Administración", data: "administracion@selu.com.ar" } );
 			
 			//inicializo los clips
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;
@@ -91,7 +91,7 @@
 		
 		private function send_complete(e:Event):void {
 			inputName.text = inputMail.text = inputMessage.text = "";
-			mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
+			mcCombo.setData( { label: "Administración", data: "administracion@selu.com.ar" } );
 			if (e.target.data == "OK") {
 				serverMessage.gotoAndStop(2);
 			} else {

@@ -32,23 +32,23 @@
 				
 				switch(child) {
 					case mcAdministracion:
-					child.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
+					child.setData( { label: "Administración", data: "administracion@selu.com.ar" } );
 					break;
 					
 					case mcVentas:
-					child.setData( { label: "Ventas", data: "ventas@seluteens.com.ar" } );
+					child.setData( { label: "Ventas", data: "ventas@selu.com.ar" } );
 					break;
 					
 					case mcClientes:
-					child.setData( { label: "Clientes", data: "clientes@seluteens.com.ar" } );
+					child.setData( { label: "Clientes", data: "clientes@selu.com.ar" } );
 					break;
 					
 					case mcExportacion:
-					child.setData( { label: "Exportaciones", data: "export@seluteens.com.ar" } );
+					child.setData( { label: "Exportaciones", data: "export@selu.com.ar" } );
 					break;
 					
 					case mcPublicidad:
-					child.setData( { label: "Publicidad", data: "publicidad@seluteens.com.ar" } );
+					child.setData( { label: "Publicidad", data: "publicidad@selu.com.ar" } );
 					break;
 				}
 				
