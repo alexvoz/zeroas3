@@ -111,8 +111,17 @@ package com.general {
 			this.sSection = sSection;
 			log( "WebSite | setSection= " + sSection, true);
 			dispatchEvent( new Event( WebSite.SECTION_CHANGED ) );
+			track( sSection );
+		}
+		
+		/**
+		 * 
+		 * @param	sTrack
+		 * @usage   sends a message to a webSite trakker ( GoogleAnalytics by default );
+		 */
+		public function track( sTrack:String ):void {
 			if ( this.loaderInfo.parameters["analytics"] ) {
-				var url:String = this.loaderInfo.parameters["analytics"]+"('"+sSection+"')";
+				var url:String = this.loaderInfo.parameters["analytics"]+"('"+sTrack+"')";
 				var request:URLRequest = new URLRequest(url);
 				try {
 					navigateToURL(request, '_self'); // second argument is target

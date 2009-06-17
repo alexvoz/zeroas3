@@ -1,6 +1,5 @@
 ﻿package com.dmotiko.opositor {
 	
-	import com.dmotiko.opositor.dummy.Combo;
 	import fl.transitions.easing.Regular;
 	import fl.transitions.Tween;
 	import flash.display.*;	
@@ -19,8 +18,7 @@
 		private var btnBar:BaseMenu;
 		private var sArea:String;
 		
-		public var mcCombo:Combo;
-		
+		public var mcButton:BaseClip;
 		public var mcEnviar:MovieClip;
 		public var errorName:MovieClip;
 		public var errorMail:MovieClip;
@@ -32,9 +30,11 @@
 									
 		override protected function initClip():void {
 			super.initClip();
-						
-			mcCombo.addEventListener( Event.CHANGE, menu_changed );
-			mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
+			
+			mcButton.addEventListener( MouseEvent.CLICK, set_section);
+			return;
+			//mcCombo.addEventListener( Event.CHANGE, menu_changed );
+			//mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
 			
 			//inicializo los clips
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;
@@ -47,6 +47,12 @@
 			
 			if(OPSite.getApp()) OPSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			
+		}
+		
+		private function set_section(e:MouseEvent):void {
+			if ( OPSite.getApp().getSection() != OPSite.CONTACTO ) {
+				OPSite.getApp().setSection( OPSite.CONTACTO );
+			}
 		}
 		
 		private function validate(e:MouseEvent):void {
@@ -71,7 +77,7 @@
 			if ( !bError ) {
 							
 				var request:URLRequest = new URLRequest ("sendMail.php");
-				request.method = URLRequestMethod.POOP;
+				request.method = URLRequestMethod.POST;
 								
 				var variables:URLVariables = new URLVariables();
 				variables.name = inputName.text;
@@ -91,7 +97,7 @@
 		
 		private function send_complete(e:Event):void {
 			inputName.text = inputMail.text = inputMessage.text = "";
-			mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
+			//mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
 			if (e.target.data == "OK") {
 				serverMessage.gotoAndStop(2);
 			} else {
@@ -106,7 +112,7 @@
 		
 		private function section_changed(e:Event):void {
 			if ( OPSite.getApp().getSection() == OPSite.CONTACTO ) {
-				mcCombo.setData( { label: "Administración", data: "administracion@selu.com.ar" } );
+				//mcCombo.setData( { label: "Administración", data: "administracion@selu.com.ar" } );
 				inputName.text = inputMail.text = inputMessage.text = "";
 				serverMessage.gotoAndStop(1);
 				serverMessage.alpha = 0;

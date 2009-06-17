@@ -17,10 +17,10 @@
 		}
 		
 		private function section_changed(e:Event=undefined):void {
-			if ( OPSite.getApp().getSection() == OPSite.BACKOPAGE && !OPSite.getApp().getSound()) {
+			if ( OPSite.getApp().getSection() == OPSite.BACKSTAGE && !OPSite.getApp().getSound()) {
 				bForceSound = true;
 				OPSite.getApp().setSound(true);
-			} else if ( bForceSound && OPSite.getApp().getSection() != OPSite.BACKOPAGE ) {
+			} else if ( bForceSound && OPSite.getApp().getSection() != OPSite.BACKSTAGE ) {
 				bForceSound = false;
 				OPSite.getApp().setSound(false);
 			}

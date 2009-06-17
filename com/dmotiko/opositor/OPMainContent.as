@@ -14,8 +14,9 @@
 		//FLA Clips
 		public var mcHome:MovieClip;
 		public var mcSound:MovieClip;
+		public var mcFolderBack:MovieClip;
 		public var mcCollection:MovieClip;
-		public var mcNoCasting:OPBotonera;
+		public var mcBackstage:MovieClip;
 		public var mcPuntosVenta:MovieClip;
 		public var mcContacto:MovieClip;
 		//
@@ -31,17 +32,18 @@
 		override protected function initClip():void {
 			
 			var nOffset = 700;
-			initPositions = [ new Point( 0, -nOffset), new Point(nOffset, -nOffset), new Point(nOffset, 0), new Point( nOffset, nOffset), new Point(0, nOffset), new Point( -nOffset, nOffset), new Point( -nOffset, 0) ];
+			initPositions = [ new Point( 0, nOffset*2), new Point(0, nOffset*2), new Point(0, -nOffset), new Point(0, -nOffset), new Point(0, -nOffset), new Point(0, -nOffset) ];
 			initPositions.push( initPositions[0] );
 			initPositions.push( initPositions[1] );
 			initPositions.push( initPositions[2] );
 			initPositions.push( initPositions[3] );
-			initPositions = ArrayUtil.randomArray(initPositions);
+			//initPositions = ArrayUtil.randomArray(initPositions);
 			
 			aSections = new Array();
 			aSections.push( mcHome );
+			aSections.push( mcFolderBack );
 			//aSections.push( mcSound );
-			aSections.push( mcNoCasting );
+			aSections.push( mcBackstage );
 			aSections.push( mcCollection );
 			aSections.push( mcPuntosVenta );
 			aSections.push( mcContacto );
@@ -49,7 +51,7 @@
 			aSections.forEach( function(item) { item.visible = false; }	);
 			
 			nSectionCount= 0;
-			timerSections = new Timer(500);
+			timerSections = new Timer(200);
 			timerSections.addEventListener( TimerEvent.TIMER, nextSection );
 			timerSections.dispatchEvent( new TimerEvent( TimerEvent.TIMER ) );
 			timerSections.start();
@@ -62,18 +64,16 @@
 		}
 				
 		private function nextSection(e:TimerEvent):void {
-			var nSections = (nSectionCount == -1) ? 1 : 4;
+			var nSections = (nSectionCount == 0) ? 2 : 1;
+			//OPSite.log("OPMainContent | nextSection | nSections= " + nSections);
 			for (var i:int = 0; i < nSections; i++) {
 				var theSection = aSections[nSectionCount];
 				if (theSection) {
-					var finalX = theSection.x;
 					var finalY = theSection.y;
 					var finalPoint:Point = initPositions[nSectionCount] as Point;
-					theSection.x = finalPoint.x;
 					theSection.y = finalPoint.y;
 					theSection.visible = true;
-					registerTween( theSection.name+"TweenX", new Tween( theSection, "x", Regular.easeOut, finalPoint.x, finalX, 0.6, true) );
-					registerTween( theSection.name + "TweenY", new Tween( theSection, "y", Regular.easeOut, finalPoint.y, finalY, 0.6, true) );
+					registerTween( theSection.name + "TweenY", new Tween( theSection, "y", Strong.easeOut, finalPoint.y, finalY, 0.5, true) );
 					nSectionCount++;	
 				} else {
 					timerSections.removeEventListener( TimerEvent.TIMER, nextSection);
@@ -82,10 +82,14 @@
 		}
 				
 		private function sectionChanged(e:Event):void {
+			OPSite.log( "OPMainContent | sectionChanged= "+ OPSite.getApp().getSection() );
 			var tweenSection:MovieClip;			
 			switch( OPSite.getApp().getSection() ) {
 				case OPSite.HOME:
 				tweenSection = mcHome;
+				break;
+				case OPSite.BACKSTAGE:
+				tweenSection = mcBackstage;
 				break;
 				case OPSite.COLECCION:
 				tweenSection = mcCollection;
@@ -93,26 +97,18 @@
 				case OPSite.PUNTOVENTA:
 				tweenSection = mcPuntosVenta;
 				break;
-				case OPSite.NOVEDADES:
-				tweenSection = mcNovedades;
-				break;
-				case OPSite.PRENSA:
-				tweenSection = mcPrensa;
-				break;
 				case OPSite.CONTACTO:
 				tweenSection = mcContacto;
 				break;
 			}
 			
-			if( tweenSection != mcNoCasting){
-				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y-tweenSection.height, 0.4, true);
-			} else {
-				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y + tweenSection.height, 0.4, true);
-			}
+			tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y-tweenSection.height, 0.4, true);
+			/*
 			if (tweenSection != mcHome) {
 				tween2 = new Tween( mcHome, "y", Strong.easeOut, mcHome.y, mcHome.y - mcHome.height, 0.4, true);
 				tween2.addEventListener( TweenEvent.MOTION_FINISH, mcHomeMoveEnd);
 			}
+			*/
 			tween.addEventListener( TweenEvent.MOTION_FINISH, activeSectionMoveEnd);
 			var sKey:String = "actionSectionMove";
 			var nKey:Number = 0;
@@ -133,10 +129,7 @@
 		}
 		
 		private function activeSectionYoYoEnd(e:TweenEvent):void {
-			if (activeSection != mcNoCasting) {
-				setChildIndex( mcNoCasting, getChildIndex( mcHome ) - 1 );
-			}
-			
+			OPSite.log("OPMainContent | activeSectionYoYoEnd");
 		}
 				
 		private function mcHomeMoveEnd(e:TweenEvent):void {

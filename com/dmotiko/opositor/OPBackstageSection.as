@@ -6,10 +6,11 @@
 	import flash.events.*
 	import com.general.*
 	import fl.video.*;
-		
+			
 	public class OPBackstageSection
 	extends BaseClip {
 		
+		public var mcButton:BaseClip;
 		public var flvPlayer:FLVPlayback;
 		public var spPlay:Sprite;
 		public var spPause:Sprite;
@@ -21,9 +22,12 @@
 		override protected function initClip():void {
 			super.initClip();
 			
-			if( SeluSite.getApp() ){
-				SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
-				SeluSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
+			mcButton.addEventListener( MouseEvent.CLICK, set_section);
+			
+			return;
+			if( OPSite.getApp() ){
+				OPSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+				OPSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
 			}
 												
 			//inicializo los clips
@@ -41,20 +45,26 @@
 			flvPlayer.stopButton = spStop;
 			flvPlayer.seekBar = spSeek;
 			flvPlayer.autoPlay = false;
-			flvPlayer.addEventListener(VideoEvent.OPATE_CHANGE, video_change);
+			flvPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
 			
 			var sVideoSrc:String = "video.flv";
-			if ( SeluSite.getApp() && SeluSite.getApp().loaderInfo.parameters["video_src"] ) sVideoSrc = SeluSite.getApp().loaderInfo.parameters["video_src"];
+			if ( OPSite.getApp() && OPSite.getApp().loaderInfo.parameters["video_src"] ) sVideoSrc = OPSite.getApp().loaderInfo.parameters["video_src"];
 			flvPlayer.load( sVideoSrc );
 			
 			volumeController = new Object();
-			if ( SeluSite.getApp().getSound() ) volumeController.volume = 1;
+			if ( OPSite.getApp().getSound() ) volumeController.volume = 1;
 			else volumeController.volume = 0;
+		}
+				
+		private function set_section(e:MouseEvent):void {
+			if ( OPSite.getApp().getSection() != OPSite.BACKSTAGE ) {
+				OPSite.getApp().setSection( OPSite.BACKSTAGE );
+			}
 		}
 		
 		private function sound_changed(e:Event):void {
-			if ( SeluSite.getApp().getSection() != SeluSite.BACKOPAGE) return;
-			if ( SeluSite.getApp().getSound() ) {
+			if ( OPSite.getApp().getSection() != OPSite.BACKSTAGE) return;
+			if ( OPSite.getApp().getSound() ) {
 				//volumeController.volume = 1;
 				videoFadeIn();
 			} else {
@@ -64,23 +74,23 @@
 		}
 						
 		private function video_change(e:VideoEvent):void {
-			SeluSite.log("video_change= " + e.state);
+			OPSite.log("video_change= " + e.state);
 		}
 		
 		private function section_changed(e:Event):void {
-			if ( SeluSite.getApp().getSection() == SeluSite.BACKOPAGE ) {
+			if ( OPSite.getApp().getSection() == OPSite.BACKSTAGE ) {
 				flvPlayer.playWhenEnoughDownloaded();
-				if ( !SeluSite.getApp().getSound() ) return;
+				if ( !OPSite.getApp().getSound() ) return;
 				videoFadeIn();
 			} else {
 				if( flvPlayer.state != "stopped"){
-					if ( !SeluSite.getApp().getSound() ) {
+					if ( !OPSite.getApp().getSound() ) {
 						stop_flv(undefined);
 						return;
 					}
 					videoFadeOut();
 				}
-				SeluSite.getApp().fadeInMusic();
+				//OPSite.getApp().fadeInMusic();
 			}
 		}
 		
@@ -95,7 +105,7 @@
 			if ( tVolume ) tVolume.stop();
 			tVolume = new Tween(volumeController, "volume", Regular.easeOut, volumeController.volume, 1, 2, true);
 			tVolume.addEventListener( TweenEvent.MOTION_CHANGE, refresh_volume);
-			SeluSite.getApp().fadeOutMusic();
+			//OPSite.getApp().fadeOutMusic();
 		}
 		
 		private function refresh_volume(e:TweenEvent):void {

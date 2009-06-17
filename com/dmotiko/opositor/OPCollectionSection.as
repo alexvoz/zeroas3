@@ -11,6 +11,7 @@
 	public class OPCollectionSection
 	extends BaseClip {
 		
+		public var mcButton:BaseClip;
 		public var mcThumbs:OPCollectionThumbs;
 		public var mcInfo:OPCollectionInfo;
 		public var btnColeccionAnterior:MovieClip;
@@ -21,7 +22,10 @@
 		
 		override protected function initClip():void {
 			super.initClip();
-						
+			
+			mcButton.addEventListener( MouseEvent.CLICK, set_section);
+			
+			return;
 			//inicializo
 			btnColeccionAnterior.buttonMode = true;
 			btnColeccionAnterior.addEventListener( MouseEvent.ROLL_OUT, rotate_btn );
@@ -39,6 +43,12 @@
 			mcPhoto.addEventListener( Event.COMPLETE, photo_complete);
 			
 			
+		}
+		
+		private function set_section(e:MouseEvent):void {
+			if ( OPSite.getApp().getSection() != OPSite.COLECCION ) {
+				OPSite.getApp().setSection( OPSite.COLECCION );
+			}
 		}
 				
 		private function rotate_btn(e:MouseEvent):void {

@@ -1,6 +1,5 @@
 ﻿package com.dmotiko.opositor {
 	
-	import com.dmotiko.opositor.dummy.*;
 	import fl.transitions.easing.Regular;
 	import fl.transitions.Tween;
 	import flash.display.*;
@@ -12,15 +11,13 @@
 	extends BaseClip {
 		
 		public var mcInfo:OPPuntosVentaInfo;
-		public var mcCombo:ComboPV;
+		public var mcButton:BaseClip;
 						
 		override protected function initClip():void {
 			super.initClip();
-			OPSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
-			
+			OPSite.log( "OPPuntosVentaSection | initClip= " + mcButton);
+			mcButton.addEventListener( MouseEvent.CLICK, set_section);
 			//inicializo los clips
-			mcCombo.addEventListener( Event.CHANGE, menu_changed );
-			mcCombo.setData( { label: "Locales Exclusivos", id: "EXCLUSIVOS" } );
 		}
 		
 		private function menu_changed(e:Event):void {
@@ -33,9 +30,10 @@
 			mcInfo.setData( theNode );			
 		}
 		
-		private function section_changed(e:Event):void {
-			if ( OPSite.getApp().getSection() == OPSite.PUNTOVENTA ) {
-				
+		private function set_section(e:MouseEvent):void {
+			OPSite.log( "OPPuntosVentaSection | set_section= " + OPSite.getApp().getSection());
+			if ( OPSite.getApp().getSection() != OPSite.PUNTOVENTA ) {
+				OPSite.getApp().setSection( OPSite.PUNTOVENTA );
 			}
 		}
 		
