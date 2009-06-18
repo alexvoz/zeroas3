@@ -28,13 +28,22 @@
 				mcImg.mask = mcMask;
 			}
 			if ( mcLoader ) {
+				swapChildren(mcLoader, mcImg);
 				mcLoader.visible = false;
+				mcLoader.addEventListener( Event.COMPLETE,  show_photo );
 			}
 		}
 		
+		private function show_photo(e:Event):void 
+		{
+			mcImg.addChild( this.loader );
+			(loader.content as Bitmap).smoothing = true;
+			this.dispatchEvent( new Event(Event.COMPLETE) );
+		}
+		
 		override protected function refreshData():void {
-			var sNoCache:String = ( OPSite.getApp() ) ? OPSite.getApp().getNoCache() : "";
-			var request:URLRequest = new URLRequest( (data as XML).attribute("big") + sNoCache );
+			//var sNoCache:String = ( OPSite.getApp() ) ? OPSite.getApp().getNoCache() : "";
+			var request:URLRequest = new URLRequest( OPSite.getApp().getResource((data as XML).attribute("big")) );
 			this.loader = new Loader();
 			var context:LoaderContext = new LoaderContext(); 
 			context.checkPolicyFile = true;
@@ -45,7 +54,6 @@
 				mcLoader.setData( { dummy: true } );
 			}
 			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
-			mcImg.addChild( this.loader );
 		}
 		
 		protected function load_progress(e:ProgressEvent):void {
@@ -54,8 +62,8 @@
 				
 		protected function thumbInit( evnt:Event ):void {
 			if( mcLoader ) mcLoader.setData( evnt );
-			(loader.content as Bitmap).smoothing = true;
-			this.dispatchEvent( new Event(Event.COMPLETE) );
+			//(loader.content as Bitmap).smoothing = true;
+			//this.dispatchEvent( new Event(Event.COMPLETE) );
 		}
 		
 	}

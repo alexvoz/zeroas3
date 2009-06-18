@@ -37,6 +37,9 @@
 						
 		public function OPSite() {
 			super();
+			
+			this.loaderInfo.parameters["URL_HEADER"] = "http://www.d-motiko.com.ar/clients/opositor/production/";
+			
 			//creo el clip que centra el contenido
 			var sCenterClip:Sprite = new Sprite();
 			sCenterClip.graphics.beginFill(0xFF0000);

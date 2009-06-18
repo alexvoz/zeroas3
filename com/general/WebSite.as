@@ -175,6 +175,17 @@ package com.general {
 				return "";
 			}
 		}
+		/**
+		 * @author: sminutoli
+		 * @usage: usefull for temp URLs
+		 * @return: a ever changing number for no cache purposes
+		 */
+		public function getResource(src:String):String {
+			if ( this.loaderInfo.parameters["URL_HEADER"]) {
+				src = this.loaderInfo.parameters["URL_HEADER"] + src;
+			}
+			return src += getNoCache();
+		}
 		
 		protected function internalLog(msg:*, toConsole:Boolean=false ):void {
 			

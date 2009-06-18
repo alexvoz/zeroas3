@@ -11,7 +11,6 @@
 	public class OPPuntosVentaInfoItem
 	extends BaseClip {
 		public var txtContent:TextField;
-		public var mcStroke:Sprite;
 				
 		override protected function initClip():void {
 			super.initClip();
@@ -23,7 +22,6 @@
 			for each( var item in data) {
 				txtContent.appendText( item + "\n" );
 			}
-			mcStroke.y = txtContent.y + txtContent.height + 2;
 		}
 		
 	}

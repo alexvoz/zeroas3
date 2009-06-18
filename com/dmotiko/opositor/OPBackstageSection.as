@@ -49,7 +49,7 @@
 			
 			var sVideoSrc:String = "video.flv";
 			if ( OPSite.getApp() && OPSite.getApp().loaderInfo.parameters["video_src"] ) sVideoSrc = OPSite.getApp().loaderInfo.parameters["video_src"];
-			flvPlayer.load( sVideoSrc );
+			flvPlayer.load( OPSite.getApp().getResource(sVideoSrc) );
 			
 			volumeController = new Object();
 			if ( OPSite.getApp().getSound() ) volumeController.volume = 1;

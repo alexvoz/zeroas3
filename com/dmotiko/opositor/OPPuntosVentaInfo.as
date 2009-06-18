@@ -27,11 +27,9 @@
 			mcContainer = new Sprite();
 			this.addChild(mcContainer);
 			mcContainer.mask = mcMask;
-			mcPrev.buttonMode = mcNext.buttonMode = true;
-			mcPrev.useHandCursor = mcNext.useHandCursor = true;
-						
+									
 			mcDrag.buttonMode = true;
-			mcDrag.visible = mcBar.visible = mcNext.visible = mcPrev.visible = false;
+			mcDrag.visible = mcBar.visible = false;
 			
 		}
 		

@@ -26,13 +26,14 @@
 				var item:BaseMenuBtn = aBtns[i];
 				if (bVertical) {
 					item.y = nOffset;
-					nOffset += item.height - 10;
+					nOffset += item.height ;
 				}
 				this.addChild(item);	
 				
+				//OPSite.log("OPPuntosVentaMenu "+aBtns[i].getData().data );
 				//hago la separación en el caso de exclusivos y gba oeste
-				if ( aBtns[i].getData().data == "EXCLUSIVOS" || aBtns[i].getData().data == "GBA OEOPE") {
-					nOffset += 20;
+				if ( aBtns[i].getData().data == "EXCLUSIVOS" || aBtns[i].getData().data == "GBA OESTE") {
+					nOffset += 17;
 				}
 				
 			}

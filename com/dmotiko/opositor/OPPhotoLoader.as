@@ -39,6 +39,7 @@
 		override protected function tweenFinished(key:String, tween:Tween):void {
 			this.visible = false;
 			mcBar.y = mcBack.y + mcBack.height;
+			dispatchEvent( new Event( Event.COMPLETE ) );
 		}
 		
 	}
