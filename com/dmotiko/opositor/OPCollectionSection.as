@@ -14,7 +14,6 @@
 		public var mcButton:BaseClip;
 		public var mcThumbs:OPCollectionThumbs;
 		public var mcInfo:OPCollectionInfo;
-		public var btnColeccionAnterior:MovieClip;
 		public var mcPhoto:OPCollectionPhoto;
 		public var mcPhotoWide:OPCollectionPhoto;
 				
@@ -25,24 +24,26 @@
 			
 			mcButton.addEventListener( MouseEvent.CLICK, set_section);
 			
-			return;
 			//inicializo
-			btnColeccionAnterior.buttonMode = true;
-			btnColeccionAnterior.addEventListener( MouseEvent.ROLL_OUT, rotate_btn );
-			btnColeccionAnterior.addEventListener( MouseEvent.ROLL_OVER, rotate_btn );
-			btnColeccionAnterior.addEventListener( MouseEvent.CLICK, gotoLastCollection );
-			
 			mcThumbs.addEventListener( Event.CHANGE, mcThumbs_changed);
 			mcThumbs.addEventListener( Event.COMPLETE, mcThumbs_complete);
 			if ( OPSite.getApp() ){
 				var xmlData:XMLList = OPSite.getApp().getCollectionData();
 				mcThumbs.setData( xmlData );
+				OPSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			}
 						
 			//activePhoto = mcPhoto;
 			mcPhoto.addEventListener( Event.COMPLETE, photo_complete);
 			
 			
+		}
+		
+		private function section_changed(e:Event):void {
+			if ( OPSite.getApp().getSection() == OPSite.COLECCION) {
+				mcThumbs.getButtons()[0].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+				mcThumbs.getButtons()[0].rollOver( undefined );
+			}
 		}
 		
 		private function set_section(e:MouseEvent):void {

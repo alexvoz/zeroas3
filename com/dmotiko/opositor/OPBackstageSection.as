@@ -24,7 +24,6 @@
 			
 			mcButton.addEventListener( MouseEvent.CLICK, set_section);
 			
-			return;
 			if( OPSite.getApp() ){
 				OPSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 				OPSite.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
@@ -45,6 +44,7 @@
 			flvPlayer.stopButton = spStop;
 			flvPlayer.seekBar = spSeek;
 			flvPlayer.autoPlay = false;
+			flvPlayer.addEventListener(VideoEvent.COMPLETE, video_complete);
 			flvPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
 			
 			var sVideoSrc:String = "video.flv";
@@ -54,6 +54,10 @@
 			volumeController = new Object();
 			if ( OPSite.getApp().getSound() ) volumeController.volume = 1;
 			else volumeController.volume = 0;
+		}
+		
+		private function video_complete(e:VideoEvent):void {
+			OPSite.getApp().track(OPSite.BACKSTAGE+"_videoComplete");
 		}
 				
 		private function set_section(e:MouseEvent):void {

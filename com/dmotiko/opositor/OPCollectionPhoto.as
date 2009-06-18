@@ -27,6 +27,9 @@
 				mcImg.y = mcMask.y;
 				mcImg.mask = mcMask;
 			}
+			if ( mcLoader ) {
+				mcLoader.visible = false;
+			}
 		}
 		
 		override protected function refreshData():void {
@@ -37,7 +40,9 @@
 			context.checkPolicyFile = true;
 			this.loader.load( request, context );
 			if (mcLoader) {
+				mcLoader.visible = true;
 				this.loader.contentLoaderInfo.addEventListener( ProgressEvent.PROGRESS, load_progress);
+				mcLoader.setData( { dummy: true } );
 			}
 			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
 			mcImg.addChild( this.loader );

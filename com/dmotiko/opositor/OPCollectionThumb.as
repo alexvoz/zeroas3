@@ -10,8 +10,7 @@ package com.dmotiko.opositor {
 	extends BaseMenuBtn {
 		
 		//FLA instances
-		public var mcBack:MovieClip;
-		public var mcOver:MovieClip;
+		public var mcPhoto:MovieClip;
 		//
 		
 		private var loader:Loader;
@@ -19,13 +18,10 @@ package com.dmotiko.opositor {
 		private var spProgress:Sprite;
 				
 		override protected function initClip():void {
-			spPhoto = new Sprite();
-			spPhoto.buttonMode = true;
-			spPhoto.x = 10;
-			spPhoto.y = 10;
-			spPhoto.addEventListener( MouseEvent.ROLL_OVER, rollOver);
-			spPhoto.addEventListener( MouseEvent.ROLL_OUT, rollOut);
-			
+			mcPhoto.buttonMode = true;
+			mcPhoto.addEventListener( MouseEvent.ROLL_OVER, rollOver);
+			mcPhoto.addEventListener( MouseEvent.ROLL_OUT, rollOut);
+			/*
 			var spProgressBar:Sprite = new Sprite();
 			spProgressBar.name = "spProgressBar";
 			spProgressBar.graphics.beginFill(0x666666);
@@ -39,6 +35,7 @@ package com.dmotiko.opositor {
 			
 			spProgress.x = spPhoto.x + (spPhoto.width - spProgress.width) / 2;
 			spProgress.y = spPhoto.y +(spPhoto.height - spProgress.height) / 2;
+			*/
 		}
 		
 		override protected function refreshData():void {
@@ -47,9 +44,9 @@ package com.dmotiko.opositor {
 			this.loader = new Loader();
 			this.loader.load( request );
 			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
-			spPhoto.addChild( this.loader );
+			mcPhoto.addChild( this.loader );
 			
-			registerTween( "progressFade", new Tween( spProgress, "alpha", Regular.easeOut, 0, 1, 0.5, true), true, true);
+			//registerTween( "progressFade", new Tween( spProgress, "alpha", Regular.easeOut, 0, 1, 0.5, true), true, true);
 		}
 		
 		override protected function tweenFinished( key:String, tween:Tween ):void {
@@ -61,16 +58,16 @@ package com.dmotiko.opositor {
 		
 		private function thumbInit( evnt:Event ):void {
 			killTween( "progressFade" );
-			removeChild(spProgress);
+			//removeChild(spProgress);
 			(loader.content as Bitmap).smoothing = true;
 		}
 		
 		override public function rollOver( evnt:MouseEvent):void {
-			mcOver.gotoAndStop(2);
+			this.gotoAndPlay("over");
 		}
 		override public function rollOut( evnt:MouseEvent):void {
 			if ( bActive ) return;
-			mcOver.gotoAndStop(3);
+			this.gotoAndPlay("out");
 		}
 		
 		override public function setActive(active:Boolean):void {

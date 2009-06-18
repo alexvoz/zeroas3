@@ -82,7 +82,7 @@
 		}
 				
 		private function sectionChanged(e:Event):void {
-			OPSite.log( "OPMainContent | sectionChanged= "+ OPSite.getApp().getSection() );
+			//OPSite.log( "OPMainContent | sectionChanged= "+ OPSite.getApp().getSection() );
 			var tweenSection:MovieClip;			
 			switch( OPSite.getApp().getSection() ) {
 				case OPSite.HOME:
@@ -102,14 +102,16 @@
 				break;
 			}
 			
-			tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y-tweenSection.height, 0.4, true);
-			/*
-			if (tweenSection != mcHome) {
-				tween2 = new Tween( mcHome, "y", Strong.easeOut, mcHome.y, mcHome.y - mcHome.height, 0.4, true);
+			if (tweenSection == mcHome) {
+				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y + tweenSection.height, 0.4, true);
+				tween.addEventListener( TweenEvent.MOTION_FINISH, mcHomeMoveEnd);
+				tween2 = new Tween( mcFolderBack, "y", Strong.easeOut, mcFolderBack.y, mcFolderBack.y + mcFolderBack.height, 0.4, true);
 				tween2.addEventListener( TweenEvent.MOTION_FINISH, mcHomeMoveEnd);
+				registerTween("backTween", tween2);
+			} else {
+				tween = new Tween( tweenSection, "y", Strong.easeOut, tweenSection.y, tweenSection.y - tweenSection.height, 0.4, true);
+				tween.addEventListener( TweenEvent.MOTION_FINISH, activeSectionMoveEnd);
 			}
-			*/
-			tween.addEventListener( TweenEvent.MOTION_FINISH, activeSectionMoveEnd);
 			var sKey:String = "actionSectionMove";
 			var nKey:Number = 0;
 			while ( getTween("actionSectionMove" + nKey) ) {
@@ -129,10 +131,15 @@
 		}
 		
 		private function activeSectionYoYoEnd(e:TweenEvent):void {
-			OPSite.log("OPMainContent | activeSectionYoYoEnd");
+			//OPSite.log("OPMainContent | activeSectionYoYoEnd");
 		}
 				
 		private function mcHomeMoveEnd(e:TweenEvent):void {
+			if ( (e.currentTarget as Tween).obj == mcHome ) {
+				var old = activeSection;
+				activeSection = (e.currentTarget as Tween).obj as MovieClip;
+				setChildIndex( activeSection, getChildIndex( old ) );
+			}
 			(e.currentTarget as Tween).yoyo();
 			(e.currentTarget as Tween).removeEventListener( TweenEvent.MOTION_FINISH, mcHomeMoveEnd);
 		}

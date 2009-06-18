@@ -18,12 +18,19 @@
 		}
 		
 		override protected function refreshData():void {
+			var nY:Number;
 			if( data is ProgressEvent ){
 				if ( ! this.visible ) this.visible = true;
 				var e:ProgressEvent = data as ProgressEvent;
 				var p:int = Math.round( e.bytesLoaded * 100 / e.bytesTotal );
-				var nY:Number = mcBack.y + mcBack.height - p * mcBack.height / 100;
+				nY = mcBack.y + mcBack.height - p * mcBack.height / 100;
+				if ( mcBar.y >= nY ) return;
 				registerTween( "barMove", new Tween( mcBar, "y", Regular.easeOut, mcBar.y, nY, 0.3, true) );
+				
+			} else if ( !(data is Event) && data.dummy ) {
+				nY = mcBack.y + mcBack.height - 20 * mcBack.height / 100;
+				registerTween( "barMove", new Tween( mcBar, "y", Regular.easeOut, mcBar.y, nY, 2, true) );
+				
 			} else {
 				registerTween( "barMove", new Tween( mcBar, "y", Regular.easeOut, mcBar.y, mcBack.y, 0.3, true), false, true );
 			}

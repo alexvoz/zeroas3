@@ -50,10 +50,8 @@
 		}
 		
 		override protected function refreshData():void {
-			//trace("OPCollectionThumbs refreshData");
 			aBtns = new Array();
 			var oData:XMLList = getData() as XMLList;
-			//OPSite.log( "OPCollectionThumbs | refreshData= " + oData.length() );
 			for ( var i:int = 0; i < oData.length(); i++) {
 				var item:BaseMenuBtn = new view();
 				item.setData( oData[i] );
@@ -115,7 +113,7 @@
 				item = aBtns[i];
 				
 				//si es multiplo de 3 y no es el primero bajo de linea
-				if ( i != 0 && i % 3 == 0) {
+				if ( i != 0 && i % 2 == 0) {
 					nX = 0;
 					nY += item.height + nSpace;
 				}
@@ -139,7 +137,7 @@
 		}
 		private function scrollThumbs( evnt:MouseEvent ):void {
 			var nEnd:Number;
-			var nScroll:Number = mcContainer.getChildAt(0).height + nSpace - 10;
+			var nScroll:Number = mcContainer.getChildAt(0).height + nSpace ;
 			if ( evnt.currentTarget == mcPrev) {
 				nEnd = mcContainer.y + nScroll;
 				//if (nEnd > 0) return;
