@@ -27,15 +27,14 @@
 		public var inputMail:TextField;
 		public var inputMessage:TextField;
 		public var serverMessage:MovieClip;
+		
+		private var mcMenu:OPContactoMenu;
 									
 		override protected function initClip():void {
 			super.initClip();
 			
 			mcButton.addEventListener( MouseEvent.CLICK, set_section);
-			return;
-			//mcCombo.addEventListener( Event.CHANGE, menu_changed );
-			//mcCombo.setData( { label: "Administración", data: "administracion@seluteens.com.ar" } );
-			
+					
 			//inicializo los clips
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;
 			mcEnviar.addEventListener(MouseEvent.CLICK, validate);
@@ -44,6 +43,15 @@
 			inputName.tabIndex = 0;
 			inputMail.tabIndex = 1;
 			inputMessage.tabIndex = 2;
+			
+			//creo el menu
+			mcMenu = new OPContactoMenu();
+			mcMenu.x = 180;
+			mcMenu.y = 295;
+			OPSite.log( "OPContactoSection | before addListener");
+			mcMenu.addEventListener( Event.CHANGE, menu_changed);
+			mcMenu.dispatchEvent( new Event(Event.CHANGE) );
+			addChild(mcMenu);
 			
 			if(OPSite.getApp()) OPSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			
@@ -107,12 +115,13 @@
 		}
 		
 		private function menu_changed(e:Event):void {
-			sArea = e.currentTarget.getData().data;
+			sArea = mcMenu.getActiveButton().getData().data;
+			OPSite.log("OPContactoSection | menu_changed= " + sArea);
 		}
 		
 		private function section_changed(e:Event):void {
 			if ( OPSite.getApp().getSection() == OPSite.CONTACTO ) {
-				//mcCombo.setData( { label: "Administración", data: "administracion@selu.com.ar" } );
+				
 				inputName.text = inputMail.text = inputMessage.text = "";
 				serverMessage.gotoAndStop(1);
 				serverMessage.alpha = 0;

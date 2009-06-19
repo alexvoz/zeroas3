@@ -29,7 +29,6 @@
 			mcMenu.setView( OPPuntosVentaButton );
 			this.addChild( mcMenu );
 			
-			mcMenu.addEventListener( Event.COMPLETE, menu_ready);
 			mcMenu.addEventListener( Event.CHANGE, menu_changed);
 			mcMenu.setData( new XML( "<root>" + OPSite.getApp().getStoresData().toXMLString() + "</root>" ) );
 			
@@ -42,14 +41,7 @@
 				mcMenu.dispatchEvent( new Event( Event.COMPLETE ) );
 			}
 		}
-		
-		private function menu_ready(e:Event):void 
-		{
-			mcMenu.getButtons()[0].rollOver(undefined);
-			mcMenu.getButtons()[0].dispatchEvent( new MouseEvent(MouseEvent.CLICK) );
-		}
-		
-		
+			
 		private function menu_changed(e:Event):void {
 			var list:XMLList = OPSite.getApp().getStoresData();
 			var stores:XML = new XML( "<root>" + list.toXMLString() + "</root>" );

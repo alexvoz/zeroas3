@@ -12,9 +12,12 @@
 		public var mcMask:Sprite;
 		public var mcBack:Sprite;
 		
+		private var lastPos:Number;
+		
 		override protected function initClip():void {
 			mcBar.mask = mcMask;
 			mcBar.y = mcBack.y + mcBack.height;
+			lastPos = 0;
 		}
 		
 		override protected function refreshData():void {
@@ -24,11 +27,13 @@
 				var e:ProgressEvent = data as ProgressEvent;
 				var p:int = Math.round( e.bytesLoaded * 100 / e.bytesTotal );
 				nY = mcBack.y + mcBack.height - p * mcBack.height / 100;
-				if ( mcBar.y >= nY ) return;
+				if ( p <= lastPos ) return;
+				lastPos = p;
 				registerTween( "barMove", new Tween( mcBar, "y", Regular.easeOut, mcBar.y, nY, 0.3, true) );
 				
 			} else if ( !(data is Event) && data.dummy ) {
 				nY = mcBack.y + mcBack.height - 20 * mcBack.height / 100;
+				lastPos = 20;
 				registerTween( "barMove", new Tween( mcBar, "y", Regular.easeOut, mcBar.y, nY, 2, true) );
 				
 			} else {
@@ -39,6 +44,7 @@
 		override protected function tweenFinished(key:String, tween:Tween):void {
 			this.visible = false;
 			mcBar.y = mcBack.y + mcBack.height;
+			lastPos = 0;
 			dispatchEvent( new Event( Event.COMPLETE ) );
 		}
 		

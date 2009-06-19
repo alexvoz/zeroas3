@@ -24,6 +24,9 @@
 		
 		private var xmlContent:OPXMLContent;
 		private var sndController:OPSoundController;
+		
+		public var mcLoader:OPPhotoLoader;
+		private var mLoader:Loader;
 								
 		//para evitar imports innecesarios
 		public static function log( msg:*, toConsole:Boolean = false ):void {
@@ -38,7 +41,7 @@
 		public function OPSite() {
 			super();
 			
-			this.loaderInfo.parameters["URL_HEADER"] = "http://www.d-motiko.com.ar/clients/opositor/production/";
+			//this.loaderInfo.parameters["URL_HEADER"] = "http://www.d-motiko.com.ar/clients/opositor/production/";
 			
 			//creo el clip que centra el contenido
 			var sCenterClip:Sprite = new Sprite();
@@ -91,22 +94,26 @@
 		}
 		
 		override protected function externalContentLoaded( evnt:Event = undefined):void {
-			var mLoader:Loader = new Loader(); 
-			var mRequest:URLRequest = new URLRequest("mainContent.swf"+getNoCache()); 
-			mLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandler); 
+			mLoader = new Loader(); 
+			var mRequest:URLRequest = new URLRequest( getResource("mainContent.swf") ); 
+			mcLoader.addEventListener( Event.COMPLETE, loader_complete);
+			mLoader.contentLoaderInfo.addEventListener( ProgressEvent.PROGRESS, mcLoader.setData);
+			mLoader.contentLoaderInfo.addEventListener( Event.INIT, mainContent_init);
+			mcLoader.setData( { dummy: true } );
+			//mLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onCompleteHandler); 
 			mLoader.load(mRequest);
 			
 		}
 		
-		private function hideLoader(e:Event):void {
-			removeChild( getChildByName("mcOPLoader") );
+		private function mainContent_init(e:Event):void 
+		{
+			mcLoader.setData( e );
 		}
 		
-		private function onProgressHandler(evnt:ProgressEvent) {         
-			var nP:Number = Math.round( evnt.bytesLoaded * 100 / evnt.bytesTotal );
-			(getChildByName("mcOPLoader") as OPLoader).setPos( nP );
+		private function loader_complete(e:Event):void 	{
+			mainContent.addChild( mLoader );
 		}
-		
+				
 		private function onCompleteHandler(loadEvent:Event) {         
 			mainContent.addChild(loadEvent.currentTarget.content);
 		}

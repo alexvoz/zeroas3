@@ -1,20 +1,31 @@
 ﻿package com.dmotiko.opositor {
 	
-	import fl.transitions.easing.Regular;
-	import fl.transitions.Tween;
 	import flash.display.*;
 	import flash.events.*
 	import com.general.*
 			
-	public class OPPuntosVentaMenu
+	public class OPContactoMenu
 	extends BaseMenu {
+		
+		override protected function initClip():void {
+			super.initClip();
+			
+			setView( OPContactoButton );
+			
+			var aData:Array = new Array();
+			aData.push( { label: "administración", data: "administracion@opositor.com.ar" } );
+			aData.push( { label: "ventas", data: "ventas@opositor.com.ar" } );
+			aData.push( { label: "clientes", data: "clientes@opositor.com.ar" } );
+			aData.push( { label: "exportaciones", data: "exportaciones@opositor.com.ar" } );
+			aData.push( { label: "publicidad", data: "publicidad@opositor.com.ar" } );
+			setData( aData );
+		}
 		
 		override protected function refreshData():void {
 			aBtns = new Array();
-			var xml:XML = getData() as XML;
-			for each(var nodo:XML in xml.elements()){
+			for each(var nodo in data){
 				var item:BaseMenuBtn = new view();
-				item.setData( { label: new String(nodo.@label), data: new String(nodo.@id), special: new String(nodo.@special) } );
+				item.setData( nodo );
 				item.addEventListener( MouseEvent.CLICK, activeBtn );
 				aBtns.push(item);
 			}
@@ -30,16 +41,11 @@
 				}
 				this.addChild(item);	
 				
-				//OPSite.log("OPPuntosVentaMenu "+aBtns[i].getData().data );
-				//hago la separación en el caso de exclusivos y gba oeste
-				if ( aBtns[i].getData().data == "EXCLUSIVOS" || aBtns[i].getData().data == "GBA OESTE") {
-					nOffset += 17;
-				}
-				
 			}
 			this.dispatchEvent( new Event( Event.COMPLETE ) );
 			aBtns[0].rollOver(undefined);
 			(aBtns[0] as BaseMenuBtn).dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+			OPSite.log("OPContactoMenu | layout end");
 		}
 		
 		
