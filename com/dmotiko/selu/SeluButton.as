@@ -19,15 +19,14 @@ package com.dmotiko.selu {
 		}
 		
 		override protected function initClip():void {
-			this.useHandCursor = true;
-			this.buttonMode = true;
+			super.initClip();
+			
 			txtLabel.mouseEnabled = false;
 			
 			nColor = 0x474747;
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;
 			txtLabel.textColor = nColor;
-			this.addEventListener( MouseEvent.ROLL_OVER, rollOver);
-			this.addEventListener( MouseEvent.ROLL_OUT, rollOut);
+			
 		}
 		
 		override public function rollOver( evnt:MouseEvent ):void {

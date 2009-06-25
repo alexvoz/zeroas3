@@ -7,17 +7,28 @@ package com.general {
 		
 		protected var bActive:Boolean;
 		
-		public function BaseMenuBtn() {
-			super();
+		/**
+		 * @usage: init buttonMode and rollOver rollOut listener
+		 * @author: sminutoli
+		 */
+		override protected function initClip():void {
+			super.initClip();
+			
+			this.buttonMode = true;
+			addEventListener( MouseEvent.ROLL_OVER, rollOver);
+			addEventListener( MouseEvent.ROLL_OUT, rollOut);
+			
 		}
 		
 		/**
 		 * @usage: for override purposes
+		 * @author: sminutoli
 		 */
 		public function rollOver(evnt:MouseEvent):void { }
 		
 		/**
 		 * @usage: for override purposes
+		 * @author: sminutoli
 		 */
 		public function rollOut(evnt:MouseEvent):void { }
 		

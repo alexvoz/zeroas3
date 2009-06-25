@@ -15,8 +15,7 @@
 		public var mcRect:MovieClip;
 						
 		override protected function initClip():void {
-			super.initClip();
-								
+			
 			//inicializo los clips
 			this.mouseEnabled = false;
 			mcRect.buttonMode = true;

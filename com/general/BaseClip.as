@@ -123,7 +123,6 @@
 					if ( root.tweens[i].tween == tween ) {
 						if( listenEnd ) root.tweenFinished( key, tween );
 						if ( !keepAlive ) root.tweens.splice( i, 1 );
-						
 					}
 				}
 			}

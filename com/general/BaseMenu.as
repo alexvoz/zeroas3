@@ -13,10 +13,6 @@ package com.general {
 		protected var nSpace:Number;
 		protected var nOffset:Number;
 				
-		public function BaseMenu() {
-			super();
-		}
-		
 		override protected function initClip():void {
 			bVertical = true;
 			nSpace = 0;
@@ -50,7 +46,7 @@ package com.general {
 					nOffset += item.height + nSpace;
 				} else {
 					item.x = nOffset;
-					nOffset += item.height + nSpace;
+					nOffset += item.width + nSpace;
 				}
 				this.addChild(item);
 			}

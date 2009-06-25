@@ -13,15 +13,13 @@ package com.dmotiko.selu {
 						
 		override protected function initClip():void {
 			//SeluSite.log( "SeluPressButton | initClip ");
-			this.useHandCursor = true;
-			this.buttonMode = true;
+			super.initClip();
+			
 			txtLabel.mouseEnabled = false;
 			
 			nColor = 0x645b44;
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;
 			txtLabel.textColor = nColor;
-			this.addEventListener( MouseEvent.ROLL_OVER, rollOver);
-			this.addEventListener( MouseEvent.ROLL_OUT, rollOut);
 		}
 		
 		override public function rollOver( evnt:MouseEvent ):void {
