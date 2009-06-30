@@ -27,6 +27,7 @@
 			txtLabel.textColor = 0xFFFFFF;
 		}
 		override public function rollOut(e:MouseEvent):void {
+			if (bActive) return;
 			mcOver.visible = false;
 			txtLabel.textColor = nColor;
 		}

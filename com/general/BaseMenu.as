@@ -6,7 +6,7 @@ package com.general {
 	public class BaseMenu
 	extends BaseClip {
 		
-		private var activeButton:BaseMenuBtn;
+		protected var activeButton:BaseMenuBtn;
 		protected var view:Class;
 		protected var aBtns:Array;
 		protected var bVertical:Boolean;		
@@ -65,7 +65,10 @@ package com.general {
 		}
 		
 		public function activeBtn( evnt:MouseEvent ):void {
-			if(activeButton) activeButton.setActive(false);
+			if (activeButton) {
+				if ( activeButton == evnt.currentTarget ) return;
+				activeButton.setActive(false);
+			}
 			activeButton = evnt.currentTarget as BaseMenuBtn;
 			activeButton.setActive( true );
 			this.dispatchEvent( new Event( Event.CHANGE ) );

@@ -14,7 +14,7 @@
 			super.initClip();			
 			mcSpanish.addEventListener( MouseEvent.CLICK, change_language);
 			mcEnglish.addEventListener( MouseEvent.CLICK, change_language);
-			//Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
+			Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
 		}
 		
 		private function lang_changed(e:Event):void {
