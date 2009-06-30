@@ -4,27 +4,11 @@
 	import flash.events.*;
 	import flash.net.URLRequest;
 	
-	public class MediasTemplate
+	public class SectionThumbs
 	extends BaseClip {
-		
-		public var mcNinos:SimpleButton;
-		public var mcBebe:SimpleButton;
-		public var mcBucanera:SimpleButton;
-		public var mcJuvenil:SimpleButton;
-		public var mcCanCan:SimpleButton;
-		public var mcColegial:SimpleButton;
-		public var mcHombre:SimpleButton;
-		public var mcDama:SimpleButton;
-		
-		public var mcLoader:MovieClip;
-		
-		private var contentLoader:Loader;
-		
+				
+				
 		override protected function initClip():void {
-			Site.log( "MediasTemplate | initClip | "+Site.getApp());
-			
-			contentLoader = new Loader();
-			addChild(contentLoader);
 			
 			if (!Site.getApp()) return;
 			Site.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed );
@@ -32,51 +16,15 @@
 		
 		private function section_changed(e:Event):void {
 			var sSection:String = Site.getApp().getSection();
-			Site.log( "MediasTemplate | section_changed= " + sSection);
-			
+					
 			var nFrame:int = 1;
 			var sContent:String;
 			if ( sSection.indexOf(Site.MEDIAS) > -1 && sSection != Site.MEDIAS) {
 				switch( sSection ) {
 					case Site.MEDIAS_NENES:
 					nFrame = 2;
-					sContent = "medias_nene.swf";
 					break;
 					
-					case Site.MEDIAS_BEBES:
-					sContent = "construct.swf";
-					nFrame = 3;
-					break;
-					
-					case Site.MEDIAS_JUVENILES:
-					sContent = "construct.swf";
-					nFrame = 4;
-					break;
-					
-					case Site.MEDIAS_BUCANERAS:
-					sContent = "construct.swf";
-					nFrame = 5;
-					break;
-					
-					case Site.MEDIAS_CANCAN:
-					sContent = "construct.swf";
-					nFrame = 6;
-					break;
-					
-					case Site.MEDIAS_COLEGIAL:
-					sContent = "construct.swf";
-					nFrame = 7;
-					break;
-					
-					case Site.MEDIAS_HOMBRE:
-					sContent = "construct.swf";
-					nFrame = 8;
-					break;
-					
-					case Site.MEDIAS_MUJER:
-					sContent = "construct.swf";
-					nFrame = 9;
-					break;
 				}
 				
 				parent.parent.setChildIndex( parent, parent.parent.numChildren -1);

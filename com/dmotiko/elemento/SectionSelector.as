@@ -7,6 +7,7 @@
 		
 	public class SectionSelector
 	extends BaseMenu {
+		private var sSubSection:String;
 			
 		override protected function refreshData():void {
 			aBtns = new Array();
@@ -28,9 +29,10 @@
 			for (var i:int = 0; i < aBtns.length; i++)	{
 				aBtns[i].removeEventListener( MouseEvent.ROLL_OVER, activeBtn );
 				aBtns[i].removeEventListener( MouseEvent.CLICK, clickBtn );
-				registerTween("moveBtn" + i, new Tween( aBtns[i], "x", Regular.easeOut, aBtns[i].x, 0, 0.7, true), false, true);
+				registerTween("moveBtn" + i, new Tween( aBtns[i], "x", Regular.easeOut, aBtns[i].x, 0, 0.7, true), false, i == aBtns.length-1);
 			}
-			Site.getApp().setSection( (e.currentTarget as BaseMenuBtn).getData().value );
+			sSubSection = (e.currentTarget as BaseMenuBtn).getData().value;
+			
 		}
 		
 		override protected function layout():void {
@@ -62,6 +64,14 @@
 				
 			}
 			this.dispatchEvent( new Event( Event.CHANGE ) );
+		}
+		
+		override protected function tweenFinished( key:String, tween:Tween):void {
+			if( key != "fade"){
+				registerTween("fade", new Tween( this, "alpha", Regular.easeOut, this.alpha, 0, 0.5, true), false, true);
+			} else {
+				Site.getApp().setSection( sSubSection );
+			}
 		}
 		
 		

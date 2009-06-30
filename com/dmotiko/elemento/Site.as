@@ -39,9 +39,9 @@ package com.dmotiko.elemento {
 		private var buttonBar:Sprite;
 		private var langBar:Sprite;
 		private var mediasTemplate:Loader;
-		private var bar:NavBar;
-		private var medias:MediasSelector;
-		private var ropa:RopaSelector;
+		//private var bar:NavBar;
+		//private var medias:MediasSelector;
+		//private var ropa:RopaSelector;
 		
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
@@ -67,6 +67,12 @@ package com.dmotiko.elemento {
 			//lo seteo como referencia para WebSite
 			setCenterClip( sCenterClip );
 			isFullFlash();
+			
+		}
+		
+		override public function setSection( s:String ):void {
+			if ( s == Site.NOSOTROS || s == Site.CARRITO || s == Site.CONTACTO ) return;
+			super.setSection( s );
 		}
 		
 		override protected function initSite():void {
@@ -83,7 +89,7 @@ package com.dmotiko.elemento {
 			var mRequest:URLRequest = new URLRequest( getResource("mediasTemplate.swf") );
 			addChild(mediasTemplate);
 			mediasTemplate.load(mRequest);
-			
+			/*
 			bar = new NavBar();
 			bar.setView( NavBarBtn );
 			this.addChild(bar);
@@ -97,9 +103,9 @@ package com.dmotiko.elemento {
 			
 			bar.setData( aData );
 			bar.addEventListener( Event.CHANGE, bar_changed);
-			
+			*/
 		}
-		
+		/*
 		private function bar_changed(e):void {
 				if( bar.getActiveButton().getData().value == Site.MEDIAS ){
 					try {
@@ -121,6 +127,7 @@ package com.dmotiko.elemento {
 					
 				}
 			}
+			*/
 		
 	}
 	
