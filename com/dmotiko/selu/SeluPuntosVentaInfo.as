@@ -72,6 +72,40 @@
 			//this.dispatchEvent( new Event( Event.COMPLETE ) );
 			checkScroll();
 		}
+		
+		private function scroll_content(e:Event):void {			
+			var nTotal:Number = (mcBar.y + mcBar.height - mcDrag.height);
+			var nDragPercent:Number = (mcDrag.y - mcBar.y) * 100 / nTotal;
+			nDragPercent = Math.round( nDragPercent );
+			if (nDragPercent > 96) nDragPercent = 100;
+			var nDif:Number = mcContainer.height - mcMask.height;
+			var nY:Number = nDragPercent * -(nDif) / 100;
+			mcContainer.y = mcMask.y + nY;
+		}
+		
+		private function start_drag(e:MouseEvent):void {
+			mcDrag.startDrag( false, new Rectangle( mcDrag.x, mcBar.y, 0, mcBar.height - mcDrag.height ) ); 
+			mcDrag.addEventListener( Event.ENTER_FRAME, scroll_content);
+		}
+		private function stop_drag(e:MouseEvent):void {
+			mcDrag.stopDrag();
+			mcDrag.removeEventListener( Event.ENTER_FRAME, scroll_content);
+		}
+		
+		private function checkScroll():void {
+			var nDif:Number = mcContainer.height - mcMask.height;
+			if(nDif > 0) {
+				mcDrag.visible = mcBar.visible = true;
+				mcDrag.y = mcBar.y;
+				mcDrag.addEventListener( MouseEvent.MOUSE_DOWN, start_drag);
+				mcDrag.stage.addEventListener( MouseEvent.MOUSE_UP, stop_drag);
+															
+			} else {
+				mcDrag.visible = mcBar.visible = false;
+				mcDrag.removeEventListener( MouseEvent.MOUSE_DOWN, start_drag);
+				mcDrag.stage.removeEventListener( MouseEvent.MOUSE_UP, stop_drag);
+			}
+		}
 				
 	}
 	

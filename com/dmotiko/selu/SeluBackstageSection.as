@@ -43,7 +43,7 @@
 			flvPlayer.autoPlay = false;
 			flvPlayer.addEventListener(VideoEvent.STATE_CHANGE, video_change);
 			
-			var sVideoSrc:String = "video.flv";
+			var sVideoSrc:String = "backstage.flv";
 			if ( SeluSite.getApp() && SeluSite.getApp().loaderInfo.parameters["video_src"] ) sVideoSrc = SeluSite.getApp().loaderInfo.parameters["video_src"];
 			flvPlayer.load( sVideoSrc );
 			
