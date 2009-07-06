@@ -83,8 +83,7 @@
 				
 				gotoAndStop(1);
 				gotoAndStop(nFrame);
-				addEventListener( Event.ENTER_FRAME, find_btns);
-				
+								
 				if (sContent) {
 					mcLoader.gotoAndPlay(2);
 					contentLoader.contentLoaderInfo.addEventListener( Event.INIT, content_loaded );
@@ -102,28 +101,13 @@
 		private function content_loaded(e:Event):void 
 		{
 			mcLoader.gotoAndStop(1);
-		}
-		
-		private function find_btns(e:Event):void {
-			Site.log("MediasTemplate | findBtns= ");
-			Site.log("MediasTemplate | mcNinos= "+mcNinos+" / "+mcNinos.hasEventListener(MouseEvent.CLICK));
-			if ( (mcNinos || mcBebe) && ( !mcNinos.hasEventListener(MouseEvent.CLICK) || !mcBebe.hasEventListener(MouseEvent.CLICK)) ) {
-				removeEventListener( Event.ENTER_FRAME, find_btns);
-				bindListeners();
-			}
-		}
-		
-		private function bindListeners():void {
-			Site.log("MediasTemplate | bindListeners= "+mcNinos);
 			
-			if (mcNinos) mcNinos.addEventListener( MouseEvent.CLICK, set_section);
-			if (mcBebe) mcBebe.addEventListener( MouseEvent.CLICK, set_section);
-			if (mcBucanera) mcBucanera.addEventListener( MouseEvent.CLICK, set_section);
-			if (mcJuvenil) mcJuvenil.addEventListener( MouseEvent.CLICK, set_section);
-			if (mcCanCan) mcCanCan.addEventListener( MouseEvent.CLICK, set_section);
-			if (mcColegial) mcColegial.addEventListener( MouseEvent.CLICK, set_section);
-			if (mcHombre) mcHombre.addEventListener( MouseEvent.CLICK, set_section);
-			if (mcDama) mcDama.addEventListener( MouseEvent.CLICK, set_section);
+		}
+		
+		override public function childLoaded(e:Event):void {
+			if ( e.currentTarget is SimpleButton ) {
+				(e.currentTarget as SimpleButton).addEventListener( MouseEvent.CLICK, set_section);
+			}
 		}
 		
 		private function set_section(e:MouseEvent):void {
