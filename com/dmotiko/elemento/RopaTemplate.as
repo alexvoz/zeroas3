@@ -4,78 +4,78 @@
 	import flash.events.*;
 	import flash.net.URLRequest;
 	
-	public class MediasTemplate
+	public class RopaTemplate
 	extends BaseClip {
 		
-		public var mcNinos:SimpleButton;
-		public var mcBebe:SimpleButton;
-		public var mcBucanera:SimpleButton;
-		public var mcJuvenil:SimpleButton;
-		public var mcCanCan:SimpleButton;
-		public var mcColegial:SimpleButton;
-		public var mcHombre:SimpleButton;
-		public var mcDama:SimpleButton;
+		public var btnPijamaNene:SimpleButton;
+		public var btnPijamaNena:SimpleButton;
+		public var mcPijamaTeen:SimpleButton;
+		public var mcRINene:SimpleButton;
+		public var btnRINena:SimpleButton;
+		public var btnRITeen:SimpleButton;
+		public var btnRemeraNene:SimpleButton;
+		public var btnRemeraNena:SimpleButton;
 		
 		public var mcLoader:MovieClip;
 		
 		private var contentLoader:Loader;
 		
 		override protected function initClip():void {
-			Site.log( "MediasTemplate | initClip | "+Site.getApp());
 			
 			contentLoader = new Loader();
-						
+			addChild(contentLoader);
+			
 			if (!Site.getApp()) return;
 			Site.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed );
 		}
 		
 		private function section_changed(e:Event):void {
 			var sSection:String = Site.getApp().getSection();
-			Site.log( "MediasTemplate | section_changed= " + sSection);
-			
+						
 			var nFrame:int = 1;
 			var sContent:String;
-			if ( sSection.indexOf(Site.MEDIAS) > -1 && sSection != Site.MEDIAS) {
+			if ( sSection.indexOf(Site.ROPA) > -1 && sSection != Site.ROPA) {
 				switch( sSection ) {
-					case Site.MEDIAS_NENES:
+					case Site.ROPA_PIJAMA_NENE:
 					nFrame = 2;
-					sContent = "medias_nene.swf";
+					sContent = "ropa_pijamaNene.swf";
 					break;
 					
-					case Site.MEDIAS_BEBES:
-					sContent = "medias_bebe.swf";
+					case Site.ROPA_PIJAMA_NENA:
+					sContent = "ropa_pijamaNena.swf";
 					nFrame = 3;
 					break;
 					
-					case Site.MEDIAS_JUVENILES:
-					sContent = "medias_juvenil.swf";
+					case Site.ROPA_PIJAMA_TEENS:
+					sContent = "ropa_pijamaTeen.swf";
 					nFrame = 4;
 					break;
 					
-					case Site.MEDIAS_BUCANERAS:
-					sContent = "medias_bucanera.swf";
+					case Site.ROPA_INT_NENE:
+					sContent = "ropa_intNene.swf";
 					nFrame = 5;
 					break;
 					
-					case Site.MEDIAS_CANCAN:
-					sContent = "medias_cancan.swf";
+					case Site.ROPA_INT_NENA:
+					sContent = "ropa_intNena.swf";
 					nFrame = 6;
 					break;
 					
-					case Site.MEDIAS_COLEGIAL:
-					sContent = "medias_colegial.swf";
+					case Site.ROPA_INT_TEENS:
+					sContent = "ropa_intTeens.swf";
 					nFrame = 7;
 					break;
 					
-					case Site.MEDIAS_HOMBRE:
-					sContent = "medias_hombre.swf";
+					case Site.ROPA_REMERA_NENE:
+					sContent = "ropa_remeraNene.swf";
 					nFrame = 8;
 					break;
 					
-					case Site.MEDIAS_MUJER:
-					sContent = "medias_mujer.swf";
+					case Site.ROPA_REMERA_NENA:
+					sContent = "ropa_remeraNena.swf";
 					nFrame = 9;
 					break;
+					
 				}
 				
 				parent.parent.setChildIndex( parent, parent.parent.numChildren -1);
@@ -87,12 +87,10 @@
 					mcLoader.gotoAndPlay(2);
 					contentLoader.contentLoaderInfo.addEventListener( Event.INIT, content_loaded );
 					contentLoader.load( new URLRequest( sContent ) );
-					if(!contains(contentLoader) ) addChild(contentLoader);
 				}			
 				
 			} else {
-				Site.log("MediasTemplate | yendo al frame 1");
-				if( contains(contentLoader) ) removeChild(contentLoader);
+				Site.log("RopaTemplate | yendo al frame 1");
 				gotoAndStop(1);
 			}
 			
@@ -112,39 +110,39 @@
 		}
 		
 		private function set_section(e:MouseEvent):void {
-			Site.log("MediasTemplate | set_section");
+			Site.log("RopaTemplate | set_section");
 			var sSection:String;
 			switch( e.currentTarget ) {
-				case mcNinos:
-				sSection = Site.MEDIAS_NENES;
+				case btnPijamaNene:
+				sSection = Site.ROPA_PIJAMA_NENE;
 				break;
 				
-				case mcBebe:
-				sSection = Site.MEDIAS_BEBES;
+				case btnPijamaNena:
+				sSection = Site.ROPA_PIJAMA_NENA;
 				break;
 				
-				case mcBucanera:
-				sSection = Site.MEDIAS_BUCANERAS;
+				case mcPijamaTeen:
+				sSection = Site.ROPA_PIJAMA_TEENS;
 				break;
 				
-				case mcJuvenil:
-				sSection = Site.MEDIAS_JUVENILES;
+				case mcRINene:
+				sSection = Site.ROPA_INT_NENE;
 				break;
 				
-				case mcCanCan:
-				sSection = Site.MEDIAS_CANCAN;
+				case btnRINena:
+				sSection = Site.ROPA_INT_NENA;
 				break;
 				
-				case mcColegial:
-				sSection = Site.MEDIAS_COLEGIAL;
+				case btnRITeen:
+				sSection = Site.ROPA_INT_TEENS;
 				break;
 				
-				case mcHombre:
-				sSection = Site.MEDIAS_HOMBRE;
+				case btnRemeraNene:
+				sSection = Site.ROPA_REMERA_NENE;
 				break;
 				
-				case mcDama:
-				sSection = Site.MEDIAS_MUJER;
+				case btnRemeraNena:
+				sSection = Site.ROPA_REMERA_NENA;
 				break;
 			}
 			Site.getApp().setSection( sSection );

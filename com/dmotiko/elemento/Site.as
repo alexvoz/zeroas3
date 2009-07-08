@@ -39,6 +39,7 @@ package com.dmotiko.elemento {
 		private var buttonBar:Sprite;
 		private var langBar:Sprite;
 		private var mediasTemplate:Loader;
+		private var ropaTemplate:Loader;
 		//private var bar:NavBar;
 		//private var medias:MediasSelector;
 		//private var ropa:RopaSelector;
@@ -71,7 +72,7 @@ package com.dmotiko.elemento {
 		}
 		
 		override public function setSection( s:String ):void {
-			if ( s == Site.NOSOTROS || s == Site.CARRITO || s == Site.CONTACTO ) return;
+			if ( s == Site.CARRITO || s == Site.CONTACTO ) return;
 			super.setSection( s );
 		}
 		
@@ -89,6 +90,13 @@ package com.dmotiko.elemento {
 			var mRequest:URLRequest = new URLRequest( getResource("mediasTemplate.swf") );
 			addChild(mediasTemplate);
 			mediasTemplate.load(mRequest);
+			
+			ropaTemplate = new Loader(); 
+			ropaTemplate.y = 75;
+			ropaTemplate.x = 15;
+			var mRequest2:URLRequest = new URLRequest( getResource("ropaTemplate.swf") );
+			addChild(ropaTemplate);
+			ropaTemplate.load(mRequest2);
 			/*
 			bar = new NavBar();
 			bar.setView( NavBarBtn );
