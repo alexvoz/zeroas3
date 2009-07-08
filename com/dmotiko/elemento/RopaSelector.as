@@ -19,8 +19,8 @@
 			aSections.push( { img: caratulaRopIntNene, initX: -127, endX: 0, value: Site.ROPA_INT_NENE } );
 			aSections.push( { img: caratulaRopIntNena, initX: -8, endX: 0, value: Site.ROPA_INT_NENA } );
 			aSections.push( { img: caratulaRopIntTeens, initX: -108, endX: 0, value: Site.ROPA_INT_TEENS } );
-			aSections.push( { img: caratulaRemeraNena, initX: -100, endX: 0, value: Site.ROPA_REMERA_NENE } );
-			aSections.push( { img: caratulaRemeraNene, initX: -78, endX: 0, value: Site.ROPA_REMERA_NENA } );
+			aSections.push( { img: caratulaRemeraNene, initX: -100, endX: 0, value: Site.ROPA_REMERA_NENE } );
+			aSections.push( { img: caratulaRemeraNena, initX: -78, endX: 0, value: Site.ROPA_REMERA_NENA } );
 			setData( aSections );
 		}		
 		

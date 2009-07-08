@@ -87,10 +87,12 @@
 					mcLoader.gotoAndPlay(2);
 					contentLoader.contentLoaderInfo.addEventListener( Event.INIT, content_loaded );
 					contentLoader.load( new URLRequest( sContent ) );
+					if(!contains(contentLoader) ) addChild(contentLoader);
 				}			
 				
 			} else {
 				Site.log("RopaTemplate | yendo al frame 1");
+				if( contains(contentLoader) ) removeChild(contentLoader);
 				gotoAndStop(1);
 			}
 			
