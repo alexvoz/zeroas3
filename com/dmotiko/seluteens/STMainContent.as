@@ -43,9 +43,11 @@
 			initPositions.push( initPositions[3] );
 			initPositions = ArrayUtil.randomArray(initPositions);
 			
+			initPositions[1] = new Point(0, 700 );
+			
 			aSections = new Array();
 			aSections.push( mcHome );
-			//aSections.push( mcSound );
+			aSections.push( mcSound );
 			aSections.push( mcNoCasting );
 			//aSections.push( mcCompras );
 			aSections.push( mcCollection );

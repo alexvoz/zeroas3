@@ -187,6 +187,10 @@ package com.general {
 			return src += getNoCache();
 		}
 		
+		public function getSWF_VAR(key:String):* {
+			return this.loaderInfo.parameters[key];
+		}
+		
 		protected function internalLog(msg:*, toConsole:Boolean=false ):void {
 			
 			if ( this.loaderInfo.parameters["CONSOLE"]) {

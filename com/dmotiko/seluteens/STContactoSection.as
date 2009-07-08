@@ -69,8 +69,13 @@
 				registerTween("alphaErrorMail", new Tween( errorMail, "alpha", Regular.easeOut, 1, 0, 3, true));
 			}
 			if ( !bError ) {
-							
-				var request:URLRequest = new URLRequest ("sendMail.php");
+				
+				if ( !STSite.getApp().getSWF_VAR("php_mail")) {
+					STSite.log( "STContactoSection | no tengo a donde enviar el mail, termino el script" );
+					return;
+				}
+				
+				var request:URLRequest = new URLRequest ( STSite.getApp().getSWF_VAR("php_mail") );
 				request.method = URLRequestMethod.POST;
 								
 				var variables:URLVariables = new URLVariables();
@@ -78,13 +83,16 @@
 				variables.mail = inputMail.text;
 				variables.message = inputMessage.text;
 				variables.mailTo = sArea;
+				variables.from = "seluteens.com.ar";
+				if ( STSite.getApp().getSWF_VAR("test_mail") ) variables.test_mail = STSite.getApp().getSWF_VAR("test_mail");
+				
 				request.data = variables;
 								
 				var loader:URLLoader = new URLLoader (request);
 				loader.addEventListener(Event.COMPLETE, send_complete);
 				loader.load(request);
 				
-				
+				STSite.log( "STContactoSection | mail enviado | "+variables.toString() );
 			}
 			
 		}

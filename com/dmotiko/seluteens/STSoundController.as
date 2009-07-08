@@ -20,7 +20,12 @@
 		
 		function STSoundController() {
 			
-			music = new Sound( new URLRequest( STSite.getApp().loaderInfo.parameters["music_src"] ) );
+			if (! STSite.getApp().getSWF_VAR("music_src") ) {
+				STSite.log( "STSoundController | no hay musica disponible, salgo del script");
+				return;
+			}
+			
+			music = new Sound( new URLRequest( STSite.getApp().getSWF_VAR("music_src") ) );
 			music.addEventListener( Event.COMPLETE, snd_complete );
 			music.addEventListener( ProgressEvent.PROGRESS, snd_progress );
 			soundController = new Object();

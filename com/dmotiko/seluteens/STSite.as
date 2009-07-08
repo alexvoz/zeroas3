@@ -64,7 +64,7 @@
 		
 		override protected function loadExternalContent():void {
 			
-			//sndController = new STSoundController();
+			sndController = new STSoundController();
 			xmlContent = new STXMLContent();
 			xmlContent.addEventListener( Event.COMPLETE, externalContentLoaded);
 			
