@@ -58,6 +58,7 @@ package com.dmotiko.elemento {
 			super();
 			//this.loaderInfo.parameters["URL_HEADER"] = "http://www.d-motiko.com.ar/clients/opositor/production/";
 			
+			
 			//creo el clip que centra el contenido
 			var sCenterClip:Sprite = new Sprite();
 			sCenterClip.graphics.beginFill(0xFF0000);
@@ -65,11 +66,12 @@ package com.dmotiko.elemento {
 			sCenterClip.graphics.endFill();
 			sCenterClip.visible = false;
 			//lo agrego al displayList
-			this.addChild( sCenterClip );
+			//this.addChild( sCenterClip );
 			//lo seteo como referencia para WebSite
-			setCenterClip( sCenterClip );
-			isFullFlash();
-			
+			//setCenterClip( sCenterClip );
+			//isFullFlash();
+			stage.align = "TC";
+			stage.scaleMode = StageScaleMode.NO_SCALE;		
 		}
 		
 		override public function setSection( s:String ):void {

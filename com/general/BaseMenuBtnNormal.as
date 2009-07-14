@@ -5,6 +5,11 @@ package com.general {
 	public class BaseMenuBtnNormal
 	extends BaseMenuBtn {
 		
+		override protected function initClip():void {
+			super.initClip();
+			stop();
+		}
+		
 		override public function rollOver(evnt:MouseEvent):void {
 			this.gotoAndStop(2);
 		}
