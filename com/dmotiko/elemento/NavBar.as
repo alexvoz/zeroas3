@@ -13,6 +13,7 @@
 		private var nBtn:int; //para mostrar con tweens
 		private var timerBtns:Timer;
 		private var mcHome:Sprite;
+		private var mcCarrito:Sprite;
 		private var mcLang:LangBtn;
 				
 		override protected function initClip():void {
@@ -25,6 +26,11 @@
 			mcLang.x = 1000 - mcLang.width - 50;
 			mcLang.visible = false;
 			this.addChild(mcLang);
+			
+			mcCarrito = new CarritoBtn();
+			mcCarrito.x = mcLang.x - mcCarrito.width - 10;
+			mcCarrito.visible = false;
+			this.addChild(mcCarrito);
 			
 			bVertical = false;
 			nBtn = 0;
@@ -65,6 +71,10 @@
 				timerBtns.stop();
 				mcLang.visible = true;
 				registerTween("btnLangAppear", new Tween( mcLang, "y", Elastic.easeOut, - 40, 0, 1.5, true));
+				
+				mcCarrito.visible = true;
+				registerTween("btnCarritoAppear", new Tween( mcCarrito, "y", Elastic.easeOut, - 40, 15, 1.5, true));
+				
 				this.dispatchEvent( new Event( Event.COMPLETE ) );
 			}
 		}
