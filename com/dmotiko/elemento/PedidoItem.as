@@ -41,6 +41,7 @@
 		}
 		
 		override protected function refreshData():void {
+			
 			var item:CarritoItemData = data.getData() as CarritoItemData;
 			
 			inputNum.text = item.getQuant().toString();
@@ -62,7 +63,13 @@
 		}
 		
 		public function getValue():String {
-			return txtTitle.text + " | " + txtArticle.text + " | " + inputNum.text;
+			var item:CarritoItemData = data.getData() as CarritoItemData;
+			var sItem:String = "";
+			sItem += txtTitle.text + " | ART " + txtArticle.text + " | CANTIDAD: " + inputNum.text;
+			if ( item.getDescription() && item.getDescription() != "" ) sItem += " | " + item.getDescription();
+			if ( item.getDescription2() && item.getDescription2() != "" ) sItem += " " + item.getDescription2();
+			sItem += "\n--\n";
+			return sItem;
 		}
 		
 	}

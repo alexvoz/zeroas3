@@ -2,6 +2,7 @@ package com.dmotiko.elemento {
 	import com.general.*;
 	import flash.display.*;
 	import flash.events.*;
+	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
 	
 	public class Site
@@ -72,7 +73,7 @@ package com.dmotiko.elemento {
 		}
 		
 		override public function setSection( s:String ):void {
-			if ( s == Site.CARRITO || s == Site.CONTACTO ) return;
+			if ( s == Site.CONTACTO ) return;
 			super.setSection( s );
 		}
 		

@@ -21,7 +21,7 @@
 		private var contentLoader:Loader;
 		
 		override protected function initClip():void {
-			Site.log( "MediasTemplate | initClip | "+Site.getApp());
+			//Site.log( "MediasTemplate | initClip | "+Site.getApp());
 			
 			contentLoader = new Loader();
 						

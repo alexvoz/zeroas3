@@ -1,20 +1,47 @@
 ﻿package com.dmotiko.elemento {
 	import com.general.*;
+	import fl.transitions.*;
+	import fl.transitions.easing.*;
 	import flash.display.*;
 	import flash.events.*;
 		
 	public class PedidoContainer
 	extends BaseMenu {
 		
+		public var background:Sprite;
+		public var mcEnvio:CarritoEnvio;
+		
 		private var sContainer:Sprite;
 		
 		override protected function initClip():void {
 			super.initClip();
 			setView( PedidoItem );
+			mcEnvio.addEventListener( Event.CHANGE, envio_changed );
 		}
 		
-		public function deleteItem( evnt:Event ):void {
+		private function envio_changed(e:Event):void 
+		{
+			if ( e.target == mcEnvio ) {
+				this.dispatchEvent( new Event( Event.CHANGE ) );
+			}
+		}
+		
+		public function collectVars():Object {
+			var o:Object = mcEnvio.collectVars();
+			var sPedido:String = "";
+			for each( var btn:PedidoItem in aBtns) {
+				sPedido += btn.getValue();
+			}			
+			o.pedido = sPedido;
 			
+			mcEnvio.erase_fields(undefined);
+			
+			var oData = getData();
+			for ( var i:int = 0; i < oData.length; i++) {
+				oData[i].dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
+			}
+			setData( new Array() );
+			return o;
 		}
 		
 		override protected function refreshData():void {
@@ -23,7 +50,6 @@
 			for ( var i:int = 0; i < oData.length; i++) {
 				var item:BaseMenuBtn = new view();
 				item.setData( oData[i] );
-				item.addEventListener( Event.CHANGE, deleteItem );
 				aBtns.push(item);
 			}
 			layout();
@@ -34,17 +60,27 @@
 			
 			if (sContainer) removeChild(sContainer);
 			sContainer = new Sprite();
+			sContainer.y = background.y + 5;
 			addChild(sContainer);
 			nOffset = 0;
 			
+			if ( aBtns.length == 0 ) {
+				registerTween("backScale", new Tween( background, "height", Regular.easeOut, background.height, nOffset + 5, 0.3, true), false, true, true);
+			}
+			
 			for (var i:uint = 0; i < aBtns.length; i++){
 				var item:BaseMenuBtn = aBtns[i];
-				item.x = 144;
+				item.x = 10;
 				item.y = nOffset;
 				nOffset += item.height + nSpace;
-				sContainer.addChild(item);
+				sContainer.addChild( item );
+				registerTween("backScale", new Tween( background, "height", Regular.easeOut, background.height, nOffset + 5, 0.3, true), false, true, true);
 			}
 			this.dispatchEvent( new Event( Event.COMPLETE ) );
+		}
+		
+		override protected function tweenChanged(key:String, tween:Tween):void {
+			mcEnvio.y = background.getBounds(this).bottom;
 		}
 		
 	}

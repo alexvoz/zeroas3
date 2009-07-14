@@ -60,6 +60,7 @@
 		}
 				
 		public function setParentName(value:String):void {
+			//Site.log( "CarritoItemData | setParentName= " + value);
 			_sParentName = value;
 		}
 		
