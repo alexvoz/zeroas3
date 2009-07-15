@@ -15,6 +15,7 @@ package com.general {
 		}
 		
 		override public function rollOut(evnt:MouseEvent):void { 
+			if (bActive) return;
 			this.gotoAndStop(1);
 		}
 		

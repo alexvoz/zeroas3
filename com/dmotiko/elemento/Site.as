@@ -2,6 +2,8 @@ package com.dmotiko.elemento {
 	import com.general.*;
 	import flash.display.*;
 	import flash.events.*;
+	import flash.media.Sound;
+	import flash.media.SoundChannel;
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
 	
@@ -41,10 +43,9 @@ package com.dmotiko.elemento {
 		private var langBar:Sprite;
 		private var mediasTemplate:Loader;
 		private var ropaTemplate:Loader;
-		//private var bar:NavBar;
-		//private var medias:MediasSelector;
-		//private var ropa:RopaSelector;
-		
+		private var sndController:SoundController;
+		private var contacto:Loader;
+				
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
 			else if (!toConsole) trace( msg );
@@ -56,29 +57,10 @@ package com.dmotiko.elemento {
 		
 		public function Site() {
 			super();
-			//this.loaderInfo.parameters["URL_HEADER"] = "http://www.d-motiko.com.ar/clients/opositor/production/";
-			
-			
-			//creo el clip que centra el contenido
-			var sCenterClip:Sprite = new Sprite();
-			sCenterClip.graphics.beginFill(0xFF0000);
-			sCenterClip.graphics.drawRect(0, 0, 1005, 600);
-			sCenterClip.graphics.endFill();
-			sCenterClip.visible = false;
-			//lo agrego al displayList
-			//this.addChild( sCenterClip );
-			//lo seteo como referencia para WebSite
-			//setCenterClip( sCenterClip );
-			//isFullFlash();
 			stage.align = "TC";
 			stage.scaleMode = StageScaleMode.NO_SCALE;		
 		}
-		
-		override public function setSection( s:String ):void {
-			if ( s == Site.CONTACTO ) return;
-			super.setSection( s );
-		}
-		
+				
 		override protected function initSite():void {
 			buttonBar = this.addChild( new Sprite() ) as Sprite;
 			langBar = this.addChild( new Sprite() ) as Sprite;
@@ -86,7 +68,18 @@ package com.dmotiko.elemento {
 			super.initSite();
 		}
 		
+		public function getMusic():Sound { return sndController.getMusic(); }
+		public function getMusicChannel():SoundChannel { return sndController.getMusicChannel(); }
+		
+		override public function setSound(bSound:Boolean):void {
+			super.setSound(bSound);
+			if (!bSound) sndController.fadeOutMusic();
+			else sndController.fadeInMusic();
+		}
+				
 		override protected function externalContentLoaded( evnt:Event = undefined):void {
+			sndController = new SoundController( getApp(), Site.log );
+			
 			mediasTemplate = new Loader(); 
 			mediasTemplate.y = 75;
 			mediasTemplate.x = 15;
@@ -100,45 +93,15 @@ package com.dmotiko.elemento {
 			var mRequest2:URLRequest = new URLRequest( getResource("ropaTemplate.swf") );
 			addChild(ropaTemplate);
 			ropaTemplate.load(mRequest2);
-			/*
-			bar = new NavBar();
-			bar.setView( NavBarBtn );
-			this.addChild(bar);
 			
-			var aData:Array = new Array();
-			aData.push( { label: "Nosotros", value: Site.NOSOTROS } );
-			aData.push( { label: "Medias", value: Site.MEDIAS } );
-			aData.push( { label: "Ropa", value: Site.ROPA } );
-			aData.push( { label: "Carrito", value: Site.CARRITO } );
-			aData.push( { label: "Contacto", value: Site.CONTACTO } );
+			contacto = new Loader(); 
+			contacto.y = 0;
+			contacto.x = 15;
+			var mRequest3:URLRequest = new URLRequest( getResource("contacto.swf") );
+			addChild(contacto);
+			contacto.load(mRequest3);
 			
-			bar.setData( aData );
-			bar.addEventListener( Event.CHANGE, bar_changed);
-			*/
 		}
-		/*
-		private function bar_changed(e):void {
-				if( bar.getActiveButton().getData().value == Site.MEDIAS ){
-					try {
-						removeChild( ropa );
-					} catch(e) { }
-					medias = new MediasSelector();
-					medias.y = 80;
-					medias.x = 15;
-					this.addChild(medias);
-					
-				}  else if ( bar.getActiveButton().getData().value == Site.ROPA){
-					try {
-						removeChild( medias );
-					} catch(e) { }
-					ropa = new RopaSelector();
-					ropa.y = 80;
-					ropa.x = 15;
-					this.addChild(ropa);
-					
-				}
-			}
-			*/
 		
 	}
 	
