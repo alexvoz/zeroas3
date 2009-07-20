@@ -69,7 +69,7 @@
 		private function sound_changed(e:Event):void {
 			if ( OPSite.getApp().getSection() != OPSite.BACKSTAGE) return;
 			if ( OPSite.getApp().getSound() ) {
-				//volumeController.volume = 1;
+				volumeController.volume = 1;
 				videoFadeIn();
 			} else {
 				videoFadeOut();
@@ -94,7 +94,7 @@
 					}
 					videoFadeOut();
 				}
-				//OPSite.getApp().fadeInMusic();
+				OPSite.getApp().fadeInMusic();
 			}
 		}
 		
@@ -109,7 +109,7 @@
 			if ( tVolume ) tVolume.stop();
 			tVolume = new Tween(volumeController, "volume", Regular.easeOut, volumeController.volume, 1, 2, true);
 			tVolume.addEventListener( TweenEvent.MOTION_CHANGE, refresh_volume);
-			//OPSite.getApp().fadeOutMusic();
+			OPSite.getApp().fadeOutMusic();
 		}
 		
 		private function refresh_volume(e:TweenEvent):void {

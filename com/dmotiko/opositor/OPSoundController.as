@@ -19,8 +19,10 @@
 		private var soundController:Object;
 		
 		function OPSoundController() {
+			var sSound:String = OPSite.getApp().getSWF_VAR("music_src");
+			if (!sSound) sSound = "musica.mp3";
 			
-			music = new Sound( new URLRequest( OPSite.getApp().loaderInfo.parameters["music_src"] ) );
+			music = new Sound( new URLRequest( sSound ) );
 			music.addEventListener( Event.COMPLETE, snd_complete );
 			music.addEventListener( ProgressEvent.PROGRESS, snd_progress );
 			soundController = new Object();
@@ -44,6 +46,7 @@
 		public function fadeInMusic():void {
 			if ( ! OPSite.getApp().getSound() || soundController.volume == 1) return;
 			musicChannel = music.play( soundController.position );
+			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
 			if (soundTween) soundTween.stop();
 			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 1, 2, true);
 			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);
@@ -51,7 +54,7 @@
 		
 		private function snd_progress(e:ProgressEvent):void {
 			var p:int = Math.round(e.bytesLoaded * 100 / e.bytesTotal );
-			if (p > 50) {
+			if (p > 30) {
 				music.removeEventListener( ProgressEvent.PROGRESS, snd_progress);
 				musicChannel = music.play();
 				musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
@@ -60,13 +63,15 @@
 		}
 		
 		private function snd_complete(e:Event):void {
-			//OPSite.log("snd complete");
+			OPSite.log( "OPSoundController | snd_complete" );
 		}
 		
 		private function loop_music(e:Event):void {
+			OPSite.log( "OPSoundController | loop_music" );
 			musicChannel.stop();
 			soundController.position = 0;
 			musicChannel = music.play( soundController.position );
+			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
 		}
 		
 		private function stop_music(e:TweenEvent):void 	{

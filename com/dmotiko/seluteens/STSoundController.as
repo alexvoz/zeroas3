@@ -49,6 +49,7 @@
 		public function fadeInMusic():void {
 			if ( ! STSite.getApp().getSound() || soundController.volume == 1) return;
 			musicChannel = music.play( soundController.position );
+			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
 			if (soundTween) soundTween.stop();
 			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 1, 2, true);
 			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);
@@ -72,6 +73,7 @@
 			musicChannel.stop();
 			soundController.position = 0;
 			musicChannel = music.play( soundController.position );
+			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
 		}
 		
 		private function stop_music(e:TweenEvent):void 	{

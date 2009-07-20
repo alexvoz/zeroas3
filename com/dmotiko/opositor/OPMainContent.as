@@ -42,7 +42,7 @@
 			aSections = new Array();
 			aSections.push( mcHome );
 			aSections.push( mcFolderBack );
-			//aSections.push( mcSound );
+			aSections.push( mcSound );
 			aSections.push( mcBackstage );
 			aSections.push( mcCollection );
 			aSections.push( mcPuntosVenta );

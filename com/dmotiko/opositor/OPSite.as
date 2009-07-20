@@ -67,7 +67,7 @@
 		
 		override protected function loadExternalContent():void {
 			
-			//sndController = new OPSoundController();
+			sndController = new OPSoundController();
 			xmlContent = new OPXMLContent();
 			xmlContent.addEventListener( Event.COMPLETE, externalContentLoaded);
 			
@@ -85,6 +85,13 @@
 			super.setSound(bSound);
 			if (!bSound) sndController.fadeOutMusic();
 			else sndController.fadeInMusic();
+		}
+		
+		public function fadeOutMusic():void {
+			sndController.fadeOutMusic();
+		}
+		public function fadeInMusic():void {
+			sndController.fadeInMusic();
 		}
 				
 			
