@@ -32,6 +32,10 @@
 			if( SeluSite.getApp() )SeluSite.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 						
 			//inicializo los clips
+			inputName.tabIndex = 1;
+			inputMail.tabIndex = 2;
+			inputMessage.tabIndex = 3;
+			
 			errorName.alpha = errorMail.alpha = errorMessage.alpha = 0;
 			mcEnviar.addEventListener(MouseEvent.CLICK, validate);
 						
