@@ -178,7 +178,7 @@ package com.general {
 		/**
 		 * @author: sminutoli
 		 * @usage: usefull for temp URLs
-		 * @return: a ever changing number for no cache purposes
+		 * @return: a new URL = external header if exists + URL + noCache random if is enabled
 		 */
 		public function getResource(src:String):String {
 			if ( this.loaderInfo.parameters["URL_HEADER"]) {
