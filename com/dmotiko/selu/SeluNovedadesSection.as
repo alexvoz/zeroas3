@@ -9,11 +9,11 @@
 	public class SeluNovedadesSection
 	extends BaseClip {
 		
-		public var mcNews:MovieClip;
+		public var mcNews:SeluNewsContainer;
 		
 		override protected function initClip():void {
 			super.initClip();
-			
+			mcNews.setData( SeluSite.getApp().getNewsData() );
 		}
 		
 	}

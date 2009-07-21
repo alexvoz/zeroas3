@@ -31,8 +31,14 @@
 			mcDrag.buttonMode = true;
 			mcDrag.visible = mcBar.visible = mcNext.visible = mcPrev.visible = false;
 			
+			mcContainer.addEventListener( Event.CHANGE, content_changed);
+						
+			//checkScroll();
+		}
+		
+		private function content_changed(e:Event):void 
+		{
 			checkScroll();
-			
 		}
 		
 		private function scroll_content(e:Event):void {			
@@ -55,7 +61,19 @@
 		}
 		
 		override protected function refreshData():void {
-			
+			var nY:int = 0;
+			for each( var node:XML in (data as XMLList) ) {
+				
+				var item:SeluNewItem = new SeluNewItem();
+				item.setData( { date: node.@date, title: node.@title, thumb: node.@thumb, link: node.@link, href: node.@href, data: node } );
+				item.y = nY;
+				mcContainer.addChild(item);
+				nY += item.height;
+				
+				mcContainer.mcFooter.y = nY + 3;
+				
+			}
+			checkScroll();
 		}
 		
 		private function checkScroll():void {

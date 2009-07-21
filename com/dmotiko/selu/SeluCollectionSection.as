@@ -22,25 +22,47 @@
 			super.initClip();
 						
 			//inicializo
-			btnBasicos.buttonMode = btnColeccion09.buttonMode = true;
+			btnBasicos.buttonMode = btnColeccion09.buttonMode = btnColeccionAnterior.buttonMode = true;
 			btnBasicos.addEventListener( MouseEvent.CLICK, toggle_collection);
 			btnColeccion09.visible = false;
 			btnColeccion09.alpha = 0;
 			btnColeccion09.addEventListener( MouseEvent.CLICK, toggle_collection);
 			btnColeccionAnterior.addEventListener( MouseEvent.CLICK, gotoLastCollection );
 			
+			btnBasicos.addEventListener( MouseEvent.ROLL_OVER, btn_over_out);
+			btnBasicos.addEventListener( MouseEvent.ROLL_OUT, btn_over_out);
+			
+			btnColeccion09.addEventListener( MouseEvent.ROLL_OVER, btn_over_out);
+			btnColeccion09.addEventListener( MouseEvent.ROLL_OUT, btn_over_out);
+			
+			btnColeccionAnterior.addEventListener( MouseEvent.ROLL_OVER, btn_over_out);
+			btnColeccionAnterior.addEventListener( MouseEvent.ROLL_OUT, btn_over_out);
+			
 			mcThumbs.addEventListener( Event.CHANGE, mcThumbs_changed);
 			mcThumbs.addEventListener( Event.COMPLETE, mcThumbs_complete);
 			mcThumbs.setData( SeluSite.getApp().getCollectionData() );
 		}
 		
+		private function btn_over_out(e:MouseEvent):void 
+		{
+			
+			var btn:MovieClip = e.currentTarget as MovieClip;
+						
+			if ( e.type == MouseEvent.ROLL_OVER ) {
+				registerTween( btn.name + "_rotation", new Tween( btn, "rotation", Regular.easeOut, btn.rotation, 2, 0.3, true) );
+			} else if( e.type == MouseEvent.ROLL_OUT) {
+				registerTween( btn.name + "_rotation", new Tween( btn, "rotation", Regular.easeOut, btn.rotation, 0, 0.3, true) );
+			}
+			
+		}
+		
 		private function gotoLastCollection(e:MouseEvent):void {
-			var url:String = "http://www.selu.com.ar/backup09";
+			var url:String = SeluSite.getApp().getSWF_VAR("lastCollection_src");
 			var request:URLRequest = new URLRequest(url);
 			try {
 			  navigateToURL(request, '_blank'); // second argument is target
 			} catch (e:Error) {
-			  trace("Error occurred!");
+			  SeluSite.log("SeluCollectionSection | gotoLastCollection | Error occurred!");
 			}
 		}
 				

@@ -13,6 +13,7 @@ package com.dmotiko.selu {
 		private var clipAlpha:Tween;
 		private var spPhoto:Sprite;
 		private var spProgress:Sprite;
+		private var over:Sprite;
 				
 		override protected function initClip():void {
 			spPhoto = new Sprite();
@@ -34,6 +35,8 @@ package com.dmotiko.selu {
 			
 			spProgress.x = (spPhoto.width - spProgress.width) / 2;
 			spProgress.y = (spPhoto.height - spProgress.height) / 2;
+			
+			over = new SeluCollectionThumbOver();
 		}
 		
 		override protected function refreshData():void {
@@ -43,7 +46,7 @@ package com.dmotiko.selu {
 			this.loader.load( request );
 			this.loader.contentLoaderInfo.addEventListener( Event.INIT, thumbInit);
 			spPhoto.addChild( this.loader );
-			
+						
 			registerTween( "progressFade", new Tween( spProgress, "alpha", Regular.easeOut, 0, 1, 0.5, true), true, true);
 		}
 		
@@ -59,18 +62,21 @@ package com.dmotiko.selu {
 			killTween( "progressFade" );
 			removeChild(spProgress);
 			var nAlpha:Number = 1;
-			if (!bActive) nAlpha = 0.2; //spPhoto.alpha = 0.2;
 			registerTween("thumbFade", new Tween( spPhoto, "alpha", Regular.easeOut, 0, nAlpha, 0.3, true) );
+					
+			over.width = loader.width;
+			over.height = loader.height;
+			if (!bActive) over.alpha = 0;
+			else over.alpha = 0.3;
+			spPhoto.addChild( over );
 		}
 		
 		override public function rollOver( evnt:MouseEvent):void {
-			if (clipAlpha) clipAlpha.stop();
-			clipAlpha = new Tween( spPhoto, "alpha", Regular.easeIn, spPhoto.alpha, 1, 0.3, true);
+			registerTween( "overFade", new Tween( over, "alpha", Regular.easeOut, over.alpha, 0.3, 0.3, true) );
 		}
 		override public function rollOut( evnt:MouseEvent):void {
 			if ( bActive ) return;
-			if (clipAlpha) clipAlpha.stop();
-			clipAlpha = new Tween( spPhoto, "alpha", Regular.easeIn, spPhoto.alpha, 0.2, 0.3, true);
+			registerTween( "overFade", new Tween( over, "alpha", Regular.easeOut, over.alpha, 0, 0.3, true) );
 		}
 		
 	}

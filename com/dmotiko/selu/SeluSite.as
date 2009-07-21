@@ -79,7 +79,7 @@
 				
 		private function snd_progress(e:ProgressEvent):void {
 			var p:int = Math.round(e.bytesLoaded * 100 / e.bytesTotal );
-			if (p > 50) {
+			if (p > 35) {
 				music.removeEventListener( ProgressEvent.PROGRESS, snd_progress);
 				musicChannel = music.play();
 				musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
@@ -128,6 +128,7 @@
 		
 		public function getTopClip():Sprite { return topClip; }
 		
+		public function getNewsData():XMLList { return xmlContent.getNewsData(); };
 		public function getCollectionData():XMLList { return xmlContent.getCollectionData();	}
 		public function getCollectionBasicData():XMLList { return xmlContent.getCollectionBasicData();	}
 		public function getStoresData():XMLList { return xmlContent.getStoresData(); }
@@ -154,6 +155,7 @@
 		public function fadeInMusic():void {
 			if ( !getSound() || getSection() == SeluSite.BACKSTAGE || soundController.volume == 1) return;
 			musicChannel = music.play( soundController.position );
+			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
 			if (soundTween) soundTween.stop();
 			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 1, 2, true);
 			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);

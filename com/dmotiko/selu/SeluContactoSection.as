@@ -75,13 +75,15 @@
 				registerTween("alphaErrorMail", new Tween( errorMail, "alpha", Regular.easeOut, 1, 0, 3, true));
 			}
 			if ( !bError ) {
-				var request:URLRequest = new URLRequest ("sendMail.php");
+				var request:URLRequest = new URLRequest ( SeluSite.getApp().getSWF_VAR("php_mail") );
 				request.method = URLRequestMethod.POST;
 								
 				var variables:URLVariables = new URLVariables();
 				variables.name = inputName.text;
 				variables.mail = inputMail.text;
 				variables.message = inputMessage.text;
+				variables.from = "selu.com.ar";
+				if ( SeluSite.getApp().getSWF_VAR( "test_mail" ) ) variables.test_mail = SeluSite.getApp().getSWF_VAR( "test_mail" );
 				variables.mailTo = btnBar.getActiveButton().getData().data;
 				request.data = variables;
 								
