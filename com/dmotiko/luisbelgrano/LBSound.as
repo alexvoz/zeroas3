@@ -14,6 +14,9 @@
 	
 	public class LBSound
 	extends BaseClip {
+		
+		public var mcInterface:MovieClip;
+		
 		private var nInitX:Number;
 		private var timerHide:Timer;
 		private var mcIcon:MovieClip;
@@ -42,7 +45,7 @@
 			oSound.position = 0;
 						
 			//recolecto variables
-			var movieInterface:MovieClip = (getChildByName("mcInterface") as MovieClip);
+			var movieInterface:MovieClip = mcInterface;
 			btnPlay = movieInterface.getChildByName("btnPlay") as SimpleButton;
 			btnStop = movieInterface.getChildByName("btnStop") as SimpleButton;
 			mcIcon = movieInterface.getChildByName("mcIcon") as MovieClip;

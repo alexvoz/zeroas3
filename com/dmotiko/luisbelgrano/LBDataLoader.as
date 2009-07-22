@@ -20,15 +20,13 @@
 				//Convert the downloaded text into an XML
 				var myXML:XML = new XML(evnt.target.data);
 				var xml:XML = myXML.children()[0].child("items").child("portfolio_item")[0];
-				trace(xml.child("photos").length());
-				trace(xml.child("photos").child("photo")[0].child("description").children()[0].toXMLString());
 				//walks the list and show in textfields
 				
 			} catch (e:TypeError){
 				//Could not convert the data, probavlu because
 				//because is not formated correctly
-				LBSite as WebSite.log("Could not parse the XML");
-				LBSite as WebSite.log(e.message);
+				LBSite.log("Could not parse the XML");
+				LBSite.log(e.message);
 			}
 		}
 		

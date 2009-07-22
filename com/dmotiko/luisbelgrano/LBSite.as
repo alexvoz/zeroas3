@@ -13,7 +13,13 @@
 		public static const PERFIL:String = "LBSITE_PERFIL";
 		public static const PORTFOLIO:String = "LBSITE_PORTFOLIO";
 		public static const CONTACTO:String = "LBSITE_CONTACTO";
-				
+		
+		//para evitar imports innecesarios
+		public static function log( msg:*, toConsole:Boolean = false ):void {
+			if ( getApp() ) getApp().internalLog( msg, toConsole );
+			else if (!toConsole) trace( msg );
+		}
+		
 		public static function getApp():LBSite {
 			return LBSite(app);
 		}
@@ -380,12 +386,61 @@
 			aArtesAplicadas.push(pItem);
 			sectionID++;
 			
-			/*
+			/* portfolio item 8 */
+			aSubItems = new Array();
+			aPhotos = new Array();
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-1_mini.jpg", "portfolio/taller/zoom/T-1_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-2_mini.jpg", "portfolio/taller/zoom/T-2_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-3_mini.jpg", "portfolio/taller/zoom/T-3_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-4_mini.jpg", "portfolio/taller/zoom/T-4_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-5_mini.jpg", "portfolio/taller/zoom/T-5_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-6_mini.jpg", "portfolio/taller/zoom/T-6_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-7_mini.jpg", "portfolio/taller/zoom/T-7_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-8_mini.jpg", "portfolio/taller/zoom/T-8_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-9_mini.jpg", "portfolio/taller/zoom/T-9_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-10_mini.jpg", "portfolio/taller/zoom/T-10_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-11_mini.jpg", "portfolio/taller/zoom/T-11_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-12_mini.jpg", "portfolio/taller/zoom/T-12_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-13_mini.jpg", "portfolio/taller/zoom/T-13_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-14_mini.jpg", "portfolio/taller/zoom/T-14_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
+			aPhotos.push(photo);
+			photoID++;
+			 
+			pItem = new LBPortfolioItemData(sectionID as String, "El Taller", aPhotos, aSubItems);
+			aArtesAplicadas.push(pItem);
+			sectionID++;
+			/* 
+			 *   end Item 8
 			 * 
-			 * END ITEM 2
 			 * 
-			 * */
-			
+			 */
+						
 			 /* portfolio item 3 */
 			aPhotos = new Array();
 			photo = new LBPortfolioPhoto(photoID as String, "Portal de la panadería artesanal en el ZOO de Bs As para Bimbo.", "", "portfolio/marketing/minis/M-1_mini.jpg", "portfolio/marketing/zoom/M-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
@@ -798,62 +853,7 @@
 			 * 
 			 * 
 			 */
-			
-			/* portfolio item 8 */
-			aSubItems = new Array();
-			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-1_mini.jpg", "portfolio/taller/zoom/T-1_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-2_mini.jpg", "portfolio/taller/zoom/T-2_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-3_mini.jpg", "portfolio/taller/zoom/T-3_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-4_mini.jpg", "portfolio/taller/zoom/T-4_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-5_mini.jpg", "portfolio/taller/zoom/T-5_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-6_mini.jpg", "portfolio/taller/zoom/T-6_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-7_mini.jpg", "portfolio/taller/zoom/T-7_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-8_mini.jpg", "portfolio/taller/zoom/T-8_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-9_mini.jpg", "portfolio/taller/zoom/T-9_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-10_mini.jpg", "portfolio/taller/zoom/T-10_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-11_mini.jpg", "portfolio/taller/zoom/T-11_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-12_mini.jpg", "portfolio/taller/zoom/T-12_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_VERTICAL);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-13_mini.jpg", "portfolio/taller/zoom/T-13_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Algunas fotos del taller con trabajos en distintas etapas de realización.", "", "portfolio/taller/minis/T-14_mini.jpg", "portfolio/taller/zoom/T-14_zoom.jpg", undefined, LBPortfolioPhoto.PHOTO_WIDE);
-			aPhotos.push(photo);
-			photoID++;
-			 
-			pItem = new LBPortfolioItemData(sectionID as String, "El Taller", aPhotos, aSubItems);
-			aArtesPlasticas.push(pItem);
-			sectionID++;
-			/* 
-			 *   end Item 8
-			 * 
-			 * 
-			 */
-						
+									
 			aPortfolio.push( new LBPortfolioSectionData("1", "Artes Aplicadas", aArtesAplicadas) );
 			aPortfolio.push( new LBPortfolioSectionData("2", "Artes Plasticas", aArtesPlasticas) );
 			
