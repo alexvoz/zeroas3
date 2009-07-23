@@ -594,25 +594,25 @@
 			
 			/*subitem 1*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, '"En la estación"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-1_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-1_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'En la estación - 2000', "Óleo sobre fibra - 0.70m x 0.70m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-1_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-1_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '"Grafismos en desuso"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-2_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Grafismos en desuso - 2000', "Óleo sobre fibra - 0.70m x 0.70m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-2_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '"Nocturnos en rojo"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-3_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-3_zoom.png", "portfolio/pintura/expoCentroCulturalSanTelmo/megaZoom/P-ECST-3_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Nocturno en rojo - 2000', "Óleo sobre fibra - 1.15m x 0.37m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-3_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-3_zoom.png", "portfolio/pintura/expoCentroCulturalSanTelmo/megaZoom/P-ECST-3_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '"Paisaje anterior"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-4_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-4_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Paisaje anterior - 2000', "Óleo sobre tela - 1.20m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-4_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-4_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '"Río rojo"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-5_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-5_zoom.png", "portfolio/pintura/expoCentroCulturalSanTelmo/megaZoom/P-ECST-5_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Río rojo - 2000', "Óleo sobre tela - 1.15m x 0.37m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-5_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-5_zoom.png", "portfolio/pintura/expoCentroCulturalSanTelmo/megaZoom/P-ECST-5_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '"Señales en el cielo"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-6_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Señales - 1999', "Óleo sobre tela - 1.00m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-6_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '"Señales"', "", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-7_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-7_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Señales en el cielo - 1999', "Óleo sobre tela - 1.20m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-7_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-7_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 						
@@ -622,22 +622,28 @@
 			/* end subItem 1 */
 			/*subitem 2*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Barrio abierto", "", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-1_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-1_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Barrio abierto - 2000", "Óleo sobre fibra - 0.80m x 0.26m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-1_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-1_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Custodios", "", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-2_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-2_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-2_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Custodios del averno - 2000", "Óleo sobe fibra - 0.55m x 0.19m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-2_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-2_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-2_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Deshumanizado", "", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-3_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-3_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-3_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Deshumanizados - 2000", "Óleo sobre fibra - 0.65m x 22.5m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-3_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-3_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-3_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "El Sr. Nos ilumina", "", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-4_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-4_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-4_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "El Señor Nos ilumina - 2001", "Óleo sobre fibra - 0.70m x 0.30m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-4_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-4_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-4_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Refugiados", "", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-5_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-5_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Refugiados - 2000", "Óleo sobre fibra - 0.90m x 0.80m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-5_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-5_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Tierra asolada", "", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-6_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-6_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-6_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Tierra asolada - 2000", "Óleo sobre fibra - 79.5m x 22.5m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-6_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-6_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-6_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Paisaje apocalíptico - 2001", "Óleo sobre fibra - 0.80m x 0.25m", "portfolio/pintura/otros/minis/P-O-8_mini.jpg", "portfolio/pintura/otros/zoom/P-O-8_zoom.png", "portfolio/pintura/otros/megaZoom/P-O-8_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			aPhotos.push(photo);
+			photoID++;
+			photo = new LBPortfolioPhoto(photoID as String, "Vuelo bestial - 2001", "Óleo sobre fibra - 0.50m x 0.25m", "portfolio/pintura/otros/minis/P-O-11_mini.jpg", "portfolio/pintura/otros/zoom/P-O-11_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 						
@@ -647,37 +653,37 @@
 			/* end subItem 2 */
 			/*subitem 3*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Figura Roja", "", "portfolio/pintura/figuras/minis/P-F-1_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-1_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Alfombra Roja - 2001", "Óleo sobre tela - 0.25m x 0.60 m", "portfolio/pintura/figuras/minis/P-F-1_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-1_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Cariatide", "", "portfolio/pintura/figuras/minis/P-F-2_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Cariátide - 1998", "Óleo sobre tela - 1.00m x 1.00m", "portfolio/pintura/figuras/minis/P-F-2_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Ensimismada", "", "portfolio/pintura/figuras/minis/P-F-3_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-3_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Ensimismada - 1998", "Óleo sobre tela - 1.00m x 1.00m", "portfolio/pintura/figuras/minis/P-F-3_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-3_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Figura azul", "", "portfolio/pintura/figuras/minis/P-F-4_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-4_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-4_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Figura azul - 2001", "Óleo sobre fibra - 0.30m x 0.80m", "portfolio/pintura/figuras/minis/P-F-4_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-4_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-4_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Figura en el lago", "", "portfolio/pintura/figuras/minis/P-F-5_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-5_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-5_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Figura en el lago - 2001", "Óleo sobre fibra - 0.30m x 0.80m", "portfolio/pintura/figuras/minis/P-F-5_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-5_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-5_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Figura recostada", "", "portfolio/pintura/figuras/minis/P-F-6_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Figura recostada - 2000", "Óleo sobre cartón - 0.49m x 0.34m", "portfolio/pintura/figuras/minis/P-F-6_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Musa sorprendida", "", "portfolio/pintura/figuras/minis/P-F-7_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-7_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Musa sorprendida - 1998", "Óleo sobre tela - 0.80m x 1.00m", "portfolio/pintura/figuras/minis/P-F-7_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-7_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Prerafaelista", "", "portfolio/pintura/figuras/minis/P-F-8_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-8_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Prerafaelista - 1998", "Óleo sobre tela - 1.00m x 1.00m", "portfolio/pintura/figuras/minis/P-F-8_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-8_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Seres especulares", "", "portfolio/pintura/figuras/minis/P-F-9_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-9_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Seres especulares - 1999", "Óleo sobre cartón - 0.30m x 0.50m", "portfolio/pintura/figuras/minis/P-F-9_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-9_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Seres etéreos", "", "portfolio/pintura/figuras/minis/P-F-10_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-10_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-10_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Seres etéreos - 2000", "Óleo sobre fibra - 0.58m x 1.17m", "portfolio/pintura/figuras/minis/P-F-10_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-10_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-10_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Suburbio", "", "portfolio/pintura/figuras/minis/P-F-11_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-11_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-11_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Suburbio - 2000", "Óleo sobre cartón - 0.32m x 0.70m", "portfolio/pintura/figuras/minis/P-F-11_mini.jpg", "portfolio/pintura/figuras/zoom/P-F-11_zoom.png", "portfolio/pintura/figuras/megaZoom/P-F-11_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 						
@@ -687,71 +693,65 @@
 			/* end subItem 3 */
 			/*subitem 4*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Caída ángel", "", "portfolio/pintura/otros/minis/P-O-1_mini.jpg", "portfolio/pintura/otros/zoom/P-O-1_zoom.png", "portfolio/pintura/otros/megaZoom/P-O-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "La Caída del ángel guardián - 2000", "Óleo sobre fibra - 0.55m x 0.19m", "portfolio/pintura/otros/minis/P-O-1_mini.jpg", "portfolio/pintura/otros/zoom/P-O-1_zoom.png", "portfolio/pintura/otros/megaZoom/P-O-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Dos pescadores", "", "portfolio/pintura/otros/minis/P-O-2_mini.jpg", "portfolio/pintura/otros/zoom/P-O-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "La siesta - 1995", "Óleo sobre tela - 0.50m x 0.40m", "portfolio/pintura/otros/minis/P-O-2_mini.jpg", "portfolio/pintura/otros/zoom/P-O-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Espacio interior", "", "portfolio/pintura/otros/minis/P-O-3_mini.jpg", "portfolio/pintura/otros/zoom/P-O-3_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Espacio interior - 1995", "Óleo sobre tela - 1.00m x 0.80m", "portfolio/pintura/otros/minis/P-O-3_mini.jpg", "portfolio/pintura/otros/zoom/P-O-3_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Flotando va", "", "portfolio/pintura/otros/minis/P-O-4_mini.jpg", "portfolio/pintura/otros/zoom/P-O-4_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Flotando va - 1995", "Óleo sobre cartón - 0.60m x 0.50m", "portfolio/pintura/otros/minis/P-O-4_mini.jpg", "portfolio/pintura/otros/zoom/P-O-4_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Interludio", "", "portfolio/pintura/otros/minis/P-O-5_mini.jpg", "portfolio/pintura/otros/zoom/P-O-5_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Interludio - 1998", "Óleo sobre tela - 0.80m x 1.00m", "portfolio/pintura/otros/minis/P-O-5_mini.jpg", "portfolio/pintura/otros/zoom/P-O-5_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Lírica", "", "portfolio/pintura/otros/minis/P-O-6_mini.jpg", "portfolio/pintura/otros/zoom/P-O-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Lírica - 1999", "Óleo sobre tela - 1.20m x 1.00", "portfolio/pintura/otros/minis/P-O-6_mini.jpg", "portfolio/pintura/otros/zoom/P-O-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Melancólica", "", "portfolio/pintura/otros/minis/P-O-7_mini.jpg", "portfolio/pintura/otros/zoom/P-O-7_zoom.png", "portfolio/pintura/otros/megaZoom/P-O-7_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Melancólica - 2001", "Óleo sobre fibra - 0.18m x 0.48m", "portfolio/pintura/otros/minis/P-O-7_mini.jpg", "portfolio/pintura/otros/zoom/P-O-7_zoom.png", "portfolio/pintura/otros/megaZoom/P-O-7_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Paisaje apocalíptico", "", "portfolio/pintura/otros/minis/P-O-8_mini.jpg", "portfolio/pintura/otros/zoom/P-O-8_zoom.png", "portfolio/pintura/otros/megaZoom/P-O-8_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Pescador - 1997", "Óleo sobre fibra - 0.80m x 1.00m", "portfolio/pintura/otros/minis/P-O-9_mini.jpg", "portfolio/pintura/otros/zoom/P-O-9_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Pescador", "", "portfolio/pintura/otros/minis/P-O-9_mini.jpg", "portfolio/pintura/otros/zoom/P-O-9_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Sillas - 1994", "Óleo sobre tela - 0.50m x 0.60m", "portfolio/pintura/otros/minis/P-O-10_mini.jpg", "portfolio/pintura/otros/zoom/P-O-10_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Sillas", "", "portfolio/pintura/otros/minis/P-O-10_mini.jpg", "portfolio/pintura/otros/zoom/P-O-10_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
-			aPhotos.push(photo);
-			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Vuelo bestial", "", "portfolio/pintura/otros/minis/P-O-11_mini.jpg", "portfolio/pintura/otros/zoom/P-O-11_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
-			aPhotos.push(photo);
-			photoID++;
-									
+												
 			pItem = new LBPortfolioItemData(sectionID as String, "Otros", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 4 */
 			/*subitem 5*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Bosque rivereño", "", "portfolio/pintura/paisajes/minis/P-P-1_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-1_zoom.png", "portfolio/pintura/paisajes/megaZoom/P-P-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Bosque rivereño - 2001", "Óleo sobre fibra 0.25m x 0.70m", "portfolio/pintura/paisajes/minis/P-P-1_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-1_zoom.png", "portfolio/pintura/paisajes/megaZoom/P-P-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Después de la tormenta", "", "portfolio/pintura/paisajes/minis/P-P-2_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Después de la tormenta - 1994", "Óleo sobre fibra - 1.00m x 0.80m", "portfolio/pintura/paisajes/minis/P-P-2_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Horizonte", "", "portfolio/pintura/paisajes/minis/P-P-3_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-3_zoom.png", "portfolio/pintura/paisajes/megaZoom/P-P-3_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Horizonte - 2001", "Óleo sobre fibra - 0.25m x 0.80m", "portfolio/pintura/paisajes/minis/P-P-3_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-3_zoom.png", "portfolio/pintura/paisajes/megaZoom/P-P-3_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Jardín del Edén", "", "portfolio/pintura/paisajes/minis/P-P-4_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-4_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Jardín del Edén - 1997", "Óleo sobre tela - 0.60m x 0.80m", "portfolio/pintura/paisajes/minis/P-P-4_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-4_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "La reconquista", "", "portfolio/pintura/paisajes/minis/P-P-5_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-5_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "La reconquista - 2000", "Óleo sobre tela - 1.50m x 1.00m", "portfolio/pintura/paisajes/minis/P-P-5_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-5_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Paisaje inconcluso", "", "portfolio/pintura/paisajes/minis/P-P-6_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Paisaje inconcluso - 2000", "Óleo sobre tela - 1.50m x 1.00m", "portfolio/pintura/paisajes/minis/P-P-6_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Paisaje ventoso", "", "portfolio/pintura/paisajes/minis/P-P-7_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-7_zoom.png", "portfolio/pintura/paisajes/megaZoom/P-P-7_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Paisaje ventoso - 2001", "Óleo sobre tela - 0.23m x 0.81m", "portfolio/pintura/paisajes/minis/P-P-7_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-7_zoom.png", "portfolio/pintura/paisajes/megaZoom/P-P-7_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Playa", "", "portfolio/pintura/paisajes/minis/P-P-8_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-8_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Playa - 1995", "Óleo sobre tela - 0.40m x 0.30m", "portfolio/pintura/paisajes/minis/P-P-8_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-8_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Tigre barco 1", "", "portfolio/pintura/paisajes/minis/P-P-9_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-9_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Pasarán debajo del puente - 2000", "Óleo sobre fibra - 0.50m x 0.90m", "portfolio/pintura/paisajes/minis/P-P-9_mini.jpg", "portfolio/pintura/paisajes/zoom/P-P-9_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 									
