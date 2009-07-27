@@ -23,7 +23,7 @@
 		}
 		
 		private function clickBtn(e:MouseEvent):void {
-			//Site.log( "clickBtn= " + (e.currentTarget as BaseMenuBtn).getData().value );
+			
 			var btn:BaseMenuBtn = e.currentTarget as BaseMenuBtn;
 			setChildIndex(btn, numChildren-1);
 			for (var i:int = 0; i < aBtns.length; i++)	{

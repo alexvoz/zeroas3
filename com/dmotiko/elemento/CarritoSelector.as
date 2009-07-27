@@ -46,6 +46,7 @@
 		
 		private function section_changed(e:Event):void 
 		{
+			return;
 			if( Site.getApp().getSection() != Site.CARRITO ){
 				var nHeight:Number = Site.getApp().height;
 				if (nHeight < 650) nHeight == 650;

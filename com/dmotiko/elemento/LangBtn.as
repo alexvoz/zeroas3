@@ -15,14 +15,19 @@
 			mcSpanish.addEventListener( MouseEvent.CLICK, change_language);
 			mcEnglish.addEventListener( MouseEvent.CLICK, change_language);
 			Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
+			lang_changed(undefined);
 		}
 		
 		private function lang_changed(e:Event):void {
 			if ( Site.getApp().getLanguage() == Site.SPANISH ) {
+				mcSpanish.rollOver(undefined);
 				mcSpanish.setActive(true);
+				mcEnglish.setActive(false);
 				
 			} else {
+				mcEnglish.rollOver(undefined);
 				mcEnglish.setActive(true);
+				mcSpanish.setActive(false);
 				
 			}
 		}

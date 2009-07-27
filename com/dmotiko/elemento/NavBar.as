@@ -15,6 +15,7 @@
 		private var mcHome:Sprite;
 		private var mcCarrito:Sprite;
 		private var mcLang:LangBtn;
+		private var sContainer:Sprite;
 				
 		override protected function initClip():void {
 			
@@ -36,18 +37,28 @@
 			nBtn = 0;
 			nOffset = mcHome.width - 13;
 			nSpace = -13;
-				
+			
 		}
 		
 		override protected function layout():void {
+			if ( sContainer && this.contains( sContainer ) ) removeChild(sContainer);
+			sContainer = new Sprite();
+			addChild(sContainer);
+			nOffset = mcHome.width - 13;
+			nBtn = 0;
+			
 			for (var i:uint = 0; i < aBtns.length; i++){
 				var item:BaseMenuBtn = aBtns[i];
 				item.x = nOffset;
 				item.visible = false;
 				if (i == aBtns.length - 1) (item as NavBarBtn).mcShadow.visible = false;
 				nOffset += item.width + nSpace;
-				this.addChild(item);
-				setChildIndex(item, 1);
+				sContainer.addChild(item);
+				sContainer.setChildIndex(item, 0);
+				if ( item.getData().value == Site.getApp().getSection() ) {
+					item.rollOver(undefined);
+					this.setActiveButton(item);
+				}
 			}
 			setChildIndex( mcHome, numChildren - 1);
 			

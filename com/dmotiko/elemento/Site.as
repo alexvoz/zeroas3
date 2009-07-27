@@ -39,8 +39,8 @@ package com.dmotiko.elemento {
 		public static var SPANISH:String = "ELEMENTO_SPANISH";
 		public static var ENGLISH:String = "ELEMENTO_ENGLISH";
 		
-		private var buttonBar:Sprite;
-		private var langBar:Sprite;
+		private var bar:NavBar;
+		
 		private var mediasTemplate:Loader;
 		private var ropaTemplate:Loader;
 		private var sndController:SoundController;
@@ -62,14 +62,21 @@ package com.dmotiko.elemento {
 		}
 				
 		override protected function initSite():void {
-			buttonBar = this.addChild( new Sprite() ) as Sprite;
-			langBar = this.addChild( new Sprite() ) as Sprite;
 			this.sSection = Site.HOME;
+			this.sLanguage = Site.SPANISH;
+			
 			super.initSite();
 		}
 		
 		public function getMusic():Sound { return sndController.getMusic(); }
 		public function getMusicChannel():SoundChannel { return sndController.getMusicChannel(); }
+		
+		override public function setSection(sSection:String):void {
+			super.setSection(sSection);
+			var nHeight:Number = Site.getApp().height;
+			if (nHeight < 650) nHeight == 650;
+			//navigateToURL( new URLRequest( "javascript: setWindowSize("+ nHeight +")"), "_self");
+		}
 		
 		override public function setSound(bSound:Boolean):void {
 			super.setSound(bSound);
@@ -102,6 +109,8 @@ package com.dmotiko.elemento {
 			contacto.load(mRequest3);
 			
 		}
+		
+		public function getBar():NavBar { return bar; }
 		
 	}
 	

@@ -30,7 +30,16 @@
 		}
 		
 		private function change_section(e:MouseEvent):void {
-			Site.getApp().setSection( Site.CARRITO );
+			//Site.getApp().setSection( Site.CARRITO );
+			var btns:Array = Site.getApp().getBar().getButtons();
+			for each( var btn:NavBarBtn in btns) {
+				if ( btn.getData().value == Site.CARRITO ) {
+					btn.rollOver(undefined);
+					Site.getApp().getBar().setActiveButton( btn );
+					Site.getApp().setSection( Site.CARRITO );
+					break;
+				}
+			}
 		}
 		
 		override protected function tweenChanged( key:String, tween:Tween ):void {

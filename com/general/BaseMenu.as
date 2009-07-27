@@ -82,7 +82,10 @@ package com.general {
 				this.activeButton = undefined;
 			} else {
 				var n = aBtns.indexOf( btn );
-				if ( n >= 0) (this.aBtns[n] as BaseMenuBtn).setActive(true);
+				if ( n >= 0) {
+					(this.aBtns[n] as BaseMenuBtn).setActive(true);
+					activeButton = aBtns[n];
+				}
 			}
 		}
 		
