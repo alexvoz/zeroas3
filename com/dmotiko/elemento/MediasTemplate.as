@@ -27,53 +27,54 @@
 						
 			if (!Site.getApp()) return;
 			Site.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed );
+			Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, section_changed );
 		}
 		
 		private function section_changed(e:Event):void {
 			var sSection:String = Site.getApp().getSection();
-			Site.log( "MediasTemplate | section_changed= " + sSection);
-			
+						
 			var nFrame:int = 1;
 			var sContent:String;
+						
 			if ( sSection.indexOf(Site.MEDIAS) > -1 && sSection != Site.MEDIAS) {
 				switch( sSection ) {
 					case Site.MEDIAS_NENES:
+					sContent = "medias_nene";
 					nFrame = 2;
-					sContent = "medias_nene.swf";
 					break;
 					
 					case Site.MEDIAS_BEBES:
-					sContent = "medias_bebe.swf";
+					sContent = "medias_bebe";
 					nFrame = 3;
 					break;
 					
 					case Site.MEDIAS_JUVENILES:
-					sContent = "medias_juvenil.swf";
+					sContent = "medias_juvenil";
 					nFrame = 4;
 					break;
 					
 					case Site.MEDIAS_BUCANERAS:
-					sContent = "medias_bucanera.swf";
+					sContent = "medias_bucanera";
 					nFrame = 5;
 					break;
 					
 					case Site.MEDIAS_CANCAN:
-					sContent = "medias_cancan.swf";
+					sContent = "medias_cancan";
 					nFrame = 6;
 					break;
 					
 					case Site.MEDIAS_COLEGIAL:
-					sContent = "medias_colegial.swf";
+					sContent = "medias_colegial";
 					nFrame = 7;
 					break;
 					
 					case Site.MEDIAS_HOMBRE:
-					sContent = "medias_hombre.swf";
+					sContent = "medias_hombre";
 					nFrame = 8;
 					break;
 					
 					case Site.MEDIAS_MUJER:
-					sContent = "medias_mujer.swf";
+					sContent = "medias_mujer";
 					nFrame = 9;
 					break;
 				}
@@ -81,6 +82,13 @@
 				parent.parent.setChildIndex( parent, parent.parent.numChildren -1);
 				
 				gotoAndStop(1);
+				var bL:Boolean = Site.getApp().getLanguage() == Site.SPANISH;
+				if (!bL) {
+					sContent += "_eng";
+					nFrame += 9;
+				}
+				sContent += ".swf";
+				
 				gotoAndStop(nFrame);
 								
 				if (sContent) {
@@ -91,7 +99,7 @@
 				}			
 				
 			} else {
-				Site.log("MediasTemplate | yendo al frame 1");
+				//Site.log("MediasTemplate | yendo al frame 1");
 				if( contains(contentLoader) ) removeChild(contentLoader);
 				gotoAndStop(1);
 			}
@@ -112,7 +120,7 @@
 		}
 		
 		private function set_section(e:MouseEvent):void {
-			Site.log("MediasTemplate | set_section");
+			//Site.log("MediasTemplate | set_section");
 			var sSection:String;
 			switch( e.currentTarget ) {
 				case mcNinos:

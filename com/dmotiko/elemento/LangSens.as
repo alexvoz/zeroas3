@@ -1,6 +1,7 @@
 ﻿package com.dmotiko.elemento {
 	
 	import com.general.*
+	import flash.display.MovieClip;
 	import flash.events.Event;
 	
 	public class LangSens
@@ -9,8 +10,11 @@
 		override protected function initClip():void {
 			super.initClip();
 			stop();
-			Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
-			lang_changed(undefined);
+			if ( Site.getApp() ) {
+				Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
+				lang_changed(undefined);
+			}
+			
 		}
 		
 		protected function lang_changed(e:Event):void 

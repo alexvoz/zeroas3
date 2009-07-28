@@ -27,6 +27,7 @@
 			
 			if (!Site.getApp()) return;
 			Site.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed );
+			Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, section_changed );
 		}
 		
 		private function section_changed(e:Event):void {
@@ -38,41 +39,41 @@
 				switch( sSection ) {
 					case Site.ROPA_PIJAMA_NENE:
 					nFrame = 2;
-					sContent = "ropa_pijamaNene.swf";
+					sContent = "ropa_pijamaNene";
 					break;
 					
 					case Site.ROPA_PIJAMA_NENA:
-					sContent = "ropa_pijamaNena.swf";
+					sContent = "ropa_pijamaNena";
 					nFrame = 3;
 					break;
 					
 					case Site.ROPA_PIJAMA_TEENS:
-					sContent = "ropa_pijamaTeen.swf";
+					sContent = "ropa_pijamaTeen";
 					nFrame = 4;
 					break;
 					
 					case Site.ROPA_INT_NENE:
-					sContent = "ropa_intNene.swf";
+					sContent = "ropa_intNene";
 					nFrame = 5;
 					break;
 					
 					case Site.ROPA_INT_NENA:
-					sContent = "ropa_intNena.swf";
+					sContent = "ropa_intNena";
 					nFrame = 6;
 					break;
 					
 					case Site.ROPA_INT_TEENS:
-					sContent = "ropa_intTeens.swf";
+					sContent = "ropa_intTeens";
 					nFrame = 7;
 					break;
 					
 					case Site.ROPA_REMERA_NENE:
-					sContent = "ropa_remeraNene.swf";
+					sContent = "ropa_remeraNene";
 					nFrame = 8;
 					break;
 					
 					case Site.ROPA_REMERA_NENA:
-					sContent = "ropa_remeraNena.swf";
+					sContent = "ropa_remeraNena";
 					nFrame = 9;
 					break;
 					
@@ -81,6 +82,14 @@
 				parent.parent.setChildIndex( parent, parent.parent.numChildren -1);
 				
 				gotoAndStop(1);
+				
+				var bL:Boolean = Site.getApp().getLanguage() == Site.SPANISH;
+				if (!bL) {
+					sContent += "_eng";
+					nFrame += 9;
+				}
+				sContent += ".swf";
+				
 				gotoAndStop(nFrame);
 								
 				if (sContent) {
@@ -91,7 +100,7 @@
 				}			
 				
 			} else {
-				Site.log("RopaTemplate | yendo al frame 1");
+				//Site.log("RopaTemplate | yendo al frame 1");
 				if( contains(contentLoader) ) removeChild(contentLoader);
 				gotoAndStop(1);
 			}

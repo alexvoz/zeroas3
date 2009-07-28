@@ -46,7 +46,7 @@
 			addChild(sContainer);
 			nOffset = mcHome.width - 13;
 			nBtn = 0;
-			
+						
 			for (var i:uint = 0; i < aBtns.length; i++){
 				var item:BaseMenuBtn = aBtns[i];
 				item.x = nOffset;
@@ -55,7 +55,7 @@
 				nOffset += item.width + nSpace;
 				sContainer.addChild(item);
 				sContainer.setChildIndex(item, 0);
-				if ( item.getData().value == Site.getApp().getSection() ) {
+				if ( Site.getApp().getSection().indexOf(item.getData().value) > -1 ) {
 					item.rollOver(undefined);
 					this.setActiveButton(item);
 				}
@@ -64,7 +64,7 @@
 			
 			mcHome.visible = true;
 			registerTween("btnHomeAppear", new Tween( mcHome, "y", Elastic.easeOut, - mcHome.height, 0, 2, true));
-						
+									
 			timerBtns = new Timer( 500 );
 			timerBtns.addEventListener( TimerEvent.TIMER, showNextBtn);
 			timerBtns.start();
@@ -80,11 +80,15 @@
 				nBtn++;
 			} else {
 				timerBtns.stop();
-				mcLang.visible = true;
-				registerTween("btnLangAppear", new Tween( mcLang, "y", Elastic.easeOut, - 40, 0, 1.5, true));
+				if( !mcLang.visible ){
+					mcLang.visible = true;
+					registerTween("btnLangAppear", new Tween( mcLang, "y", Elastic.easeOut, - 40, 0, 1.5, true));
+				}
 				
-				mcCarrito.visible = true;
-				registerTween("btnCarritoAppear", new Tween( mcCarrito, "y", Elastic.easeOut, - 40, 15, 1.5, true));
+				if( !mcCarrito.visible ){
+					mcCarrito.visible = true;
+					registerTween("btnCarritoAppear", new Tween( mcCarrito, "y", Elastic.easeOut, - 40, 15, 1.5, true));
+				}
 				
 				this.dispatchEvent( new Event( Event.COMPLETE ) );
 			}

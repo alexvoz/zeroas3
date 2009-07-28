@@ -50,7 +50,9 @@
 			if( Site.getApp().getSection() != Site.CARRITO ){
 				var nHeight:Number = Site.getApp().height;
 				if (nHeight < 650) nHeight == 650;
-				navigateToURL( new URLRequest( "javascript: setWindowSize("+ nHeight +")"), "_self");
+				if( Site.getApp().getSWF_VAR("browser") ){
+					navigateToURL( new URLRequest( "javascript: setWindowSize(" + nHeight +")"), "_self");
+				}
 			}
 		}
 				

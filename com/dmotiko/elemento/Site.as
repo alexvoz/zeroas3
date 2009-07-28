@@ -39,7 +39,7 @@ package com.dmotiko.elemento {
 		public static var SPANISH:String = "ELEMENTO_SPANISH";
 		public static var ENGLISH:String = "ELEMENTO_ENGLISH";
 		
-		private var bar:NavBar;
+		public var bar:*;
 		
 		private var mediasTemplate:Loader;
 		private var ropaTemplate:Loader;
@@ -75,7 +75,10 @@ package com.dmotiko.elemento {
 			super.setSection(sSection);
 			var nHeight:Number = Site.getApp().height;
 			if (nHeight < 650) nHeight == 650;
-			//navigateToURL( new URLRequest( "javascript: setWindowSize("+ nHeight +")"), "_self");
+			if( Site.getApp().getSWF_VAR("browser") ){
+				Site.log("Site.as | setSection | resize window");
+				//navigateToURL( new URLRequest( "javascript: setWindowSize(" + nHeight +")"), "_self");
+			}
 		}
 		
 		override public function setSound(bSound:Boolean):void {
@@ -110,7 +113,7 @@ package com.dmotiko.elemento {
 			
 		}
 		
-		public function getBar():NavBar { return bar; }
+		public function getBar():* { return bar; }
 		
 	}
 	

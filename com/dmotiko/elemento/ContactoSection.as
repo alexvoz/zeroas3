@@ -18,6 +18,7 @@
 			this.stop();
 			if (Site.getApp()) {
 				Site.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed );
+				Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, section_changed );
 			}
 		}
 		
@@ -25,6 +26,7 @@
 			var nFrame:int;
 			if ( Site.getApp().getSection() == Site.CONTACTO) {
 				nFrame = 2;
+				if ( Site.getApp().getLanguage() != Site.SPANISH ) nFrame = 3;
 			} else {
 				nFrame = 1;
 			}
