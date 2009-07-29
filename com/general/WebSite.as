@@ -124,7 +124,7 @@ package com.general {
 				var url:String = this.loaderInfo.parameters["analytics"]+"('"+sTrack+"')";
 				var request:URLRequest = new URLRequest(url);
 				try {
-					navigateToURL(request, '_self'); // second argument is target
+					//navigateToURL(request, '_self'); // second argument is target
 				} catch (e:Error) {
 					log( "WebSite | analytic error");
 				}
@@ -201,7 +201,7 @@ package com.general {
 				txtConsole.scrollV = txtConsole.maxScrollV;
 				txtConsole.nLine ++;
 			} else if ( this.loaderInfo.parameters["FIREBUG"] ) {
-				navigateToURL( new URLRequest("javascript:console.log('" + msg + "');"), "_self" );
+				//navigateToURL( new URLRequest("javascript:console.log('" + msg + "');"), "_self" );
 				
 			} else if( !toConsole) {
 				trace(msg);

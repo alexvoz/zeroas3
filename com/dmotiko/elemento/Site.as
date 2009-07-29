@@ -77,7 +77,7 @@ package com.dmotiko.elemento {
 			if (nHeight < 650) nHeight == 650;
 			if( Site.getApp().getSWF_VAR("browser") ){
 				Site.log("Site.as | setSection | resize window");
-				//navigateToURL( new URLRequest( "javascript: setWindowSize(" + nHeight +")"), "_self");
+				navigateToURL( new URLRequest( "javascript: setWindowSize(" + nHeight +")"), "_self");
 			}
 		}
 		

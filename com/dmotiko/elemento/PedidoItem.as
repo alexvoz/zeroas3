@@ -28,6 +28,15 @@
 			removeChild(txtDescription);
 						
 			mcDelete.addEventListener( MouseEvent.CLICK, delete_item);
+			
+			if ( Site.getApp() ) {
+				Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
+			}
+		}
+		
+		private function lang_changed(e:Event):void 
+		{
+			if ( data ) refreshData();
 		}
 		
 		private function refresh_quant(e:Event):void 

@@ -13,35 +13,61 @@
 			var ci:CarritoItemData;
 			var cig:CarritoItemGroup;
 			var nY:int = 0;
-					
+			
+			var oEstampado:Object = { spanish: "Estampados", english: "Printed" };
+			var oEstampado34:Object = { spanish: "3/4 Estampado", english: "Knee High Printed" };
+			var oEstampado12:Object = { spanish: "Estampado 1/2 Caña", english: "Calf High printed" };
+			var oRay34:Object = { spanish: "3/4 Rayado", english: "Knee High Stripes" };
+			var oRay12:Object = { spanish: "Rayado 1/2 Caña", english: "Calf High Stripes" };
+			var oLiso:Object = { spanish: "Lisos", english: "Solid Colors" };
+			var oLiso34:Object = { spanish: "3/4 Liso", english: "Knee High Solid Colors" };
+			var oLisa:Object = { spanish: "Lisas", english: "Solid Colors" };
+			var oSoq:Object = { spanish: "Soquetes", english: "Low cut" };
+			var oSoqLiso:Object = { spanish: "Soquetes Lisas", english: "Low Cut solid colors" };
+			var oSoqEst:Object = { spanish: "Soquetes Estampado", english: "Low Cut printed" };
+			var oSoqMesh:Object = { spanish: "Soquete Mesh", english: "Low Cut mesh" };
+			var oClassic:Object = { spanish: "Clasicas", english: "Classic" };
+			var oModern:Object = { spanish: "Modernas", english: "Modern" };
+			var oRombo:Object = { spanish: "Rombos", english: "Argyle" };
+			var oRombo12:Object = { spanish: "Rombo 1/2 Caña", english: "Calf High Argyle" };
+			
+			var oDocena:Object = { spanish: "x docena", english: "x 12 units" };
+			var oDocMix:Object = { spanish: "(6 de varón y 6 de nena)", english: "(6 for boys, 6 for girls)" };
+			var oDocMisc:Object = { spanish: "(varios colores unisex, nena y varón)", english: "(various colors, unisex, for boys and girls)" };
+			var oDocRay:Object = { spanish: "(variedad de rayadas)", english: "(stripes, available in various colors)" };
+			var oDocRay2:Object = { spanish: "(variedad de rayadas, estampadas, lisas)", english: "(stripes, printed, solid colors)" };
+			var oDocBLW:Object = { spanish: "(de azul o docena de blanco)", english: "(blue or white)" };
+			var oDocBW:Object = { spanish: "(de negro, o docena de blanco)", english: "(black or white)" };
+			var oDocColors:Object = { spanish: "(varios colores)", english: "(diff. colors available)" };
+			
 			//grupo1
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Estampados");
-			ci.setDescription("x docena");
-			ci.setDescription2("(6 de varón y 6 de nena)");
+			ci.setName( oEstampado );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMix );
 			ci.setArticle("1011");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Lisos");
-			ci.setDescription("x docena");
-			ci.setDescription2("(varios colores unisex, nena y varón)");
+			ci.setName( oLiso );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMisc );
 			ci.setArticle("1850");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquetes");
-			ci.setDescription("x docena");
-			ci.setDescription2("(6 de varon y 6 de nena)");
+			ci.setName( oSoq );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMix );
 			ci.setArticle("104");
 			aData.push(ci);
 			
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
-			cig.setName("Bebe");
+			cig.setName( { spanish: "Bebes", english: "Babies" } );
 			cig.setColor( SiteColors.MEDIAS_BEBE );
 			cig.setHeader( new CSHMediaBebe() ); 
 			cig.setData( aData );
@@ -55,30 +81,30 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Estampados");
-			ci.setDescription("x docena");
-			ci.setDescription2("(6 de varón y 6 de nena)");
+			ci.setName( oEstampado );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMix );
 			ci.setArticle("1020");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Lisos");
-			ci.setDescription("x docena");
-			ci.setDescription2("(varios colores unisex, nena y varón)");
+			ci.setName( oLiso );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMisc );
 			ci.setArticle("1070");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquetes");
-			ci.setDescription("x docena");
-			ci.setDescription2("(6 de varón y 6 de nena)");
+			ci.setName( oSoq );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMix );
 			ci.setArticle("104");
 			aData.push(ci);
 			
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
-			cig.setName("Niños");
+			cig.setName( { spanish: "Niños", english: "Kids" } );
 			cig.setColor( SiteColors.MEDIAS_NENES );
 			cig.setHeader( new CSHMediaNenes() ); 
 			cig.setData( aData );
@@ -93,30 +119,30 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Estampados");
-			ci.setDescription("x docena");
-			ci.setDescription2("(6 de varón y 6 de nena)");
+			ci.setName( oEstampado );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMix );
 			ci.setArticle("1090");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Lisos");
-			ci.setDescription("x docena");
-			ci.setDescription2("(varios colores unisex, nena y varón)");
+			ci.setName( oLiso );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMisc );
 			ci.setArticle("1070");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquetes");
-			ci.setDescription("x docena");
-			ci.setDescription2("(6 de varon y 6 de nena)");
+			ci.setName( oSoq );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMix );
 			ci.setArticle("105");
 			aData.push(ci);
 			
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
-			cig.setName("Juvenil");
+			cig.setName( { spanish: "Juvenil", english: "Teens"} );
 			cig.setColor( SiteColors.MEDIAS_JUVENIL );
 			cig.setHeader( new CSHMediaJuvenil() ); 
 			cig.setData( aData );
@@ -132,16 +158,16 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Estampados");
-			ci.setDescription("x docena");
-			ci.setDescription2("(variedad de rayadas)");
+			ci.setName( oEstampado );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocRay );
 			ci.setArticle("205");
 			aData.push(ci);
 						
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
-			cig.setName("Bucanera");
+			cig.setName( { spanish: "Bucanera", english: "Thigh High" } );
 			cig.setColor( SiteColors.MEDIAS_BUCANERA );
 			cig.setHeader( new CSHMediaBucanera() ); 
 			cig.setData( aData );
@@ -155,16 +181,16 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Estampados");
-			ci.setDescription("x docena");
-			ci.setDescription2("(variedad de rayadas, estampadas, lisas)");
+			ci.setName( oEstampado );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocRay2 );
 			ci.setArticle("082");
 			aData.push(ci);
 						
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
-			cig.setName("Can Can");
+			cig.setName( { spanish: "Can Can", english: "Can Can" } );
 			cig.setColor( SiteColors.MEDIAS_CANCAN);
 			cig.setHeader( new CSHMediaCanCan() ); 
 			cig.setData( aData );
@@ -178,16 +204,16 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Lisas");
-			ci.setDescription("x docena");
-			ci.setDescription2("(de azul o docena de blanco)");
+			ci.setName( oLisa );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocBLW );
 			ci.setArticle("000");
 			aData.push(ci);
 						
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
-			cig.setName("Colegial");
+			cig.setName( { spanish: "Colegial", english: "School" } );
 			cig.setColor( SiteColors.MEDIAS_COLEGIAL);
 			cig.setHeader( new CSHMediaColegial() ); 
 			cig.setData( aData );
@@ -201,40 +227,41 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Clasicas");
-			ci.setDescription("x docena");
+						
+			ci.setName( oClassic );
+			ci.setDescription( oDocena );
 			ci.setArticle("950");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Modernas");
-			ci.setDescription("x docena");
+			ci.setName( oModern );
+			ci.setDescription( oDocena );
 			ci.setArticle("951");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Rombos");
-			ci.setDescription("x docena");
+			ci.setName( oRombo );
+			ci.setDescription( oDocena );
 			ci.setArticle("952");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquetes");
-			ci.setDescription("x docena");
+			ci.setName( oSoq );
+			ci.setDescription( oDocena );
 			ci.setArticle("102");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquetes Lisas");
-			ci.setDescription("x docena");
-			ci.setDescription2("(varios colores)");
+			ci.setName( oSoqLiso );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocColors );
 			ci.setArticle("000");
 			aData.push(ci);
 			
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
-			cig.setName("Hombre");
+			cig.setName( { spanish: "Hombre", english: "Men" } );
 			cig.setColor( SiteColors.MEDIAS_HOMBRE);
 			cig.setHeader( new CSHMediaHombre() ); 
 			cig.setData( aData );
@@ -248,93 +275,94 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("3/4 Estampado");
-			ci.setDescription("x docena");
+						
+			ci.setName( oEstampado34 );
+			ci.setDescription( oDocena );
 			ci.setArticle("204");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("3/4 Rayado");
-			ci.setDescription("x docena");
+			ci.setName( oRay34 );
+			ci.setDescription( oDocena );
 			ci.setArticle("203");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("3/4 Liso");
-			ci.setDescription("x docena");
-			ci.setDescription2("(varios colores)");
+			ci.setName( oLiso34 );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocColors );
 			ci.setArticle("203");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("3/4 Estampado");
-			ci.setDescription("x docena");
-			ci.setDescription2("(de negro, o docena de blanco)");
+			ci.setName( oEstampado34 );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocBW );
 			ci.setArticle("203");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Estampado 1/2 Caña");
+			ci.setName( oEstampado12 );
 			ci.setDescription("x docena");
 			ci.setArticle("202");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Rayado 1/2 Caña");
-			ci.setDescription("x docena");
+			ci.setName( oRay12 );
+			ci.setDescription( oDocena );
 			ci.setArticle("200");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Rombo 1/2 Caña");
-			ci.setDescription("x docena");
+			ci.setName( oRombo12 );
+			ci.setDescription( oDocena );
 			ci.setArticle("206");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Liso");
-			ci.setDescription("x docena");
-			ci.setDescription2("(varios colores)");
+			ci.setName( oLiso );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocColors );
 			ci.setArticle("201");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Liso");
-			ci.setDescription("x docena");
-			ci.setDescription2("(de negro, o docena de blanco)");
+			ci.setName( oLiso );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocBW );
 			ci.setArticle("201");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquete Estampado");
-			ci.setDescription("x docena");
+			ci.setName( oSoqEst );
+			ci.setDescription( oDocena );
 			ci.setArticle("101");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquete Liso");
-			ci.setDescription("x docena");
-			ci.setDescription2("(varios colores)");
+			ci.setName( oSoqLiso );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocColors );
 			ci.setArticle("101");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquete Liso");
-			ci.setDescription("x docena");
-			ci.setDescription2("(de blanco o docena de negro)");
+			ci.setName( oSoqLiso );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocBW );
 			ci.setArticle("101");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Soquete Mesh");
-			ci.setDescription("x docena");
+			ci.setName( oSoqMesh );
+			ci.setDescription( oDocena );
 			ci.setArticle("101");
 			aData.push(ci);
 						
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
-			cig.setName("Mujer");
+			cig.setName( { spanish: "Mujer", english: "Women" } );
 			cig.setColor( SiteColors.MEDIAS_MUJER);
 			cig.setHeader( new CSHMediaMujer() ); 
 			cig.setData( aData );

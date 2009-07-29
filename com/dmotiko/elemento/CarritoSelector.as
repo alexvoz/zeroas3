@@ -21,8 +21,13 @@
 		private var activeCarrito:CarritoTemplate;
 		
 		override protected function initClip():void {
-			mcMedias.setData( { label: "medias" } );
-			mcRopa.setData( { label: "ropa" } );
+			if ( Site.getApp() && Site.getApp().getLanguage() != Site.SPANISH ) {
+				mcMedias.setData( { label: "stockings" } );
+				mcRopa.setData( { label: "clothes" } );
+			} else {
+				mcMedias.setData( { label: "medias" } );
+				mcRopa.setData( { label: "ropa" } );
+			}
 			
 			carritoMedias = new CarritoMedias();
 			carritoRopa = new CarritoRopa();
@@ -41,12 +46,25 @@
 			
 			if (Site.getApp()) {
 				Site.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
+				Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, section_changed);
+				section_changed( undefined );
 			}
 		}
 		
 		private function section_changed(e:Event):void 
 		{
-			return;
+			//return;
+			if ( Site.getApp().getLanguage() == Site.SPANISH ) {
+				gotoAndStop(1);
+				mcMedias.setData( { label: "medias" } );
+				mcRopa.setData( { label: "ropa" } );
+			} else {
+				gotoAndStop(2);
+				mcMedias.setData( { label: "stockings" } );
+				mcRopa.setData( { label: "clothes" } );
+			}
+			mcRopa.x = mcMedias.getBounds(this).right;
+			
 			if( Site.getApp().getSection() != Site.CARRITO ){
 				var nHeight:Number = Site.getApp().height;
 				if (nHeight < 650) nHeight == 650;

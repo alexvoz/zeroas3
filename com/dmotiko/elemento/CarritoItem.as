@@ -25,6 +25,15 @@
 			removeChild(txtDescription2);
 			
 			addEventListener( MouseEvent.CLICK, toggle_active);
+			
+			if ( Site.getApp() ) {
+				Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
+			}
+		}
+		
+		private function lang_changed(e:Event):void 
+		{
+			if( data ) refreshData();
 		}
 		
 		private function toggle_active(e:MouseEvent):void {

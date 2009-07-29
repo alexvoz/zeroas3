@@ -7,7 +7,7 @@
 	extends BaseMenu {
 		
 		private var nColor:int;
-		private var _sName:String;
+		private var _oName:Object;
 		private var spHeader:MovieClip;
 				
 		override protected function initClip():void {
@@ -41,7 +41,7 @@
 			for ( var i:int = 0; i < oData.length; i++) {
 				var item:BaseMenuBtn = new view();
 				(oData[i] as CarritoItemData).setColor( this.nColor );
-				(oData[i] as CarritoItemData).setParentName( this._sName );
+				(oData[i] as CarritoItemData).setParentName( this._oName );
 				item.setData( oData[i] );
 				item.addEventListener( MouseEvent.CLICK, activeBtn );
 				aBtns.push(item);
@@ -61,11 +61,14 @@
 			this.dispatchEvent( new Event( Event.COMPLETE ) );
 		}
 		
-		public function getName():String { return _sName; }
+		public function getName():String { 
+			if ( Site.getApp().getLanguage() == Site.SPANISH) return _oName.spanish; 
+			else return _oName.english;
+		}
 		
-		public function setName(value:String):void 
+		public function setName(value:Object):void 
 		{
-			_sName = value;
+			_oName = value;
 		}
 		
 	}

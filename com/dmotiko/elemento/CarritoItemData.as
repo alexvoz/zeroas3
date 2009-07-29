@@ -6,10 +6,10 @@
 		
 		private var _ID:int;
 		private var _nColor:int;
-		private var _sName:String;
-		private var _sParentName:String;
-		private var _sDescription:String;
-		private var _sDescription2:String;
+		private var _oName:Object;
+		private var _oParentName:Object;
+		private var _oDescription:Object;
+		private var _oDescription2:Object;
 		private var _sArticle:String;
 		private var _nQuant:int;
 		
@@ -29,22 +29,41 @@
 			_nColor = value;
 		}
 		
-		public function getName():String { return _sName; }
-		
-		public function setName(value:String):void {
-			_sName = value;
+		public function getName():String { 
+			if ( Site.getApp().getLanguage() == Site.SPANISH) return _oName.spanish; 
+			else return _oName.english;
 		}
 		
-		public function getDescription():String { return _sDescription; }
-		
-		public function setDescription(value:String):void {
-			_sDescription = value;
+		public function setName(value:Object):void {
+			if ( value is String ) {
+				_oName = { spanish: value, english: value };
+			} else {
+				_oName = value;
+			}
 		}
 		
-		public function getDescription2():String { return _sDescription2; }
+		public function getDescription():String { 
+			if ( ! _oDescription ) return undefined;
+			if ( Site.getApp().getLanguage() == Site.SPANISH) return _oDescription.spanish; 
+			else return _oDescription.english;
+		}
 		
-		public function setDescription2(value:String):void {
-			_sDescription2 = value;
+		public function setDescription(value:Object):void {
+			if ( value is String ) {
+				_oDescription = { spanish: value, english: value };
+			} else {
+				_oDescription = value;
+			}
+		}
+		
+		public function getDescription2():String { 
+			if ( ! _oDescription2 ) return undefined;
+			if ( Site.getApp().getLanguage() == Site.SPANISH) return _oDescription2.spanish; 
+			else return _oDescription2.english;
+		}
+		
+		public function setDescription2(value:Object):void {
+			_oDescription2 = value;
 		}
 		
 		public function getArticle():String { return _sArticle; }
@@ -59,12 +78,15 @@
 			_ID = value;
 		}
 				
-		public function setParentName(value:String):void {
+		public function setParentName(value:Object):void {
 			//Site.log( "CarritoItemData | setParentName= " + value);
-			_sParentName = value;
+			_oParentName = value;
 		}
 		
-		public function getParentName():String { return _sParentName; }
+		public function getParentName():String { 
+			if ( Site.getApp().getLanguage() == Site.SPANISH) return _oParentName.spanish; 
+			else return _oParentName.english;
+		}
 		
 		public function getQuant():int { return _nQuant; }
 		

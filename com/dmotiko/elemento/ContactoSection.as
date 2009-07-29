@@ -26,7 +26,7 @@
 			var nFrame:int;
 			if ( Site.getApp().getSection() == Site.CONTACTO) {
 				nFrame = 2;
-				if ( Site.getApp().getLanguage() != Site.SPANISH ) nFrame = 3;
+				if ( Site.getApp().getLanguage() != Site.SPANISH ) nFrame = 4;
 			} else {
 				nFrame = 1;
 			}

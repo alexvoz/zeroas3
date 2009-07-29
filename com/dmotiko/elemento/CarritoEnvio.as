@@ -19,8 +19,15 @@
 		public var errorMail:Sprite;
 				
 		override protected function initClip():void {
-			mcEnviar.setData( { label: "enviar" } );
-			mcBorrar.setData( { label: "borrar" } );
+			if ( Site.getApp() && Site.getApp().getLanguage() != Site.SPANISH ) {
+				gotoAndStop(2);
+				mcEnviar.setData( { label: "submit" } );
+				mcBorrar.setData( { label: "reset" } );
+			} else {
+				gotoAndStop(1);
+				mcEnviar.setData( { label: "enviar" } );
+				mcBorrar.setData( { label: "borrar" } );	
+			}
 			mcBorrar.addEventListener( MouseEvent.CLICK, erase_fields);
 			mcEnviar.addEventListener( MouseEvent.CLICK, send_mail);
 			erase_fields(undefined);
@@ -38,6 +45,24 @@
 			inputMail.tabIndex = 4;
 			mcEnviar.tabIndex = 5;
 			mcBorrar.tabIndex = 6;
+			
+			if ( Site.getApp() ) {
+				Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
+				lang_changed(undefined);
+			}
+		}
+		
+		private function lang_changed(e:Event):void 
+		{
+			if ( Site.getApp().getLanguage() == Site.SPANISH ) {
+				gotoAndStop(1);
+				mcEnviar.setData( { label: "enviar" } );
+				mcBorrar.setData( { label: "borrar" } );
+			} else {
+				gotoAndStop(2);
+				mcEnviar.setData( { label: "submit" } );
+				mcBorrar.setData( { label: "reset" } );
+			}
 		}
 		
 		public function collectVars():Object {

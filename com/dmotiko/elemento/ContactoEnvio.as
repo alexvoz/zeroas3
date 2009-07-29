@@ -19,8 +19,14 @@
 		public var errorComment:Sprite;
 				
 		override protected function initClip():void {
-			mcEnviar.setData( { label: "enviar" } );
-			mcBorrar.setData( { label: "borrar" } );
+			if ( Site.getApp() && Site.getApp().getLanguage() != Site.SPANISH ) {
+				mcEnviar.setData( { label: "submit" } );
+				mcBorrar.setData( { label: "reset" } );
+			} else {
+				mcEnviar.setData( { label: "enviar" } );
+				mcBorrar.setData( { label: "borrar" } );	
+			}
+			
 			mcBorrar.addEventListener( MouseEvent.CLICK, erase_fields);
 			mcEnviar.addEventListener( MouseEvent.CLICK, send_mail);
 			erase_fields(undefined);

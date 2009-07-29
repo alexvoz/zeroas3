@@ -17,6 +17,22 @@
 			super.initClip();
 			setView( PedidoItem );
 			mcEnvio.addEventListener( Event.CHANGE, envio_changed );
+			
+			if ( Site.getApp() ) {
+				Site.getApp().addEventListener( WebSite.LANGUAGE_CHANGED, lang_changed);
+				lang_changed(undefined);
+			}
+		}
+		
+		private function lang_changed(e:Event):void 
+		{
+			if ( Site.getApp().getLanguage() == Site.SPANISH ) {
+				gotoAndStop(1);
+				
+			} else {
+				gotoAndStop(2);
+				
+			}
 		}
 		
 		private function envio_changed(e:Event):void 
