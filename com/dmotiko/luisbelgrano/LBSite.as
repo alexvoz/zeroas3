@@ -14,6 +14,9 @@
 		public static const PORTFOLIO:String = "LBSITE_PORTFOLIO";
 		public static const CONTACTO:String = "LBSITE_CONTACTO";
 		
+		public static const SPANISH:String = "LBSITE_SPANISH";
+		public static const ENGLISH:String = "LBSITE_ENGLISH";
+		
 		//para evitar imports innecesarios
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
@@ -860,9 +863,9 @@
 			return aPortfolio;
 		}
 		
-		private var aPortfolio:Array;
-		private var mainClip:MovieClip;
-		private var portfolioLoader:LBDataLoader;
+		protected var aPortfolio:Array;
+		protected var mainClip:MovieClip;
+		protected var portfolioLoader:LBDataLoader;
 		
 		
 		public function LBSite() {
@@ -872,6 +875,7 @@
 			
 		override protected function loadExternalContent():void {
 			aPortfolio = dummyContent();
+			setLanguage( LBSite.SPANISH );
 			this.externalContentLoaded();
 			/*
 			portfolioLoader = new LBDataLoader("portfolio.xml");
