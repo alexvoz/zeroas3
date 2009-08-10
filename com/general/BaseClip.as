@@ -14,17 +14,26 @@
 		public static var CLIP_RESIZED:String = "baseclip_resized";
 		public static var CLIP_REFRESHDATA:String = "baseclip_refreshdata";
 				
+		protected var _ID:int;
 		protected var data:Object;
 		protected var tweens:Array;
 		protected var bShowed:Boolean;
 		protected var pSize:Point;
 		
+		private static var CLIP_ID:int = 0;
+				
+		private static function getNextID():int {
+			CLIP_ID++;
+			return CLIP_ID;
+		}
+		
 		public function BaseClip() {
 			super();
+			_ID = BaseClip.getNextID();
 			initClip();
 			var p:BaseClip = parent as BaseClip;
 			if ( p ) {
-				addEventListener( CLIP_LOADED, p.childLoaded );
+				addEventListener( CLIP_LOADED, p.childLoaded, false, 0, true );
 			}
 			function dispatch(evnt) {
 				removeEventListener( Event.ENTER_FRAME, dispatch );
