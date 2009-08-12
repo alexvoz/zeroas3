@@ -58,32 +58,32 @@
 			photo = new LBPortfolioPhoto(photoID as String, "Shopping mall gallery.", "", "portfolio/navidad/escobar/minis/N-E-2_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods, with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-3_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-3_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods, with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-4_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-4_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods, with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-5_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-5_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-5_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-5_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods, with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-6_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
+			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-6_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods, with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-7_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Details of Santa Claus´ house in the woods with the elfs that help him with presents.", "", "portfolio/navidad/escobar/minis/N-E-7_mini.jpg", "portfolio/navidad/escobar/zoom/N-E-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			
-			pItem = new LBPortfolioItemData(sectionID as String, "Escobar", aPhotos);
+			pItem = new LBPortfolioItemData(sectionID as String, "Portal Escobar", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 2 */
 			/*subitem 3*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Christmas cloth flags at the Mall gallery.", "", "portfolio/navidad/lomasCenter/minis/N-LC-1_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Christmas flags at the Mall gallery.", "", "portfolio/navidad/lomasCenter/minis/N-LC-1_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Dolphins in the fountain, with Christmas hats.", "", "portfolio/navidad/lomasCenter/minis/N-LC-2_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Dolphins in the fountain with Christmas hats.", "", "portfolio/navidad/lomasCenter/minis/N-LC-2_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Santa Claus´ forest, decorations details.", "", "portfolio/navidad/lomasCenter/minis/N-LC-3_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
@@ -92,7 +92,7 @@
 			photo = new LBPortfolioPhoto(photoID as String, "Signboard in Mall interior.", "", "portfolio/navidad/lomasCenter/minis/N-LC-4_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Christmas cloth flags at the Mall gallery.", "", "portfolio/navidad/lomasCenter/minis/N-LC-5_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-5_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Christmas flags at the Mall gallery.", "", "portfolio/navidad/lomasCenter/minis/N-LC-5_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-5_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Santa Claus´ forest, decorations details.", "", "portfolio/navidad/lomasCenter/minis/N-LC-6_mini.jpg", "portfolio/navidad/lomasCenter/zoom/N-LC-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
@@ -102,7 +102,7 @@
 			aPhotos.push(photo);
 			photoID++;
 						
-			pItem = new LBPortfolioItemData(sectionID as String, "Lomas Center", aPhotos);
+			pItem = new LBPortfolioItemData(sectionID as String, "Portal Lomas", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 3 */
@@ -142,13 +142,13 @@
 			/* end subItem 4 */
 			/*subitem 5*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "5 m Christmas tree.", "portfolio/navidad/parqueBrown/minis/N-PB-1_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "15 feet Christmas tree.", "portfolio/navidad/parqueBrown/minis/N-PB-1_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "Detail of the small animals in the woods.", "portfolio/navidad/parqueBrown/minis/N-PB-2_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "5 m Christmas tree.", "portfolio/navidad/parqueBrown/minis/N-PB-3_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "15 feet Christmas tree.", "portfolio/navidad/parqueBrown/minis/N-PB-3_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "Storefront decoration.", "portfolio/navidad/parqueBrown/minis/N-PB-4_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
@@ -160,10 +160,10 @@
 			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "Decorative signboard.", "portfolio/navidad/parqueBrown/minis/N-PB-6_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "Canopy and space decoration.", "portfolio/navidad/parqueBrown/minis/N-PB-7_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
+			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "Hanging Ribbons and space decoration.", "portfolio/navidad/parqueBrown/minis/N-PB-7_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "5 m Christmas tree.", "portfolio/navidad/parqueBrown/minis/N-PB-8_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-8_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photo = new LBPortfolioPhoto(photoID as String, '“Christmas Forest”', "15 feet Christmas tree.", "portfolio/navidad/parqueBrown/minis/N-PB-8_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-8_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, '"Santa Claus Vegetable Garden."', "View of the decorative stage setting.", "portfolio/navidad/parqueBrown/minis/N-PB-9_mini.jpg", "portfolio/navidad/parqueBrown/zoom/N-PB-9_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
@@ -191,16 +191,16 @@
 			/* end subItem 5 */
 			/*subitem 6*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, 'Pendant sledges.', "", "portfolio/navidad/plazaOeste/minis/N-PO-1_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, 'Flying sledges.', "", "portfolio/navidad/plazaOeste/minis/N-PO-1_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, 'Pendant sledges.', "", "portfolio/navidad/plazaOeste/minis/N-PO-2_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, 'Flying sledges.', "", "portfolio/navidad/plazaOeste/minis/N-PO-2_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, 'Pendant stars mobile.', "", "portfolio/navidad/plazaOeste/minis/N-PO-3_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, 'Pendant sledges.', "", "portfolio/navidad/plazaOeste/minis/N-PO-4_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, 'Flying sledges.', "", "portfolio/navidad/plazaOeste/minis/N-PO-4_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, 'Santa Claus´ house with snow.', "", "portfolio/navidad/plazaOeste/minis/N-PO-5_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-5_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
@@ -212,12 +212,12 @@
 			photo = new LBPortfolioPhoto(photoID as String, 'Detail of landscape in the back and mill.', "", "portfolio/navidad/plazaOeste/minis/N-PO-7_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, 'Pendant sledges.', "", "portfolio/navidad/plazaOeste/minis/N-PO-8_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-8_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
+			photo = new LBPortfolioPhoto(photoID as String, 'Flying sledges.', "", "portfolio/navidad/plazaOeste/minis/N-PO-8_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-8_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
 			aPhotos.push(photo);
 			photoID++;photo = new LBPortfolioPhoto(photoID as String, 'Mobile with Christmas ornaments.', "", "portfolio/navidad/plazaOeste/minis/N-PO-9_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-9_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photoID++;photo = new LBPortfolioPhoto(photoID as String, 'Christmas banner with Christmas motive.', "", "portfolio/navidad/plazaOeste/minis/N-PO-10_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-10_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photoID++;photo = new LBPortfolioPhoto(photoID as String, 'Banner with Christmas motive.', "", "portfolio/navidad/plazaOeste/minis/N-PO-10_mini.jpg", "portfolio/navidad/plazaOeste/zoom/N-PO-10_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
 						
@@ -230,7 +230,7 @@
 			photo = new LBPortfolioPhoto(photoID as String, 'Columns decorated with Christmas banners.', "", "portfolio/navidad/quilmes/minis/N-Q-1_mini.jpg", "portfolio/navidad/quilmes/zoom/N-Q-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, 'Santa Claus hanging from a cloth.', "", "portfolio/navidad/quilmes/minis/N-Q-2_mini.jpg", "portfolio/navidad/quilmes/zoom/N-Q-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
+			photo = new LBPortfolioPhoto(photoID as String, 'Santa Claus hanging.', "", "portfolio/navidad/quilmes/minis/N-Q-2_mini.jpg", "portfolio/navidad/quilmes/zoom/N-Q-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_SQUARE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, 'Columns decorated with Christmas banners.', "", "portfolio/navidad/quilmes/minis/N-Q-3_mini.jpg", "portfolio/navidad/quilmes/zoom/N-Q-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
@@ -240,20 +240,20 @@
 			aPhotos.push(photo);
 			photoID++;
 									
-			pItem = new LBPortfolioItemData(sectionID as String, "Quilmes", aPhotos);
+			pItem = new LBPortfolioItemData(sectionID as String, "Factory Quilmes", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 7 */
 			/*subitem 8*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, '"Santa Claus" Cabin in the woods. Portal de Rosario Shopping Mall.', "", "portfolio/navidad/rosario/minis/N-R-1_mini.jpg", "portfolio/navidad/rosario/zoom/N-R-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
+			photo = new LBPortfolioPhoto(photoID as String, '"Santa Claus" Cabin in the woods.', "", "portfolio/navidad/rosario/minis/N-R-1_mini.jpg", "portfolio/navidad/rosario/zoom/N-R-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_VERTICAL);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, '"Santa Claus" Cabin in the woods. Portal de Rosario Shopping Mall.', "", "portfolio/navidad/rosario/minis/N-R-2_mini.jpg", "portfolio/navidad/rosario/zoom/N-R-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, '"Santa Claus" Cabin in the woods.', "", "portfolio/navidad/rosario/minis/N-R-2_mini.jpg", "portfolio/navidad/rosario/zoom/N-R-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 												
-			pItem = new LBPortfolioItemData(sectionID as String, "Rosario", aPhotos);
+			pItem = new LBPortfolioItemData(sectionID as String, "Portal Rosario", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 8 */
@@ -451,10 +451,10 @@
 			photo = new LBPortfolioPhoto(photoID as String, "F1 Ferrari car for the CASE stand at Expo Chacra.", "", "portfolio/marketing/minis/M-4_mini.jpg", "portfolio/marketing/zoom/M-4_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Figurines for Christian Lacroix window display.", "", "portfolio/marketing/minis/M-5_mini.jpg", "portfolio/marketing/zoom/M-5_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Figurine for Christian Lacroix window display.", "", "portfolio/marketing/minis/M-5_mini.jpg", "portfolio/marketing/zoom/M-5_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Figurines for Christian Lacroix window display.", "", "portfolio/marketing/minis/M-6_mini.jpg", "portfolio/marketing/zoom/M-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Figurine for Christian Lacroix window display.", "", "portfolio/marketing/minis/M-6_mini.jpg", "portfolio/marketing/zoom/M-6_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Christmas decoration for Paula Cahen D´Anvers window display.", "", "portfolio/marketing/minis/M-7_mini.jpg", "portfolio/marketing/zoom/M-7_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
@@ -537,13 +537,13 @@
 			
 			/*subitem 2*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Objects for Dibu III stage setting.", "", "portfolio/escenografias/dibu/minis/E-D-1_mini.jpg", "portfolio/escenografias/dibu/zoom/E-D-1_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Objects for Dibu III stage design.", "", "portfolio/escenografias/dibu/minis/E-D-1_mini.jpg", "portfolio/escenografias/dibu/zoom/E-D-1_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Objects for Dibu III stage setting.", "", "portfolio/escenografias/dibu/minis/E-D-2_mini.jpg", "portfolio/escenografias/dibu/zoom/E-D-2_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Objects for Dibu III stage design.", "", "portfolio/escenografias/dibu/minis/E-D-2_mini.jpg", "portfolio/escenografias/dibu/zoom/E-D-2_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Objects for Dibu III stage setting.", "", "portfolio/escenografias/dibu/minis/E-D-3_mini.jpg", "portfolio/escenografias/dibu/zoom/E-D-3_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Objects for Dibu III stage design.", "", "portfolio/escenografias/dibu/minis/E-D-3_mini.jpg", "portfolio/escenografias/dibu/zoom/E-D-3_zoom.png", "", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 						
@@ -554,10 +554,10 @@
 			
 			/*subitem 3*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Painting and objects for stage setting of 'Sin Complejos' TV program, Channel 13, Arg.", "", "portfolio/escenografias/varios/minis/E-V-1_mini.jpg", "portfolio/escenografias/varios/zoom/E-V-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Painting and objects for stage design of 'Sin Complejos' TV program, Channel 13, Arg.", "", "portfolio/escenografias/varios/minis/E-V-1_mini.jpg", "portfolio/escenografias/varios/zoom/E-V-1_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "Painting and objects for stage setting of 'Sin Complejos' TV program, Channel 13, Arg.", "", "portfolio/escenografias/varios/minis/E-V-2_mini.jpg", "portfolio/escenografias/varios/zoom/E-V-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
+			photo = new LBPortfolioPhoto(photoID as String, "Painting and objects for stage design of 'Sin Complejos' TV program, Channel 13, Arg.", "", "portfolio/escenografias/varios/minis/E-V-2_mini.jpg", "portfolio/escenografias/varios/zoom/E-V-2_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Mural of Lipchestein paintings for cable TV program.", "", "portfolio/escenografias/varios/minis/E-V-3_mini.jpg", "portfolio/escenografias/varios/zoom/E-V-3_zoom.jpg", "", LBPortfolioPhoto.PHOTO_WIDE);
@@ -575,7 +575,7 @@
 			sectionID++;
 			/* end subItem 3 */
 			
-			pItem = new LBPortfolioItemData(sectionID as String, "Stage settings", aPhotos, aSubItems);
+			pItem = new LBPortfolioItemData(sectionID as String, "Stage design", aPhotos, aSubItems);
 			aArtesAplicadas.push(pItem);
 			sectionID++;
 			
@@ -590,25 +590,25 @@
 			
 			/*subitem 1*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, 'At the Station – 2000', "Oil on fiber 0,70 m x 0,70 m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-1_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-1_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'At the Station - 2000', "Oil on fiber 0,70 m x 0,70 m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-1_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-1_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, 'Graphics fallen into Disuse - 2000', "Oil on fiber - 0.70m x 0.70m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-2_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Abandond Grafhics - 2000', "Oil on fiber - 0.70m x 0.70m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-2_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, 'Nocturnal in red - 2000', "Oil on fiber - 1.15m x 0.37m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-3_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-3_zoom.png", "portfolio/pintura/expoCentroCulturalSanTelmo/megaZoom/P-ECST-3_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, 'Preceding Landscape  - 2000', "Oil on canvas - 1.20m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-4_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-4_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Previous Landscape  - 2000', "Oil on canvas - 1.20m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-4_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-4_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, 'Red River - 2000', "Oil on canvas - 1.15m x 0.37m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-5_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-5_zoom.png", "portfolio/pintura/expoCentroCulturalSanTelmo/megaZoom/P-ECST-5_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, 'Signs - 1999', "Oil on canvas - 1.00m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-6_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Signals - 1999', "Oil on canvas - 1.00m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-6_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-6_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, 'Signs in the Sky - 1999', "Oil on canvas - 1.20m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-7_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-7_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, 'Signals in the Sky - 1999', "Oil on canvas - 1.20m x 1.00m", "portfolio/pintura/expoCentroCulturalSanTelmo/minis/P-ECST-7_mini.jpg", "portfolio/pintura/expoCentroCulturalSanTelmo/zoom/P-ECST-7_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 						
@@ -618,7 +618,7 @@
 			/* end subItem 1 */
 			/*subitem 2*/
 			aPhotos = new Array();
-			photo = new LBPortfolioPhoto(photoID as String, "Open Neighborhood - 2000", "Oil on fiber - 0.80m x 0.26m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-1_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-1_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Opened Neighborhood - 2000", "Oil on fiber - 0.80m x 0.26m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-1_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-1_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Custodians of Hell - 2000", "Oil on fiber - 0.55m x 0.19m", "portfolio/pintura/expoMuseoPueyrredon/minis/P-EMP-2_mini.jpg", "portfolio/pintura/expoMuseoPueyrredon/zoom/P-EMP-2_zoom.png", "portfolio/pintura/expoMuseoPueyrredon/megaZoom/P-EMP-2_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
@@ -692,7 +692,7 @@
 			photo = new LBPortfolioPhoto(photoID as String, "The Fall of the Guardian Angel - 2000", "Oil on fiber - 0.55m x 0.19m", "portfolio/pintura/otros/minis/P-O-1_mini.jpg", "portfolio/pintura/otros/zoom/P-O-1_zoom.png", "portfolio/pintura/otros/megaZoom/P-O-1_megazoom.jpg", LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
-			photo = new LBPortfolioPhoto(photoID as String, "The Nap - 1995", "Oil on canvas - 0.50m x 0.40m", "portfolio/pintura/otros/minis/P-O-2_mini.jpg", "portfolio/pintura/otros/zoom/P-O-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
+			photo = new LBPortfolioPhoto(photoID as String, "Afternoon Break - 1995", "Oil on canvas - 0.50m x 0.40m", "portfolio/pintura/otros/minis/P-O-2_mini.jpg", "portfolio/pintura/otros/zoom/P-O-2_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);
 			aPhotos.push(photo);
 			photoID++;
 			photo = new LBPortfolioPhoto(photoID as String, "Interior Space - 1995", "Oil on canvas - 1.00m x 0.80m", "portfolio/pintura/otros/minis/P-O-3_mini.jpg", "portfolio/pintura/otros/zoom/P-O-3_zoom.png", undefined, LBPortfolioPhoto.PHOTO_TRANSPARENT);

@@ -81,7 +81,7 @@
 			aPhotos.push(photo);
 			photoID++;
 			
-			pItem = new LBPortfolioItemData(sectionID as String, "Escobar", aPhotos);
+			pItem = new LBPortfolioItemData(sectionID as String, "Portal Escobar", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 2 */
@@ -109,7 +109,7 @@
 			aPhotos.push(photo);
 			photoID++;
 						
-			pItem = new LBPortfolioItemData(sectionID as String, "Lomas Center", aPhotos);
+			pItem = new LBPortfolioItemData(sectionID as String, "Portal Lomas", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 3 */
@@ -247,7 +247,7 @@
 			aPhotos.push(photo);
 			photoID++;
 									
-			pItem = new LBPortfolioItemData(sectionID as String, "Quilmes", aPhotos);
+			pItem = new LBPortfolioItemData(sectionID as String, "Factory Quilmes", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 7 */
@@ -260,7 +260,7 @@
 			aPhotos.push(photo);
 			photoID++;
 												
-			pItem = new LBPortfolioItemData(sectionID as String, "Rosario", aPhotos);
+			pItem = new LBPortfolioItemData(sectionID as String, "Portal Rosario", aPhotos);
 			aSubItems.push(pItem);
 			sectionID++;
 			/* end subItem 8 */
