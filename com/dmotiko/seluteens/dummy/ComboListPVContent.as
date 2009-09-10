@@ -11,6 +11,7 @@
 	public class ComboListPVContent
 	extends BaseClip {
 				
+		public var mcProximamente:ComboItemPV;
 		public var mcExclusivos:ComboItemPV;
 		public var mcCapitalFederal:ComboItemPV;
 		public var mcGbaNorte:ComboItemPV;
@@ -38,6 +39,10 @@
 				child.alpha = 1;
 				
 				switch(child) {
+					case mcProximamente:
+					child.setData( { label: "Proximamente", id: "PROXIMAMENTE" } );
+					break;
+					
 					case mcExclusivos:
 					child.setData( { label: "Locales Exclusivos", id: "EXCLUSIVOS" } );
 					break;

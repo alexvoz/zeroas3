@@ -20,7 +20,7 @@
 			
 			//inicializo los clips
 			mcCombo.addEventListener( Event.CHANGE, menu_changed );
-			mcCombo.setData( { label: "Locales Exclusivos", id: "EXCLUSIVOS" } );
+			mcCombo.setData( { label: "Proximamente", id: "PROXIMAMENTE" } );
 		}
 		
 		private function menu_changed(e:Event):void {
