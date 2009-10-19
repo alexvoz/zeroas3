@@ -13,8 +13,6 @@
 		public var mcRINene:SimpleButton;
 		public var btnRINena:SimpleButton;
 		public var btnRITeen:SimpleButton;
-		public var btnRemeraNene:SimpleButton;
-		public var btnRemeraNena:SimpleButton;
 		
 		public var mcLoader:MovieClip;
 		
@@ -66,17 +64,7 @@
 					sContent = "ropa_intTeens";
 					nFrame = 7;
 					break;
-					
-					case Site.ROPA_REMERA_NENE:
-					sContent = "ropa_remeraNene";
-					nFrame = 8;
-					break;
-					
-					case Site.ROPA_REMERA_NENA:
-					sContent = "ropa_remeraNena";
-					nFrame = 9;
-					break;
-					
+										
 				}
 				
 				parent.parent.setChildIndex( parent, parent.parent.numChildren -1);
@@ -86,7 +74,7 @@
 				var bL:Boolean = Site.getApp().getLanguage() == Site.SPANISH;
 				if (!bL) {
 					sContent += "_eng";
-					nFrame += 9;
+					nFrame += 7;
 				}
 				sContent += ".swf";
 				
@@ -148,13 +136,6 @@
 				sSection = Site.ROPA_INT_TEENS;
 				break;
 				
-				case btnRemeraNene:
-				sSection = Site.ROPA_REMERA_NENE;
-				break;
-				
-				case btnRemeraNena:
-				sSection = Site.ROPA_REMERA_NENA;
-				break;
 			}
 			Site.getApp().setSection( sSection );
 		}

@@ -7,14 +7,12 @@
 	public class MediasTemplate
 	extends BaseClip {
 		
-		public var mcNinos:SimpleButton;
 		public var mcBebe:SimpleButton;
-		public var mcBucanera:SimpleButton;
+		public var mcNino:SimpleButton;
 		public var mcJuvenil:SimpleButton;
-		public var mcCanCan:SimpleButton;
-		public var mcColegial:SimpleButton;
 		public var mcHombre:SimpleButton;
 		public var mcDama:SimpleButton;
+		public var mcInblack:SimpleButton;
 		
 		public var mcLoader:MovieClip;
 		
@@ -38,13 +36,14 @@
 						
 			if ( sSection.indexOf(Site.MEDIAS) > -1 && sSection != Site.MEDIAS) {
 				switch( sSection ) {
-					case Site.MEDIAS_NENES:
-					sContent = "medias_nene";
+										
+					case Site.MEDIAS_BEBES:
+					sContent = "medias_bebe";
 					nFrame = 2;
 					break;
 					
-					case Site.MEDIAS_BEBES:
-					sContent = "medias_bebe";
+					case Site.MEDIAS_NENES:
+					sContent = "medias_nene";
 					nFrame = 3;
 					break;
 					
@@ -53,30 +52,21 @@
 					nFrame = 4;
 					break;
 					
-					case Site.MEDIAS_BUCANERAS:
-					sContent = "medias_bucanera";
+					case Site.MEDIAS_INBLACK:
+					sContent = "medias_inblack";
 					nFrame = 5;
-					break;
-					
-					case Site.MEDIAS_CANCAN:
-					sContent = "medias_cancan";
-					nFrame = 6;
-					break;
-					
-					case Site.MEDIAS_COLEGIAL:
-					sContent = "medias_colegial";
-					nFrame = 7;
 					break;
 					
 					case Site.MEDIAS_HOMBRE:
 					sContent = "medias_hombre";
-					nFrame = 8;
+					nFrame = 6;
 					break;
 					
 					case Site.MEDIAS_MUJER:
 					sContent = "medias_mujer";
-					nFrame = 9;
+					nFrame = 7;
 					break;
+									
 				}
 				
 				parent.parent.setChildIndex( parent, parent.parent.numChildren -1);
@@ -85,7 +75,7 @@
 				var bL:Boolean = Site.getApp().getLanguage() == Site.SPANISH;
 				if (!bL) {
 					sContent += "_eng";
-					nFrame += 9;
+					nFrame += 7;
 				}
 				sContent += ".swf";
 				
@@ -94,6 +84,7 @@
 				if (sContent) {
 					mcLoader.gotoAndPlay(2);
 					contentLoader.contentLoaderInfo.addEventListener( Event.INIT, content_loaded );
+					//Site.log( "MediasTemplate | load= " + sContent );
 					contentLoader.load( new URLRequest( sContent ) );
 					if(!contains(contentLoader) ) addChild(contentLoader);
 				}			
@@ -120,31 +111,20 @@
 		}
 		
 		private function set_section(e:MouseEvent):void {
-			//Site.log("MediasTemplate | set_section");
+			//Site.log("MediasTemplate | set_section " + e.currentTarget);
+			
 			var sSection:String;
 			switch( e.currentTarget ) {
-				case mcNinos:
+				case mcNino:
 				sSection = Site.MEDIAS_NENES;
 				break;
 				
 				case mcBebe:
 				sSection = Site.MEDIAS_BEBES;
 				break;
-				
-				case mcBucanera:
-				sSection = Site.MEDIAS_BUCANERAS;
-				break;
-				
+								
 				case mcJuvenil:
 				sSection = Site.MEDIAS_JUVENILES;
-				break;
-				
-				case mcCanCan:
-				sSection = Site.MEDIAS_CANCAN;
-				break;
-				
-				case mcColegial:
-				sSection = Site.MEDIAS_COLEGIAL;
 				break;
 				
 				case mcHombre:
@@ -153,6 +133,10 @@
 				
 				case mcDama:
 				sSection = Site.MEDIAS_MUJER;
+				break;
+				
+				case mcInblack:
+				sSection = Site.MEDIAS_INBLACK;
 				break;
 			}
 			Site.getApp().setSection( sSection );

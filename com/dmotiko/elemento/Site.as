@@ -14,14 +14,12 @@ package com.dmotiko.elemento {
 		public static var NOSOTROS:String = "ELEMENTO_NOSOTROS";
 		
 		public static var MEDIAS:String = "ELEMENTO_MEDIAS";
-		public static var MEDIAS_NENES:String = "ELEMENTO_MEDIAS_NENES";
 		public static var MEDIAS_BEBES:String = "ELEMENTO_MEDIAS_BEBES";
+		public static var MEDIAS_NENES:String = "ELEMENTO_MEDIAS_NENES";
 		public static var MEDIAS_JUVENILES:String = "ELEMENTO_MEDIAS_JUVENILES";
-		public static var MEDIAS_BUCANERAS:String = "ELEMENTO_MEDIAS_BUCANERAS";
-		public static var MEDIAS_CANCAN:String = "ELEMENTO_MEDIAS_CANCAN";
-		public static var MEDIAS_COLEGIAL:String = "ELEMENTO_MEDIAS_COLEGIAL";
 		public static var MEDIAS_HOMBRE:String = "ELEMENTO_MEDIAS_HOMBRE";
 		public static var MEDIAS_MUJER:String = "ELEMENTO_MEDIAS_MUJER";
+		public static var MEDIAS_INBLACK:String = "ELEMENTO_MEDIAS_INBLACK";
 		
 		public static var ROPA:String = "ELEMENTO_ROPA";		
 		public static var ROPA_PIJAMA_NENE:String = "ELEMENTO_ROPA_PIJAMA_NENE";
@@ -30,9 +28,7 @@ package com.dmotiko.elemento {
 		public static var ROPA_INT_NENE:String = "ELEMENTO_ROPA_INT_NENE";
 		public static var ROPA_INT_NENA:String = "ELEMENTO_ROPA_INT_NENA";
 		public static var ROPA_INT_TEENS:String = "ELEMENTO_ROPA_INT_TEENS";
-		public static var ROPA_REMERA_NENE:String = "ELEMENTO_ROPA_REMERA_NENE";
-		public static var ROPA_REMERA_NENA:String = "ELEMENTO_ROPA_REMERA_NENA";
-		
+				
 		public static var CARRITO:String = "ELEMENTO_CARRITO";
 		public static var CONTACTO:String = "ELEMENTO_CONTACTO";
 		

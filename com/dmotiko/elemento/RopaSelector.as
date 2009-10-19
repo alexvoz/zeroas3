@@ -13,14 +13,12 @@
 			nSpace = 10;
 			setView( SectionBtn );
 			var aSections:Array = new Array();
-			aSections.push( { img: caratulaPijamaNene, initX: -12, endX: 0, value: Site.ROPA_PIJAMA_NENE } );
-			aSections.push( { img: caratulaPijamaNena, initX: -111, endX: 0, value: Site.ROPA_PIJAMA_NENA } );
-			aSections.push( { img: caratulaPijamaTeens, initX: -79, endX: 0, value: Site.ROPA_PIJAMA_TEENS } );
-			aSections.push( { img: caratulaRopIntNene, initX: -127, endX: 0, value: Site.ROPA_INT_NENE } );
-			aSections.push( { img: caratulaRopIntNena, initX: -8, endX: 0, value: Site.ROPA_INT_NENA } );
+			aSections.push( { img: caratulaPijamaNene, initX: -105, endX: 0, value: Site.ROPA_PIJAMA_NENE } );
+			aSections.push( { img: caratulaPijamaNena, initX: -19, endX: 0, value: Site.ROPA_PIJAMA_NENA } );
+			aSections.push( { img: caratulaPijamaTeens, initX: -24, endX: 0, value: Site.ROPA_PIJAMA_TEENS } );
+			aSections.push( { img: caratulaRopIntNene, initX: -96, endX: 0, value: Site.ROPA_INT_NENE } );
+			aSections.push( { img: caratulaRopIntNena, initX: -100, endX: 0, value: Site.ROPA_INT_NENA } );
 			aSections.push( { img: caratulaRopIntTeens, initX: -108, endX: 0, value: Site.ROPA_INT_TEENS } );
-			aSections.push( { img: caratulaRemeraNene, initX: -100, endX: 0, value: Site.ROPA_REMERA_NENE } );
-			aSections.push( { img: caratulaRemeraNena, initX: -78, endX: 0, value: Site.ROPA_REMERA_NENA } );
 			setData( aSections );
 		}		
 		
