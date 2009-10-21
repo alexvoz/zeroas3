@@ -15,6 +15,7 @@
 			var nY:int = 0;
 			
 			var oUnit:Object = { spanish: "x unidad", english: "per unit" };
+			
 			var oSlipCom:Object = { spanish: "Slip Combinado", english: "Briefs combination of colors" };
 			var oSlipRay:Object = { spanish: "Slip Rayado", english: "Briefs stripes" };
 			var oBoxerLiso:Object = { spanish: "Boxer Liso", english: "Boxer solid colors" };
@@ -39,21 +40,27 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Fede");
+			ci.setName("Alex");
 			ci.setDescription( oUnit );
-			ci.setArticle("935");
+			ci.setArticle("942");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Nano");
+			ci.setName("Blas");
 			ci.setDescription( oUnit );
-			ci.setArticle("936");
+			ci.setArticle("943");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Pepo");
+			ci.setName("Felix");
 			ci.setDescription( oUnit );
-			ci.setArticle("937");
+			ci.setArticle("940");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName("Mateo");
+			ci.setDescription( oUnit );
+			ci.setArticle("941");
 			aData.push(ci);
 			
 			//defino el grupo
@@ -73,27 +80,39 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Eva");
+			ci.setName("Dina");
 			ci.setDescription( oUnit );
-			ci.setArticle("521");
+			ci.setArticle("529");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Lina");
+			ci.setName("Fiona");
 			ci.setDescription( oUnit );
-			ci.setArticle("522");
+			ci.setArticle("531");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Lulu");
+			ci.setName("Frida");
 			ci.setDescription( oUnit );
-			ci.setArticle("519");
+			ci.setArticle("525");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Sol");
+			ci.setName("Julie");
 			ci.setDescription( oUnit );
-			ci.setArticle("520");
+			ci.setArticle("527");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName("Millie");
+			ci.setDescription( oUnit );
+			ci.setArticle("528");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName("Pia");
+			ci.setDescription( oUnit );
+			ci.setArticle("530");
 			aData.push(ci);
 			
 			//defino el grupo
@@ -113,23 +132,19 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Love");
-			ci.setDescription( oUnit );
-			ci.setArticle("206");
+			ci.setName("Ana");
+			ci.setDescription( { spanish: "(ribb combinado)", english: "(ribb combinado)" } );
+			ci.setDescription2( oUnit );
+			ci.setArticle("210");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Telma");
-			ci.setDescription( oUnit );
-			ci.setArticle("207");
+			ci.setName("Mara");
+			ci.setDescription( { spanish: "(camison jersey)", english: "(camison jersey)" } );
+			ci.setDescription2( oUnit );
+			ci.setArticle("211");
 			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName("Vicky");
-			ci.setDescription( oUnit );
-			ci.setArticle("205");
-			aData.push(ci);
-			
+						
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
@@ -240,84 +255,6 @@
 			cig.addEventListener( Event.CHANGE, group_change);
 			aGroups.push(cig);
 			
-			//grupo6
-			//defino los items
-			aData = new Array();
-			ci = new CarritoItemData();
-			ci.setName("Culotte");
-			ci.setArticle("803");
-			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName( oCorpCullotte );
-			ci.setArticle("814");
-			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName( oColaless );
-			ci.setArticle("800");
-			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName( oBikini );
-			ci.setArticle("801");
-			aData.push(ci);
-												
-			//defino el grupo
-			cig = new CarritoItemGroup();
-			cig.setView( CarritoItem );
-			cig.setName( { spanish: "R Interior", english: "Underwear" } );
-			cig.setColor( SiteColors.ROPA_INT_TEEN );
-			cig.setHeader( new CSHRopaIntTeen() ); 
-			cig.setData( aData );
-			addChild(cig);
-			cig.y = nY;
-			nY += cig.getBounds(this).height + 20;
-			cig.addEventListener( Event.CHANGE, group_change);
-			aGroups.push(cig);
-			
-			//grupo7
-			//defino los items
-			aData = new Array();
-			ci = new CarritoItemData();
-			ci.setName( oRemeraNene );
-			ci.setArticle("800");
-			aData.push(ci);
-							
-			//defino el grupo
-			cig = new CarritoItemGroup();
-			cig.setView( CarritoItem );
-			cig.setName( { spanish: "Remera", english: "T-shirt" } );
-			cig.setColor( SiteColors.ROPA_REMERA_NENE );
-			cig.setHeader( new CSHRopaRemeraNene() ); 
-			cig.setData( aData );
-			addChild(cig);
-			cig.y = nY;
-			nY += cig.getBounds(this).height + 20;
-			cig.addEventListener( Event.CHANGE, group_change);
-			aGroups.push(cig);
-			
-			//grupo8
-			//defino los items
-			aData = new Array();
-			ci = new CarritoItemData();
-			ci.setName( oRemeraNena );
-			ci.setArticle("800");
-			aData.push(ci);
-							
-			//defino el grupo
-			cig = new CarritoItemGroup();
-			cig.setView( CarritoItem );
-			cig.setName( { spanish: "Remera", english: "T-shirt" } );
-			cig.setColor( SiteColors.ROPA_REMERA_NENA );
-			cig.setHeader( new CSHRopaRemeraNena() ); 
-			cig.setData( aData );
-			addChild(cig);
-			cig.y = nY;
-			nY += cig.getBounds(this).height + 20;
-			cig.addEventListener( Event.CHANGE, group_change);
-			aGroups.push(cig);
-						
 		}
 		
 	}
