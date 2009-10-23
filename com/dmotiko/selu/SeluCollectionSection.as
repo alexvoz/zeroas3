@@ -27,6 +27,7 @@
 			btnColeccion09.visible = false;
 			btnColeccion09.alpha = 0;
 			btnColeccion09.addEventListener( MouseEvent.CLICK, toggle_collection);
+			btnColeccionAnterior.visible = false;
 			btnColeccionAnterior.addEventListener( MouseEvent.CLICK, gotoLastCollection );
 			
 			btnBasicos.addEventListener( MouseEvent.ROLL_OVER, btn_over_out);
