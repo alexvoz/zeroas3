@@ -14,27 +14,30 @@
 			var cig:CarritoItemGroup;
 			var nY:int = 0;
 			
-			var oEstampado:Object = { spanish: "Estampados", english: "Printed" };
-			var oEstampado34:Object = { spanish: "3/4 Estampado", english: "Knee High Printed" };
-			var oEstampado12:Object = { spanish: "Estampado 1/2 Caña", english: "Calf High printed" };
-			var oRay:Object = { spanish: "Rayado", english: "Stripes" };
-			var oRay34:Object = { spanish: "3/4 Rayado", english: "Knee High Stripes" };
-			var oRay12:Object = { spanish: "Rayado 1/2 Caña", english: "Calf High Stripes" };
-			var oLiso:Object = { spanish: "Lisos", english: "Solid Colors" };
-			var oLiso34:Object = { spanish: "3/4 Liso", english: "Knee High Solid Colors" };
-			var oLisa:Object = { spanish: "Lisas", english: "Solid Colors" };
-			var oSoq:Object = { spanish: "Soquetes", english: "Low cut" };
-			var oSoqBlanco:Object = { spanish: "Soquetes Blanco", english: "White Low cut" };
-			var oSoqNegro:Object = { spanish: "Soquetes Negro", english: "Black Low cut" };
-			var oSoqDeportivo:Object = { spanish: "Soquetes Deportivo", english: "Sports Low cut" };
-			var oSoqLiso:Object = { spanish: "Soquetes Lisas", english: "Low Cut solid colors" };
-			var oSoqEst:Object = { spanish: "Soquetes Estampado", english: "Low Cut printed" };
+			var oEstampado:Object = { spanish: "Estampada", english: "Printed" };
+			var oEstampado34:Object = { spanish: "3/4 Estampada", english: "Knee High Printed" };
+			var oEstampado12:Object = { spanish: "Estampada 1/2 Caña", english: "Calf High printed" };
+			var oRay:Object = { spanish: "Rayada", english: "Stripes" };
+			var oRay34:Object = { spanish: "3/4 Rayada", english: "Knee High Stripes" };
+			var oRay12:Object = { spanish: "Rayada 1/2 Caña", english: "Calf High Stripes" };
+			var oLiso:Object = { spanish: "Lisa", english: "Solid Colors" };
+			var oLisoBlanco:Object = { spanish: "Lisa Blanca", english: "Solid White" };
+			var oLisoNegro:Object = { spanish: "Lisa Negra", english: "Solid Black" };
+			var oLiso34:Object = { spanish: "3/4 Lisa", english: "Knee High Solid Colors" };
+			var oLisa:Object = { spanish: "Lisa", english: "Solid Colors" };
+			var oSoq:Object = { spanish: "Soquete", english: "Low cut" };
+			var oSoqBlanco:Object = { spanish: "Soquete Blanco", english: "White Low cut" };
+			var oSoqNegro:Object = { spanish: "Soquete Negro", english: "Black Low cut" };
+			var oSoqDeportivo:Object = { spanish: "Soquete Deportivo", english: "Sports Low cut" };
+			var oSoqLiso:Object = { spanish: "Soquete Liso", english: "Low Cut solid colors" };
+			var oSoqEst:Object = { spanish: "Soquete Estampado", english: "Low Cut printed" };
+			var oSoqRay:Object = { spanish: "Soquete Rayado", english: "Low Cut Stripes" };
 			var oSoqMesh:Object = { spanish: "Soquete Mesh", english: "Low Cut mesh" };
-			var oSoqCalado:Object = { spanish: "Soquetes Calado", english: "Low Cut" };
-			var oSoqCaladoBlanca:Object = { spanish: "Soquetes Calado Blanca", english: "White Low Cut" };
-			var oClassic:Object = { spanish: "Clasicas", english: "Classic" };
-			var oModern:Object = { spanish: "Modernas", english: "Modern" };
-			var oRombo:Object = { spanish: "Rombos", english: "Argyle" };
+			var oSoqCalado:Object = { spanish: "Soquete Calado", english: "Low Cut" };
+			var oSoqCaladoBlanca:Object = { spanish: "Soquete Calado Blanco", english: "White Low Cut" };
+			var oClassic:Object = { spanish: "Clasica", english: "Classic" };
+			var oModern:Object = { spanish: "Moderna", english: "Modern" };
+			var oRombo:Object = { spanish: "Rombo", english: "Argyle" };
 			var oRombo12:Object = { spanish: "Rombo 1/2 Caña", english: "Calf High Argyle" };
 			
 			var oDocena:Object = { spanish: "x docena", english: "x 12 units" };
@@ -62,19 +65,7 @@
 			ci.setDescription2( oDocMisc );
 			ci.setArticle("1850");
 			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName( oSoq );
-			ci.setDescription( oDocMix );
-			ci.setArticle("104");
-			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName( oSoqBlanco );
-			ci.setDescription( oDocMix );
-			ci.setArticle("104");
-			aData.push(ci);
-			
+						
 			//defino el grupo
 			cig = new CarritoItemGroup();
 			cig.setView( CarritoItem );
@@ -106,9 +97,15 @@
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oSoq );
+			ci.setName( oSoqEst );
 			ci.setDescription( oDocMix );
-			ci.setArticle("105");
+			ci.setArticle("104");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName( oSoqBlanco );
+			ci.setDescription( oDocMix );
+			ci.setArticle("104B");
 			aData.push(ci);
 			
 			//defino el grupo
@@ -143,10 +140,17 @@
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oSoq );
+			ci.setName( oSoqEst );
 			ci.setDescription( oDocena );
 			ci.setDescription2( oDocMix );
 			ci.setArticle("105");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName( oSoqBlanco );
+			ci.setDescription( oDocena );
+			ci.setDescription2( oDocMix );
+			ci.setArticle("105B");
 			aData.push(ci);
 			
 			//defino el grupo
@@ -178,13 +182,7 @@
 			ci.setDescription( oDocena );
 			ci.setArticle("951");
 			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName( oSoq );
-			ci.setDescription( oDocena );
-			ci.setArticle("102");
-			aData.push(ci);
-			
+						
 			ci = new CarritoItemData();
 			ci.setName( oSoqLiso );
 			ci.setDescription( oDocena );
@@ -192,27 +190,27 @@
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oSoqEst );
+			ci.setName( oSoqRay );
 			ci.setDescription( oDocena );
-			ci.setArticle("102");
+			ci.setArticle("102R");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
 			ci.setName( oSoqBlanco );
 			ci.setDescription( oDocena );
-			ci.setArticle("102");
+			ci.setArticle("102B");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
 			ci.setName( oSoqNegro );
 			ci.setDescription( oDocena );
-			ci.setArticle("102");
+			ci.setArticle("102N");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
 			ci.setName( oSoqDeportivo );
 			ci.setDescription( oDocena );
-			ci.setArticle("102M");
+			ci.setArticle("102D");
 			aData.push(ci);
 			
 			//defino el grupo
@@ -232,16 +230,9 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-						
-			ci.setName( oEstampado );
-			ci.setDescription( oDocena );
-			ci.setArticle("204");
-			aData.push(ci);
-			
-			ci = new CarritoItemData();
 			ci.setName( oRay );
 			ci.setDescription( oDocena );
-			ci.setArticle("203");
+			ci.setArticle("200");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
@@ -255,14 +246,19 @@
 			ci.setName( oEstampado );
 			ci.setDescription( oDocena );
 			ci.setDescription2( oDocBW );
-			ci.setArticle("203");
+			ci.setArticle("202");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oLiso );
+			ci.setName( oLisoBlanco );
 			ci.setDescription( oDocena );
-			ci.setDescription2( oDocBW );
-			ci.setArticle("201");
+			ci.setArticle("201B");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName( oLisoNegro );
+			ci.setDescription( oDocena );
+			ci.setArticle("201N");
 			aData.push(ci);
 						
 			ci = new CarritoItemData();
@@ -279,28 +275,21 @@
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oSoqLiso );
+			ci.setName( oSoqBlanco );
 			ci.setDescription( oDocena );
-			ci.setDescription2( oDocBW );
-			ci.setArticle("101");
+			ci.setArticle("101B");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oSoqCalado );
+			ci.setName( oSoqNegro );
 			ci.setDescription( oDocena );
-			ci.setArticle("17");
-			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName( oSoqCaladoBlanca );
-			ci.setDescription( oDocena );
-			ci.setArticle("17");
+			ci.setArticle("101N");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
 			ci.setName( oSoqDeportivo );
 			ci.setDescription( oDocena );
-			ci.setArticle("101M");
+			ci.setArticle("101D");
 			aData.push(ci);
 						
 			//defino el grupo
