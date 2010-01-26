@@ -1,4 +1,6 @@
 package com.general {
+	import fl.transitions.Tween;
+	import fl.transitions.TweenEvent;
 	import flash.display.*;
 	import flash.events.*;
 	import flash.net.*;
@@ -20,6 +22,7 @@ package com.general {
 		protected var txtConsole:WebSiteConsole;
 		protected var mcCenterClip:DisplayObject;
 		protected var testingParams:Object;
+		protected var tweens:Array;
 		
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
@@ -209,11 +212,82 @@ package com.general {
 				txtConsole.scrollV = txtConsole.maxScrollV;
 				txtConsole.nLine ++;
 			} else if ( this.loaderInfo.parameters["FIREBUG"] ) {
-				//navigateToURL( new URLRequest("javascript:console.log('" + msg + "');"), "_self" );
+				navigateToURL( new URLRequest("javascript:console.log('" + msg + "');"), "_self" );
 				
 			} else if( !toConsole) {
 				trace(msg);
 			}
+		}
+		
+		protected function registerTween( key:String, tween:Tween, keepAlive:Boolean=false, listenEnd:Boolean=false, listenChange:Boolean=false ):void {
+			if ( !tweens ) tweens = new Array();
+			killTween(key);
+			tweens.push( { key: key, tween: tween } );
+			//trace(this+" | registerTween | "+tweens.length);
+			var oListener:Object = new Object();
+			var root = this;
+			if( listenChange ){
+				oListener.onMotionChanged = function(ev) {
+					root.tweenChanged( key, tween );
+				}
+				tween.addEventListener( TweenEvent.MOTION_CHANGE, oListener.onMotionChanged );
+			}
+			oListener.onMotionFinished = function(ev) {
+				// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
+				for (var i:Number = 0; i < root.tweens.length ; i++) {
+					if ( root.tweens[i].tween == tween ) {
+						if( listenEnd ) root.tweenFinished( key, tween );
+						if ( !keepAlive ) root.tweens.splice( i, 1 );
+					}
+				}
+			}
+			tween.addEventListener( TweenEvent.MOTION_FINISH, oListener.onMotionFinished );
+			
+		}
+		
+		/**
+		 * @author: sminutoli
+		 * @usage: for override purposes
+		 * @param	key
+		 * @param	tween
+		 */
+		protected function tweenChanged(key:String, tween:Tween):void {
+			
+		}
+		/**
+		 * @author: sminutoli
+		 * @usage: for override purposes
+		 * @param	key
+		 * @param	tween
+		 */
+		protected function tweenFinished(key:String, tween:Tween):void {
+			
+		}
+		
+		/**
+		 * 
+		 * @param	arg | you can pass a Tween or a String/key
+		 */
+		protected function killTween(arg:*):void {
+			var tween:Tween;
+			if (arg is Tween) tween = arg;
+			else tween = getTween(arg as String);
+			if ( !tween ) return;
+			// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
+			for (var i:Number = 0; i < tweens.length ; i++) {
+				if ( tweens[i].tween == tween ) {
+					tween.stop();
+					tweens.splice( i, 1 );
+				}
+			}
+		}
+		protected function getTween(key:String):Tween {
+			if ( !tweens ) return undefined;
+			// busco el tween y lo saco del array, queda libre para que el garbage collector lo liquide
+			for (var i:Number = 0; i < tweens.length ; i++) {
+				if ( tweens[i].key == key ) return tweens[i].tween;
+			}
+			return undefined;
 		}
 		
 	}

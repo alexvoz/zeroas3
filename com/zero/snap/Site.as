@@ -59,8 +59,7 @@ package com.zero.snap {
 		private var worksBarTween:Tween;
 		private var flvVideoBack:Shape;
 		private var flvVideoContainer:Sprite;
-		
-						
+								
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
 			else if (!toConsole) trace( msg );
@@ -93,7 +92,7 @@ package com.zero.snap {
 			mcSombra.alpha = 0.2;
 			mcSombra.mouseEnabled = false;
 			mcScroll.addEventListener( Event.CHANGE, scroll_change);
-			mcScroll.addEventListener( Event.ACTIVATE, init_scroll );
+			init_scroll(undefined);
 			
 			tooltip = new SnapTooltip();
 			tooltip.mouseEnabled = false;
@@ -137,18 +136,15 @@ package com.zero.snap {
 		}
 		
 		public function showTooltip(sMessage:String, clipBounds:Rectangle):void {
-			if ( tooltipTween ) tooltipTween.stop();
-			
 			var point:Point = new Point();
 			point.x = clipBounds.left + clipBounds.width / 2 + 14;
 			point.y = clipBounds.top + clipBounds.height / 2 - 5;
 						
-			tooltipTween = new Tween( tooltip, "alpha", Regular.easeOut, tooltip.alpha, 1, 0.5, true );
+			registerTween("tooltipTween", new Tween( tooltip, "alpha", Regular.easeOut, tooltip.alpha, 1, 0.5, true ) );
 			tooltip.setText( sMessage, point, undefined, false );
 		}
 		public function hideTooltip():void {
-			if ( tooltipTween ) tooltipTween.stop();
-			tooltipTween = new Tween( tooltip, "alpha", Regular.easeOut, tooltip.alpha, 0, 0.5, true );
+			registerTween("tooltipTween", new Tween( tooltip, "alpha", Regular.easeOut, tooltip.alpha, 0, 0.5, true ) );
 		}
 		
 		public function highlightSection(sSection:String):void {
@@ -157,6 +153,7 @@ package com.zero.snap {
 		
 		private function init_scroll(e:Event):void 
 		{
+			Site.log("Site | Scroll activate" );
 			mcScroll.setPos(59);
 			scroll_change(undefined);
 			
@@ -204,12 +201,10 @@ package com.zero.snap {
 		}
 		
 		public function placaIn(){
-			if (placaTween) placaTween.stop();
-			placaTween = new Tween(mcPlaca, "y", Strong.easeOut, mcPlaca.y, 0, 0.5, true);
+			registerTween("placaTween", new Tween(mcPlaca, "y", Strong.easeOut, mcPlaca.y, 0, 0.5, true) );
 		}
 		public function placaOut(){
-			if (placaTween) placaTween.stop();
-			placaTween = new Tween(mcPlaca, "y", Strong.easeOut, mcPlaca.y, -560, 0.5, true);
+			registerTween("placaTween", new Tween(mcPlaca, "y", Strong.easeOut, mcPlaca.y, -560, 0.5, true) );
 		}
 
 
@@ -217,10 +212,10 @@ package com.zero.snap {
 			if ( bZoomed ) return;
 			bZoomed = true;
 			var clip = mcFondo;
-			new Tween(clip, "scaleY", Strong.easeOut, clip.scaleY, 1.5, 0.5, true);
-			new Tween(clip, "scaleX", Strong.easeOut, clip.scaleX, 1.5, 0.5, true);
-			new Tween(clip, "x", Strong.easeOut, clip.x, -1650, 0.5, true);
-			new Tween(clip, "y", Strong.easeOut, clip.y, -80, 0.5, true);
+			registerTween("fondoScaleY", new Tween(clip, "scaleY", Strong.easeOut, clip.scaleY, 1.5, 0.5, true) );
+			registerTween("fondoScaleX", new Tween(clip, "scaleX", Strong.easeOut, clip.scaleX, 1.5, 0.5, true) );
+			registerTween("fondoMoveX", new Tween(clip, "x", Strong.easeOut, clip.x, -1650, 0.5, true) );
+			registerTween("fondoMoveY", new Tween(clip, "y", Strong.easeOut, clip.y, -80, 0.5, true) );
 			try{
 				
 				mcFondo.removeChild( mcFondo.loader ); //ver index.fla | mcFondo
@@ -233,10 +228,10 @@ package com.zero.snap {
 			if ( !bZoomed ) return;
 			bZoomed = false;
 			var clip = mcFondo;
-			new Tween(clip, "scaleY", Strong.easeOut, clip.scaleY, 1, 0.5, true);
-			new Tween(clip, "scaleX", Strong.easeOut, clip.scaleX, 1, 0.5, true);
-			new Tween(clip, "x", Strong.easeOut, clip.x, -900, 0.5, true);
-			new Tween(clip, "y", Strong.easeOut, clip.y, 0, 0.5, true);
+			registerTween("fondoScaleY", new Tween(clip, "scaleY", Strong.easeOut, clip.scaleY, 1, 0.5, true));
+			registerTween("fondoScaleX", new Tween(clip, "scaleX", Strong.easeOut, clip.scaleX, 1, 0.5, true));
+			registerTween("fondoMoveX", new Tween(clip, "x", Strong.easeOut, clip.x, -900, 0.5, true));
+			registerTween("fondoMoveY", new Tween(clip, "y", Strong.easeOut, clip.y, 0, 0.5, true));
 			try{
 				flvVideo.stop();
 				mcFondo.addChild( mcFondo.loader ); //ver index.fla | mcFondo
@@ -246,14 +241,13 @@ package com.zero.snap {
 			}
 		}
 		public function sombraIn(){
-			new Tween(mcSombra, "alpha", Regular.easeOut, mcSombra.alpha, 1, 0.5, true);
+			registerTween("sombraIn", new Tween(mcSombra, "alpha", Regular.easeOut, mcSombra.alpha, 1, 0.5, true));
 		}
 		public function sombraOut(){
-			new Tween(mcSombra, "alpha", Regular.easeOut, mcSombra.alpha, 0.2, 0.5, true);
+			registerTween("sombraOut", new Tween(mcSombra, "alpha", Regular.easeOut, mcSombra.alpha, 0.2, 0.5, true));
 		}
 
 		private function scroll_change(e:Event):void {
-			//log("scroll_change= " + mcScroll.getPos());
 			setPos( mcScroll.getPos() );
 		}
 
@@ -262,7 +256,9 @@ package com.zero.snap {
 		}
 
 		public function setPos(n):void {
-			var nX:Number = -(n * (mcFondo.width - 1000) / 100);
+			if ( n < 10 ) n = 10;
+			else if ( n > 90 ) n = 90;
+			var nX:Number = -(n * (mcFondo.width - 1112) / 100);
 			mcFondo.x = nX;
 			
 		}
