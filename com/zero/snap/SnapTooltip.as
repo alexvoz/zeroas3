@@ -1,5 +1,6 @@
 package com.zero.snap {
 	
+	import com.general.BaseClip;
 	import fl.transitions.*;
 	import fl.transitions.easing.*;
 	
@@ -10,7 +11,7 @@ package com.zero.snap {
 	import flash.utils.*;
 	
 	public class SnapTooltip
-	extends Sprite {
+	extends BaseClip {
 		
 		private var rect:Sprite;
 		private var triangle:Shape;
@@ -67,21 +68,23 @@ package com.zero.snap {
 			tField.visible = false;
 			oHelper.chars = this.sText.length;
 					
-			new Tween( oHelper, "height", Elastic.easeInOut, oHelper.height, tField.height + 10, 1, true );
+			var t:Tween = new Tween( oHelper, "height", Elastic.easeInOut, oHelper.height, tField.height + 10, 1, true );
+			registerTween( "height", t);
 			tweenRect = new Tween( oHelper, "width", Elastic.easeInOut, oHelper.width, tField.width + 10, 1, true );
 			tweenRect.addEventListener( TweenEvent.MOTION_CHANGE, redraw_clip );
 				
 			if( newPos ){
 				if( tweens ){
-					new Tween( this, "x", Strong.easeInOut, this.x, newPos.x - (tField.width + 10), 1, true);
-					new Tween( this, "y", Strong.easeInOut, this.y, newPos.y - (tField.height + 10 + triangle.height), 1, true);
+					registerTween( "posX", new Tween( this, "x", Strong.easeInOut, this.x, newPos.x - (tField.width + 10), 1, true));
+					registerTween( "posY", new Tween( this, "y", Strong.easeInOut, this.y, newPos.y - (tField.height + 10 + triangle.height), 1, true));
+					
 				} else {
 					this.x = newPos.x - (tField.width + 10);
 					this.y = newPos.y - (tField.height + 10 + triangle.height);
 				}
 			}
 			if( newAlpha != undefined ) {
-				new Tween( this, "alpha", Regular.easeOut, this.alpha, newAlpha, 0.5, true);
+				registerTween("alpha", new Tween( this, "alpha", Regular.easeOut, this.alpha, newAlpha, 0.5, true));
 			}
 				
 			timerChars = new Timer(500, 1);
@@ -94,12 +97,14 @@ package com.zero.snap {
 			tField.visible = true;
 			tweenChars = new Tween( oHelper, "chars", Regular.easeOut, 0, oHelper.chars, 0.5, true );
 			tweenChars.addEventListener( TweenEvent.MOTION_CHANGE, redraw_text );
+			tweenChars.addEventListener( TweenEvent.MOTION_FINISH, end_text );
 		}
 
 		private function redraw_text(e:TweenEvent):void {
-			
 			tField.text = sText.substr(0, Math.ceil(oHelper.chars) ) ;
-			
+		}
+		private function end_text(e:TweenEvent):void {
+			tField.text = sText;
 		}
 		private function redraw_clip(e:TweenEvent):void {
 			

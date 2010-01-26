@@ -19,6 +19,7 @@ package com.general {
 		
 		protected var txtConsole:WebSiteConsole;
 		protected var mcCenterClip:DisplayObject;
+		protected var testingParams:Object;
 		
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
@@ -31,6 +32,9 @@ package com.general {
 		
 		public function WebSite() {
 			app = this;
+			
+			testingParams = new Object();
+			
 			if ( this.loaderInfo.parameters["CONSOLE"] ) {
 				
 				this.txtConsole = new WebSiteConsole();
@@ -188,7 +192,11 @@ package com.general {
 		}
 		
 		public function getSWF_VAR(key:String):* {
-			return this.loaderInfo.parameters[key];
+			if( this.loaderInfo.parameters[key] ){
+				return this.loaderInfo.parameters[key];
+			} else {
+				return this.testingParams[key];
+			}
 		}
 		
 		protected function internalLog(msg:*, toConsole:Boolean=false ):void {
