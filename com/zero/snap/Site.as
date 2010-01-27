@@ -81,9 +81,7 @@ package com.zero.snap {
 			this.sLanguage = Site.SPANISH;
 			
 			super.initSite();
-			
-			testingParams = { video1: "h90.flv", video2: "trailer_101.f4v" };
-									
+												
 			mcPlaca = new Board();
 			mcPlaca.y = -560;
 			mcPlaca.mask = mcMask;

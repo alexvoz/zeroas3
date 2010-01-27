@@ -59,7 +59,7 @@
 				break;
 				
 				case Site.PRODUCTION:
-				path = "production.swf";
+				path = "produccion.swf";
 				break;
 				
 				case Site.HISTORY:
@@ -70,11 +70,15 @@
 				path = "partners.swf";
 				break;
 				
+				case Site.CONTACT:
+				path = "contacto.swf";
+				break;
+				
 			}
 			if ( path ) {
 				loader.load(new URLRequest(path));
 				this.addChild( mcLoaderClip );
-				loader.contentLoaderInfo.addEventListener( Event.COMPLETE, remove_loader );
+				loader.contentLoaderInfo.addEventListener( Event.INIT, remove_loader );
 			}
 		}
 		

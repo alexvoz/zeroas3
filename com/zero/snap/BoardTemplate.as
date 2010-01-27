@@ -4,6 +4,8 @@
 	import flash.display.*;
 	import fl.transitions.*;
 	import fl.transitions.easing.*;
+	import flash.net.navigateToURL;
+	import flash.net.URLRequest;
 	import flash.utils.*;
 	import flash.events.*;
 	
@@ -73,8 +75,14 @@
 					registerTween( e.currentTarget.name + "alpha", new Tween( e.currentTarget, "alpha", Regular.easeOut, e.currentTarget.alpha, 1, 0.5, true) );
 				});
 				btn.addEventListener( MouseEvent.CLICK, function(e:MouseEvent) {
-					var link = getLink( e.currentTarget );
+					var link:String = getLink( e.currentTarget );
 					var timeline = e.currentTarget.parent;
+					
+					if ( link.indexOf("http://") == 0 ) {
+						navigateToURL( new URLRequest( link ), "_blank" );
+						return;
+					}
+					
 					if ( link == BTN_NEXT) {
 						if ( timeline.currentFrame < timeline.totalFrames ) timeline.nextFrame();
 						else timeline.gotoAndStop( 1 );

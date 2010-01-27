@@ -131,7 +131,7 @@ package com.general {
 				var url:String = this.loaderInfo.parameters["analytics"]+"('"+sTrack+"')";
 				var request:URLRequest = new URLRequest(url);
 				try {
-					//navigateToURL(request, '_self'); // second argument is target
+					navigateToURL(request, '_self'); // second argument is target
 				} catch (e:Error) {
 					log( "WebSite | analytic error");
 				}
