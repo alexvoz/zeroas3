@@ -19,6 +19,11 @@
 			aSections.push( { img: caratulaMediasInBlack, initX: -112, endX: 0, value: Site.MEDIAS_INBLACK } );
 			aSections.push( { img: caratulaMediasHombre, initX: -157, endX: 0, value: Site.MEDIAS_HOMBRE} );
 			aSections.push( { img: caratulaMediasMujer, initX: -104, endX: 0, value: Site.MEDIAS_MUJER } );
+			aSections.push( { img: caratulaMediasBucaneras, initX: -104, endX: 0, value: Site.MEDIAS_BUCANERAS } );
+			aSections.push( { img: caratulaMediasCancan, initX: -104, endX: 0, value: Site.MEDIAS_CANCAN } );
+			aSections.push( { img: caratulaMediasColegial, initX: -104, endX: 0, value: Site.MEDIAS_COLEGIAL } );
+			
+			
 			setData( aSections );
 		}		
 		

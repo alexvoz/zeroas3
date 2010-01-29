@@ -19,6 +19,9 @@ package com.dmotiko.elemento {
 		public static var MEDIAS_JUVENILES:String = "ELEMENTO_MEDIAS_JUVENILES";
 		public static var MEDIAS_HOMBRE:String = "ELEMENTO_MEDIAS_HOMBRE";
 		public static var MEDIAS_MUJER:String = "ELEMENTO_MEDIAS_MUJER";
+		public static var MEDIAS_CANCAN:String = "ELEMENTO_MEDIAS_CANCAN";
+		public static var MEDIAS_BUCANERAS:String = "ELEMENTO_MEDIAS_BUCANERAS";
+		public static var MEDIAS_COLEGIAL:String = "ELEMENTO_MEDIAS_COLEGIAL";
 		public static var MEDIAS_INBLACK:String = "ELEMENTO_MEDIAS_INBLACK";
 		
 		public static var ROPA:String = "ELEMENTO_ROPA";		

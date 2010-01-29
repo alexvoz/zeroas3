@@ -8,12 +8,15 @@
 	extends BaseClip {
 		
 		public var mcBebe:SimpleButton;
-		public var mcNino:SimpleButton;
+		public var mcNinos:SimpleButton;
 		public var mcJuvenil:SimpleButton;
 		public var mcHombre:SimpleButton;
 		public var mcDama:SimpleButton;
 		public var mcInblack:SimpleButton;
-		
+		public var mcCanCan:SimpleButton;
+		public var mcBucanera:SimpleButton;
+		public var mcColegial:SimpleButton;
+				
 		public var mcLoader:MovieClip;
 		
 		private var contentLoader:Loader;
@@ -66,6 +69,21 @@
 					sContent = "medias_mujer";
 					nFrame = 7;
 					break;
+					
+					case Site.MEDIAS_CANCAN:
+					sContent = "medias_cancan";
+					nFrame = 7;
+					break;
+
+					case Site.MEDIAS_BUCANERAS:
+					sContent = "medias_bucaneras";
+					nFrame = 7;
+					break;
+
+					case Site.MEDIAS_COLEGIAL:
+					sContent = "medias_colegial";
+					nFrame = 7;
+					break;
 									
 				}
 				
@@ -115,7 +133,7 @@
 			
 			var sSection:String;
 			switch( e.currentTarget ) {
-				case mcNino:
+				case mcNinos:
 				sSection = Site.MEDIAS_NENES;
 				break;
 				
@@ -137,6 +155,18 @@
 				
 				case mcInblack:
 				sSection = Site.MEDIAS_INBLACK;
+				break;
+				
+				case mcBucanera:
+				sSection = Site.MEDIAS_BUCANERAS;
+				break;
+				
+				case mcCanCan:
+				sSection = Site.MEDIAS_CANCAN;
+				break;
+				
+				case mcColegial:
+				sSection = Site.MEDIAS_COLEGIAL;
 				break;
 			}
 			Site.getApp().setSection( sSection );
