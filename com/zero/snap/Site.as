@@ -10,6 +10,7 @@ package com.zero.snap {
 	import fl.transitions.*;
 	import fl.transitions.easing.*;
 	import fl.video.*;
+	import flash.utils.getTimer;
 	
 	
 	public class Site
@@ -59,6 +60,11 @@ package com.zero.snap {
 		private var worksBarTween:Tween;
 		private var flvVideoBack:Shape;
 		private var flvVideoContainer:Sprite;
+		
+		private var music:Sound;
+		private var musicChannel:SoundChannel;
+		private var soundTween:Tween;
+		private var soundController:Object;
 								
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
@@ -75,13 +81,51 @@ package com.zero.snap {
 			stage.scaleMode = StageScaleMode.NO_SCALE;
 			
 		}
+		
+		public function getMusic():Sound { return music; }
+		public function getMusicChannel():SoundChannel { return musicChannel; }
+		
+		override public function setSound(bSound:Boolean):void {
+			super.setSound(bSound);
+			if (!bSound) fadeOutMusic();
+			else fadeInMusic();
+		}
+		
+		public function fadeOutMusic():void {
+			if ( soundController.volume == 0) return;
+			if (soundTween) soundTween.stop();
+			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 0, 2, true);
+			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);
+			soundTween.addEventListener(TweenEvent.MOTION_FINISH, stop_music);
+		}
+			
+		public function fadeInMusic():void {
+			if ( !getSound() || getSection() == Site.WORKS || getSection() == Site.REEL || soundController.volume == 1) return;
+			musicChannel = music.play( soundController.position );
+			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
+			if (soundTween) soundTween.stop();
+			soundTween = new Tween(soundController, "volume", Regular.easeOut, soundController.volume, 1, 2, true);
+			soundTween.addEventListener(TweenEvent.MOTION_CHANGE, refresh_fade);
+		}
+		
+		private function refresh_fade(e:TweenEvent):void {
+			var transform:SoundTransform = getMusicChannel().soundTransform;
+			transform.volume = soundController.volume;
+			getMusicChannel().soundTransform = transform;
+		}
+		
+		private function stop_music(e:TweenEvent):void 	{
+			soundController.position = getMusicChannel().position;
+			getMusicChannel().stop();
+		}
 				
 		override protected function initSite():void {
 			this.sSection = Site.HOME;
 			this.sLanguage = Site.SPANISH;
 			
 			super.initSite();
-												
+			
+															
 			mcPlaca = new Board();
 			mcPlaca.y = -560;
 			mcPlaca.mask = mcMask;
@@ -119,7 +163,10 @@ package com.zero.snap {
 			flvVideo.scaleMode = VideoScaleMode.MAINTAIN_ASPECT_RATIO;
 			flvVideo.skinBackgroundColor = 0;
 			flvVideo.skin = "SkinOverPlaySeekStop.swf";
+			flvVideo.autoPlay = false;
+			flvVideo.autoRewind = false;
 			flvVideo.skinAutoHide = true;
+			flvVideo.addEventListener( VideoEvent.STATE_CHANGE, video_change );
 			
 			//flvVideoContainer | hago un contenedor para el fondo y el video asi posiciono todo junto
 			flvVideoContainer = new Sprite();
@@ -127,10 +174,67 @@ package com.zero.snap {
 			flvVideoContainer.addChild(flvVideo);
 			flvVideoContainer.x = 267;
 			flvVideoContainer.y = 100;
+			
+			//SONIDO
+			var siteSound:SiteSound = new soundIcon();
+			siteSound.x = 40;
+			siteSound.y = 570;
+			addChild( siteSound );
+						
+			var sndSrc:String = this.loaderInfo.parameters["music_src"];
+			if (!sndSrc) sndSrc = "big_band.mp3";
+			
+			music = new Sound( new URLRequest( sndSrc ) );
+			music.addEventListener( Event.COMPLETE, snd_complete );
+			music.addEventListener( ProgressEvent.PROGRESS, snd_progress );
+			soundController = new Object();
+			soundController.volume = 1;
+			soundController.position = 0;
+			soundController.startDownload = getTimer();
+		}
+		
+		private function snd_progress(e:ProgressEvent):void {
+			var p:int = Math.round(e.bytesLoaded * 100 / e.bytesTotal );
+			if (p > 35) {
+				music.removeEventListener( ProgressEvent.PROGRESS, snd_progress);
+				musicChannel = music.play();
+				musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
+				setSound(true);
+			}
+		}
+		
+		private function snd_complete(e:Event):void {
+			Site.log("Site | snd complete");
+		}
+		
+		private function loop_music(e:Event):void {
+			musicChannel.stop();
+			soundController.position = 0;
+			musicChannel = music.play( soundController.position );
+		}
+		
+		private function video_change(e:VideoEvent):void 
+		{
+			log("Site video_change | "+e.state);
+			switch( Site.getApp().getSection() ) {
+				
+				case Site.WORKS:
+				case Site.REEL:
+				break;
+				
+				default:
+				try { 
+					flvVideo.stop();
+				} catch (e) {
+					log("Site video_change");
+				}
+				break;
+			}
 		}
 		
 		public function setVideo(src:String):void {
-			flvVideo.play(src);
+			if ( getSection() != Site.REEL && getSection() != Site.WORKS ) return;
+			flvVideo.play(src, 0);
 		}
 		
 		public function showTooltip(sMessage:String, clipBounds:Rectangle):void {
@@ -261,17 +365,6 @@ package com.zero.snap {
 			
 		}
 
-
-		
-		public function getMusic():Sound { return sndController.getMusic(); }
-		public function getMusicChannel():SoundChannel { return sndController.getMusicChannel(); }
-				
-		override public function setSound(bSound:Boolean):void {
-			super.setSound(bSound);
-			if (!bSound) sndController.fadeOutMusic();
-			else sndController.fadeInMusic();
-		}
-		
 	}
 	
 }
