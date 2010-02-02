@@ -20,26 +20,16 @@
 			this.buttonMode = true;
 			this.addEventListener( MouseEvent.CLICK, toggle_sound );
 			Site.getApp().addEventListener( WebSite.SOUND_CHANGED, sound_changed);
-			Site.getApp().addEventListener( WebSite.SECTION_CHANGED, section_changed);
 			sound_changed();
 		}
 		
-		private function section_changed(e:Event=undefined):void {
-			if ((Site.getApp().getSection() == Site.REEL || Site.getApp().getSection() == Site.WORKS ) && Site.getApp().getSound()) {
-				
-				Site.getApp().setSound(false);
-			} else if ( (Site.getApp().getSection() != Site.WORKS || Site.getApp().getSection() != Site.REEL)  ) {
-				
-				Site.getApp().setSound(true);
-			}
-		}
 		
 		private function sound_changed(e:Event=undefined):void {
 			if ( Site.getApp().getSound() ) {
-				Site.log( "Site.getSound true");
+				//Site.log( "Site.getSound true");
 				this.gotoAndStop(1);
 			} else {
-				Site.log( "Site.getSound false");
+				//Site.log( "Site.getSound false");
 				this.gotoAndStop(2);
 			}
 		}

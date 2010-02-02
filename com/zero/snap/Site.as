@@ -11,6 +11,7 @@ package com.zero.snap {
 	import fl.transitions.easing.*;
 	import fl.video.*;
 	import flash.utils.getTimer;
+	import flash.utils.Timer;
 	
 	
 	public class Site
@@ -65,6 +66,8 @@ package com.zero.snap {
 		private var musicChannel:SoundChannel;
 		private var soundTween:Tween;
 		private var soundController:Object;
+		private var siteSound:SiteSound;
+		private var timerMusic:Timer;
 								
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
@@ -176,7 +179,7 @@ package com.zero.snap {
 			flvVideoContainer.y = 100;
 			
 			//SONIDO
-			var siteSound:SiteSound = new soundIcon();
+			siteSound = new soundIcon();
 			siteSound.x = 40;
 			siteSound.y = 570;
 			addChild( siteSound );
@@ -185,12 +188,13 @@ package com.zero.snap {
 			if (!sndSrc) sndSrc = "big_band.mp3";
 			
 			music = new Sound( new URLRequest( sndSrc ) );
-			music.addEventListener( Event.COMPLETE, snd_complete );
 			music.addEventListener( ProgressEvent.PROGRESS, snd_progress );
 			soundController = new Object();
 			soundController.volume = 1;
 			soundController.position = 0;
 			soundController.startDownload = getTimer();
+			timerMusic = new Timer(7000);
+			timerMusic.addEventListener( TimerEvent.TIMER, loop_music );  
 		}
 		
 		private function snd_progress(e:ProgressEvent):void {
@@ -198,19 +202,23 @@ package com.zero.snap {
 			if (p > 35) {
 				music.removeEventListener( ProgressEvent.PROGRESS, snd_progress);
 				musicChannel = music.play();
-				musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
+				musicChannel.addEventListener( Event.SOUND_COMPLETE, timer_music);
 				setSound(true);
 			}
 		}
 		
-		private function snd_complete(e:Event):void {
-			Site.log("Site | snd complete");
-		}
-		
-		private function loop_music(e:Event):void {
+		private function timer_music(e:Event):void 
+		{
 			musicChannel.stop();
 			soundController.position = 0;
+			timerMusic.reset();
+			timerMusic.start();
+		}
+				
+		private function loop_music(e:Event):void {
+			timerMusic.stop();
 			musicChannel = music.play( soundController.position );
+			musicChannel.addEventListener( Event.SOUND_COMPLETE, timer_music);
 		}
 		
 		private function video_change(e:VideoEvent):void 
@@ -263,17 +271,20 @@ package com.zero.snap {
 		
 		override public function setSection(s:String):void {
 			super.setSection(s);
+			siteSound.visible = true;
 			switch(s) {
 				case HOME:
 				zoomOut();
 				sombraOut();
+				fadeInMusic();
 				break;
 				
 				case WORKS:
 				case REEL:
 				zoomIn();
 				sombraIn();
-							
+				fadeOutMusic();
+				siteSound.visible = false;
 				break;
 				
 				case PRODUCTION:
@@ -282,6 +293,7 @@ package com.zero.snap {
 				case CLIENTS:
 				mcScroll.setPos( 0 );
 				placaIn();
+				fadeInMusic();
 				break;
 				
 				case STAFF:
@@ -290,6 +302,7 @@ package com.zero.snap {
 				case HISTORY:
 				mcScroll.setPos( 100 );
 				placaIn();
+				fadeInMusic();
 				break;
 				
 				case BROCHURE:
