@@ -17,6 +17,7 @@ package com.general {
 			bVertical = true;
 			nSpace = 0;
 			nOffset = 0;
+			
 		}
 		
 		public function setView(view:Class):void {

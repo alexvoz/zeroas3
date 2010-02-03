@@ -7,7 +7,6 @@
 	public class ScrollerMovie
 	extends MovieClip {
 		
-		private var targY;
 		public var mcDrag:Sprite;
 		public var mcTrigger:Sprite;
 		public var mcBar:Sprite;
@@ -15,7 +14,8 @@
 		public var mcMask:Sprite;
 		public var mcNext:Sprite;
 		public var mcPrev:Sprite;
-		private var scrollAmount;
+		protected var targY;
+		protected var scrollAmount;
 		
 		public function ScrollerMovie() {
 				
@@ -38,7 +38,16 @@
 			
 			//por ahora lo anulo
 			//mcBar.addEventListener(MouseEvent.CLICK, bar_press);
-						
+			
+			if ( !mcMask ) {
+				mcMask = new Sprite();
+				mcMask.y = mcBar.y;
+				mcMask.x = 0;
+				mcMask.graphics.beginFill(0);
+				mcMask.graphics.drawRect(0,0, mcBar.x, mcBar.y + mcBar.height );
+				this.addChild(mcMask);
+			}
+			
 			//set the mask for the text
 			if (!mcContent) {
 				//trace("ScrollerMovie creating mcContent");
@@ -48,7 +57,7 @@
 				mcContent.y = mcMask.y;
 				this.addChild( mcContent );
 			}
-			
+						
 			mcContent.mask = mcMask;
 			mcMask.alpha = 0.3;
 			
@@ -82,7 +91,7 @@
 			return mcBar.visible;
 		}
 		
-		private function content_check(e:Event):void {
+		protected function content_check(e:Event):void {
 			if( !checkScroll() ) return;
 			/*set a variable 
 			this variable basically stores info regarding what fraction of the total content 
@@ -95,7 +104,7 @@
 			//set the y of the text to 1/5 of the distance between its current y and the target y
 			
 			//change the 5 to a lower number for faster scrolling or a higher number for slower scrolling
-			mcContent.y-=(mcContent.y-targY)/5;
+			mcContent.y-=(mcContent.y-targY)/5 ;
 		}
 		
 		private function drag_release(e:MouseEvent):void {

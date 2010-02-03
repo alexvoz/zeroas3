@@ -16,7 +16,8 @@
 		public var mcCanCan:SimpleButton;
 		public var mcBucanera:SimpleButton;
 		public var mcColegial:SimpleButton;
-				
+		public var mcInBlack:SimpleButton;
+		
 		public var mcLoader:MovieClip;
 		
 		private var contentLoader:Loader;
@@ -42,12 +43,12 @@
 										
 					case Site.MEDIAS_BEBES:
 					sContent = "medias_bebe";
-					nFrame = 2;
+					nFrame = 3;
 					break;
 					
 					case Site.MEDIAS_NENES:
 					sContent = "medias_nene";
-					nFrame = 3;
+					nFrame = 2;
 					break;
 					
 					case Site.MEDIAS_JUVENILES:
@@ -57,27 +58,27 @@
 					
 					case Site.MEDIAS_INBLACK:
 					sContent = "medias_inblack";
-					nFrame = 5;
+					nFrame = 8;
 					break;
 					
 					case Site.MEDIAS_HOMBRE:
 					sContent = "medias_hombre";
-					nFrame = 6;
+					nFrame = 9;
 					break;
 					
 					case Site.MEDIAS_MUJER:
 					sContent = "medias_mujer";
-					nFrame = 7;
+					nFrame = 10;
 					break;
 					
 					case Site.MEDIAS_CANCAN:
 					sContent = "medias_cancan";
-					nFrame = 7;
+					nFrame = 6;
 					break;
 
 					case Site.MEDIAS_BUCANERAS:
-					sContent = "medias_bucaneras";
-					nFrame = 7;
+					sContent = "medias_bucanera";
+					nFrame = 5;
 					break;
 
 					case Site.MEDIAS_COLEGIAL:
@@ -93,7 +94,7 @@
 				var bL:Boolean = Site.getApp().getLanguage() == Site.SPANISH;
 				if (!bL) {
 					sContent += "_eng";
-					nFrame += 7;
+					nFrame += 10;
 				}
 				sContent += ".swf";
 				
@@ -153,7 +154,7 @@
 				sSection = Site.MEDIAS_MUJER;
 				break;
 				
-				case mcInblack:
+				case mcInBlack:
 				sSection = Site.MEDIAS_INBLACK;
 				break;
 				

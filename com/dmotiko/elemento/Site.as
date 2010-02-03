@@ -48,6 +48,7 @@ package com.dmotiko.elemento {
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
 			else if (!toConsole) trace( msg );
+					
 		}
 		
 		public static function getApp():Site {
