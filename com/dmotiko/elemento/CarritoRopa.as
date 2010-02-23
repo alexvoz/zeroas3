@@ -15,52 +15,61 @@
 			var nY:int = 0;
 			
 			var oUnit:Object = { spanish: "x unidad", english: "per unit" };
+			var oDes:Object = { spanish: "Desagujado", english: "looseknit" };
+			var oCotton:Object = { spanish: "Algodón con Lycra", english: "Cotton and Lycra" };
 			
-			var oSlipCom:Object = { spanish: "Slip Combinado", english: "Briefs combination of colors" };
-			var oSlipRay:Object = { spanish: "Slip Rayado", english: "Briefs stripes" };
-			var oBoxerLiso:Object = { spanish: "Boxer Liso", english: "Boxer solid colors" };
-			var oBoxerRay:Object = { spanish: "Boxer Rayado", english: "Boxer stripes" };
-			var oBoxerColl:Object = { spanish: "collareta contratono", english: "waistband in diff. color" };
+			var oSlipLis:Object = { spanish: "Slip Liso", english: "solid color brief" };
+			var oSlipEst:Object = { spanish: "Slip Estampado", english: "Painted Brief" };
+			var oSlipRay:Object = { spanish: "Slip Rayado", english: "Striped Brief " };
+			var oBoxerLiso:Object = { spanish: "Boxer Liso", english: "solid colors Boxer" };
+			var oBoxerLisColl:Object = { spanish: "con collaret", english: "with waistband" };
+			var oBoxerEst:Object = { spanish: "Boxer Estampado", english: "printed boxer" };
+			var oBoxerRay:Object = { spanish: "Boxer Rayado", english: "Striped Boxer" };
 			
-			var oBomb:Object = { spanish: "Bombacha Clásica", english: "Panties Classic" };
-			var oBombLL:Object = { spanish: "Bombacha Lisa Lycra", english: "PANTIES solid colors lycra" };
-			var oBombSet:Object = { spanish: "CONJUNTO CAMISETA Y BOMBACHA", english: "SHIRT AND PANTIES SET" };
-			var oCorpBomb:Object = { spanish: "Corpiño y Bombacha", english: "BRA & PANTIES" };
-			var oCorpCullotte:Object = { spanish: "Corpiño y Culotte", english: "BRA & PANTIES" };
-			var oColaless:Object = { spanish: "Colaless", english: "THONG" };
-			var oBikini:Object = { spanish: "Vedettina", english: "BIKINI" };
-			var oBombRL:Object = { spanish: "rayada y lisa", english: "stripes, solid colors" };
-			var oLycraPrinted:Object = { spanish: "(lycra con estampa)", english: "(lycra, printed)" };
-			var oLisoRibbed:Object = { spanish: "(liso ribb desagujado)", english: "(solid colors, ribbed)" };
-			
+			var oBomb:Object = { spanish: "Bombacha Clásica", english: "Classic Panties" };
+			var oBombCE:Object = { spanish: "Bombacha Clásica Estampada", english: "classic printed PANTIES" };
+			var oBombacha:Object = { spanish: "BOMBACHA", english: "panties" };
+			var oBombCO:Object = { spanish: "Bombacha Colores Oscuros", english: "Dark Colors Panties" };
+			var oConjCamBomb:Object = { spanish: "Conjunto Camiseta y Bombacha", english: "shirt and panties set" };
+			var oCorpBomb:Object = { spanish: "Corpiño y Bombacha", english: "bra and panties" };
+			var oCulotte:Object = { spanish: "Culotte", english: "Culotte" };
+			var oMiniShort:Object = { spanish: "MiniShort", english: "MiniShort" };
+						
 			var oRemeraNene:Object = { spanish: "Remera Nene", english: "BOY T-SHIRT" };
 			var oRemeraNena:Object = { spanish: "Remera Nena", english: "GIRL T-SHIRT" };
+					
 						
 			//grupo1
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
 			ci.setName("Alex");
-			ci.setDescription( oUnit );
-			ci.setArticle("942");
+			ci.setDescription( { spanish: "(Interlock Estampado) x Unidad", english: "(Printed Interlock) per Unit" } );
+			ci.setArticle("948");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Blas");
-			ci.setDescription( oUnit );
-			ci.setArticle("943");
+			ci.setName("Dante");
+			ci.setDescription( { spanish: "(Interlock) x Unidad", english: "(Interlock) per Unit" } );
+			ci.setArticle("954");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName("Elias");
+			ci.setDescription( { spanish: "(Ribb) x Unidad", english: "(Ribb) per Unit" } );
+			ci.setArticle("949");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
 			ci.setName("Felix");
-			ci.setDescription( oUnit );
-			ci.setArticle("940");
+			ci.setDescription( { spanish: "(Interlock) x Unidad", english: "(Interlock) per Unit" } );
+			ci.setArticle("946");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Mateo");
-			ci.setDescription( oUnit );
-			ci.setArticle("941");
+			ci.setName("Igor");
+			ci.setDescription( { spanish: "(Jersey) x Unidad", english: "(Jersey) per Unit" } );
+			ci.setArticle("947");
 			aData.push(ci);
 			
 			//defino el grupo
@@ -80,39 +89,39 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Dina");
-			ci.setDescription( oUnit );
-			ci.setArticle("529");
+			ci.setName("Ana");
+			ci.setDescription( { spanish: "(Interlock) x Unidad", english: "(Interlock) per Unit" } );
+			ci.setArticle("533");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
 			ci.setName("Fiona");
-			ci.setDescription( oUnit );
-			ci.setArticle("531");
+			ci.setDescription( { spanish: "(Interlock Estampado) x Unidad", english: "(Printed Interlock) per Unit" } );
+			ci.setArticle("537");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Frida");
-			ci.setDescription( oUnit );
-			ci.setArticle("525");
+			ci.setName("Kari");
+			ci.setDescription( { spanish: "(Jersey) x Unidad", english: "(Jersey) per Unit" } );
+			ci.setArticle("536");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Julie");
-			ci.setDescription( oUnit );
-			ci.setArticle("527");
+			ci.setName("Mia");
+			ci.setDescription( { spanish: "(Interlock) x Unidad", english: "(Interlock) per Unit" } );
+			ci.setArticle("535");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Millie");
-			ci.setDescription( oUnit );
-			ci.setArticle("528");
+			ci.setName("Nina");
+			ci.setDescription( { spanish: "(Ribb) x Unidad", english: "(Ribb) per Unit" } );
+			ci.setArticle("534");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Pia");
-			ci.setDescription( oUnit );
-			ci.setArticle("530");
+			ci.setName("Penty");
+			ci.setDescription( { spanish: "(Intelock) x Unidad", english: "(Interlock) per Unit" } );
+			ci.setArticle("532");
 			aData.push(ci);
 			
 			//defino el grupo
@@ -132,15 +141,13 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName("Ana");
-			ci.setDescription( { spanish: "(ribb combinado)", english: "(ribb combinado)" } );
+			ci.setName("Pijama");
 			ci.setDescription2( oUnit );
 			ci.setArticle("210");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Mara");
-			ci.setDescription( { spanish: "(camison jersey)", english: "(camison jersey)" } );
+			ci.setName("Combinado");
 			ci.setDescription2( oUnit );
 			ci.setArticle("211");
 			aData.push(ci);
@@ -162,8 +169,13 @@
 			//defino los items
 			aData = new Array();
 			ci = new CarritoItemData();
-			ci.setName( oSlipCom );
+			ci.setName( oSlipLis );
 			ci.setArticle("703");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName( oSlipEst );
+			ci.setArticle("708");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
@@ -178,14 +190,19 @@
 			
 			
 			ci = new CarritoItemData();
-			ci.setName( oBoxerRay );
-			ci.setArticle("705");
+			ci.setName( oBoxerLiso );
+			ci.setDescription( oBoxerLisColl );
+			ci.setArticle("706");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oBoxerLiso );
-			ci.setDescription( oBoxerColl );
-			ci.setArticle("706");
+			ci.setName( oBoxerEst );
+			ci.setArticle("707");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName( oBoxerRay );
+			ci.setArticle("705");
 			aData.push(ci);
 						
 			//defino el grupo
@@ -206,39 +223,52 @@
 			aData = new Array();
 			ci = new CarritoItemData();
 			ci.setName( oBomb );
-			ci.setDescription( oBombRL );
-			ci.setArticle("602");
-			aData.push(ci);
-			
-			ci = new CarritoItemData();
-			ci.setName( oBombLL );
+			ci.setDescription( "(Lycra)" );
 			ci.setArticle("702");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oBombSet );
-			ci.setDescription2( oLycraPrinted );
+			ci.setName( oBombCE );
+			ci.setDescription( "(Lycra)" );
+			ci.setArticle("604");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName( oBombacha );
+			ci.setDescription( "(Ribb)" );
+			ci.setArticle("602");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName( oBombCO );
+			ci.setDescription( "(Lycra)" );
+			ci.setArticle("700");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName( oConjCamBomb );
+			ci.setDescription2 (oCotton);
 			ci.setArticle("610");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oBombSet );
-			ci.setDescription2( oLisoRibbed );
+			ci.setName(oConjCamBomb);
+			ci.setDescription2(oDes);
 			ci.setArticle("615");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName( oCorpBomb );
+			ci.setName(oCorpBomb);
 			ci.setArticle("609");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Culotte");
+			ci.setName(oCulotte);
 			ci.setArticle("701");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
-			ci.setName("Mini Short");
+			ci.setName(oMiniShort);
 			ci.setArticle("601");
 			aData.push(ci);
 									

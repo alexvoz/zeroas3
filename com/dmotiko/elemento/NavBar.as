@@ -23,6 +23,7 @@
 			mcHome.visible = false;
 			this.addChild(mcHome);
 			
+			
 			mcLang = new LangBtn();
 			mcLang.x = 1000 - mcLang.width - 50;
 			mcLang.visible = false;
