@@ -1,4 +1,4 @@
-package com.zero.snap {
+﻿package com.zero.snap {
 	import com.general.*;
 	import flash.display.*;
 	import flash.events.*;
@@ -128,7 +128,6 @@ package com.zero.snap {
 			
 			super.initSite();
 			
-															
 			mcPlaca = new Board();
 			mcPlaca.y = -560;
 			mcPlaca.mask = mcMask;
@@ -137,7 +136,6 @@ package com.zero.snap {
 			mcSombra.alpha = 0.2;
 			mcSombra.mouseEnabled = false;
 			mcScroll.addEventListener( Event.CHANGE, scroll_change);
-			init_scroll(undefined);
 			
 			tooltip = new SnapTooltip();
 			tooltip.mouseEnabled = false;
@@ -193,8 +191,49 @@ package com.zero.snap {
 			soundController.volume = 1;
 			soundController.position = 0;
 			soundController.startDownload = getTimer();
+			/*
 			timerMusic = new Timer(7000);
-			timerMusic.addEventListener( TimerEvent.TIMER, loop_music );  
+			timerMusic.addEventListener( TimerEvent.TIMER, loop_music );
+			*/
+			
+			//NAVEGACION SUPERIOR
+			var nextRoom:TopNavigation = new TopNavigation();
+			nextRoom.name = "nextRoom";
+			addChild(nextRoom);
+			nextRoom.x = mcPlaca.getBounds(this).right - nextRoom.width;
+			nextRoom.setMessage("Distribucion");
+			nextRoom.addEventListener( MouseEvent.CLICK, gotoNextRoom, false, 0, true);
+			
+			var prevRoom:TopNavigation = new TopNavigation(true);
+			prevRoom.name = "prevRoom";
+			prevRoom.x = mcPlaca.getBounds(this).left;
+			addChild(prevRoom);
+			prevRoom.setMessage("Producción");
+			prevRoom.addEventListener( MouseEvent.CLICK, gotoPrevRoom, false, 0, true);
+			
+			init_scroll(undefined);
+		}
+		
+		private function gotoPrevRoom(e:MouseEvent):void 
+		{
+			var nPos:Number = mcScroll.getPos();
+			if ( nPos > 40 && nPos < 80 ) { 
+				mcScroll.setPosAnimated(0); 
+				
+			} else if ( nPos >= 80 ) {
+				mcScroll.setPosAnimated(59); 
+			}
+		}
+		
+		private function gotoNextRoom(e:MouseEvent):void 
+		{
+			var nPos:Number = mcScroll.getPos();
+			if ( nPos > 40 && nPos < 80 ) { 
+				mcScroll.setPosAnimated(100); 
+				
+			} else if ( nPos <= 40 ) {
+				mcScroll.setPosAnimated(59);
+			}
 		}
 		
 		private function snd_progress(e:ProgressEvent):void {
@@ -211,12 +250,15 @@ package com.zero.snap {
 		{
 			musicChannel.stop();
 			soundController.position = 0;
+			loop_music(e);
+			/*
 			timerMusic.reset();
 			timerMusic.start();
+			*/
 		}
 				
 		private function loop_music(e:Event):void {
-			timerMusic.stop();
+			//timerMusic.stop();
 			musicChannel = music.play( soundController.position );
 			musicChannel.addEventListener( Event.SOUND_COMPLETE, timer_music);
 		}
@@ -234,13 +276,14 @@ package com.zero.snap {
 				try { 
 					flvVideo.stop();
 				} catch (e) {
-					log("Site video_change");
+					log("Site video_change error "+e);
 				}
 				break;
 			}
 		}
 		
 		public function setVideo(src:String):void {
+			trace("thumb_click -> setVideo "+src);
 			if ( getSection() != Site.REEL && getSection() != Site.WORKS ) return;
 			flvVideo.play(src, 0);
 		}
@@ -263,7 +306,7 @@ package com.zero.snap {
 		
 		private function init_scroll(e:Event):void 
 		{
-			Site.log("Site | Scroll activate" );
+			//Site.log("Site | Scroll activate" );
 			mcScroll.setPos(59);
 			scroll_change(undefined);
 			
@@ -272,6 +315,7 @@ package com.zero.snap {
 		override public function setSection(s:String):void {
 			super.setSection(s);
 			siteSound.visible = true;
+						
 			switch(s) {
 				case HOME:
 				zoomOut();
@@ -297,9 +341,14 @@ package com.zero.snap {
 				break;
 				
 				case STAFF:
-				case PARTNERS:
 				case CONTACT:
 				case HISTORY:
+				mcScroll.setPos( 59 );
+				placaIn();
+				fadeInMusic();
+				break;
+				
+				case PARTNERS:
 				mcScroll.setPos( 100 );
 				placaIn();
 				fadeInMusic();
@@ -317,9 +366,12 @@ package com.zero.snap {
 		
 		public function placaIn(){
 			registerTween("placaTween", new Tween(mcPlaca, "y", Strong.easeOut, mcPlaca.y, 0, 0.5, true) );
+			this.getChildByName("prevRoom").visible = false;
+			this.getChildByName("nextRoom").visible = false;
 		}
 		public function placaOut(){
 			registerTween("placaTween", new Tween(mcPlaca, "y", Strong.easeOut, mcPlaca.y, -560, 0.5, true) );
+			setPos( mcScroll.getPos() );
 		}
 
 
@@ -376,6 +428,24 @@ package com.zero.snap {
 			var nX:Number = -(n * (mcFondo.width - 1112) / 100);
 			mcFondo.x = nX;
 			
+			if ( n < 40 ) {
+				this.getChildByName("prevRoom").visible = false;
+				this.getChildByName("nextRoom").visible = true;
+				(this.getChildByName("prevRoom") as TopNavigation).setMessage("");
+				(this.getChildByName("nextRoom") as TopNavigation).setMessage("Showroom");
+			} else if ( n > 40 && n < 80 ) {
+				this.getChildByName("prevRoom").visible = true;
+				this.getChildByName("nextRoom").visible = true;
+				(this.getChildByName("prevRoom") as TopNavigation).setMessage("Produccion");
+				(this.getChildByName("nextRoom") as TopNavigation).setMessage("Distribucion");
+				
+			} else if ( n > 80 ){
+				this.getChildByName("prevRoom").visible = true;
+				this.getChildByName("nextRoom").visible = false;
+				(this.getChildByName("nextRoom") as TopNavigation).setMessage("");
+				this.getChildByName("prevRoom").visible = true;
+				(this.getChildByName("prevRoom") as TopNavigation).setMessage("Showroom");
+			}
 		}
 
 	}

@@ -9,16 +9,14 @@
 	public class ScrollBar
 	extends MovieClip {
 		
-		//public var mcGlobito:MovieClip;
-		//public var tGlobito:Tween;
 		public var btnTrigger:MovieClip;
 		public var btn:MovieClip;
 		public var back:MovieClip;
 		public var mcBotonera:MovieClip;
 		
 		private var pOffset:Point;
-		//private var pOffsetGlobito:Point;
 		private var tBotonera:Tween;
+		private var tBtn:Tween;
 		
 		function ScrollBar(){
 		
@@ -63,6 +61,11 @@
 		
 		public function getPos():Number {
 			return Math.round( btn.x * 100 /(back.width - btn.width) );
+		}
+		public function setPosAnimated(n):void {
+			addEventListener( Event.ENTER_FRAME, btn_move );
+			tBtn = new Tween( btn, "x", Regular.easeInOut, btn.x, n * (back.width - btn.width) / 100, 1, true);
+			tBtn.addEventListener( TweenEvent.MOTION_FINISH, btn_up);
 		}
 		public function setPos(n):void {
 			

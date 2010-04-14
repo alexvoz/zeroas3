@@ -88,11 +88,14 @@
 				addChild(thumb);
 				nX += 100;
 			}
+			
 		}
 		
 		private function thumb_click(e:MouseEvent):void 
 		{
+			
 			var oData = (e.currentTarget as BaseClip).getData();
+			
 			Site.getApp().setVideo( oData.@href );
 			txtTitle.text = oData.@title.toUpperCase();
 			txtType.text = oData.@type;
