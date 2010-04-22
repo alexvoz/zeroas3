@@ -2,14 +2,27 @@
 	import com.general.*;
 	import flash.text.*;
 	import flash.display.*;
+	import fl.transitions.easing.Regular;
+	import fl.transitions.Tween;
+	import flash.display.*;
+	import flash.events.*
+	import com.general.*
+	import flash.net.navigateToURL;
+	import flash.net.URLRequest;
 	
 	public class SeluCollectionInfo
 	extends BaseClip {
 		
 		public var txtContent:TextField;
+		public var mcNext:Sprite;
+		public var mcPrev:Sprite;
 		
 		override protected function initClip():void {
 			txtContent.htmlText = "";
+			mcNext.buttonMode = mcPrev.buttonMode = true;
+			mcNext.addEventListener( MouseEvent.CLICK, scroll_text);
+			mcPrev.addEventListener( MouseEvent.CLICK, scroll_text);
+			mcPrev.visible = false;
 		}
 		override protected function refreshData():void {
 			txtContent.htmlText = "";
@@ -31,8 +44,21 @@
 				}
 				txtContent.htmlText += sContent;
 			}
+			
 		}
-		
+		private function scroll_text(e:MouseEvent):void 
+		{
+			if ( e.currentTarget == mcNext ) {
+				txtContent.scrollV ++;
+				if (txtContent.scrollV == txtContent.maxScrollV ) mcNext.visible = false;
+				mcPrev.visible = true;
+				
+			} else {
+				txtContent.scrollV --;
+				if (txtContent.scrollV == 1 ) mcPrev.visible = false;
+				mcNext.visible = true;
+			}
+		}
 	}
 	
 }

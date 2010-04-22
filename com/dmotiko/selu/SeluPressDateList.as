@@ -25,7 +25,7 @@
 				item.setData( { label: new String(nodo.@date), data: nodo } );
 				item.addEventListener( MouseEvent.CLICK, active_btn );
 				item.y = nY;
-				nY += item.height + 2;
+				nY += item.height + 10;
 				mcContent.addChild( item );
 				aBtns.push( item );
 			}

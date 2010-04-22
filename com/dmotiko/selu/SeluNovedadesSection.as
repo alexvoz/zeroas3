@@ -14,7 +14,7 @@
 		override protected function initClip():void {
 			super.initClip();
 			mcNews.setData( SeluSite.getApp().getNewsData() );
-		}
+					}
 		
 	}
 	

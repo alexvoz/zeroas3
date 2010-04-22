@@ -26,9 +26,9 @@
 		override protected function initClip():void {
 			super.initClip();
 			imgContainer = new Sprite();
-			imgContainer.x = 8;
-			imgContainer.y = 11;
-			imgContainer.rotation = 1;
+			imgContainer.x = 11;//8;
+			imgContainer.y = 28;//11;
+			//imgContainer.rotation = 1;
 			addChild(imgContainer);
 			
 			imgLoader = new Loader();
@@ -67,7 +67,7 @@
 			
 			if( data.link ){
 				txtLink.htmlText = "<a href='"+data.href+"' >"+data.link+"</a>";
-				txtLink.y = txtContent.getBounds(this).bottom;
+				txtLink.y = txtContent.getBounds(this).bottom + 30;
 				mcStroke.y = txtLink.getBounds(this).bottom + 5;
 			} else {
 				removeChild(txtLink);

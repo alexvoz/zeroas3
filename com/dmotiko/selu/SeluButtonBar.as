@@ -1,4 +1,4 @@
-package com.dmotiko.selu {
+﻿package com.dmotiko.selu {
 	import com.general.*;
 	import flash.display.*;
 	import flash.text.*;
@@ -11,19 +11,19 @@ package com.dmotiko.selu {
 				
 		override protected function initClip():void {
 			bVertical = true;
-			nSpace = 9;
+			nSpace = 1;
 			nOffset = 0;
 			setVertical(false);
 			setView( SeluButton );
 			setData( [ 
-				{ label: "coleccion", over: new ColeccionOver(), section: SeluSite.COLECCION },
-				{ label: "backstage", over: new BackstageOver(), section: SeluSite.BACKSTAGE },
-				{ label: "puntos de venta", over: new PuntosDeVentaOver(), section: SeluSite.PUNTOVENTA },
-				{ label: "novedades", over: new NovedadesOver(), section: SeluSite.NOVEDADES },
-				{ label: "sexies", /*over: new SexiesOver()*/over: new Construction(), section: SeluSite.SEXIES },
-				{ label: "prensa", over: new PrensaOver() /*over: new Construction()*/, section: SeluSite.PRENSA },
-				{ label: "contacto", over: new ContactoOver(), section: SeluSite.CONTACTO },
-				{ label: "no casting", over: new NoCastingOver(), section: SeluSite.NOCASTING }
+				{ label: "Colección  .", /*over: new ColeccionOver(),*/ section: SeluSite.COLECCION, nFrame: 2 },
+				{ label: "Backstage  .", /*over: new BackstageOver(),*/ section: SeluSite.BACKSTAGE, nFrame: 2 },
+				{ label: "Puntos de venta  .", /*over: new PuntosDeVentaOver(),*/ section: SeluSite.PUNTOVENTA, nFrame: 3 },
+				{ label: "Novedades  .", /*over: new NovedadesOver(),*/ section: SeluSite.NOVEDADES, nFrame: 4 },
+				{ label: "Sexies  .", over: new SexiesOver(),/*over: new ColeccionOver(),*/ /*section: SeluSite.SEXIES,*/ nFrame: 7 },
+				{ label: "Prensa  .", /*over: new PrensaOver() over: new Construction(),*/ section: SeluSite.PRENSA, nFrame: 5 },
+				{ label: "Contacto  .", /*over: new ContactoOver(),*/ section: SeluSite.CONTACTO, nFrame: 2 },
+				{ label: "No casting", /*over: new NoCastingOver(),*/ section: SeluSite.NOCASTING, nFrame: 6 }
 			]);
 		}
 		
@@ -52,7 +52,7 @@ package com.dmotiko.selu {
 					if (i < aBtns.length - 1) {
 						separator = new SeluButtonSeparator();
 						separator.x = item.x + item.width;
-						nOffset += item.width + separator.width + nSpace;
+						nOffset += item.width + separator.width -8;//+ nSpace;
 					} else {
 						nOffset += item.width + nSpace;
 					}

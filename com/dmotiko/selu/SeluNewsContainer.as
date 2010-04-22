@@ -68,7 +68,7 @@
 				item.setData( { date: node.@date, title: node.@title, thumb: node.@thumb, link: node.@link, href: node.@href, data: node } );
 				item.y = nY;
 				mcContainer.addChild(item);
-				nY += item.height;
+				nY += item.height + 5;
 				
 				mcContainer.mcFooter.y = nY + 3;
 				

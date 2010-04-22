@@ -26,8 +26,9 @@
 			mcCloseBtn.addEventListener( MouseEvent.CLICK, rightButtonClick);
 			
 			navBar = new SeluButtonBar();
-			navBar.x = 27;
-			navBar.y = 200;
+			navBar.x = 25;
+			navBar.y = 217;
+			navBar.rotation -= 1.2
 			navBar.mouseEnabled = false;
 			navBar.mouseChildren = false;
 			navBar.addEventListener( Event.CHANGE, btnBarChange);

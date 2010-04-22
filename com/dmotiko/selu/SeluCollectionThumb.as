@@ -17,7 +17,7 @@ package com.dmotiko.selu {
 				
 		override protected function initClip():void {
 			spPhoto = new Sprite();
-			spPhoto.graphics.drawRect(0, 0, 63, 63);
+			spPhoto.graphics.drawRect(0, 0, 75, 75);
 			spPhoto.buttonMode = true;
 			spPhoto.addEventListener( MouseEvent.ROLL_OVER, rollOver);
 			spPhoto.addEventListener( MouseEvent.ROLL_OUT, rollOut);
@@ -64,8 +64,10 @@ package com.dmotiko.selu {
 			var nAlpha:Number = 1;
 			registerTween("thumbFade", new Tween( spPhoto, "alpha", Regular.easeOut, 0, nAlpha, 0.3, true) );
 					
-			over.width = loader.width;
-			over.height = loader.height;
+			over.width = 65;//loader.width;
+			over.height = 65;//loader.height;
+			over.x = 5;
+			over.y = 6;
 			if (!bActive) over.alpha = 0;
 			else over.alpha = 0.3;
 			spPhoto.addChild( over );

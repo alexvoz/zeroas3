@@ -41,19 +41,21 @@
 						
 			btnBar = new BaseMenu();
 			addChild(btnBar);
-			btnBar.x = 66;
-			btnBar.y = 285;
+			btnBar.x = 100;
+			btnBar.y = 245;
 			btnBar.rotation = -3;
 			btnBar.setView( SeluButtonResalte );
 			btnBar.addEventListener( Event.CHANGE, menu_changed);
-			btnBar.setSpace( -10 );
+			//btnBar.setSpace( -10 );
+			
 			
 			var aData:Array = new Array();
-			aData.push( { label: "Administracion", data: "administracion@selu.com.ar" } );
+			aData.push( { label: "Administración", data: "administracion@selu.com.ar" } );
 			aData.push( { label: "Ventas", data: "ventas@selu.com.ar" } );
 			aData.push( { label: "Clientes", data: "clientes@selu.com.ar" } );
 			aData.push( { label: "Exportaciones", data: "export@selu.com.ar" } );
 			aData.push( { label: "Publicidad", data: "publicidad@selu.com.ar" } );
+			aData.push( { label: "Newsletter", data: "newsletter@selu.com.ar" } );
 			
 			btnBar.setData( aData );
 			

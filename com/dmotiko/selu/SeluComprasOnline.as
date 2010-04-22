@@ -37,8 +37,8 @@
 				
 				case SeluSite.PUNTOVENTA:
 				p = new Point( 75, 445);
-				visible = true;
-				alpha = 1;
+				//visible = true;
+				//alpha = 1;
 				break;
 				
 				case SeluSite.NOVEDADES:

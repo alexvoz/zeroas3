@@ -17,13 +17,13 @@ package com.dmotiko.selu {
 			
 			txtLabel.mouseEnabled = false;
 			
-			nColor = 0x645b44;
+			nColor = 0x000000;
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;
 			txtLabel.textColor = nColor;
 		}
 		
 		override public function rollOver( evnt:MouseEvent ):void {
-			txtLabel.textColor = 0xfefff3;
+			txtLabel.textColor = /*0xfefff3;*/0x000000;
 			gotoAndStop(2);
 		}
 		
@@ -35,7 +35,7 @@ package com.dmotiko.selu {
 		
 		override protected function refreshData():void {
 			//SeluSite.log( "SeluPressButton | refreshData=  "+data.label);
-			txtLabel.text = data.label.toUpperCase();
+			txtLabel.text = data.label/*.toUpperCase()*/;
 		}
 	}
 	

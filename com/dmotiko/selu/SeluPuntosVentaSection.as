@@ -20,8 +20,9 @@
 			//inicializo los clips
 			btnBar = new SeluPuntosVentaMenu();
 			addChild(btnBar);
-			btnBar.x = 515;
-			btnBar.y = 75;
+			btnBar.x = 613;
+			btnBar.y = 55;
+			//btnBar.rotation -= 2.5;
 			btnBar.setView( SeluButtonResalte );
 			btnBar.addEventListener( Event.CHANGE, menu_changed);
 						

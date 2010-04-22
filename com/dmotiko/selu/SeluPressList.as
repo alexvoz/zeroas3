@@ -4,6 +4,7 @@
 	import flash.display.*;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+
 		
 	public class SeluPressList
 	extends ScrollerMovie {
@@ -54,7 +55,7 @@
 				item.setData( { label: new String(nodo.@name), data: nodo } );
 				item.addEventListener( MouseEvent.CLICK, active_btn );
 				item.y = nY;
-				nY += item.height + 2;
+				nY += item.height + 10;
 				mcContent.addChild( item );
 				aBtns.push( item );
 			}
@@ -74,6 +75,11 @@
 		public function getButtons():Array {
 			return aBtns;
 		}
+		
+		public function scrollD():void {
+			mcContent.x = -10;
+		}
+		
 		
 	}
 	

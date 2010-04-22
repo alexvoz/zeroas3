@@ -13,7 +13,9 @@ package com.dmotiko.selu {
 			this.buttonMode = true;
 			txtLabel.mouseEnabled = false;
 			
-			nColor = 0xc66d41;
+			//nColor = 0xc66d41;
+			//nColor = 0x9d7c88;
+			nColor = 0x000000;
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;
 			txtLabel.textColor = nColor;
 			this.addEventListener( MouseEvent.ROLL_OVER, rollOver);
