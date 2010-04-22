@@ -48,6 +48,7 @@
 			var oDocMix:Object = { spanish: "(6 de varón y 6 de nena)", english: "(6 for boys, 6 for girls)" };
 			var oDocMisc:Object = { spanish: "(varios colores unisex, nena y varón)", english: "(various colors, unisex, for boys and girls)" };
 			var oDocMiscTalle:Object = { spanish: "(varios colores unisex, nena y varón) T: 000-00-0-1", english: "(various colors, unisex, for boys and girls)" };
+			var oDocMiscTalleN:Object = { spanish: "(varios colores unisex, nena y varón) T: 0-1-2-3", english: "(various colors, unisex, for boys and girls)" };
 			var oDocMiscTalle45:Object = { spanish: "(varios colores unisex, nena y varón) T: 4-5", english: "(various colors, unisex, for boys and girls)" };
 			var oDocRay:Object = { spanish: "(variedad de rayadas)", english: "(stripes, available in various colors)" };
 			var oDocRay2:Object = { spanish: "(variedad de rayadas, estampadas, lisas)", english: "(stripes, printed, solid colors)" };
@@ -114,7 +115,7 @@
 			ci = new CarritoItemData();
 			ci.setName( oLiso );
 			ci.setDescription( oDocena );
-			ci.setDescription2( oDocMiscTalle );
+			ci.setDescription2( oDocMiscTalleN );
 			ci.setArticle("1070");
 			aData.push(ci);
 			

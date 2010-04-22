@@ -1,4 +1,4 @@
-package com.dmotiko.elemento {
+﻿package com.dmotiko.elemento {
 	import com.general.*;
 	import flash.display.*;
 	import flash.events.*;
@@ -6,7 +6,7 @@ package com.dmotiko.elemento {
 	import flash.media.SoundChannel;
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
-	
+		
 	public class Site
 	extends WebSite {
 		
@@ -44,7 +44,7 @@ package com.dmotiko.elemento {
 		private var ropaTemplate:Loader;
 		private var sndController:SoundController;
 		private var contacto:Loader;
-				
+		
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
 			else if (!toConsole) trace( msg );
@@ -60,7 +60,7 @@ package com.dmotiko.elemento {
 			stage.align = "TC";
 			stage.scaleMode = StageScaleMode.NO_SCALE;		
 		}
-				
+		
 		override protected function initSite():void {
 			this.sSection = Site.HOME;
 			this.sLanguage = Site.SPANISH;
@@ -72,6 +72,7 @@ package com.dmotiko.elemento {
 		public function getMusicChannel():SoundChannel { return sndController.getMusicChannel(); }
 		
 		override public function setSection(sSection:String):void {
+			
 			super.setSection(sSection);
 			var nHeight:Number = Site.getApp().height;
 			if (nHeight < 650) nHeight == 650;

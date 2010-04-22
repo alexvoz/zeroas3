@@ -262,9 +262,20 @@
 			ci.setArticle("609");
 			aData.push(ci);
 			
+			
 			ci = new CarritoItemData();
-			ci.setName(oCulotte);
-			ci.setArticle("701");
+			ci.setName("Cullote");
+			ci.setArticle("803");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName("Colaless");
+			ci.setArticle("800");
+			aData.push(ci);
+			
+			ci = new CarritoItemData();
+			ci.setName("Vedettina");
+			ci.setArticle("801");
 			aData.push(ci);
 			
 			ci = new CarritoItemData();
