@@ -82,6 +82,10 @@
 						navigateToURL( new URLRequest( link ), "_blank" );
 						return;
 					}
+					if ( link.indexOf("mailto:") == 0){
+						navigateToURL( new URLRequest( link ) );
+						return;
+					}
 					
 					if ( link == BTN_NEXT) {
 						if ( timeline.currentFrame < timeline.totalFrames ) timeline.nextFrame();

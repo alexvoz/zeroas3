@@ -9,6 +9,7 @@
 	import flash.net.*;
 	import fl.transitions.*;
 	import fl.transitions.easing.*;
+	import fl.video.VideoEvent;
 	import fl.video.*;
 	import flash.utils.getTimer;
 	import flash.utils.Timer;
@@ -104,6 +105,7 @@
 			
 		public function fadeInMusic():void {
 			if ( !getSound() || getSection() == Site.WORKS || getSection() == Site.REEL || soundController.volume == 1) return;
+			if (musicChannel) musicChannel.stop();
 			musicChannel = music.play( soundController.position );
 			musicChannel.addEventListener( Event.SOUND_COMPLETE, loop_music);
 			if (soundTween) soundTween.stop();
@@ -153,28 +155,14 @@
 			flvVideoBack.graphics.beginFill(0);
 			flvVideoBack.graphics.drawRect(0, 0, 525, 301);
 						
-			//flvVideoSettings | instancio el componente y lo seteo
-			flvVideo = new FLVPlayback();
-			flvVideo.autoPlay = false;
-			flvVideo.width = 525;
-			flvVideo.height = 393;
-			flvVideo.registrationHeight = 300;
-			flvVideo.registrationY = 0;
-			flvVideo.align = VideoAlign.CENTER;
-			flvVideo.scaleMode = VideoScaleMode.MAINTAIN_ASPECT_RATIO;
-			flvVideo.skinBackgroundColor = 0;
-			flvVideo.skin = "SkinOverPlaySeekStop.swf";
-			flvVideo.autoPlay = false;
-			flvVideo.autoRewind = false;
-			flvVideo.skinAutoHide = true;
-			flvVideo.addEventListener( VideoEvent.STATE_CHANGE, video_change );
-			
 			//flvVideoContainer | hago un contenedor para el fondo y el video asi posiciono todo junto
 			flvVideoContainer = new Sprite();
 			flvVideoContainer.addChild(flvVideoBack);
-			flvVideoContainer.addChild(flvVideo);
 			flvVideoContainer.x = 267;
 			flvVideoContainer.y = 100;
+			
+			//flvVideoSettings | instancio el componente y lo seteo
+			this.instanceFLVVideo();
 			
 			//SONIDO
 			siteSound = new soundIcon();
@@ -214,6 +202,30 @@
 			init_scroll(undefined);
 		}
 		
+		private function instanceFLVVideo():void {
+			if (flvVideo) {
+				if (flvVideoContainer.contains( flvVideo ) ) flvVideoContainer.removeChild( flvVideo );
+				flvVideo.getVideoPlayer(0).close();
+				flvVideo = null;
+			}
+			
+			flvVideo = new FLVPlayback();
+			flvVideo.width = 525;
+			flvVideo.height = 393;
+			flvVideo.registrationHeight = 300;
+			flvVideo.registrationY = 0;
+			flvVideo.align = VideoAlign.CENTER;
+			flvVideo.scaleMode = VideoScaleMode.MAINTAIN_ASPECT_RATIO;
+			flvVideo.skinBackgroundColor = 0;
+			flvVideo.skin = "SkinOverPlaySeekStop.swf";
+			flvVideo.autoPlay = true;
+			flvVideo.autoRewind = false;
+			flvVideo.skinAutoHide = true;
+			flvVideo.addEventListener( VideoEvent.STATE_CHANGE, video_change, false, 0, true );
+			flvVideoContainer.addChild(flvVideo);
+			
+		}
+		
 		private function gotoPrevRoom(e:MouseEvent):void 
 		{
 			var nPos:Number = mcScroll.getPos();
@@ -240,6 +252,7 @@
 			var p:int = Math.round(e.bytesLoaded * 100 / e.bytesTotal );
 			if (p > 35) {
 				music.removeEventListener( ProgressEvent.PROGRESS, snd_progress);
+				if (musicChannel) musicChannel.stop();
 				musicChannel = music.play();
 				musicChannel.addEventListener( Event.SOUND_COMPLETE, timer_music);
 				setSound(true);
@@ -259,6 +272,7 @@
 				
 		private function loop_music(e:Event):void {
 			//timerMusic.stop();
+			if (musicChannel) musicChannel.stop();
 			musicChannel = music.play( soundController.position );
 			musicChannel.addEventListener( Event.SOUND_COMPLETE, timer_music);
 		}
@@ -274,7 +288,8 @@
 				
 				default:
 				try { 
-					flvVideo.stop();
+					this.instanceFLVVideo();
+					
 				} catch (e) {
 					log("Site video_change error "+e);
 				}
@@ -283,8 +298,9 @@
 		}
 		
 		public function setVideo(src:String):void {
-			trace("thumb_click -> setVideo "+src);
+			trace("Site | thumb_click -> setVideo "+src);
 			if ( getSection() != Site.REEL && getSection() != Site.WORKS ) return;
+			trace("Site | thumb_click -> setVideo OK");
 			flvVideo.play(src, 0);
 		}
 		
@@ -383,12 +399,14 @@
 			registerTween("fondoScaleX", new Tween(clip, "scaleX", Strong.easeOut, clip.scaleX, 1.5, 0.5, true) );
 			registerTween("fondoMoveX", new Tween(clip, "x", Strong.easeOut, clip.x, -1650, 0.5, true) );
 			registerTween("fondoMoveY", new Tween(clip, "y", Strong.easeOut, clip.y, -80, 0.5, true) );
+			this.getChildByName("prevRoom").visible = false;
+			this.getChildByName("nextRoom").visible = false;
 			try{
 				
 				mcFondo.removeChild( mcFondo.loader ); //ver index.fla | mcFondo
-				addChild(flvVideoContainer);
+				this.addChild( flvVideoContainer );
 			} catch (e) {
-				Site.log("Site.as | 200 | error de play "+e);
+				Site.log("Site.as | 404 | error de play "+e);
 			}
 		}
 		public function zoomOut(){
@@ -399,10 +417,12 @@
 			registerTween("fondoScaleX", new Tween(clip, "scaleX", Strong.easeOut, clip.scaleX, 1, 0.5, true));
 			registerTween("fondoMoveX", new Tween(clip, "x", Strong.easeOut, clip.x, -900, 0.5, true));
 			registerTween("fondoMoveY", new Tween(clip, "y", Strong.easeOut, clip.y, 0, 0.5, true));
+			this.getChildByName("prevRoom").visible = true;
+			this.getChildByName("nextRoom").visible = true;
 			try{
-				flvVideo.stop();
+				this.instanceFLVVideo();
 				mcFondo.addChild( mcFondo.loader ); //ver index.fla | mcFondo
-				removeChild(flvVideoContainer);
+				this.removeChild( flvVideoContainer );
 			} catch (e) {
 				Site.log("Site.as | 215 | error de stop "+e);
 			}
