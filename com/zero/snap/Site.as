@@ -52,6 +52,7 @@
 		public var mcFondo:MovieClip;
 		public var worksBar:MovieClip;
 		public var flvVideo:FLVPlayback;
+		public var designBy:Sprite;
 		
 		private var t:Tween;
 		private var sndController:SoundController;
@@ -69,6 +70,7 @@
 		private var soundController:Object;
 		private var siteSound:SiteSound;
 		private var timerMusic:Timer;
+		
 								
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
@@ -129,6 +131,11 @@
 			this.sLanguage = Site.SPANISH;
 			
 			super.initSite();
+			
+			designBy.addEventListener( MouseEvent.ROLL_OVER, designBy_event);
+			designBy.addEventListener( MouseEvent.ROLL_OUT, designBy_event);
+			designBy.addEventListener( MouseEvent.CLICK, designBy_event);
+			designBy.buttonMode = true;
 			
 			mcPlaca = new Board();
 			mcPlaca.y = -560;
@@ -200,6 +207,17 @@
 			prevRoom.addEventListener( MouseEvent.CLICK, gotoPrevRoom, false, 0, true);
 			
 			init_scroll(undefined);
+		}
+		
+		private function designBy_event(e:MouseEvent):void 
+		{
+			if ( e.type == MouseEvent.ROLL_OVER ) {
+				showTooltip("Diseño Web | 76", (e.currentTarget as Sprite).getBounds(this));
+			} else if ( e.type == MouseEvent.ROLL_OUT ) {
+				hideTooltip();
+			} else if ( e.type == MouseEvent.CLICK ) {
+				navigateToURL( new URLRequest("http://www.seventysix.com.ar"), "_blank" );
+			}
 		}
 		
 		private function instanceFLVVideo():void {

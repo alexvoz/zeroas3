@@ -6,6 +6,7 @@
 	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
+	import flash.filters.BlurFilter;
 	import flash.filters.DropShadowFilter;
 	import flash.text.TextField;
 	import flash.text.TextFieldAutoSize;
@@ -32,14 +33,14 @@
 			this.buttonMode = true;
 			initBackground();
 			initField();
-			
+				
 		}
 		
 		private function initBackground():void
 		{
 			back = new Shape();
 			back.graphics.beginFill(0xFFFFFF, 0);
-			back.graphics.drawRect(0, 0, 150, 40);
+			back.graphics.drawRect(0, 0, 150, 30);
 			back.graphics.endFill();
 			this.addChild(back);
 			
@@ -48,12 +49,14 @@
 				flecha.scaleX = -1;
 				flecha.x = 150;
 			}
+			flecha.alpha = 0.7;
+			flecha.filters = [ new BlurFilter(2,4,1) ];
 			addChild(flecha);
 			
 			stroke = new Shape();
 			stroke.graphics.lineStyle(1, 0x0099CC, 1);
 			stroke.graphics.lineTo(0, 0);
-			stroke.graphics.lineTo(0, 40);
+			stroke.graphics.lineTo(0, 30);
 			this.addChild(stroke);
 			if ( this.bLeft ) stroke.x = 150;
 		}
@@ -85,7 +88,7 @@
 			if ( tMove ) tMove.stop();
 			tMove = new Tween( this, "y", Regular.easeInOut, this.y - this.height, 0, 0.5, true);
 			this.txtLabel.text = msg.toUpperCase();
-			this.txtLabel.y = 20 - this.txtLabel.height /2;
+			this.txtLabel.y = 15 - this.txtLabel.height /2;
 		}
 		
 	}
