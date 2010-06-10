@@ -136,6 +136,7 @@
 			designBy.addEventListener( MouseEvent.ROLL_OUT, designBy_event);
 			designBy.addEventListener( MouseEvent.CLICK, designBy_event);
 			designBy.buttonMode = true;
+			if ( !this.getSWF_VAR("SHOW_FIRM") ) removeChild( designBy );
 			
 			mcPlaca = new Board();
 			mcPlaca.y = -560;
