@@ -1,4 +1,4 @@
-package net.xinterface.utils
+package com.util
 {
 	/**
 	 * @author Dalis Lopez
