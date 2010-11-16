@@ -9,6 +9,7 @@
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.text.TextField;
 	
@@ -34,13 +35,21 @@
 			
 			txtTitle.text = txtType.text = txtFrequency.text = txtDuration.text = "";
 			
-			var xmlData:XML = <root>
-				<item src='box_h90.png' href='http://snaptv.tv/trailer_h90.flv' tooltip='ver trailer\nde h90' title='h90' type='documental' freq='diaria / semanal' dur='15x90"' />
-				<item src='box_101.png' href='http://snaptv.tv/trailer_101.flv' tooltip='ver trailer\nde 101' title='101' type='docu reality' freq='diaria / semanal / fillers' dur="20eps x30' + 21 fills x 2'" />
-				<item src='box_rescates.png' href='http://snaptv.tv/trailer_rescates.flv' tooltip='ver trailer de\nRescates Extremos' title='Rescates Extremos' type='docu reality' freq='semanal' dur="6x1hora" />
-			</root>
-			
-			setData( xmlData.item );
+			var dataLoader:URLLoader = new URLLoader( new URLRequest( "works.xml" ) );
+			dataLoader.addEventListener(Event.COMPLETE, xml_loaded );
+			//
+			//var xmlData:XML = <root>
+				//<item src='box_h90.png' href='http://snaptv.tv/trailer_h90.flv' tooltip='ver trailer\nde h90' title='h90' type='documental' freq='diaria / semanal' dur='15x90"' />
+				//<item src='box_101.png' href='http://snaptv.tv/trailer_101.flv' tooltip='ver trailer\nde 101' title='101' type='docu reality' freq='diaria / semanal / fillers' dur="20eps x30' + 21 fills x 2'" />
+				//<item src='box_rescates.png' href='http://snaptv.tv/trailer_rescates.flv' tooltip='ver trailer de\nRescates Extremos' title='Rescates Extremos' type='docu reality' freq='semanal' dur="6x1hora" />
+			//</root>
+			//
+			//
+		}
+		
+		private function xml_loaded(e:Event):void 
+		{
+			setData( new XML( e.currentTarget.data ).item );
 		}
 		
 		private function section_changed(e:Event):void 

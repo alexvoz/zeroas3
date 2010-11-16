@@ -1,6 +1,7 @@
 package com.util {
 	
 	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
 	
 	public class DisplayUtil {
 		public static  function remove(obj:Object):void {
@@ -22,6 +23,13 @@ package com.util {
 				trace("Couldn't remove the object. It was null or doesn't exist.");
 			}
 		}
+		
+		public static function clear(obj:DisplayObjectContainer):void {
+			while ( obj.numChildren ) {
+				obj.removeChildAt( obj.numChildren - 1 );
+			}
+		}
+		
 	}
  
 }

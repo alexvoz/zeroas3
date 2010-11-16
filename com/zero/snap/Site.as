@@ -222,6 +222,8 @@
 		}
 		
 		private function instanceFLVVideo():void {
+			log("instanceFLVVideo()");
+			
 			if (flvVideo) {
 				if (flvVideoContainer.contains( flvVideo ) ) flvVideoContainer.removeChild( flvVideo );
 				flvVideo.getVideoPlayer(0).close();
@@ -237,6 +239,7 @@
 			flvVideo.scaleMode = VideoScaleMode.MAINTAIN_ASPECT_RATIO;
 			flvVideo.skinBackgroundColor = 0;
 			flvVideo.skin = "SkinOverPlaySeekStop.swf";
+			flvVideo.bufferTime = 2;
 			flvVideo.autoPlay = true;
 			flvVideo.autoRewind = false;
 			flvVideo.skinAutoHide = true;
@@ -317,9 +320,10 @@
 		}
 		
 		public function setVideo(src:String):void {
-			trace("Site | thumb_click -> setVideo "+src);
+			log("Site | thumb_click -> setVideo "+src);
 			if ( getSection() != Site.REEL && getSection() != Site.WORKS ) return;
-			trace("Site | thumb_click -> setVideo OK");
+			log("Site | thumb_click -> setVideo OK");
+			instanceFLVVideo();
 			flvVideo.play(src, 0);
 		}
 		

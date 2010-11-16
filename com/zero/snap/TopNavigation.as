@@ -43,8 +43,9 @@
 			back.graphics.drawRect(0, 0, 150, 30);
 			back.graphics.endFill();
 			this.addChild(back);
-			
+						
 			flecha = new FlechaTopNavigation();
+			
 			if ( this.bLeft ) {
 				flecha.scaleX = -1;
 				flecha.x = 150;

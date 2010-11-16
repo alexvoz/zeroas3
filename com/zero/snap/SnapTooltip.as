@@ -3,6 +3,7 @@ package com.zero.snap {
 	import com.general.BaseClip;
 	import fl.transitions.*;
 	import fl.transitions.easing.*;
+	import flash.ui.Keyboard;
 	
 	import flash.display.*;
 	import flash.events.*;
@@ -33,7 +34,14 @@ package com.zero.snap {
 			tField.x = tField.y = 5;
 			tField.selectable = false;
 			tField.mouseEnabled = false;
-			tFormat = new TextFormat( "Myriad Web", 12, 0xFFFFFF, true );
+			
+			var font:Font = new Font1();
+			//tFormat = new TextFormat( "Font2", 12, 0xFFFFFF, true );
+			tFormat = new TextFormat();
+			tFormat.font = font.fontName;
+			tFormat.size = 12;
+			tFormat.color = 0xFFFFFF;
+			tFormat.bold = true;
 			tField.antiAliasType = AntiAliasType.ADVANCED;
 			tField.defaultTextFormat = tFormat;
 			
@@ -63,6 +71,7 @@ package com.zero.snap {
 		}
 		
 		public function setText(sText:String, newPos:Point=undefined, newAlpha=undefined, tweens:Boolean = true):void {
+			sText = sText.replace("\\n", String.fromCharCode( Keyboard.ENTER ) );
 			this.sText = sText.toUpperCase();
 			tField.text = this.sText;
 			tField.visible = false;
