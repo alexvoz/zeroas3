@@ -398,7 +398,7 @@
 				break;
 				
 				case MARVISTA:
-				navigateToURL( new URLRequest("http://www.marvista.net/Catalog_life.html"), "_blank" );
+				navigateToURL( new URLRequest("http://www.marvista.net/programing-catalog.php"), "_blank" );
 				break;
 			}
 		}

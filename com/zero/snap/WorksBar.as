@@ -37,6 +37,8 @@
 			
 			var dataLoader:URLLoader = new URLLoader( new URLRequest( "works.xml" ) );
 			dataLoader.addEventListener(Event.COMPLETE, xml_loaded );
+			
+			mouseEnabled = false;
 			//
 			//var xmlData:XML = <root>
 				//<item src='box_h90.png' href='http://snaptv.tv/trailer_h90.flv' tooltip='ver trailer\nde h90' title='h90' type='documental' freq='diaria / semanal' dur='15x90"' />
@@ -62,6 +64,7 @@
 				
 				default:
 				hide();
+				mouseEnabled = false;
 				break;
 			}
 		}
@@ -76,11 +79,11 @@
 		
 		override protected function showEnd(evnt=undefined):void {
 			super.showEnd(undefined);
+			mouseEnabled = true;
 			getChildByName( "thumb0" ).dispatchEvent( new MouseEvent( MouseEvent.CLICK ) );
 		}
 		override protected function hideEnd(evnt=undefined):void {
-			super.hideEnd(undefined);
-			
+			super.hideEnd(undefined);			
 		}
 		
 		override protected function refreshData():void {

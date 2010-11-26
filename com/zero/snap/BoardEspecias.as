@@ -4,6 +4,7 @@
 	import flash.display.*;
 	import fl.transitions.*;
 	import fl.transitions.easing.*;
+	import flash.filters.DropShadowFilter;
 	import flash.net.navigateToURL;
 	import flash.net.URLRequest;
 	import flash.utils.*;
