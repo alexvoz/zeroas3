@@ -1,6 +1,7 @@
 ﻿package com.zero.snap 
 {
 	import com.general.BaseClip;
+	import fl.video.FLVPlayback;
 	import flash.display.*;
 	import fl.transitions.*;
 	import fl.transitions.easing.*;
@@ -18,6 +19,9 @@
 	{
 		public const BTN_TRAILER:String = "btn_trailer";
 		public const BTN_VOLVER:String = "btn_volver";
+		
+		public var timer:Timer;
+		public var reproductor:FLVPlayback;
 				
 		override protected function bindBtns(aBtns:Array, aLinks:Array):void {
 			this.aBtns = aBtns;
@@ -58,15 +62,37 @@
 						
 					} else if ( link == BTN_TRAILER) {
 						e.currentTarget.video.visible = true;
-						e.currentTarget.video.trailerFLV.play( e.currentTarget.src );
+						(e.currentTarget.video.trailerFLV as FLVPlayback).bufferTime = 0.5;
+						(e.currentTarget.video.trailerFLV as FLVPlayback).play( e.currentTarget.src );
 						e.currentTarget.volver.visible = true;
 						e.currentTarget.visible = false;
+						if ( timer ) timer.stop();
+						timer = new Timer(500, 1);
+						timer.start();
+						reproductor = e.currentTarget.video.trailerFLV ;
+						
+						timer.addEventListener( TimerEvent.TIMER, function(e2) {
+									if( ! reproductor.playing ){
+										Site.log( "BoardEspecias | no estaba playing" );
+										reproductor.pause();
+										reproductor.play();
+									} else {
+										Site.log( "BoardEspecias | ya estaba playing" );
+									}
+								}
+							);
+						
+						
 						Site.getApp().setSound(false);
 												
 					} else if ( link == BTN_VOLVER) {
+						
+						if ( timer ) timer.stop();
 						e.currentTarget.visible = false;
 						e.currentTarget.trailer.visible = true;
 						e.currentTarget.video.visible = false;
+						(e.currentTarget.video.trailerFLV as FLVPlayback).seek(0);
+						(e.currentTarget.video.trailerFLV as FLVPlayback).stop();
 						e.currentTarget.video.trailerFLV.getVideoPlayer(e.currentTarget.video.trailerFLV.activeVideoPlayerIndex).close()
 						Site.getApp().setSound(true);
 						
