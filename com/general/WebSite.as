@@ -3,6 +3,7 @@ package com.general {
 	import fl.transitions.TweenEvent;
 	import flash.display.*;
 	import flash.events.*;
+	import flash.external.ExternalInterface;
 	import flash.net.*;
 	import flash.text.TextField;
 	
@@ -50,11 +51,11 @@ package com.general {
 				this.txtConsole.background = true;
 				this.txtConsole.backgroundColor = 0xFFFFFF;
 				this.txtConsole.borderColor = 0;
-				this.addChild(this.txtConsole);
-				internalLog("WebSite | Console Initialized");
+				this.stage.addChild(this.txtConsole);
+				internalLog("WebSite | Internal console Initialized");
 				
 			} else {
-				internalLog("WebSite | Console disabled");
+				internalLog("WebSite | Internal console disabled");
 			}
 			this.initSite();
 		}
@@ -65,6 +66,9 @@ package com.general {
 		 */
 		protected function initSite():void {
 			loadExternalContent();
+			if ( this.loaderInfo.parameters["FULLFLASH"] ) {
+				isFullFlash();
+			}
 		}
 		/**
 		 *  @author: sminutoli
@@ -117,8 +121,8 @@ package com.general {
 		public function setSection(sSection:String):void {
 			this.sSection = sSection;
 			log( "WebSite | setSection= " + sSection, true);
-			dispatchEvent( new Event( WebSite.SECTION_CHANGED ) );
-			track( sSection );
+			this.dispatchEvent( new Event( WebSite.SECTION_CHANGED, true ) );
+			this.track( sSection );
 		}
 		
 		/**
@@ -127,11 +131,9 @@ package com.general {
 		 * @usage   sends a message to a webSite trakker ( GoogleAnalytics by default );
 		 */
 		public function track( sTrack:String ):void {
-			if ( this.loaderInfo.parameters["analytics"] ) {
-				var url:String = this.loaderInfo.parameters["analytics"]+"('"+sTrack+"')";
-				var request:URLRequest = new URLRequest(url);
+			if ( this.loaderInfo.parameters["ANALYTICS"] ) {
 				try {
-					navigateToURL(request, '_self'); // second argument is target
+					ExternalInterface.call( this.loaderInfo.parameters["ANALYTICS"], sTrack );
 				} catch (e:Error) {
 					log( "WebSite | analytic error");
 				}

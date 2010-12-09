@@ -2,7 +2,7 @@
 	
 	public class MathUtil {
 		
-		public static function random(min:Number, max:Number):Number {
+		public static function random(min:int, max:int):int {
 			return Math.floor(Math.random() * (max - min + 1)) + min;
 		}
 		
