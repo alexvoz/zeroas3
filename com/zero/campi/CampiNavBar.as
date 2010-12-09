@@ -16,17 +16,16 @@
 		
 		public function CampiNavBar() 
 		{
-			var aLabels:Array = [ "Nosotros", "Catálogo", "Distribucion", "Contacto" ];
+			var aLabels:Array = [ "Nuestra Empresa", "Productos", "Distribucion", "Contacto" ];
 			var aLinks:Array = [ CampiSite.NOSOTROS, CampiSite.CATALOGO, CampiSite.DISTRIBUCION, CampiSite.CONTACTO ];
 			var nY:int = 0;
-			var nSpace:int = 15;
+			var nSpace:int = 13;
 			for (var i:int = 0; i < aLabels.length; i++) 
 			{
 				var btn:CampiButton = new CampiButton(aLabels[i], aLinks[i]);
 				btn.alpha = 0;
 				btn.y = nY + 5;
 				addChild(btn);
-				//Actuate.tween( btn, 1, { alpha: 1, y: nY } ).delay( i * 0.3 ).ease( Linear.easeNone );
 				TweenMax.to( btn, 1, { alpha: 1, y: nY, delay: i * 0.3, ease: Linear.easeNone } );
 				nY += btn.height + nSpace;
 			}

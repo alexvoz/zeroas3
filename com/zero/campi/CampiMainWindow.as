@@ -1,8 +1,5 @@
 ﻿package com.zero.campi 
 {
-	//import com.eclecticdesignstudio.motion.Actuate;
-	//import com.eclecticdesignstudio.motion.easing.Quad;
-	//import com.eclecticdesignstudio.motion.easing.Quint;
 	import com.greensock.*; 
 	import com.greensock.easing.*;
 	import flash.display.Loader;
@@ -30,28 +27,26 @@
 			
 			progressBar = new Shape();
 			progressBar.graphics.beginFill(0x666666);
-			progressBar.graphics.drawRect(0, 0, 2, stage.stageHeight );
+			progressBar.graphics.drawRect(0, 0, 2.5, stage.stageHeight );
 			progressBar.scaleY = 0;
 			progressBar.y = stage.stageHeight;
 			addChild(progressBar);
 						
 			loader = new Loader();
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, show_progress);
-			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, content_loaded );
+			//loader.contentLoaderInfo.addEventListener(Event.COMPLETE, content_loaded );
 		}
 		
-		private function content_loaded(e:Event):void 
+		private function content_loaded(e:Event=null):void 
 		{
-			this.dispatchEvent( e );
+			//this.dispatchEvent( e );
 			if ( content && contains( content ) ) removeChild(content);
 			
 			content = loader.content as CampiContent;
 			addChild(content);
 			
 			content.mask = progressBar;
-			//content.mask.width = content.width / 2;
-			//Actuate.tween( progressBar, 0.8, { width: content.width, height: content.height } ).ease( Quint.easeOut );
-			//Actuate.tween( content, 0.3, { alpha: 0 } ).reverse();
+			
 			progressBar.height = content.height;
 			TweenMax.to( progressBar, 0.8, { width: content.width , ease: Quint.easeOut } );
 			TweenMax.from( content, 0.3, { alpha: 0 } );
@@ -69,8 +64,8 @@
 		
 		private function show_progress(e:ProgressEvent):void 
 		{
-			//Actuate.tween( progressBar, 0.3, { scaleY: (e.bytesLoaded / e.bytesTotal) } ).onUpdate(layout_bar);
-			TweenMax.to( progressBar, 0.3, { scaleY: (e.bytesLoaded / e.bytesTotal), onUpdate: layout_bar } );
+			var p:Number = (e.bytesLoaded / e.bytesTotal);
+			TweenMax.to( progressBar, 0.4, { scaleY: p, onUpdate: layout_bar, onComplete: (p == 1) ? content_loaded : null  } );
 		}
 		
 		private function layout_bar():void
@@ -114,7 +109,7 @@
 		
 		private function load_next(e:Event = null):void
 		{
-			progressBar.width = 2;
+			progressBar.width = 2.5;
 			progressBar.scaleY = 0;
 			loader.load( req );
 		}

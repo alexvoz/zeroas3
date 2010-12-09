@@ -22,11 +22,9 @@
 		{
 			fondo = getChildAt(0) as Shape;
 			navBar = new CampiNavBar();
-			navBar.x = 25;
+			navBar.x = 13;
 			navBar.y = mcLogo.getBounds(this).bottom + 60;
 			addChild(navBar);
-			
-			//loguito.visible = false;
 			
 			mcToolBar.x = 15;
 			loguito.x = 15;
