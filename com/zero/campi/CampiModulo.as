@@ -23,7 +23,7 @@
 		{
 			fondo = new Shape();
 			fondo.graphics.beginFill( color, 1);
-			fondo.graphics.drawRect(0, 0, 82, 120 );
+			fondo.graphics.drawRect(0, 0, 90, 120 );
 			fondo.alpha = alpha;
 			addChild(fondo);
 			

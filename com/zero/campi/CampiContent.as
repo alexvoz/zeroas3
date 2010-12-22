@@ -2,6 +2,7 @@
 {
 	import com.greensock.easing.Strong;
 	import com.greensock.TweenMax;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
@@ -9,11 +10,12 @@
 	 * ...
 	 * @author sminutoli
 	 */
-	public class CampiContent extends Sprite
+	public class CampiContent extends MovieClip
 	{
 		
 		public static const SHOW_END:String = "show_end";
 		public static const HIDE_END:String = "hide_end";
+	
 		
 		public function CampiContent() 
 		{
@@ -42,8 +44,9 @@
 			}
 		}
 		
-		private function hide_end():void
+		protected function hide_end():void
 		{
+			trace("campi content hide_end");
 			this.mask = null;
 			this.stage.removeEventListener( Event.RESIZE, init);
 			this.parent.removeChild(this);

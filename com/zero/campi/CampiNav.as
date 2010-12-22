@@ -22,14 +22,28 @@
 		{
 			fondo = getChildAt(0) as Shape;
 			navBar = new CampiNavBar();
-			navBar.x = 13;
+			navBar.x = 10;
 			navBar.y = mcLogo.getBounds(this).bottom + 60;
 			addChild(navBar);
 			
-			mcToolBar.x = 15;
-			loguito.x = 15;
+			mcToolBar.x = 8;
+			loguito.x = 8;
+			
+			mcLogo.buttonMode = true;
+			mcLogo.mouseChildren = false;
+			mcLogo.addEventListener(MouseEvent.CLICK, btn_click );
 			
 			refreshSize();
+			
+		}
+		
+		private function btn_click(e:MouseEvent):void 
+		{
+			switch( e.target ) {
+				case mcLogo:
+				CampiSite.getApp().setSection( CampiSite.HOME );
+				break;
+			}
 		}
 		
 		public function refreshSize():void {

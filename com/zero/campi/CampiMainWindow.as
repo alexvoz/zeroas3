@@ -2,6 +2,8 @@
 {
 	import com.greensock.*; 
 	import com.greensock.easing.*;
+	import flash.display.DisplayObject;
+	import flash.display.DisplayObjectContainer;
 	import flash.display.Loader;
 	import flash.display.Shape;
 	import flash.display.Sprite;
@@ -18,7 +20,7 @@
 		
 		private var progressBar:Shape;
 		private var loader:Loader;
-		private var content:CampiContent;
+		private var content:DisplayObject;
 		private var req:URLRequest;
 		
 		public function CampiMainWindow(stage) 
@@ -42,24 +44,13 @@
 			//this.dispatchEvent( e );
 			if ( content && contains( content ) ) removeChild(content);
 			
-			content = loader.content as CampiContent;
+			content = loader.content;
 			addChild(content);
 			
-			content.mask = progressBar;
-			
 			progressBar.height = content.height;
-			TweenMax.to( progressBar, 0.8, { width: content.width , ease: Quint.easeOut } );
-			TweenMax.from( content, 0.3, { alpha: 0 } );
-		
-			var sombra:DropShadowFilter = new DropShadowFilter();
-			sombra.alpha = 0.55;
-			sombra.angle = 0;
-			sombra.distance = 10;
-			sombra.blurX = sombra.blurY = 15;
-			content.filters = [ sombra ];
-			
+						
 			content.addEventListener( CampiContent.HIDE_END, load_next );
-			content.show();
+			if( content is CampiTramaContent ) (content as CampiTramaContent).show();
 		}
 		
 		private function show_progress(e:ProgressEvent):void 
@@ -82,9 +73,12 @@
 		
 		public function load( url:String ):void {
 			req.url = url;
-			if ( content ) {
-				content.hide();
+			if ( content && content is CampiTramaContent ) {
+				//trace("CampiMainWindow load", "antes de hacer load_next disparo el hide");				
+				(content as CampiTramaContent).hide();
+				
 			} else {
+				//trace("CampiMainWindow load", content, content is DisplayObjectContainer );		
 				load_next();
 			}
 			
@@ -93,22 +87,36 @@
 		public function section_changed(e:Event):void 
 		{
 			switch( CampiSite.getApp().getSection() ){
-				case CampiSite.NOSOTROS:
+				
+				case CampiSite.HOME:
 				this.load("home.swf");
+				break;
+				
+				case CampiSite.NOSOTROS:
+				this.load("historia.swf");
+				break;
+				
+				case CampiSite.CATALOGO:
+				this.load("productos.swf");
 				break;
 				
 				case CampiSite.DISTRIBUCION:
 				this.load("distribucion.swf");
 				break;
 				
+				case CampiSite.CONTACTO:
+				this.load("home.swf");
+				break;
+				
 				default:
-				trace( "CampiMainWindow | section_changed | ", CampiSite.getApp().getSection() );
+				//trace( "CampiMainWindow | section_changed | ", CampiSite.getApp().getSection() );
 				break;
 			}
 		}
 		
 		private function load_next(e:Event = null):void
 		{
+			//trace("CampiWindow", "load_next", req.url);
 			progressBar.width = 2.5;
 			progressBar.scaleY = 0;
 			loader.load( req );

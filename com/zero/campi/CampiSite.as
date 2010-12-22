@@ -12,6 +12,7 @@
 	public class CampiSite extends WebSite
 	{
 		
+		public static const HOME:String = "campi_home";
 		public static const NOSOTROS:String = "campi_nosotros";
 		public static const CATALOGO:String = "campi_catalogo";
 		public static const DISTRIBUCION:String = "campi_distribucion";
@@ -40,9 +41,10 @@
 			this.addEventListener( WebSite.SECTION_CHANGED, mcMainWindow.section_changed );
 			mcNav.addEventListener(MouseEvent.CLICK, nav_bar_clicked );
 			
-			mcNav.init();
+			//mcNav.init();
+			addChild(mcNav);
 			isFullFlash();
-			
+			this.setSection( CampiSite.HOME );
 		}
 				
 		private function nav_bar_clicked(e:MouseEvent):void 
