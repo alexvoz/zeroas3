@@ -29,9 +29,9 @@
 			
 			progressBar = new Shape();
 			progressBar.graphics.beginFill(0x666666);
-			progressBar.graphics.drawRect(0, 0, 2.5, stage.stageHeight );
+			progressBar.graphics.drawRect(0, 0, 2.5, 600 );
 			progressBar.scaleY = 0;
-			progressBar.y = stage.stageHeight;
+			progressBar.y = 600;
 			addChild(progressBar);
 						
 			loader = new Loader();
@@ -47,7 +47,7 @@
 			content = loader.content;
 			addChild(content);
 			
-			progressBar.height = content.height;
+			progressBar.height = 600;
 						
 			content.addEventListener( CampiContent.HIDE_END, load_next );
 			if( content is CampiTramaContent ) (content as CampiTramaContent).show();
@@ -61,7 +61,7 @@
 		
 		private function layout_bar():void
 		{
-			progressBar.y = stage.stageHeight - progressBar.height;
+			progressBar.y = 600 - progressBar.height;
 		}
 		
 		public function refreshSize():void {
@@ -73,12 +73,21 @@
 		
 		public function load( url:String ):void {
 			req.url = url;
-			if ( content && content is CampiTramaContent ) {
+			if ( content ) {
 				//trace("CampiMainWindow load", "antes de hacer load_next disparo el hide");				
-				(content as CampiTramaContent).hide();
+				if( content is CampiTramaContent ){
+					(content as CampiTramaContent).hide();
+				} else {
+					var c:DisplayObjectContainer = content as DisplayObjectContainer;
+					for (var i:int = 0; i < c.numChildren; i++) 
+					{
+						if ( c.getChildAt(i) is CampiTramaContent ) {
+							(c.getChildAt(i) as CampiTramaContent).hide();
+						}
+					}
+				}
 				
 			} else {
-				//trace("CampiMainWindow load", content, content is DisplayObjectContainer );		
 				load_next();
 			}
 			

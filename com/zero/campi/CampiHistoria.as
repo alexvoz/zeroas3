@@ -31,14 +31,9 @@
 		private function hide_trama():void
 		{
 			//trace("CampiHistoria hide_trama");
-			animation.hide();
+			super.hide()
 		}
-		
-		override protected function animation_hide_end(e:Event):void 
-		{
-			super.hide_end();
-		}
-		
+	
 		override protected function animation_show_end(e:Event):void 
 		{
 			addChild(texto);

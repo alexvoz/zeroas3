@@ -1,6 +1,5 @@
 ﻿package com.zero.campi 
 {
-	//import com.eclecticdesignstudio.motion.Actuate;
 	import com.greensock.*; 
 	import com.greensock.easing.*;
 	
@@ -40,19 +39,16 @@
 		private function image_loaded(e:Event):void 
 		{
 			loader.alpha = 0;
-			//Actuate.tween( loader, 0.5, { alpha: 1 } ).delay( Math.random()*1.5 );
-			TweenMax.to( loader, 0.5, { alpha: 1, delay: Math.random() * 1.5 } );
+			TweenLite.to( loader, 0.5, { alpha: 1, delay: Math.random() * 1.5 } );
 		}
 		
 		private function setData( color:uint = undefined, alpha:Number = undefined, image:String = null ):void
 		{
 			if ( color ) {
-				//Actuate.transform( fondo, 0.5).color( color, 1, alpha ? alpha : fondo.alpha);
-				TweenMax.to(this, 0.5, { colorTransform:{tint: color }, alpha: (alpha) ? alpha : fondo.alpha } );
+				TweenLite.to(this, 0.5, { colorTransform:{tint: color }, alpha: (alpha) ? alpha : fondo.alpha } );
 			}
 			if (alpha) {
-				//Actuate.tween( fondo, 0.5, { alpha: alpha } );
-				TweenMax.to(fondo, 0.5, { alpha: alpha } );
+				TweenLite.to(fondo, 0.5, { alpha: alpha } );
 			}
 			if (image) {
 				loader.load( new URLRequest(image) );

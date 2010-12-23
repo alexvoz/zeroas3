@@ -3,9 +3,8 @@ package com.zero.campi
 	import com.greensock.easing.Strong;
 	import com.greensock.TweenLite;
 	import flash.display.DisplayObject;
-	import flash.events.Event;
-	import flash.events.EventDispatcher;
-	import flash.geom.Vector3D;
+		
+	
 	/**
 	 * ...
 	 * @author sminutoli

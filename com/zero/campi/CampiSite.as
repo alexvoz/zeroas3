@@ -58,8 +58,8 @@
 		
 		override protected function resizeBrowser( evnt:Event ):void {
 			//CampiSite.log(this.width +" | "+stage.stageWidth );
-			mcNav.refreshSize();
-			mcMainWindow.refreshSize();
+			//mcNav.refreshSize();
+			//mcMainWindow.refreshSize();
 			
 		}
 		

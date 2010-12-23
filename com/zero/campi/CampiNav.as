@@ -22,7 +22,7 @@
 		{
 			fondo = getChildAt(0) as Shape;
 			navBar = new CampiNavBar();
-			navBar.x = 10;
+			navBar.x = 5;
 			navBar.y = mcLogo.getBounds(this).bottom + 60;
 			addChild(navBar);
 			
@@ -33,7 +33,7 @@
 			mcLogo.mouseChildren = false;
 			mcLogo.addEventListener(MouseEvent.CLICK, btn_click );
 			
-			refreshSize();
+			//refreshSize();
 			
 		}
 		

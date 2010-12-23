@@ -31,7 +31,7 @@
 		
 		private function hide_trama():void
 		{
-			animation.hide();
+			super.hide();
 		}
 		
 		override protected function animation_hide_end(e:Event):void 
