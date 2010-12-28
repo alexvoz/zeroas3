@@ -18,7 +18,7 @@ package com.zero.campi
 		protected var tweens:Vector.<TweenLite>;
 		protected var trama:CampiBitmapTrama;
 		
-		public function TramaTransition( trama:CampiBitmapTrama ) 
+		public function TramaTransition( trama:CampiBitmapTrama, autoplay:Boolean=true ) 
 		{
 			tweens = new Vector.<TweenLite>(trama.numChildren);
 			this.trama = trama;

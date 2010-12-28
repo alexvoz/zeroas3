@@ -13,9 +13,9 @@ package com.zero.campi
 	 */
 	public class TramaTransition4 extends TramaTransition
 	{
-		public function TramaTransition4( trama:CampiBitmapTrama ) 
+		public function TramaTransition4( trama:CampiBitmapTrama, autoplay:Boolean ) 
 		{
-			super( trama );
+			super( trama, autoplay );
 		}
 		
 		override public function show():void {

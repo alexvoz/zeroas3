@@ -12,9 +12,9 @@ package com.zero.campi
 	 */
 	public class TramaTransition3 extends TramaTransition
 	{
-		public function TramaTransition3( trama:CampiBitmapTrama ) 
+		public function TramaTransition3( trama:CampiBitmapTrama, autoplay:Boolean=true ) 
 		{
-			super( trama );
+			super( trama, autoplay );
 		}
 		
 		override public function show():void {

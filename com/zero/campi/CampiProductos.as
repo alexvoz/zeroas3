@@ -76,7 +76,10 @@ package com.zero.campi
 			TweenLite.to( container, 0.5, { x: 720 } );
 			
 			addChild( mcFotoGrande );
-			TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 1 } );
+			//TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 1 } );
+			var tramaloca:CampiBitmapTrama = new CampiBitmapTrama( mcFotoGrande );
+			addChild( tramaloca );
+			animation = TramaTransitionFactory.getInstance( tramaloca );
 		}
 		
 		private function xml_loaded(e:Event):void 

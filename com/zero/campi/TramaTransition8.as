@@ -11,10 +11,9 @@ package com.zero.campi
 	 */
 	public class TramaTransition8 extends TramaTransition
 	{
-		public function TramaTransition8( trama:CampiBitmapTrama ) 
+		public function TramaTransition8( trama:CampiBitmapTrama, autoplay:Boolean=true ) 
 		{
-			super( trama );
-			trace( "new TramaTransition8" );
+			super( trama, autoplay );
 		}
 		
 		override public function show():void {
