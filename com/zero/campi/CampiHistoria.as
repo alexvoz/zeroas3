@@ -18,6 +18,8 @@
 		
 		public function CampiHistoria() 
 		{
+			animationClass = TramaTransition7;
+			
 			super();
 			removeChild( texto );
 			//trace(this);

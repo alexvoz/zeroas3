@@ -20,6 +20,7 @@ package com.zero.campi
 		public var mcFoto:Sprite;
 		protected var trama:CampiBitmapTrama;
 		protected var animation:TramaTransition;
+		protected var animationClass:Class;
 		protected var back:Shape;
 		
 		public function CampiTramaContent() 
@@ -31,7 +32,11 @@ package com.zero.campi
 				addChild( trama );
 				removeChild( mcFoto );
 								
-				animation = TramaTransitionFactory.getInstance( trama );
+				if ( !animationClass ) {
+					animation = TramaTransitionFactory.getInstance( trama );
+				} else {
+					animation = new animationClass( trama );
+				}
 				animation.addEventListener( TramaTransition.SHOW_END, animation_show_end );
 				animation.addEventListener( TramaTransition.SHOW_END, mostrar_fondo );
 				animation.addEventListener( TramaTransition.HIDE_END, animation_hide_end );

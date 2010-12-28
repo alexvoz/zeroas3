@@ -10,6 +10,7 @@ package com.zero.campi
 		public static function getInstance(trama:CampiBitmapTrama, autoplay:Boolean=true):TramaTransition
 		{
 			var total:Array = [ TramaTransition, TramaTransition2, TramaTransition3, TramaTransition4, TramaTransition5, TramaTransition6, TramaTransition7, TramaTransition8 ];
+			return new total[ 0 ]( trama, autoplay ) ;
 			return new total[ Math.floor( Math.random() * total.length ) ]( trama, autoplay ) ;
 		}
 		

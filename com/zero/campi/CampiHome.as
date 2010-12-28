@@ -17,6 +17,9 @@
 		
 		public function CampiHome() 
 		{
+			
+			animationClass = TramaTransition7;
+			
 			super();
 			
 			mcBanner.y = -mcBanner.height - 30;
@@ -42,6 +45,8 @@
 		override protected function animation_show_end(e:Event):void 
 		{
 			super.animation_show_end(e);
+			removeChild( trama );
+			addChild( mcFoto );
 			addChild(mcBanner);
 			TweenLite.to( mcBanner, 0.8, { y: trama.getChildByName("r2c5").y, delay: 0.2, ease: Strong.easeInOut } );
 		}

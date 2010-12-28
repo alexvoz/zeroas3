@@ -17,12 +17,16 @@ package com.zero.campi
 		
 		protected var tweens:Vector.<TweenLite>;
 		protected var trama:CampiBitmapTrama;
+		protected var nHidden:uint;
+		protected var nShow:uint;
 		
 		public function TramaTransition( trama:CampiBitmapTrama, autoplay:Boolean=true ) 
 		{
 			tweens = new Vector.<TweenLite>(trama.numChildren);
 			this.trama = trama;
-			this.show();	
+			if ( autoplay ) {
+				this.show();	
+			}
 		}
 		
 		public function show():void {
@@ -42,19 +46,23 @@ package com.zero.campi
 		
 		protected function bindTweens():void
 		{
+			nShow = 0;
 			tweens = tweens.sort( sortOnDelay ).reverse();
-			tweens[0].vars.onComplete = show_end;
-			tweens[0].vars.onReverseComplete = hide_end;
+			tweens.forEach( function( item:TweenLite, index:int, vector  ) { 
+				item.vars.onComplete = show_end; 
+				item.vars.onReverseComplete = hide_end;  } 
+			);
 		}
 		
 		public function hide():void {
-			/*
-			for( var i:int = 0; i < tweens.length; i++){
-				var t:TweenLite = tweens[i];
-				t.reverse();
-			}
-			*/
-			tweens.forEach( function( item:TweenLite, index:int, vector  ) { item.reverse(); } );
+			nHidden = 0;
+			tweens.forEach( function( item:TweenLite, index:int, vector  ) { 
+				TweenLite.delayedCall( item.vars.delay, function() { item.reverse(); } ) 
+			});
+		}
+		
+		public function getTrama():CampiBitmapTrama {
+			return this.trama;
 		}
 		
 		protected function sortOnDelay(a, b):Number {
@@ -63,17 +71,23 @@ package com.zero.campi
 			} else if(a.vars.delay < b.vars.delay) {
 				return -1;
 			} else  {
-				//aPrice == bPrice
 				return 0;
 			}
 		}
 		
 		protected function show_end():void {
-			this.dispatchEvent( new Event( SHOW_END ) );
+			nShow++;
+			if ( nShow == tweens.length ) {
+				this.dispatchEvent( new Event( SHOW_END ) );
+			}
+			
 		}
 		
 		protected function hide_end():void {
-			this.dispatchEvent( new Event( HIDE_END ) );
+			nHidden++;
+			if ( nHidden == tweens.length ) {
+				this.dispatchEvent( new Event( HIDE_END ) );
+			}
 		}
 		
 	}

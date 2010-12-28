@@ -22,9 +22,13 @@ package com.zero.campi
 				
 		public var mcFotoGrande:Sprite;
 		private var fotoGrandeMask:Shape;
+		private var animationZoom:TramaTransition;
+		private var tramaZoom:CampiBitmapTrama;
 				
 		function CampiProductos()
 		{
+			animationClass = TramaTransition;		
+			
 			super();
 			//trace("new CampiProductos");
 			var pedido:URLRequest = new URLRequest( "products.xml" );
@@ -37,8 +41,9 @@ package com.zero.campi
 			container.x = 90;
 			container.y = 120;
 			
-			//removeChild( mcFotoGrande );
+			removeChild( mcFotoGrande );
 			
+			/*
 			fotoGrandeMask = new Shape();
 			fotoGrandeMask.graphics.beginFill(0xFFFF00);
 			fotoGrandeMask.graphics.drawRect(0, 0, mcFotoGrande.width, mcFotoGrande.height );
@@ -47,16 +52,50 @@ package com.zero.campi
 			addChild(fotoGrandeMask);
 			
 			mcFotoGrande.mask = fotoGrandeMask;
+			*/
 			mcFotoGrande.addEventListener(MouseEvent.CLICK, close_zoom );
 			
 			//mcFotoGrande.x = fotoGrandeMask.x = 270;
 			
 			container.addEventListener(MouseEvent.CLICK, show_zoom );
+			
+			tramaZoom = new CampiBitmapTrama( mcFotoGrande, 5, Math.ceil( mcFotoGrande.width / 90 ) );
+			animationZoom = new TramaTransition7( tramaZoom, false );
+			animationZoom.addEventListener( CampiTramaContent.SHOW_END, replace_effect );
+			animationZoom.addEventListener( CampiTramaContent.HIDE_END, remove_effect );
 		}
 		
 		private function close_zoom(e:MouseEvent):void 
 		{
-			TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 0 } );
+			removeChild(mcFotoGrande);
+			addChild(tramaZoom);
+			animationZoom.hide();
+			//TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 0 } );
+					
+		}
+		
+		private function show_zoom(e:MouseEvent):void 
+		{
+			var minis:Array = DisplayUtil.getChildren( container );
+			for (var i:int = 0; i < minis.length; i++) 
+			{
+				TweenLite.killTweensOf( minis[i], true );
+				minis[i].makeMini();
+			}
+			TweenLite.to( container, 0.5, { x: 720 } );
+			
+			//mcFotoGrande.mask = null;
+			//addChild( mcFotoGrande );
+			//TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 1 } );
+			
+			addChild( tramaZoom );
+			addChild( container );
+			animationZoom.show();
+		}
+		
+		private function remove_effect(e:Event):void 
+		{
+			removeChild( tramaZoom );
 			
 			var minis:Array = DisplayUtil.getChildren( container );
 			for (var i:int = 0; i < minis.length; i++) 
@@ -66,20 +105,10 @@ package com.zero.campi
 			TweenLite.to( container, 0.5, { x: 180 } );
 		}
 		
-		private function show_zoom(e:MouseEvent):void 
+		private function replace_effect(e:Event):void 
 		{
-			var minis:Array = DisplayUtil.getChildren( container );
-			for (var i:int = 0; i < minis.length; i++) 
-			{
-				minis[i].makeMini();
-			}
-			TweenLite.to( container, 0.5, { x: 720 } );
-			
-			addChild( mcFotoGrande );
-			//TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 1 } );
-			var tramaloca:CampiBitmapTrama = new CampiBitmapTrama( mcFotoGrande );
-			addChild( tramaloca );
-			animation = TramaTransitionFactory.getInstance( tramaloca );
+			removeChild( (e.currentTarget as TramaTransition).getTrama() );
+			addChild(mcFotoGrande);
 		}
 		
 		private function xml_loaded(e:Event):void 
@@ -126,7 +155,6 @@ package com.zero.campi
 			} else if(a.vars.delay < b.vars.delay) {
 				return -1;
 			} else  {
-				//aPrice == bPrice
 				return 0;
 			}
 		}

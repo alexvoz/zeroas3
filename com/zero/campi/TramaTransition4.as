@@ -24,8 +24,9 @@ package com.zero.campi
 				var modulo:DisplayObject = trama.getChildAt(i);
 				modulo.scaleX = 0.8;
 				modulo.scaleY = 0.8;
+				modulo.alpha = 0;
 				modulo.visible = false;
-				var t = TweenLite.to( modulo, Math.random(), { scaleX: 1, scaleY: 1, delay: Math.random(), ease: Elastic.easeOut, onStart: init_modulo, onStartParams: [ modulo ] } );
+				var t = TweenLite.to( modulo, Math.random(), { alpha: 1, scaleX: 1, scaleY: 1, delay: Math.random(), ease: Elastic.easeOut, onStart: init_modulo, onStartParams: [ modulo ] } );
 				tweens[i] = t;
 			}
 			bindTweens();

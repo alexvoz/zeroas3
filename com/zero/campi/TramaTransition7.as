@@ -22,7 +22,7 @@ package com.zero.campi
 				var modulo:DisplayObject = trama.getChildAt(i);
 				modulo.alpha = 0;
 				modulo.visible = false;
-				var t = TweenLite.to( modulo, 0.5, { alpha: 1, delay: Math.random(), ease: Strong.easeOut, onStart: init_modulo, onStartParams: [ modulo ] } );
+				var t = TweenLite.to( modulo, 0.8, { alpha: 1, delay: Math.random(), ease: Strong.easeOut, onStart: init_modulo, onStartParams: [ modulo ] } );
 				tweens[i] = t;
 			}
 			bindTweens();

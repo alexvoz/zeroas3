@@ -126,8 +126,12 @@ package com.zero.campi
 		
 		public function makeMini() {
 			bMini =  true;
-			if( contains(container) ) removeChild( container );
-			//tweens.forEach( function( item:TweenLite, index:int, vector ) { item.resume(); } );
+			if ( contains(container) ) removeChild( container );
+			for (var i:int = 0; i < container.numChildren; i++) 
+			{
+				TweenLite.killTweensOf( container.getChildAt(i), true );
+			}
+			TweenLite.killTweensOf( txtTitle, true );
 			TweenLite.to( txtTitle, 0.5, { x:0 } );
 		}
 		

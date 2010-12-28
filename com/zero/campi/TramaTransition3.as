@@ -23,10 +23,10 @@ package com.zero.campi
 				var modulo:DisplayObject = trama.getChildAt(i);
 				var nY:int = modulo.y;
 				var nX:int = modulo.x;
-				modulo.x = -modulo.width;
-				modulo.y = 0;
+				modulo.x = ( nX > 810 /2 ) ? 810 : 0;
+				modulo.y = ( nY > 600 / 2 ) ? 600 : 0;
 				modulo.visible = false;
-				var t = TweenLite.to( modulo, Math.random(), { x: nX, y: nY, delay: Math.random(), ease: Strong.easeOut, onStart: init_modulo, onStartParams: [ modulo ] } );
+				var t = TweenLite.to( modulo, 1, { x: nX, y: nY, delay: Math.random(), ease: Strong.easeOut, onStart: init_modulo, onStartParams: [ modulo ] } );
 				tweens[i] = t;
 			}
 			bindTweens();
