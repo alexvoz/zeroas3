@@ -2,6 +2,7 @@
 {
 	import com.greensock.easing.Strong;
 	import com.greensock.TweenLite;
+	import flash.display.MovieClip;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	/**
@@ -12,6 +13,8 @@
 	{
 		public var mcTitle:Sprite;
 		public var mcTexto:Sprite;
+		public var mcCamion:MovieClip;
+		
 		private var t:TweenLite;
 		private var t2:TweenLite;
 		
@@ -38,11 +41,14 @@
 		}
 		override protected function animation_show_end(e:Event):void 
 		{
+			super.animation_show_end(e);
+			
 			addChild( mcTitle );
 			t = TweenLite.from( mcTitle, 0.8, { alpha: 0, y: mcTitle.y + 30, ease: Strong.easeInOut, onReverseComplete: hide_trama } );
 			
 			addChild( mcTexto );
-			t2 = TweenLite.from( mcTexto, 0.8, { alpha: 0, x: mcTexto.x - 10, ease: Strong.easeInOut, onReverseComplete: hide_title, delay: 0.5 } );
+			addChild( mcCamion );
+			t2 = TweenLite.from( mcTexto, 0.8, { alpha: 0, x: mcTexto.x - 10, ease: Strong.easeInOut, onReverseComplete: hide_title, delay: 0.5, onComplete: function(){ mcCamion.play() } } );
 			
 		}
 	}

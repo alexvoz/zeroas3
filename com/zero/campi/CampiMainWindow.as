@@ -22,6 +22,7 @@
 		private var loader:Loader;
 		private var content:DisplayObject;
 		private var req:URLRequest;
+		private var lastcontent:DisplayObject;
 		
 		public function CampiMainWindow(stage) 
 		{
@@ -42,15 +43,22 @@
 		private function content_loaded(e:Event=null):void 
 		{
 			//this.dispatchEvent( e );
-			if ( content && contains( content ) ) removeChild(content);
+			if ( content && contains( content ) ) {
+				lastcontent = content;
+			}
 			
 			content = loader.content;
 			addChild(content);
 			
 			progressBar.height = 600;
 						
-			content.addEventListener( CampiContent.HIDE_END, load_next );
+			content.addEventListener( CampiContent.SHOW_END, remove_last_content );
 			if( content is CampiTramaContent ) (content as CampiTramaContent).show();
+		}
+		
+		private function remove_last_content(e:Event):void 
+		{
+			if ( lastcontent && contains( lastcontent ) ) removeChild( lastcontent ); 
 		}
 		
 		private function show_progress(e:ProgressEvent):void 
@@ -72,24 +80,10 @@
 		}
 		
 		public function load( url:String ):void {
+			if ( req.url == url ) return;
+			
 			req.url = url;
-			if ( content ) {
-				//trace("CampiMainWindow load", "antes de hacer load_next disparo el hide");				
-				if( content is CampiTramaContent ){
-					(content as CampiTramaContent).hide();
-				} else {
-					var c:DisplayObjectContainer = content as DisplayObjectContainer;
-					for (var i:int = 0; i < c.numChildren; i++) 
-					{
-						if ( c.getChildAt(i) is CampiTramaContent ) {
-							(c.getChildAt(i) as CampiTramaContent).hide();
-						}
-					}
-				}
-				
-			} else {
-				load_next();
-			}
+			load_next();
 			
 		}
 		

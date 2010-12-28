@@ -71,6 +71,7 @@ package com.zero.campi
 		}
 		
 		protected function show_end():void {
+			trace("CampiTramaContent show_end");
 			this.dispatchEvent( new Event( SHOW_END, true ) );
 		}
 		

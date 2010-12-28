@@ -36,6 +36,7 @@
 	
 		override protected function animation_show_end(e:Event):void 
 		{
+			super.animation_show_end(e);
 			addChild(texto);
 			t = TweenLite.from( texto, 0.8, { alpha: 0, y: texto.y + 30, ease: Strong.easeInOut, onReverseComplete: hide_trama } );
 			

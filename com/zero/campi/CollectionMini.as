@@ -1,6 +1,7 @@
 package com.zero.campi 
 {
 	import com.general.Image;
+	import com.greensock.OverwriteManager;
 	import com.greensock.TweenLite;
 	import com.util.LayoutUtil;
 	import flash.display.Loader;
@@ -26,12 +27,19 @@ package com.zero.campi
 		private var data:XML;
 		private var tweens:Vector.<TweenLite>;
 		private var container:Sprite;
+		private var containerSingle:Sprite;
 		private var txtTitle:TextField;
-		
+		private var bMini:Boolean;
+				
 		public function CollectionMini( data:XML ) 
 		{
 			super();
 			this.data = data;
+			
+			this.bMini = false;
+			
+			this.buttonMode = true;
+			this.mouseChildren = false;
 			
 			var font:Font = new FontCollection();
 			var format:TextFormat = new TextFormat();
@@ -53,7 +61,7 @@ package com.zero.campi
 			
 			container = new Sprite();
 			addChild(container);
-			
+									
 			var products:XMLList = data.product;
 			for each( var p:XML in products ) {
 				var sPath:String = p.@imgPath;
@@ -62,6 +70,13 @@ package com.zero.campi
 				img.visible = false;
 				container.addChild( img );
 			}
+			
+			containerSingle = new Sprite();
+			img = new Image( sPath + products[0].@thumb, new Point( 23, 35), true );
+			containerSingle.addChild(img);
+			containerSingle.alpha = 0;
+			containerSingle.x = -33;
+			
 			LayoutUtil.layoutX( container, 10 );
 			txtTitle.visible = false;
 			
@@ -74,11 +89,18 @@ package com.zero.campi
 		private function roll_out(e:MouseEvent):void 
 		{
 			TweenLite.to( this, 0.5, { alpha: 1 } );
+			if ( bMini ) {
+				TweenLite.to( containerSingle, 0.5, { alpha: 0, x: 0, onComplete: function(){ if( contains( containerSingle ) ) removeChild(containerSingle) } } );
+			}
 		}
 		
 		private function roll_over(e:MouseEvent):void 
 		{
 			TweenLite.to( this, 0.5, { alpha: 0.7 } );
+			if ( bMini ) {
+				addChild( containerSingle );
+				TweenLite.to( containerSingle, 0.5, { alpha: 1, x: -33 } );
+			}
 		}
 		
 		public function show() {
@@ -100,6 +122,21 @@ package com.zero.campi
 		
 		public function hide() {
 			tweens.forEach( function( item:TweenLite, index:int, vector  ) { item.reverse(); } );
+		}
+		
+		public function makeMini() {
+			bMini =  true;
+			if( contains(container) ) removeChild( container );
+			//tweens.forEach( function( item:TweenLite, index:int, vector ) { item.resume(); } );
+			TweenLite.to( txtTitle, 0.5, { x:0 } );
+		}
+		
+		public function makeNormal() {
+			bMini =  false ;
+			addChild( container );
+			container.alpha = 1;
+			//tweens.forEach( function( item:TweenLite, index:int, vector ) { item.resume(); } );
+			TweenLite.to( txtTitle, 0.5, { x: container.getBounds( this ).right + 10, overwrite: false } );
 		}
 		
 		protected function show_end():void {

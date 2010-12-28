@@ -9,7 +9,7 @@ package com.zero.campi
 		
 		public static function getInstance(trama:CampiBitmapTrama):TramaTransition
 		{
-			var total:Array = [ TramaTransition, TramaTransition2, TramaTransition3 ];
+			var total:Array = [ TramaTransition, TramaTransition2, TramaTransition3, TramaTransition4, TramaTransition5, TramaTransition6, TramaTransition7, TramaTransition8 ];
 			return new total[ Math.floor( Math.random() * total.length ) ]( trama ) ;
 		}
 		

@@ -41,6 +41,7 @@
 		
 		override protected function animation_show_end(e:Event):void 
 		{
+			super.animation_show_end(e);
 			addChild(mcBanner);
 			TweenLite.to( mcBanner, 0.8, { y: trama.getChildByName("r2c5").y, delay: 0.2, ease: Strong.easeInOut } );
 		}

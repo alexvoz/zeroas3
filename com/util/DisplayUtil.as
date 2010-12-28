@@ -29,6 +29,14 @@ package com.util {
 				obj.removeChildAt( obj.numChildren - 1 );
 			}
 		}
+		public static function getChildren( obj:DisplayObjectContainer ):Array {
+			var a:Array = new Array();
+			for (var i:int = 0; i < obj.numChildren; i++) 
+			{
+				a.push( obj.getChildAt(i) );
+			}
+			return a;
+		}
 		
 	}
  

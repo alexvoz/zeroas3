@@ -1,6 +1,7 @@
 package com.zero.campi 
 {
 	import com.greensock.TweenLite;
+	import com.util.DisplayUtil;
 	import com.util.LayoutUtil;
 	import flash.display.DisplayObject;
 	import flash.display.Shape;
@@ -18,14 +19,14 @@ package com.zero.campi
 		private var products:XML;
 		private var container:Sprite;
 		private var tweens:Vector.<TweenLite>;
-		
+				
 		public var mcFotoGrande:Sprite;
 		private var fotoGrandeMask:Shape;
-		
+				
 		function CampiProductos()
 		{
 			super();
-			trace("new CampiProductos");
+			//trace("new CampiProductos");
 			var pedido:URLRequest = new URLRequest( "products.xml" );
 			var loader:URLLoader = new URLLoader( pedido );
 			loader.addEventListener(Event.COMPLETE, xml_loaded );
@@ -33,7 +34,7 @@ package com.zero.campi
 			container = new Sprite();
 			addChild(container);
 			
-			container.x = 180;
+			container.x = 90;
 			container.y = 120;
 			
 			//removeChild( mcFotoGrande );
@@ -48,16 +49,32 @@ package com.zero.campi
 			mcFotoGrande.mask = fotoGrandeMask;
 			mcFotoGrande.addEventListener(MouseEvent.CLICK, close_zoom );
 			
+			//mcFotoGrande.x = fotoGrandeMask.x = 270;
+			
 			container.addEventListener(MouseEvent.CLICK, show_zoom );
 		}
 		
 		private function close_zoom(e:MouseEvent):void 
 		{
 			TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 0 } );
+			
+			var minis:Array = DisplayUtil.getChildren( container );
+			for (var i:int = 0; i < minis.length; i++) 
+			{
+				minis[i].makeNormal();
+			}
+			TweenLite.to( container, 0.5, { x: 180 } );
 		}
 		
 		private function show_zoom(e:MouseEvent):void 
 		{
+			var minis:Array = DisplayUtil.getChildren( container );
+			for (var i:int = 0; i < minis.length; i++) 
+			{
+				minis[i].makeMini();
+			}
+			TweenLite.to( container, 0.5, { x: 720 } );
+			
 			addChild( mcFotoGrande );
 			TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 1 } );
 		}
@@ -86,6 +103,8 @@ package com.zero.campi
 		
 		override protected function animation_show_end(e:Event):void 
 		{
+			super.animation_show_end(e);
+			
 			tweens = new Vector.<TweenLite>( container.numChildren, true );
 			for (var i:int = 0; i < container.numChildren; i++) 
 			{
