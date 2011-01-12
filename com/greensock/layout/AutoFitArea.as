@@ -1,8 +1,8 @@
 /**
- * VERSION: 1.55
- * DATE: 2010-06-22
+ * VERSION: 1.7
+ * DATE: 2010-12-16
  * AS3
- * UPDATES AND DOCUMENTATION AT: http://www.greensock.com/autofitarea/
+ * UPDATES AND DOCS AT: http://www.greensock.com/autofitarea/
  **/
 package com.greensock.layout {
 	import flash.display.BitmapData;
@@ -68,13 +68,13 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 </listing>
  *
  * 
- * <b>Copyright 2010, GreenSock. All rights reserved.</b> This work is subject to the license that came with your Club GreenSock membership and is <b>ONLY</b> to be used by corporate or "Shockingly Green" Club GreenSock members. To learn more about Club GreenSock, visit <a href="http://www.greensock.com/club/">http://www.greensock.com/club/</a>.
+ * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the license that came with your Club GreenSock membership and is <b>ONLY</b> to be used by corporate or "Shockingly Green" Club GreenSock members. To learn more about Club GreenSock, visit <a href="http://www.greensock.com/club/">http://www.greensock.com/club/</a>.
  * 
  * @author Jack Doyle, jack@greensock.com
  */	 
 	public class AutoFitArea extends Shape {
 		/** @private **/
-		public static const version:Number = 1.55;
+		public static const version:Number = 1.7;
 		
 		/** @private **/
 		private static var _bd:BitmapData;
@@ -95,6 +95,10 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 		protected var _preview:Boolean;
 		/** @private **/
 		protected var _tweenMode:Boolean;
+		/** @private **/
+		protected var _width:Number;
+		/** @private **/
+		protected var _height:Number;
 		
 		/**
 		 * Constructor
@@ -114,14 +118,9 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 				throw new Error("AutoFitArea parent cannot be null");
 			}
 			_parent = parent;
-			
-			var g:Graphics = this.graphics;
-			g.clear();
-			g.beginFill(previewColor, 1);
-			g.drawRect(0, 0, width, height);
-			g.endFill();
-			
-			this.previewColor = previewColor;
+			_width = width;
+			_height = height;
+			_redraw(previewColor);
 		}
 		
 		/**
@@ -165,13 +164,14 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 		 * @param maxHeight Maximum height to which the target is allowed to scale
 		 * @param calculateVisible If true, only the visible portions of the target will be taken into account when determining its position and scale which can be useful for objects that have masks applied (otherwise, Flash reports their width/height and getBounds() values including the masked portions). Setting <code>calculateVisible</code> to <code>true</code> degrades performance, so only use it when absolutely necessary.
 		 * @param customAspectRatio Normally if you set the <code>scaleMode</code> to <code>PROPORTIONAL_INSIDE</code> or <code>PROPORTIONAL_OUTSIDE</code>, its native (unscaled) dimensions will be used to determine the proportions (aspect ratio), but if you prefer to define a custom width-to-height ratio, use <code>customAspectRatio</code>. For example, if an item is 100 pixels wide and 50 pixels tall at its native size, the aspect ratio would be 100/50 or 2. If, however, you want it to be square (a 1-to-1 ratio), the <code>customAspectRatio</code> would be 1. 
+		 * @param roundPosition To force the target's x/y position to snap to whole pixel values, set <code>roundPosition</code> to <code>true</code> (it is <code>false</code> by default).
 		 */
-		public function attach(target:DisplayObject, scaleMode:String="proportionalInside", hAlign:String="center", vAlign:String="center", crop:Boolean=false, minWidth:Number=0, maxWidth:Number=999999999, minHeight:Number=0, maxHeight:Number=999999999, calculateVisible:Boolean=false, customAspectRatio:Number=NaN):void {
+		public function attach(target:DisplayObject, scaleMode:String="proportionalInside", hAlign:String="center", vAlign:String="center", crop:Boolean=false, minWidth:Number=0, maxWidth:Number=999999999, minHeight:Number=0, maxHeight:Number=999999999, calculateVisible:Boolean=false, customAspectRatio:Number=NaN, roundPosition:Boolean=false):void {
 			if (target.parent != _parent) {
 				throw new Error("The parent of the DisplayObject " + target.name + " added to AutoFitArea " + this.name + " doesn't share the same parent.");
 			}
 			release(target);
-			_rootItem = new AutoFitItem(target, scaleMode, hAlign, vAlign, minWidth, maxWidth, minHeight, maxHeight, calculateVisible, customAspectRatio, _rootItem);
+			_rootItem = new AutoFitItem(target, scaleMode, hAlign, vAlign, minWidth, maxWidth, minHeight, maxHeight, calculateVisible, customAspectRatio, roundPosition, _rootItem);
 			if (crop) {
 				var shape:Shape = new Shape();
 				var bounds:Rectangle = this.getBounds(this);
@@ -261,7 +261,7 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 			var matrix:Matrix = this.transform.matrix;
 			
 			var item:AutoFitItem = _rootItem;
-			var w:Number, h:Number, target:DisplayObject, bounds:Rectangle, tRatio:Number, scaleMode:String, ratio:Number, angle:Number, sin:Number, cos:Number, m:Matrix, mScale:Number, mPrev:Matrix;
+			var w:Number, h:Number, tx:Number, ty:Number, target:DisplayObject, bounds:Rectangle, tRatio:Number, scaleMode:String, ratio:Number, angle:Number, sin:Number, cos:Number, m:Matrix, mScale:Number, mPrev:Matrix;
 			while (item) {
 				target = item.target;
 				scaleMode = item.scaleMode;
@@ -358,21 +358,31 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 				
 				bounds = (item.calculateVisible) ? getVisibleBounds(target, _parent) : target.getBounds(_parent);
 				
+				tx = target.x;
+				ty = target.y;
 				if (item.hAlign == AlignMode.LEFT) {
-					target.x += (x - bounds.x);
+					tx += (x - bounds.x);
 				} else if (item.hAlign == AlignMode.CENTER) {
-					target.x += (x - bounds.x) + ((width - target.width) * 0.5);
+					tx += (x - bounds.x) + ((width - bounds.width) * 0.5);
 				} else {
-					target.x += (x - bounds.x) + (width - target.width);
+					tx += (x - bounds.x) + (width - bounds.width);
 				}
 				
 				if (item.vAlign == AlignMode.TOP) {
-					target.y += (y - bounds.y);
+					ty += (y - bounds.y);
 				} else if (item.vAlign == AlignMode.CENTER) {
-					target.y += (y - bounds.y) + ((height - target.height) * 0.5);
+					ty += (y - bounds.y) + ((height - bounds.height) * 0.5);
 				} else {
-					target.y += (y - bounds.y) + (height - target.height);
+					ty += (y - bounds.y) + (height - bounds.height);
 				}
+				
+				if (item.roundPosition) {
+					tx = (tx + 0.5) >> 0; //much faster than Math.round()
+					ty = (ty + 0.5) >> 0;
+				}
+				
+				target.x = tx;
+				target.y = ty;
 				
 				if (item.mask) {
 					item.mask.transform.matrix = matrix;
@@ -448,8 +458,10 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 				release(item.target);
 				item = nxt;
 			}
-			_bd.dispose();
-			_bd = null;
+			if (_bd != null) {
+				_bd.dispose();
+				_bd = null;
+			}
 			_parent = null;
 		}
 		
@@ -458,6 +470,8 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 			if (_bd == null) {
 				_bd = new BitmapData(2800, 2800, true, 0x00FFFFFF);
 			}
+			var msk:DisplayObject = target.mask;
+			target.mask = null;
 			_bd.fillRect(_rect, 0x00FFFFFF);
 			_matrix.tx = _matrix.ty = 0;
 			var offset:Rectangle = target.getBounds(targetCoordinateSpace);
@@ -468,7 +482,18 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 			var bounds:Rectangle = _bd.getColorBoundsRect(0xFF000000, 0x00000000, false);
 			bounds.x += offset.x;
 			bounds.y += offset.y;
+			target.mask = msk;
 			return bounds;
+		}
+		
+		/** @private **/
+		protected function _redraw(color:uint):void {
+			_previewColor = color;
+			var g:Graphics = this.graphics;
+			g.clear();
+			g.beginFill(_previewColor, 1);
+			g.drawRect(0, 0, _width, _height);
+			g.endFill();
 		}
 		
 //---- GETTERS / SETTERS ---------------------------------------------------------------------------
@@ -527,10 +552,7 @@ var area:AutoFitArea = AutoFitArea.createAround(myImage);
 			return _previewColor;
 		}
 		public function set previewColor(value:uint):void {
-			_previewColor = value;
-			var ct:ColorTransform = this.transform.colorTransform;
-			ct.color = value;
-			this.transform.colorTransform = ct;
+			_redraw(value);
 		}
 		
 		/** To see a visual representation of the area on the screen, set <code>preview</code> to <code>true</code>. Doing so will add the area to the display list behind any DisplayObjects that have been attached. **/
@@ -582,6 +604,7 @@ internal class AutoFitItem {
 	public var mask:Shape;
 	public var matrix:Matrix;
 	public var hasCustomRatio:Boolean;
+	public var roundPosition:Boolean;
 	
 	public var next:AutoFitItem;
 	public var prev:AutoFitItem;
@@ -590,7 +613,7 @@ internal class AutoFitItem {
 	public var bounds:Rectangle;
 	
 	/** @private **/
-	public function AutoFitItem(target:DisplayObject, scaleMode:String, hAlign:String, vAlign:String, minWidth:Number, maxWidth:Number, minHeight:Number, maxHeight:Number, calculateVisible:Boolean, customAspectRatio:Number, next:AutoFitItem) {
+	public function AutoFitItem(target:DisplayObject, scaleMode:String, hAlign:String, vAlign:String, minWidth:Number, maxWidth:Number, minHeight:Number, maxHeight:Number, calculateVisible:Boolean, customAspectRatio:Number, roundPosition:Boolean, next:AutoFitItem) {
 		this.target = target;
 		this.scaleMode = scaleMode;
 		this.hAlign = hAlign;
@@ -599,6 +622,7 @@ internal class AutoFitItem {
 		this.maxWidth = maxWidth;
 		this.minHeight = minHeight;
 		this.maxHeight = maxHeight;
+		this.roundPosition = roundPosition;
 		this.matrix = target.transform.matrix;
 		this.calculateVisible = calculateVisible;
 		if (!isNaN(customAspectRatio)) {

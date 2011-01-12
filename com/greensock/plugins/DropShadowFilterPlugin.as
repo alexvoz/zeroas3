@@ -5,8 +5,7 @@
  * UPDATES AND DOCUMENTATION AT: http://www.TweenMax.com
  **/
 package com.greensock.plugins {
-	import flash.filters.*;
-	import flash.display.*;
+	import flash.filters.DropShadowFilter;
 	import com.greensock.*;
 /**
  * Tweens a DropShadowFilter. The following properties are available (you only need to define the ones you want to tween):
@@ -40,7 +39,7 @@ package com.greensock.plugins {
  * 		TweenLite.to(mc, 1, {dropShadowFilter:{blurX:5, blurY:5, distance:5, alpha:0.6}}); <br /><br />
  * </code>
  * 
- * <b>Copyright 2010, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
  * 
  * @author Jack Doyle, jack@greensock.com
  */

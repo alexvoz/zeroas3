@@ -1,6 +1,6 @@
 /**
- * VERSION: 1.14
- * DATE: 2010-06-22
+ * VERSION: 1.773
+ * DATE: 2011-01-06
  * AS3
  * UPDATES AND DOCS AT: http://www.greensock.com/loadermax/
  **/
@@ -10,7 +10,6 @@ package com.greensock.loading.core {
 	import com.greensock.loading.LoaderStatus;
 	import com.greensock.loading.display.ContentDisplay;
 	
-	import flash.display.BitmapData;
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.Sprite;
@@ -19,21 +18,20 @@ package com.greensock.loading.core {
 	import flash.events.ProgressEvent;
 	import flash.net.LocalConnection;
 	import flash.system.ApplicationDomain;
+	import flash.system.Capabilities;
 	import flash.system.LoaderContext;
+	import flash.system.Security;
 	import flash.system.SecurityDomain;
-
 /**
  * Serves as the base class for SWFLoader and ImageLoader. There is no reason to use this class on its own. 
  * Please refer to the documentation for the other classes.
  * <br /><br />
  * 
- * <b>Copyright 2010, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
+ * <b>Copyright 2011, GreenSock. All rights reserved.</b> This work is subject to the terms in <a href="http://www.greensock.com/terms_of_use.html">http://www.greensock.com/terms_of_use.html</a> or for corporate Club GreenSock members, the software agreement that was issued with the corporate membership.
  * 
  * @author Jack Doyle, jack@greensock.com
  */	
 	public class DisplayObjectLoader extends LoaderItem {
-		/** @private Just used to test for scriptAccessDenied. **/
-		protected static var _bitmapData:BitmapData = new BitmapData(1, 1, false);
 		/** @private the Sprite to which the EVENT_LISTENER was attached for forcing garbage collection after 1 frame (improves performance especially when multiple loaders are disposed at one time). **/
 		protected static var _gcDispatcher:DisplayObject;
 		/** @private **/
@@ -79,8 +77,18 @@ package com.greensock.loading.core {
 			
 			if (this.vars.context is LoaderContext) {
 				_context = this.vars.context;
-			} else if (_context == null && !_isLocal) {
-				_context = new LoaderContext(true, ApplicationDomain.currentDomain, SecurityDomain.currentDomain); //avoids some security sandbox headaches that plague many users.
+			} else if (_context == null) {
+				if (LoaderMax.defaultContext != null) {
+					_context = LoaderMax.defaultContext;
+					if (_isLocal) {
+						_context.securityDomain = null;
+					}
+				} else if (!_isLocal) {
+					_context = new LoaderContext(true, new ApplicationDomain(ApplicationDomain.currentDomain), SecurityDomain.currentDomain); //avoids some security sandbox headaches that plague many users.
+				}
+			}
+			if (Capabilities.playerType != "Desktop") { //AIR apps will choke on Security.allowDomain()
+				Security.allowDomain(_url); 
 			}
 			
 			_loader.load(_request, _context);
@@ -90,7 +98,7 @@ package com.greensock.loading.core {
 		protected function _refreshLoader(unloadContent:Boolean=true):void {
 			if (_loader != null) {
 				//to avoid gc issues and get around a bug in Flash that incorrectly reports progress values on Loaders that were closed before completing, we must force gc and recreate the Loader altogether...
-				if (_loader.contentLoaderInfo.bytesLoaded < _loader.contentLoaderInfo.bytesTotal) {
+				if (_status == LoaderStatus.LOADING) {
 					try {
 						_loader.close();
 					} catch (error:Error) {
@@ -142,8 +150,9 @@ package com.greensock.loading.core {
 			if (_gcCycles == 0) {
 				_gcDispatcher.removeEventListener(Event.ENTER_FRAME, _forceGCHandler);
 				_gcDispatcher = null;
+			} else {
+				_gcCycles--;
 			}
-			_gcCycles--;
 			try {
 				new LocalConnection().connect("FORCE_GC");
 				new LocalConnection().connect("FORCE_GC");
@@ -170,11 +179,9 @@ package com.greensock.loading.core {
 		/** @private **/
 		protected function _determineScriptAccess():void {
 			if (!_scriptAccessDenied) {
-				try {
-					_bitmapData.draw(_loader.content);
-				} catch (error:Error) {
+				if (!_loader.contentLoaderInfo.childAllowsParent) {
 					_scriptAccessDenied = true;
-					dispatchEvent(new LoaderEvent(LoaderEvent.SCRIPT_ACCESS_DENIED, this, error.message));
+					dispatchEvent(new LoaderEvent(LoaderEvent.SCRIPT_ACCESS_DENIED, this, "Error #2123: Security sandbox violation: " + this + ". No policy files granted access."));
 				}
 			}
 		}
@@ -185,11 +192,10 @@ package com.greensock.loading.core {
 		/** @private **/
 		protected function _securityErrorHandler(event:ErrorEvent):void {
 			//If a security error is thrown because of a missing crossdomain.xml file for example and the user didn't define a specific LoaderContext, we'll try again without checking the policy file, accepting the restrictions that come along with it because typically people would rather have the content show up on the screen rather than just error out (and they can always check the scriptAccessDenied property if they need to figure out whether it's safe to do BitmapData stuff on it, etc.)
-			if (_context != null && _context.checkPolicyFile && !("context" in this.vars)) {
-				_context.checkPolicyFile = false;
-				_context.applicationDomain = null;
-				_context.securityDomain = null;
+			if (_context != null && _context.checkPolicyFile && !(this.vars.context is LoaderContext)) {
+				_context = new LoaderContext(false);
 				_scriptAccessDenied = true;
+				dispatchEvent(new LoaderEvent(LoaderEvent.SCRIPT_ACCESS_DENIED, this, event.text));
 				_errorHandler(event);
 				_load();
 			} else {
@@ -201,6 +207,9 @@ package com.greensock.loading.core {
 		protected function _initHandler(event:Event):void {
 			if (!_initted) {
 				_initted = true;
+				if (_content == null) { //_content is set in ImageLoader or SWFLoader (subclasses), but we put this here just in case someone wants to use DisplayObjectLoader on its own as a lighter weight alternative without the bells & whistles of SWFLoader/ImageLoader.
+					_content = (_scriptAccessDenied) ? _loader : _loader.content;
+				}
 				(_sprite as Object).rawContent = (_content as DisplayObject);
 				dispatchEvent(new LoaderEvent(LoaderEvent.INIT, this));
 			}
