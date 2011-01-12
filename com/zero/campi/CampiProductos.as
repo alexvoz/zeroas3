@@ -102,7 +102,7 @@ package com.zero.campi
 			{
 				minis[i].makeNormal();
 			}
-			TweenLite.to( container, 0.5, { x: 180 } );
+			TweenLite.to( container, 0.5, { x: 90 } );
 		}
 		
 		private function replace_effect(e:Event):void 
