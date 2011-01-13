@@ -29,11 +29,13 @@ package com.util {
 				obj.removeChildAt( obj.numChildren - 1 );
 			}
 		}
-		public static function getChildren( obj:DisplayObjectContainer ):Array {
+		public static function getChildren( obj:DisplayObjectContainer, type:Class=null ):Array {
 			var a:Array = new Array();
 			for (var i:int = 0; i < obj.numChildren; i++) 
 			{
-				a.push( obj.getChildAt(i) );
+				if( !type || obj.getChildAt(i) is type ){
+					a.push( obj.getChildAt(i) );
+				}
 			}
 			return a;
 		}

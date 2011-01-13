@@ -108,7 +108,7 @@
 				break;
 				
 				case CampiSite.CONTACTO:
-				this.load("home.swf");
+				this.load("contacto.swf");
 				break;
 				
 				default:
