@@ -1,5 +1,6 @@
 package com.zero.campi.form 
 {
+	import com.greensock.data.DropShadowFilterVars;
 	import com.greensock.plugins.ColorTransformPlugin;
 	import com.greensock.plugins.TweenPlugin;
 	import com.greensock.TweenLite;
@@ -8,6 +9,7 @@ package com.zero.campi.form
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.FocusEvent;
+	import flash.filters.DropShadowFilter;
 	import flash.geom.Point;
 	import flash.text.Font;
 	import flash.text.TextField;
@@ -37,15 +39,17 @@ package com.zero.campi.form
 			
 			background = new Shape();
 			background.graphics.beginFill( HTMLColors.white, 1 );
-			background.graphics.drawRect(0, 0, size.x, size.y);
+			background.graphics.drawRoundRect(0, 0, size.x, size.y, 5, 5);
 			addChild(background);
+			
+			//background.filters = [ new DropShadowFilter(4, 0,0,0.3, 5, 5) ];
 			
 			border = new Shape();
 			border.graphics.lineStyle( 1, HTMLColors.dimgrey );
 			border.graphics.beginFill( HTMLColors.white, 0 );
-			border.graphics.drawRect(0, 0, size.x, size.y);
+			border.graphics.drawRoundRect(0, 0, size.x, size.y, 5, 5);
 			addChild(border);
-			
+						
 			txtLabel = new TextField();
 			txtLabel.width = txtLabel.height = 0;
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;

@@ -50,7 +50,7 @@
 			removeChild(mcBanner);
 			mcBanner.stop();
 			
-			var timerChange:Timer = new Timer( 10000 );
+			var timerChange:Timer = new Timer( 5000 );
 			timerChange.start();
 			timerChange.addEventListener(TimerEvent.TIMER, do_change );
 		}
@@ -59,6 +59,7 @@
 		{
 			if ( lastTrama == tramaDerecha ) {
 				lastTrama = tramaDerecha2;
+				//tramaDerecha2.randomModules();
 				addChild(tramaDerecha2);
 				addChild(mcBanner);
 				animationDerecha2.show();
@@ -67,6 +68,7 @@
 								
 			} else {
 				lastTrama = tramaDerecha;
+				//tramaDerecha.randomModules();
 				addChild(tramaDerecha);
 				addChild(mcBanner);
 				animationDerecha.show();

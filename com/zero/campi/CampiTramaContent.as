@@ -47,7 +47,7 @@ package com.zero.campi
 			back = new Shape();
 			back.graphics.beginFill(0, 1);
 			back.graphics.drawRect(0, 0, 90*9, 5*120 );					
-			back.filters = [ new DropShadowFilter(5, 45, 0, 1, 10, 10, 0.7, 3) ];
+			//back.filters = [ new DropShadowFilter(5, 45, 0, 1, 10, 10, 0.7, 3) ];
 			
 		}
 		

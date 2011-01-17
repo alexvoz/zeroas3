@@ -30,8 +30,8 @@ package com.zero.campi
 			removeChild( mcDatos );
 			
 			form = new CampiForm();
-			form.x = 90;
-			form.y = 120;
+			form.x = 520;
+			form.y = 122;
 		}
 		override public function hide():void {
 			t2.reverse();
@@ -56,7 +56,7 @@ package com.zero.campi
 			t2 = TweenLite.from( form, 0.8, { alpha: 0, x: form.x - 10, ease: Strong.easeInOut, onReverseComplete: hide_title, delay: 0.5 } );
 			
 			addChild( mcDatos );
-			t3 = TweenLite.from( mcDatos, 0.8, { alpha: 0, y: mcDatos.y + 30, ease: Strong.easeInOut, delay: 0.5 } );
+			t3 = TweenLite.from( mcDatos, 0.8, { alpha: 0, y: mcDatos.x - 10, ease: Strong.easeInOut, delay: 0.5 } );
 			
 		}
 		

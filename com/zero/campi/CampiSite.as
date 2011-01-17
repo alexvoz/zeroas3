@@ -2,6 +2,7 @@
 {
 	import com.general.WebSite;
 	import flash.display.StageAlign;
+	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
@@ -36,14 +37,19 @@
 						
 			this.mcMainWindow = new CampiMainWindow(stage);
 			this.mcMainWindow.x = this.mcNav.getBounds(this).right;
+			this.mcMainWindow.y = this.mcNav.getBounds(this).top;
 			this.addChild(mcMainWindow);
+			
+			this.mcMainWindow.mask = mcWindowMask;
 			
 			this.addEventListener( WebSite.SECTION_CHANGED, mcMainWindow.section_changed );
 			mcNav.addEventListener(MouseEvent.CLICK, nav_bar_clicked );
 			
 			//mcNav.init();
 			addChild(mcNav);
-			isFullFlash();
+			//isFullFlash();
+			stage.align = StageAlign.TOP;
+			stage.scaleMode = StageScaleMode.NO_SCALE;
 			this.setSection( CampiSite.HOME );
 		}
 				
@@ -57,6 +63,7 @@
 		}
 		
 		override protected function resizeBrowser( evnt:Event ):void {
+			super.resizeBrowser( evnt );
 			//CampiSite.log(this.width +" | "+stage.stageWidth );
 			//mcNav.refreshSize();
 			//mcMainWindow.refreshSize();
