@@ -1,6 +1,7 @@
 ﻿package com.zero.campi 
 {
 	import com.general.WebSite;
+	import flash.display.Sprite;
 	import flash.display.StageAlign;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
@@ -22,6 +23,8 @@
 		public static const FAQ:String = "campi_faq";
 		
 		public var mcNav:CampiNav;
+		public var mcFondo:Sprite;
+		public var mcSombra:Sprite;
 		private var mcMainWindow:CampiMainWindow;
 				
 		public static function log( msg:*, toConsole:Boolean = false ):void {

@@ -24,7 +24,7 @@ package com.zero.campi
 	public class CollectionMini extends Sprite 
 	{
 		
-		private var data:XML;
+		private var _data:XML;
 		private var tweens:Vector.<TweenLite>;
 		private var container:Sprite;
 		private var containerSingle:Sprite;
@@ -34,7 +34,7 @@ package com.zero.campi
 		public function CollectionMini( data:XML ) 
 		{
 			super();
-			this.data = data;
+			this._data = data;
 			
 			this.bMini = false;
 			
@@ -161,6 +161,8 @@ package com.zero.campi
 				return 0;
 			}
 		}
+		
+		public function get data():XML { return _data; }
 		
 	}
 

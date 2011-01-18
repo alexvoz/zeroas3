@@ -12,7 +12,7 @@ package com.zero.campi.form
 		
 		public function CampiFieldArea(label:String, size:Point = undefined) 
 		{
-			super(label, new Point( 200, 150 ) );
+			super(label, new Point( 210, 150 ) );
 			txtInput.multiline = true;
 		}
 		override protected function validator(e:FocusEvent):void 

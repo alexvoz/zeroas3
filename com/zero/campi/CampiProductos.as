@@ -1,9 +1,11 @@
 package com.zero.campi 
 {
+	import com.greensock.loading.core.DisplayObjectLoader;
 	import com.greensock.TweenLite;
 	import com.util.DisplayUtil;
 	import com.util.LayoutUtil;
 	import flash.display.DisplayObject;
+	import flash.display.Loader;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -24,6 +26,8 @@ package com.zero.campi
 		private var fotoGrandeMask:Shape;
 		private var animationZoom:TramaTransition;
 		private var tramaZoom:CampiBitmapTrama;
+		private var zoomLoader:Loader;
+		private var lastContent:DisplayObject;
 				
 		function CampiProductos()
 		{
@@ -43,26 +47,32 @@ package com.zero.campi
 			
 			removeChild( mcFotoGrande );
 			
-			/*
-			fotoGrandeMask = new Shape();
-			fotoGrandeMask.graphics.beginFill(0xFFFF00);
-			fotoGrandeMask.graphics.drawRect(0, 0, mcFotoGrande.width, mcFotoGrande.height );
-			fotoGrandeMask.graphics.endFill();
-			fotoGrandeMask.scaleX = 0;
-			addChild(fotoGrandeMask);
-			
-			mcFotoGrande.mask = fotoGrandeMask;
-			*/
 			mcFotoGrande.addEventListener(MouseEvent.CLICK, close_zoom );
 			
 			//mcFotoGrande.x = fotoGrandeMask.x = 270;
 			
 			container.addEventListener(MouseEvent.CLICK, show_zoom );
+			zoomLoader = new Loader();
+			zoomLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, make_trama_zoom );
+		}
+		
+		private function make_trama_zoom(e:Event):void 
+		{
+			if ( lastContent ) mcFotoGrande.removeChild( lastContent );
+			lastContent = zoomLoader.content;
+						
+			DisplayUtil.remove( tramaZoom );
+			
+			mcFotoGrande.addChild( zoomLoader.content );
 			
 			tramaZoom = new CampiBitmapTrama( mcFotoGrande, 5, Math.ceil( mcFotoGrande.width / 90 ) );
 			animationZoom = new TramaTransition7( tramaZoom, false );
-			animationZoom.addEventListener( CampiTramaContent.SHOW_END, replace_effect );
-			animationZoom.addEventListener( CampiTramaContent.HIDE_END, remove_effect );
+			animationZoom.addEventListener( CampiTramaContent.SHOW_END, replace_effect, false, 0, true );
+			animationZoom.addEventListener( CampiTramaContent.HIDE_END, remove_effect, false, 0, true );
+			
+			addChild( tramaZoom );
+			addChild( container );
+			animationZoom.show();
 		}
 		
 		private function close_zoom(e:MouseEvent):void 
@@ -70,8 +80,7 @@ package com.zero.campi
 			removeChild(mcFotoGrande);
 			addChild(tramaZoom);
 			animationZoom.hide();
-			//TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 0 } );
-					
+			
 		}
 		
 		private function show_zoom(e:MouseEvent):void 
@@ -84,13 +93,13 @@ package com.zero.campi
 			}
 			TweenLite.to( container, 0.5, { x: 720 } );
 			
-			//mcFotoGrande.mask = null;
-			//addChild( mcFotoGrande );
-			//TweenLite.to( fotoGrandeMask, 0.8, { scaleX: 1 } );
+			DisplayUtil.remove( mcFotoGrande );
 			
-			addChild( tramaZoom );
-			addChild( container );
-			animationZoom.show();
+			var zoomReq:URLRequest = new URLRequest( e.target.data.@imgPath + e.target.data.product[0].@src );
+			zoomLoader.load( zoomReq );
+			
+			mcFotoGrande["txtTitle"].text = e.target.data.product[0].@title.toUpperCase();
+			mcFotoGrande["txtDescription"].text = e.target.data.product[0];
 		}
 		
 		private function remove_effect(e:Event):void 

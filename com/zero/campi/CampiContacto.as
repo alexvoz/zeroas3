@@ -31,7 +31,7 @@ package com.zero.campi
 			
 			form = new CampiForm();
 			form.x = 520;
-			form.y = 122;
+			form.y = 127;
 		}
 		override public function hide():void {
 			t2.reverse();

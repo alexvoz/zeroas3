@@ -22,7 +22,7 @@
 		{
 			fondo = getChildAt(0) as Shape;
 			navBar = new CampiNavBar();
-			navBar.x = 5;
+			navBar.x = 14;
 			navBar.y = mcLogo.getBounds(this).bottom + 17;
 			addChild(navBar);
 			

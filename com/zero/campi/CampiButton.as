@@ -2,6 +2,7 @@
 {
 	import com.greensock.*; 
 	import com.greensock.easing.*;
+	import com.util.HTMLColors;
 	import flash.text.AntiAliasType;
 	
 	import flash.display.Sprite;
@@ -24,7 +25,7 @@
 		
 		public function CampiButton(sName:String, data:Object) 
 		{
-			
+						
 			this.name = sName;
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;
 			txtLabel.wordWrap = false;
@@ -33,7 +34,7 @@
 			//txtLabel.sharpness = -100;
 			//txtLabel.thickness = -100;
 			txtLabel.text = sName.toUpperCase();
-			txtLabel.z = 0; //para que el campo de texto sea cacheado como bitmap
+			//txtLabel.z = 0; //para que el campo de texto sea cacheado como bitmap
 			
 			//txtLabel.text = sName.toLowerCase();
 			//txtLabel.text = sName;
@@ -51,16 +52,23 @@
 			if ( active ) {
 				TweenMax.to( this, 0.3, { x: initPos.x } );
 			} else {
-				txtLabel.textColor = 0xA0A0A0;
+				//txtLabel.textColor = 0xA0A0A0;
+				TweenMax.to( this, 0.5, {glowFilter:{color:0xffffff, alpha:0, blurX:10, blurY:10, strength:0, quality:3}, ease:Quad.easeOut});
 				TweenMax.to( this, 0.3, { x: initPos.x /*, colorTransform: { tint: 0xA0A0A0 }*/ } );
 			}
+			TweenMax.to( CampiSite.getApp().mcFondo, 0.5, { glowFilter: { strength: 0.35, blurX: 10, blurY: 10 } } );
+			TweenMax.to( CampiSite.getApp().mcSombra, 0.5, { dropShadowFilter: { strength: 0.8, blurX: 40, blurY: 7 }, scaleX: 1 } );
 		}
 		
 		private function btn_over(e:MouseEvent):void 
 		{
 			if ( !initPos ) initPos = new Point( x, y );
-			txtLabel.textColor = 0xC9C9C9;
-			TweenMax.to( this, 0.3, { x: initPos.x+2 /*, colorTransform: { tint: 0xD0D0D0 } */ } );
+			//txtLabel.textColor = 0xC9C9C9;
+			//TweenMax.to( this, 0.3, { x: initPos.x + 2 /*, colorTransform: { tint: 0xD0D0D0 } */ } );
+			TweenMax.to( this, 0.5, {glowFilter:{color:0xffffff, alpha:1, blurX:10, blurY:10, strength:0.7, quality:3}, ease:Quad.easeOut});
+			TweenMax.to( CampiSite.getApp().mcFondo, 0.5, { glowFilter: { strength: 1, blurX: 15, blurY: 15 } } );
+			TweenMax.to( CampiSite.getApp().mcSombra, 0.5, { dropShadowFilter: { strength: 1, blurX: 20 }, scaleX: 1.03 } );
+			
 		}
 				
 		public function get active():Boolean { return _active; }

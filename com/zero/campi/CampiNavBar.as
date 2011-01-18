@@ -19,14 +19,14 @@
 			var aLabels:Array = [ "Nuestra Empresa", "Productos", "Distribucion", "Contacto" ];
 			var aLinks:Array = [ CampiSite.NOSOTROS, CampiSite.CATALOGO, CampiSite.DISTRIBUCION, CampiSite.CONTACTO ];
 			var nY:int = 0;
-			var nSpace:int = 13;
+			var nSpace:int = 10;
 			for (var i:int = 0; i < aLabels.length; i++) 
 			{
 				var btn:CampiButton = new CampiButton(aLabels[i], aLinks[i]);
 				btn.alpha = 0;
-				btn.y = nY + 5;
+				btn.y = nY;
 				addChild(btn);
-				TweenMax.to( btn, 1, { alpha: 1, y: nY, delay: i * 0.3, ease: Linear.easeNone } );
+				TweenMax.to( btn, 1, { alpha: 1, delay: i * 0.3, ease: Linear.easeNone } );
 				nY += btn.height + nSpace;
 			}
 			this.addEventListener(MouseEvent.CLICK, active_button );

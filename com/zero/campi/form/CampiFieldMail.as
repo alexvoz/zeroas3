@@ -15,7 +15,7 @@ package com.zero.campi.form
 		override protected function validator(e:FocusEvent):void 
 		{
 			var exp:RegExp = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
-			validate = exp.test( value );
+			validate = exp.test( value.toLowerCase() );
 		}
 		
 	}
