@@ -34,7 +34,8 @@
 			mcLogo.addEventListener(MouseEvent.CLICK, btn_click );
 			
 			//refreshSize();
-			
+			//removeChild(navBar);
+			//removeChild(mcToolBar);
 		}
 		
 		private function btn_click(e:MouseEvent):void 

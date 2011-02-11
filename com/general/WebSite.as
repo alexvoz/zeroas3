@@ -1,10 +1,13 @@
 package com.general {
+	import com.asual.swfaddress.SWFAddress;
+	import com.asual.swfaddress.SWFAddressEvent;
 	import fl.transitions.Tween;
 	import fl.transitions.TweenEvent;
 	import flash.display.*;
 	import flash.events.*;
 	import flash.external.ExternalInterface;
 	import flash.net.*;
+	import flash.system.Security;
 	import flash.text.TextField;
 	
 	public class WebSite
@@ -57,6 +60,14 @@ package com.general {
 			} else {
 				internalLog("WebSite | Internal console disabled");
 			}
+			if ( this.loaderInfo.parameters["SWFADDRESS"] ) {
+				var domain:String = LoaderInfo(this.loaderInfo).parameters.domain;
+				Security.allowDomain(domain);
+				Security.allowInsecureDomain(domain);
+				//SWFAddress.addEventListener(SWFAddressEvent.CHANGE, handleSWFAddress);
+				SWFAddress.addEventListener(SWFAddressEvent.EXTERNAL_CHANGE, handleSWFAddress);
+				
+			}
 			this.initSite();
 		}
 		
@@ -101,7 +112,7 @@ package com.general {
 		 * @usage: function that defines the stage layout
 		 * 
 		 * */
-		protected function resizeBrowser( evnt:Event ):void {
+		protected function resizeBrowser( evnt:Event=null ):void {
 			if ( stage.stageWidth <= 1024 ) return;
 			
 			if ( getCenterClip() ) {
@@ -118,11 +129,11 @@ package com.general {
 		public function getSection():String {
 			return this.sSection;
 		}
-		public function setSection(sSection:String):void {
+		public function setSection(sSection:String, track:Boolean=true):void {
 			this.sSection = sSection;
 			log( "WebSite | setSection= " + sSection, true);
 			this.dispatchEvent( new Event( WebSite.SECTION_CHANGED, true ) );
-			this.track( sSection );
+			if(track) this.track( sSection );
 		}
 		
 		/**
@@ -137,9 +148,26 @@ package com.general {
 				} catch (e:Error) {
 					log( "WebSite | analytic error");
 				}
-
+			}
+			if ( this.loaderInfo.parameters["SWFADDRESS"] ) {
+				SWFAddress.setValue( sTrack );
 			}
 		}
+		
+		// SWFAddress handling
+		function handleSWFAddress(e:SWFAddressEvent) {
+			try {
+				setSection( e.value.split("/")[1], false );
+			} catch(err) {
+				log( "WebSite handleSFWAddress ERROR", true );
+			}
+			var title:String = 'Campi';	
+			for (var i = 0; i < e.pathNames.length; i++) {
+				title += ' / ' + e.pathNames[i].substr(0,1).toUpperCase() + e.pathNames[i].substr(1);
+			}
+			SWFAddress.setTitle(title);
+		}
+		
 		
 		public function getLanguage():String {
 			return this.sLanguage;

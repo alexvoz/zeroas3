@@ -1,11 +1,13 @@
 package com.zero.campi 
 {
+	import com.adobe.utils.StringUtil;
 	import com.greensock.loading.core.DisplayObjectLoader;
 	import com.greensock.TweenLite;
 	import com.util.DisplayUtil;
 	import com.util.LayoutUtil;
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
+	import flash.display.MovieClip;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
@@ -22,7 +24,7 @@ package com.zero.campi
 		private var container:Sprite;
 		private var tweens:Vector.<TweenLite>;
 				
-		public var mcFotoGrande:Sprite;
+		public var mcFotoGrande:MovieClip;
 		private var fotoGrandeMask:Shape;
 		private var animationZoom:TramaTransition;
 		private var tramaZoom:CampiBitmapTrama;
@@ -48,8 +50,9 @@ package com.zero.campi
 			removeChild( mcFotoGrande );
 			
 			mcFotoGrande.addEventListener(MouseEvent.CLICK, close_zoom );
-			
-			//mcFotoGrande.x = fotoGrandeMask.x = 270;
+			mcFotoGrande.txtTitle.wordWrap = true;
+			mcFotoGrande.txtTitle.multiline = true;
+			mcFotoGrande.txtTitle.autoSize = "left";
 			
 			container.addEventListener(MouseEvent.CLICK, show_zoom );
 			zoomLoader = new Loader();
@@ -77,6 +80,9 @@ package com.zero.campi
 		
 		private function close_zoom(e:MouseEvent):void 
 		{
+			if( mcFotoGrande.getChildByName("minis") ){
+				mcFotoGrande.removeChild( mcFotoGrande.getChildByName("minis") );
+			}
 			removeChild(mcFotoGrande);
 			addChild(tramaZoom);
 			animationZoom.hide();
@@ -98,8 +104,32 @@ package com.zero.campi
 			var zoomReq:URLRequest = new URLRequest( e.target.data.@imgPath + e.target.data.product[0].@src );
 			zoomLoader.load( zoomReq );
 			
-			mcFotoGrande["txtTitle"].text = e.target.data.product[0].@title.toUpperCase();
-			mcFotoGrande["txtDescription"].text = e.target.data.product[0];
+			mcFotoGrande.txtTitle.text = e.target.data.product[0].@title.toUpperCase();
+			mcFotoGrande.txtDescription.y = mcFotoGrande.txtTitle.y + mcFotoGrande.txtTitle.textHeight + 15;
+			mcFotoGrande.txtDescription.text = StringUtil.remove( e.target.data.product[0], "\r" );
+			
+			if( mcFotoGrande.getChildByName("minis") ){
+				mcFotoGrande.removeChild( mcFotoGrande.getChildByName("minis") );
+			}
+			if( e.target.data.product.length() > 1 ){
+				var mcMinis:CollectionMiniBasic = new CollectionMiniBasic( e.target.data );
+				mcMinis.name = "minis";
+				mcMinis.addEventListener(Event.CHANGE, update_zoom );
+				mcMinis.x = mcFotoGrande["txtTitle"].x;
+				mcMinis.y = mcFotoGrande["txtDescription"].y + mcFotoGrande["txtDescription"].height;
+				mcFotoGrande.addChild( mcMinis );
+			}
+		}
+		
+		private function update_zoom(e:Event):void 
+		{
+			DisplayUtil.remove( mcFotoGrande );
+						
+			var zoomReq:URLRequest = new URLRequest( e.target.data.@imgPath + e.currentTarget.activeNode.@src );
+			zoomLoader.load( zoomReq );
+			mcFotoGrande["txtTitle"].text = e.currentTarget.activeNode.@title.toUpperCase();
+			mcFotoGrande.txtDescription.y = mcFotoGrande.txtTitle.y + mcFotoGrande.txtTitle.textHeight + 15;
+			mcFotoGrande["txtDescription"].text = StringUtil.remove( e.currentTarget.activeNode, "\r" );
 		}
 		
 		private function remove_effect(e:Event):void 
@@ -116,7 +146,7 @@ package com.zero.campi
 		
 		private function replace_effect(e:Event):void 
 		{
-			removeChild( (e.currentTarget as TramaTransition).getTrama() );
+			DisplayUtil.remove( (e.currentTarget as TramaTransition).getTrama() );
 			addChild(mcFotoGrande);
 		}
 		

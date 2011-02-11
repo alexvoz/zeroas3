@@ -98,7 +98,7 @@
 			is being displayed through the mask and ensures that dragging the mcDrag
 			from top to bottom will reveal all the text.
 			*/
-			scrollAmount=(mcContent.height-(mcMask.height/*/1.3*/))/(mcBar.height-mcDrag.height);
+			scrollAmount=(mcContent.height-(mcMask.height))/(mcBar.height-mcDrag.height);
 			//set a new target y position
 			targY =-mcDrag.y*scrollAmount;
 			//set the y of the text to 1/5 of the distance between its current y and the target y

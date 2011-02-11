@@ -31,14 +31,9 @@
 			txtLabel.wordWrap = false;
 			txtLabel.multiline = false;
 			txtLabel.antiAliasType = AntiAliasType.ADVANCED;
-			//txtLabel.sharpness = -100;
-			//txtLabel.thickness = -100;
-			txtLabel.text = sName.toUpperCase();
+			txtLabel.text = sName.toUpperCase()+" ";
 			//txtLabel.z = 0; //para que el campo de texto sea cacheado como bitmap
-			
-			//txtLabel.text = sName.toLowerCase();
-			//txtLabel.text = sName;
-			
+						
 			this.buttonMode = true;
 			this.mouseChildren = false;
 			this.data = data;

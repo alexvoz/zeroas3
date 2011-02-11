@@ -2,6 +2,7 @@
 {
 	import com.greensock.easing.Strong;
 	import com.greensock.TweenLite;
+	import com.zero.campi.distribucion.ZonasList;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	/**
@@ -21,8 +22,12 @@
 			animationClass = TramaTransition;
 			
 			super();
+					
 			removeChild( mcTitle );
-			removeChild( mcTexto );
+			//removeChild( mcTexto );
+			mcTexto = new ZonasList();
+			mcTexto.x = 480;
+			mcTexto.y = 66;
 		}
 		override public function hide():void {
 			t2.reverse();

@@ -37,7 +37,7 @@
 						
 			loader = new Loader();
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, show_progress);
-			//loader.contentLoaderInfo.addEventListener(Event.COMPLETE, content_loaded );
+			loader.contentLoaderInfo.addEventListener(Event.COMPLETE, content_loaded );
 		}
 		
 		private function content_loaded(e:Event=null):void 
@@ -48,7 +48,9 @@
 			}
 			
 			content = loader.content;
-			addChild(content);
+			if( content ){
+				addChild(content);
+			}
 			
 			progressBar.height = 600;
 						
@@ -64,7 +66,7 @@
 		private function show_progress(e:ProgressEvent):void 
 		{
 			var p:Number = (e.bytesLoaded / e.bytesTotal);
-			TweenMax.to( progressBar, 0.4, { scaleY: p, onUpdate: layout_bar, onComplete: (p == 1) ? content_loaded : null  } );
+			//TweenMax.to( progressBar, 0.4, { scaleY: p, onUpdate: layout_bar, onComplete: (p == 1) ? content_loaded : null  } );
 		}
 		
 		private function layout_bar():void

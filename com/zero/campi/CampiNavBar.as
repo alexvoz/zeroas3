@@ -18,6 +18,7 @@
 		{
 			var aLabels:Array = [ "Nuestra Empresa", "Productos", "Distribucion", "Contacto" ];
 			var aLinks:Array = [ CampiSite.NOSOTROS, CampiSite.CATALOGO, CampiSite.DISTRIBUCION, CampiSite.CONTACTO ];
+						
 			var nY:int = 0;
 			var nSpace:int = 10;
 			for (var i:int = 0; i < aLabels.length; i++) 

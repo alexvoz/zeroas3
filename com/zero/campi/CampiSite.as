@@ -1,11 +1,17 @@
 ﻿package com.zero.campi 
 {
+	import com.asual.swfaddress.SWFAddress;
+	import com.asual.swfaddress.SWFAddressEvent;
 	import com.general.WebSite;
+	import flash.display.LoaderInfo;
 	import flash.display.Sprite;
 	import flash.display.StageAlign;
+	import flash.display.StageDisplayState;
 	import flash.display.StageScaleMode;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
+	import flash.external.ExternalInterface;
+	import flash.system.Security;
 	
 	/**
 	 * ...
@@ -50,10 +56,26 @@
 			
 			//mcNav.init();
 			addChild(mcNav);
+			
 			//isFullFlash();
+			stage.displayState = StageDisplayState.FULL_SCREEN;
 			stage.align = StageAlign.TOP;
 			stage.scaleMode = StageScaleMode.NO_SCALE;
-			this.setSection( CampiSite.HOME );
+			//stage.scaleMode = StageScaleMode.SHOW_ALL;
+			//this.setSection( CampiSite.CATALOGO );
+			SWFAddress.addEventListener(SWFAddressEvent.INIT, check_address);
+						
+			stage.addEventListener(Event.RESIZE, resizeBrowser );
+			resizeBrowser();
+		}
+		
+		private function check_address(e:SWFAddressEvent):void 
+		{
+			if ( SWFAddress.getValue().split("/")[1] ) {
+				this.setSection( SWFAddress.getValue().split("/")[1] );
+			} else {
+				this.setSection( CampiSite.HOME );
+			}
 		}
 				
 		private function nav_bar_clicked(e:MouseEvent):void 
@@ -65,12 +87,20 @@
 			
 		}
 		
-		override protected function resizeBrowser( evnt:Event ):void {
-			super.resizeBrowser( evnt );
-			//CampiSite.log(this.width +" | "+stage.stageWidth );
-			//mcNav.refreshSize();
-			//mcMainWindow.refreshSize();
-			
+		override protected function resizeBrowser( evnt:Event=null ):void {
+			var dif:int = mcSombra.getBounds(this).bottom - stage.stageHeight;
+			ExternalInterface.call( "console.log", dif );
+			if ( dif > 0 ) {
+				var ratio:Number = stage.stageHeight / mcSombra.getBounds(this).bottom;
+				if ( ratio > 1 ) ratio = 1;
+				this.scaleX = this.scaleY = ratio;
+				if ( dif > 20 ) dif = 20;
+				this.y = -dif; //esto es para que quede clavado arriba
+				this.x = +30; //¿de donde goma sale este 30? lo probé a ojo
+			} else {
+				this.y = this.x = 0;
+				this.scaleX = this.scaleY = 1;
+			}
 		}
 		
 	}
