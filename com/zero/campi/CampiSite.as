@@ -20,6 +20,8 @@
 	public class CampiSite extends WebSite
 	{
 		
+		public static const PROYECTOR:Boolean = false;
+		
 		public static const HOME:String = "campi_home";
 		public static const NOSOTROS:String = "campi_nosotros";
 		public static const CATALOGO:String = "campi_catalogo";
@@ -57,14 +59,16 @@
 			//mcNav.init();
 			addChild(mcNav);
 			
-			//isFullFlash();
-			stage.displayState = StageDisplayState.FULL_SCREEN;
-			stage.align = StageAlign.TOP;
-			stage.scaleMode = StageScaleMode.NO_SCALE;
-			//stage.scaleMode = StageScaleMode.SHOW_ALL;
-			//this.setSection( CampiSite.CATALOGO );
-			SWFAddress.addEventListener(SWFAddressEvent.INIT, check_address);
-						
+			if ( PROYECTOR ) {
+				stage.displayState = StageDisplayState.FULL_SCREEN;
+				stage.scaleMode = StageScaleMode.SHOW_ALL;
+				this.setSection( CampiSite.CATALOGO );	
+			} else {
+				stage.align = StageAlign.TOP;
+				stage.scaleMode = StageScaleMode.NO_SCALE;	
+				SWFAddress.addEventListener(SWFAddressEvent.INIT, check_address);
+			}
+								
 			stage.addEventListener(Event.RESIZE, resizeBrowser );
 			resizeBrowser();
 		}

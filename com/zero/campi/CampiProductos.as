@@ -30,7 +30,7 @@ package com.zero.campi
 		private var tramaZoom:CampiBitmapTrama;
 		private var zoomLoader:Loader;
 		private var lastContent:DisplayObject;
-				
+						
 		function CampiProductos()
 		{
 			animationClass = TramaTransition;		
@@ -45,7 +45,7 @@ package com.zero.campi
 			addChild(container);
 			
 			container.x = 90;
-			container.y = 120;
+			container.y = 35;
 			
 			removeChild( mcFotoGrande );
 			
@@ -106,7 +106,7 @@ package com.zero.campi
 			
 			mcFotoGrande.txtTitle.text = e.target.data.product[0].@title.toUpperCase();
 			mcFotoGrande.txtDescription.y = mcFotoGrande.txtTitle.y + mcFotoGrande.txtTitle.textHeight + 15;
-			mcFotoGrande.txtDescription.text = StringUtil.remove( e.target.data.product[0], "\r" );
+			mcFotoGrande.txtDescription.htmlText = StringUtil.remove( e.target.data.product[0], "\r" );
 			
 			if( mcFotoGrande.getChildByName("minis") ){
 				mcFotoGrande.removeChild( mcFotoGrande.getChildByName("minis") );
@@ -127,9 +127,9 @@ package com.zero.campi
 						
 			var zoomReq:URLRequest = new URLRequest( e.target.data.@imgPath + e.currentTarget.activeNode.@src );
 			zoomLoader.load( zoomReq );
-			mcFotoGrande["txtTitle"].text = e.currentTarget.activeNode.@title.toUpperCase();
+			mcFotoGrande.txtTitle.text = e.currentTarget.activeNode.@title.toUpperCase();
 			mcFotoGrande.txtDescription.y = mcFotoGrande.txtTitle.y + mcFotoGrande.txtTitle.textHeight + 15;
-			mcFotoGrande["txtDescription"].text = StringUtil.remove( e.currentTarget.activeNode, "\r" );
+			mcFotoGrande.txtDescription.htmlText = StringUtil.remove( e.currentTarget.activeNode, "\r" );
 		}
 		
 		private function remove_effect(e:Event):void 
