@@ -66,13 +66,13 @@ package com.zero.campi
 			for each( var p:XML in products ) {
 				var sPath:String = p.@imgPath;
 				if ( !sPath ) sPath = data.@imgPath;
-				var img:Image = new Image( sPath + p.@thumb, new Point(23, 35), true );
+				var img:Image = new Image( sPath + p.@thumb, new Point(23, 35) );
 				img.visible = false;
 				container.addChild( img );
 			}
 			
 			containerSingle = new Sprite();
-			img = new Image( sPath + products[0].@thumb, new Point( 23, 35), true );
+			img = new Image( sPath + products[0].@thumb, new Point( 23, 35) );
 			containerSingle.addChild(img);
 			containerSingle.alpha = 0;
 			containerSingle.x = -33;

@@ -14,6 +14,7 @@ package com.zero.campi
 	import flash.events.MouseEvent;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
+	import flash.text.TextField;
 	/**
 	 * ...
 	 * @author sminutoli
@@ -68,6 +69,8 @@ package com.zero.campi
 			
 			mcFotoGrande.addChild( zoomLoader.content );
 			
+			mcFotoGrande.minis.visible = mcFotoGrande.txtTitle.visible = mcFotoGrande.txtDescription.visible = false;
+			
 			tramaZoom = new CampiBitmapTrama( mcFotoGrande, 5, Math.ceil( mcFotoGrande.width / 90 ) );
 			animationZoom = new TramaTransition7( tramaZoom, false );
 			animationZoom.addEventListener( CampiTramaContent.SHOW_END, replace_effect, false, 0, true );
@@ -80,6 +83,8 @@ package com.zero.campi
 		
 		private function close_zoom(e:MouseEvent):void 
 		{
+			if ( e.target is TextField ) return;
+			
 			if( mcFotoGrande.getChildByName("minis") ){
 				mcFotoGrande.removeChild( mcFotoGrande.getChildByName("minis") );
 			}
@@ -115,9 +120,10 @@ package com.zero.campi
 				var mcMinis:CollectionMiniBasic = new CollectionMiniBasic( e.target.data );
 				mcMinis.name = "minis";
 				mcMinis.addEventListener(Event.CHANGE, update_zoom );
-				mcMinis.x = mcFotoGrande["txtTitle"].x;
-				mcMinis.y = mcFotoGrande["txtDescription"].y + mcFotoGrande["txtDescription"].height;
-				mcFotoGrande.addChild( mcMinis );
+				mcMinis.x = mcFotoGrande.txtTitle.x;
+				mcMinis.y = mcFotoGrande.txtDescription.y + mcFotoGrande.txtDescription.height;
+				mcFotoGrande.minis = mcFotoGrande.addChild( mcMinis );
+				
 			}
 		}
 		
@@ -148,6 +154,10 @@ package com.zero.campi
 		{
 			DisplayUtil.remove( (e.currentTarget as TramaTransition).getTrama() );
 			addChild(mcFotoGrande);
+			mcFotoGrande.minis.visible = mcFotoGrande.txtTitle.visible = mcFotoGrande.txtDescription.visible = true;
+			TweenLite.from( mcFotoGrande.txtTitle, 0.5, { alpha: 0, y: mcFotoGrande.txtTitle.y + 8 } );
+			TweenLite.from( mcFotoGrande.txtDescription, 0.5, { alpha: 0, y: mcFotoGrande.txtDescription.y + 8, delay: 0.2 } );
+			TweenLite.from( mcFotoGrande.minis, 0.5, { alpha: 0, y: mcFotoGrande.minis.y + 8, delay: 0.2 } );
 		}
 		
 		private function xml_loaded(e:Event):void 
@@ -184,7 +194,6 @@ package com.zero.campi
 				tweens[i] = TweenLite.from( cm , 0.5, { alpha: 0, delay: i*0.3, onStart: cm.show } );
 			}
 			tweens = tweens.sort( sortOnDelay ).reverse();
-			//tweens[0].vars.onComplete = show_end;
 			tweens[0].vars.onReverseComplete = menu_hide_end;
 		}
 		

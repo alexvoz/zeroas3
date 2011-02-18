@@ -32,7 +32,7 @@ package com.zero.campi
 			for each( var p:XML in products ) {
 				var sPath:String = p.@imgPath;
 				if ( !sPath ) sPath = data.@imgPath;
-				var img:Image = new Image( sPath + p.@thumb, new Point(23, 35), true );
+				var img:Image = new Image( sPath + p.@thumb, new Point(30, 45), true );
 				img.name = "id_" + p.@id;
 				img.buttonMode = true;
 				img.addEventListener(MouseEvent.CLICK, set_active );

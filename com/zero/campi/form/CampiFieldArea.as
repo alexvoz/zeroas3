@@ -10,10 +10,11 @@ package com.zero.campi.form
 	public class CampiFieldArea extends CampiField 
 	{
 		
-		public function CampiFieldArea(label:String, size:Point = undefined) 
+		public function CampiFieldArea(id:String, label:String, size:Point = undefined) 
 		{
-			super(label, new Point( 210, 150 ) );
+			super(id, label, new Point( 210, 150 ) );
 			txtInput.multiline = true;
+			txtInput.wordWrap = true;
 		}
 		override protected function validator(e:FocusEvent):void 
 		{

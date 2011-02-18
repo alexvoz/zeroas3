@@ -3,6 +3,7 @@
 	import com.greensock.*; 
 	import com.greensock.easing.*;
 	import flash.display.Sprite;
+	import flash.events.Event;
 	import flash.events.MouseEvent;
 	
 	/**
@@ -31,7 +32,13 @@
 				nY += btn.height + nSpace;
 			}
 			this.addEventListener(MouseEvent.CLICK, active_button );
-			
+			this.addEventListener(Event.ADDED_TO_STAGE, print );
+		}
+		
+		private function print(e:Event):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, print);
+			trace( "CampiNavBar added to stage");
 		}
 		
 		private function active_button(e:MouseEvent):void 

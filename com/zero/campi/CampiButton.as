@@ -3,7 +3,10 @@
 	import com.greensock.*; 
 	import com.greensock.easing.*;
 	import com.util.HTMLColors;
+	import flash.display.Shape;
 	import flash.text.AntiAliasType;
+	import flash.text.Font;
+	import flash.text.TextFormat;
 	
 	import flash.display.Sprite;
 	import flash.events.MouseEvent;
@@ -25,8 +28,9 @@
 		
 		public function CampiButton(sName:String, data:Object) 
 		{
-						
+			//trace("new CampiButton", sName );
 			this.name = sName;
+						
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;
 			txtLabel.wordWrap = false;
 			txtLabel.multiline = false;
@@ -40,6 +44,11 @@
 			
 			this.addEventListener(MouseEvent.ROLL_OVER, btn_over );
 			this.addEventListener(MouseEvent.ROLL_OUT, btn_out );
+			
+			//var shape:Shape = new Shape();
+			//addChildAt(shape, 0);
+			//shape.graphics.beginFill(0xFF0000, 1 );
+			//shape.graphics.drawRect(0, 0, 100, 20);
 		}
 		
 		private function btn_out(e:MouseEvent):void 

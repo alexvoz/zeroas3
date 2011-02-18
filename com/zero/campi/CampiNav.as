@@ -33,9 +33,12 @@
 			mcLogo.mouseChildren = false;
 			mcLogo.addEventListener(MouseEvent.CLICK, btn_click );
 			
-			//refreshSize();
-			//removeChild(navBar);
-			//removeChild(mcToolBar);
+			if( CampiSite.PROYECTOR ){
+				removeChild(navBar);
+			}
+			removeChild(mcToolBar);
+			
+			trace("CampiNav", contains( navBar ) );
 		}
 		
 		private function btn_click(e:MouseEvent):void 

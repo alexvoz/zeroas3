@@ -8,8 +8,8 @@ package com.zero.campi.form
 	public class CampiFieldMail extends CampiField 
 	{
 		
-		function CampiFieldMail(label:String) {
-			super(label);
+		function CampiFieldMail(id:String, label:String) {
+			super(id, label);
 		}
 		
 		override protected function validator(e:FocusEvent):void 

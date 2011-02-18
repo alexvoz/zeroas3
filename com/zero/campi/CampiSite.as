@@ -56,13 +56,15 @@
 			this.addEventListener( WebSite.SECTION_CHANGED, mcMainWindow.section_changed );
 			mcNav.addEventListener(MouseEvent.CLICK, nav_bar_clicked );
 			
-			//mcNav.init();
 			addChild(mcNav);
 			
 			if ( PROYECTOR ) {
 				stage.displayState = StageDisplayState.FULL_SCREEN;
 				stage.scaleMode = StageScaleMode.SHOW_ALL;
-				this.setSection( CampiSite.CATALOGO );	
+				var intro = mcMainWindow.addChild( new IntroCatalogo() );
+				intro.x = (720 - intro.width) / 2;
+				intro.y = (mcMainWindow.height - intro.height) / 2;
+				
 			} else {
 				stage.align = StageAlign.TOP;
 				stage.scaleMode = StageScaleMode.NO_SCALE;	
@@ -93,7 +95,7 @@
 		
 		override protected function resizeBrowser( evnt:Event=null ):void {
 			var dif:int = mcSombra.getBounds(this).bottom - stage.stageHeight;
-			ExternalInterface.call( "console.log", dif );
+			//ExternalInterface.call( "console.log", dif );
 			if ( dif > 0 ) {
 				var ratio:Number = stage.stageHeight / mcSombra.getBounds(this).bottom;
 				if ( ratio > 1 ) ratio = 1;

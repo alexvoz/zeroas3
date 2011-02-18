@@ -35,13 +35,15 @@ package com.zero.campi.form
 		private var iconOK:DisplayObject;
 		private var iconEasing:Function;
 			
-		public function CampiField(label:String, size:Point=undefined ) 
+		public function CampiField(id:String, label:String, size:Point=undefined ) 
 		{
 			if ( !size ) {
 				size = new Point(210, 25);
 			}
 						
 			_validate = false;
+			
+			this.name = id;
 			
 			background = new Shape();
 			background.graphics.beginFill( HTMLColors.white, 1 );
@@ -108,6 +110,7 @@ package com.zero.campi.form
 			addChild(iconOK);
 			
 			iconEasing = Strong.easeInOut;
+				
 		}
 		
 		protected function validator(e:FocusEvent):void 
@@ -121,6 +124,11 @@ package com.zero.campi.form
 			TweenLite.to( background, 0.5, { dropShadowFilter: new DropShadowFilterVars(3, 5, 5, 0.6, 45, 0, 1) } );
 			//TweenLite.to( iconOK, 0.5, { alpha: 0, x: background.getBounds(this).right, scaleX: 0.5, scaleY: 0.5, ease: iconEasing } );
 			//TweenLite.to( iconError, 0.5, { alpha: 0, x: background.getBounds(this).right, scaleX: 0.5, scaleY: 0.5, ease: iconEasing } );
+		}
+		
+		public function reset() {
+			value = "";
+			iconError.alpha = iconOK.alpha = 0;
 		}
 		
 		public function get value():String { 
