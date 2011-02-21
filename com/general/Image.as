@@ -1,11 +1,13 @@
 package com.general 
 {
 	
+	import flash.display.Bitmap;
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
 	import flash.display.Shape;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.IOErrorEvent;
 	import flash.events.ProgressEvent;
 	import flash.geom.Point;
 	import flash.net.URLRequest;
@@ -36,6 +38,12 @@ package com.general
 			
 			loader.contentLoaderInfo.addEventListener(Event.INIT, image_loaded );
 			loader.contentLoaderInfo.addEventListener(ProgressEvent.PROGRESS, image_progress );
+			loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, handle_error );
+		}
+		
+		private function handle_error(e:IOErrorEvent):void 
+		{
+			trace("Image.as", "handle_error", e.text );
 		}
 		
 		private function image_progress(e:ProgressEvent):void 
@@ -58,6 +66,9 @@ package com.general
 				
 			} else {
 				
+				if ( this.content is Bitmap ) {
+					(this.content as Bitmap).smoothing = true;
+				}
 				content.width = size.x;
 				content.height = size.y;
 				
