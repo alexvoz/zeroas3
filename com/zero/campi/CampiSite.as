@@ -12,6 +12,7 @@
 	import flash.events.MouseEvent;
 	import flash.external.ExternalInterface;
 	import flash.system.Security;
+	import flash.text.Font;
 	
 	/**
 	 * ...
@@ -34,7 +35,7 @@
 		public var mcFondo:Sprite;
 		public var mcSombra:Sprite;
 		private var mcMainWindow:CampiMainWindow;
-				
+		
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
 			else if (!toConsole) trace( msg );
@@ -45,7 +46,7 @@
 		}
 		
 		override protected function externalContentLoaded( evnt:Event = undefined):void {
-						
+										
 			this.mcMainWindow = new CampiMainWindow(stage);
 			this.mcMainWindow.x = this.mcNav.getBounds(this).right;
 			this.mcMainWindow.y = this.mcNav.getBounds(this).top;
@@ -73,6 +74,12 @@
 								
 			stage.addEventListener(Event.RESIZE, resizeBrowser );
 			resizeBrowser();
+			
+			var fontList:Array = Font.enumerateFonts();
+			for( var i:int=0; i<fontList.length; i++ )
+			{
+				trace( "font: " + fontList[ i ].fontName );
+			}
 		}
 		
 		private function check_address(e:SWFAddressEvent):void 

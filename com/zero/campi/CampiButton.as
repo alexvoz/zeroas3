@@ -28,9 +28,18 @@
 		
 		public function CampiButton(sName:String, data:Object) 
 		{
-			//trace("new CampiButton", sName );
+			
 			this.name = sName;
-						
+			
+			txtLabel = new TextField();
+			addChild(txtLabel);
+			
+			var format:TextFormat = new TextFormat( new ButtonFont().fontName, 11, 0xb9b9b9 );
+			format.kerning = true;
+			format.letterSpacing = -0.5;
+			
+			txtLabel.defaultTextFormat = format;
+			txtLabel.embedFonts = true;
 			txtLabel.autoSize = TextFieldAutoSize.LEFT;
 			txtLabel.wordWrap = false;
 			txtLabel.multiline = false;
