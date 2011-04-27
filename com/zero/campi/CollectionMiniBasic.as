@@ -19,7 +19,7 @@ package com.zero.campi
 		private var products:XMLList;
 		private var _activeNode:XML;
 				
-		public function CollectionMiniBasic( data:XML ) 
+		public function CollectionMiniBasic( data:XML, activeNode:XML ) 
 		{
 			super();
 			this._data = data;
@@ -34,16 +34,30 @@ package com.zero.campi
 				if ( !sPath ) sPath = data.@imgPath;
 				var img:Image = new Image( sPath + p.@thumb, new Point(30, 45), true );
 				img.name = "id_" + p.@id;
-				img.buttonMode = true;
-				img.addEventListener(MouseEvent.CLICK, set_active );
-				container.addChild( img );
+				if ( p != activeNode ) {
+					
+					img.alpha = 0.5;
+					img.buttonMode = true;
+					img.addEventListener(MouseEvent.CLICK, set_active );	
+					img.addEventListener(MouseEvent.ROLL_OVER, img_over );
+					img.addEventListener(MouseEvent.ROLL_OUT, img_out );
+				}
 				
-				//img.alpha = 0;
-				//TweenLite.to( img, 0.5, { alpha: 1, delay: 0.3*i } );
+				container.addChild( img );
 				i++;
 			}
 			
 			LayoutUtil.layoutX( container, 10 );
+		}
+		
+		private function img_out(e:MouseEvent):void 
+		{
+			TweenLite.to( e.currentTarget, 0.5, { alpha: 0.5 } );
+		}
+		
+		private function img_over(e:MouseEvent):void 
+		{
+			TweenLite.to( e.currentTarget, 0.5, { alpha: 1 } );
 		}
 		
 		private function set_active(e:MouseEvent):void 

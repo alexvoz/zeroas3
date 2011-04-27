@@ -20,6 +20,7 @@ package com.zero.campi
 		private var unitW:uint;
 		private var unitH:uint;
 		private var modulesPos:Array;
+		private var _target:DisplayObject;
 		
 		public function CampiBitmapTrama( object:DisplayObject, rows:uint = 5, cols:uint = 9, unitW:uint = 90, unitH:uint = 120 ) 
 		{
@@ -27,6 +28,8 @@ package com.zero.campi
 			this.cols = cols;
 			this.unitW = unitW;
 			this.unitH = unitH;
+			
+			this._target = object;
 			
 			var objectData:BitmapData = new BitmapData( object.width, object.height );
 			objectData.draw( object );
@@ -60,6 +63,8 @@ package com.zero.campi
 				getChildAt(i).y = modulesRandom[i].y;
 			}
 		}
+		
+		public function get target():DisplayObject { return _target; }
 		
 	}
 

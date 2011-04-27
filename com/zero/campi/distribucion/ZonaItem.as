@@ -29,7 +29,7 @@ package com.zero.campi.distribucion
 		
 		public function ZonaItem(local:XML, empresa:XML ) 
 		{
-			
+			//trace("new ZonaItem ");
 			this.local = local;
 			this.empresa = empresa;
 			
@@ -45,6 +45,7 @@ package com.zero.campi.distribucion
 			if( !local_title ){
 				local_title = new TextField();
 				local_title.width = local_title.height = 0;
+				local_title.embedFonts = true;
 				local_title.autoSize = TextFieldAutoSize.LEFT;
 				addChild( local_title );
 				local_title.defaultTextFormat = format;
@@ -55,6 +56,7 @@ package com.zero.campi.distribucion
 				sucursales.wordWrap = true;
 				sucursales.width = 300;
 				sucursales.height = 0;
+				sucursales.embedFonts = true;
 				sucursales.autoSize = TextFieldAutoSize.LEFT;
 				addChild(sucursales);
 				sucursales.defaultTextFormat = format2;
@@ -63,24 +65,32 @@ package com.zero.campi.distribucion
 			local_title.text = empresa.@name;
 			
 			LayoutUtil.layoutY(this, -5);
-			
-			if ( empresa.@mail.toString() != "" ) {
-				mail = new ZonaItemEmail();
-				mail.buttonMode = true;
-				mail.x = local_title.getBounds(this).right + 5;
-				mail.y = (local_title.height - mail.height ) / 2;
-				mail.addEventListener(MouseEvent.CLICK, open_mail );
-				addChild(mail);
+			try {
+				if ( empresa.@mail && empresa.@mail.toString() != "" ) {
+					mail = new ZonaItemEmail();
+					mail.buttonMode = true;
+					mail.x = local_title.getBounds(this).right + 5;
+					mail.y = (local_title.height - mail.height ) / 2;
+					mail.addEventListener(MouseEvent.CLICK, open_mail );
+					addChild(mail);
+				}
+			} catch (e) {
+				trace("ZonaItem empresa", empresa.@name,"@mail error ",e);
 			}
 			
-			if ( empresa.@href.toString() != "" ) {
-				arrow = new ZonaItemHREF();
-				arrow.buttonMode = true;
-				if ( mail ) arrow.x = mail.getBounds(this).right + 5;
-				else arrow.x = local_title.getBounds(this).right + 5;
-				arrow.y = (local_title.height - arrow.height ) / 2;
-				arrow.addEventListener(MouseEvent.CLICK, open_href );
-				addChild(arrow);
+			try {
+				if ( empresa.@href && empresa.@href.toString() != "" ) {
+					arrow = new ZonaItemHREF();
+					arrow.buttonMode = true;
+					if ( mail ) arrow.x = mail.getBounds(this).right + 5;
+					else arrow.x = local_title.getBounds(this).right + 5;
+					arrow.y = (local_title.height - arrow.height ) / 2;
+					arrow.addEventListener(MouseEvent.CLICK, open_href );
+					addChild(arrow);
+				}
+				
+			} catch (e) {
+				trace("ZonaItem empresa", empresa.@name,"@href error ",e);
 			}
 						
 			sucursales.text = "Sucursales: "+ local;
@@ -90,7 +100,7 @@ package com.zero.campi.distribucion
 		
 		private function open_mail(e:MouseEvent):void 
 		{
-			navigateToURL( new URLRequest( "mailto:empresa.@mail" ), "_self" );
+			navigateToURL( new URLRequest( "mailto:"+empresa.@mail ), "_self" );
 		}
 		
 		private function open_href(e:MouseEvent):void 

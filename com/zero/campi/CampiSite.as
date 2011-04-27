@@ -30,6 +30,8 @@
 		public static const CONTACTO:String = "campi_contacto";
 		public static const MAPA:String = "campi_mapa";
 		public static const FAQ:String = "campi_faq";
+		public static const CARACTERISTICAS:String = "campi_caracteristicas";
+		public static const RESERVADO:String = "campi_reservado";
 		
 		public var mcNav:CampiNav;
 		public var mcFondo:Sprite;
@@ -46,7 +48,12 @@
 		}
 		
 		override protected function externalContentLoaded( evnt:Event = undefined):void {
-										
+			
+			this.mcNav = new CampiNav();
+			this.mcNav.x = 30;
+			this.mcNav.y = 22;
+			addChild(mcNav);
+			
 			this.mcMainWindow = new CampiMainWindow(stage);
 			this.mcMainWindow.x = this.mcNav.getBounds(this).right;
 			this.mcMainWindow.y = this.mcNav.getBounds(this).top;
@@ -56,8 +63,6 @@
 			
 			this.addEventListener( WebSite.SECTION_CHANGED, mcMainWindow.section_changed );
 			mcNav.addEventListener(MouseEvent.CLICK, nav_bar_clicked );
-			
-			addChild(mcNav);
 			
 			if ( PROYECTOR ) {
 				stage.displayState = StageDisplayState.FULL_SCREEN;
@@ -75,11 +80,6 @@
 			stage.addEventListener(Event.RESIZE, resizeBrowser );
 			resizeBrowser();
 			
-			var fontList:Array = Font.enumerateFonts();
-			for( var i:int=0; i<fontList.length; i++ )
-			{
-				trace( "font: " + fontList[ i ].fontName );
-			}
 		}
 		
 		private function check_address(e:SWFAddressEvent):void 

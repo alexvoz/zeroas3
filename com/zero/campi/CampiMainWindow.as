@@ -114,7 +114,7 @@
 				break;
 				
 				default:
-				//trace( "CampiMainWindow | section_changed | ", CampiSite.getApp().getSection() );
+				trace( "CampiMainWindow | section_changed | ", CampiSite.getApp().getSection() );
 				break;
 			}
 		}

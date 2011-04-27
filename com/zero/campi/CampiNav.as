@@ -16,14 +16,20 @@
 		public var loguito:Sprite;
 				
 		private var navBar:CampiNavBar;
+		private var subNavBar:CampiSubNavBar;
 		
 		public function CampiNav() 
 		{
 			fondo = getChildAt(0) as Shape;
 			navBar = new CampiNavBar();
-			navBar.x = 10;
+			navBar.x = 8;
 			navBar.y = mcLogo.getBounds(this).bottom + 17;
 			addChild(navBar);
+			
+			subNavBar = new CampiSubNavBar();
+			subNavBar.x = 8;
+			subNavBar.y = loguito.getBounds(this).top - subNavBar.height - 10;
+			addChild(subNavBar);
 						
 			loguito.x = 8;
 			
@@ -34,8 +40,7 @@
 			if( CampiSite.PROYECTOR ){
 				removeChild(navBar);
 			}
-						
-			trace("CampiNav", contains( navBar ) );
+			
 		}
 		
 		private function btn_click(e:MouseEvent):void 
@@ -50,6 +55,7 @@
 		public function refreshSize():void {
 			fondo.height = stage.stageHeight;
 			loguito.y = fondo.height - loguito.height - 10;
+			subNavBar.y = loguito.getBounds(this).top - subNavBar.height - 10;
 		}
 		
 		public function init():void {

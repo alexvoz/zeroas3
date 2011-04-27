@@ -25,7 +25,8 @@ package com.zero.campi
 		private var container:Sprite;
 		private var tweens:Vector.<TweenLite>;
 				
-		public var mcFotoGrande:MovieClip;
+		private var actualZoom:ProductoZoom;
+		private var lastZoom:ProductoZoom;
 		private var fotoGrandeMask:Shape;
 		private var animationZoom:TramaTransition;
 		private var tramaZoom:CampiBitmapTrama;
@@ -34,10 +35,9 @@ package com.zero.campi
 						
 		function CampiProductos()
 		{
-			animationClass = TramaTransition;		
+			animationClass = TramaTransition; //defino cual va a ser la transicion para que use la SuperClass
 			
 			super();
-			//trace("new CampiProductos");
 			var pedido:URLRequest = new URLRequest( "products.xml" );
 			var loader:URLLoader = new URLLoader( pedido );
 			loader.addEventListener(Event.COMPLETE, xml_loaded );
@@ -47,14 +47,7 @@ package com.zero.campi
 			
 			container.x = 90;
 			container.y = 35;
-			
-			removeChild( mcFotoGrande );
-			
-			mcFotoGrande.addEventListener(MouseEvent.CLICK, close_zoom );
-			mcFotoGrande.txtTitle.wordWrap = true;
-			mcFotoGrande.txtTitle.multiline = true;
-			mcFotoGrande.txtTitle.autoSize = "left";
-			
+						
 			container.addEventListener(MouseEvent.CLICK, show_zoom );
 			zoomLoader = new Loader();
 			zoomLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, make_trama_zoom );
@@ -62,16 +55,13 @@ package com.zero.campi
 		
 		private function make_trama_zoom(e:Event):void 
 		{
-			if ( lastContent ) mcFotoGrande.removeChild( lastContent );
 			lastContent = zoomLoader.content;
 						
 			DisplayUtil.remove( tramaZoom );
 			
-			mcFotoGrande.addChild( zoomLoader.content );
+			actualZoom.addChild( lastContent );
 			
-			mcFotoGrande.minis.visible = mcFotoGrande.txtTitle.visible = mcFotoGrande.txtDescription.visible = false;
-			
-			tramaZoom = new CampiBitmapTrama( mcFotoGrande, 5, Math.ceil( mcFotoGrande.width / 90 ) );
+			tramaZoom = new CampiBitmapTrama( actualZoom, 5, 5 );
 			animationZoom = new TramaTransition7( tramaZoom, false );
 			animationZoom.addEventListener( CampiTramaContent.SHOW_END, replace_effect, false, 0, true );
 			animationZoom.addEventListener( CampiTramaContent.HIDE_END, remove_effect, false, 0, true );
@@ -85,16 +75,12 @@ package com.zero.campi
 		{
 			if ( e.target is TextField ) return;
 			
-			if( mcFotoGrande.getChildByName("minis") ){
-				mcFotoGrande.removeChild( mcFotoGrande.getChildByName("minis") );
-			}
-			removeChild(mcFotoGrande);
 			addChild(tramaZoom);
 			animationZoom.hide();
 			
 		}
 		
-		private function show_zoom(e:MouseEvent):void 
+		private function show_zoom(e:Event):void 
 		{
 			var minis:Array = DisplayUtil.getChildren( container );
 			for (var i:int = 0; i < minis.length; i++) 
@@ -104,38 +90,47 @@ package com.zero.campi
 			}
 			TweenLite.to( container, 0.5, { x: 720 } );
 			
-			DisplayUtil.remove( mcFotoGrande );
+			if ( lastZoom ) {
+				DisplayUtil.remove( lastZoom.minis );
+				lastZoom.hide();
+			}
 			
-			var zoomReq:URLRequest = new URLRequest( e.target.data.@imgPath + e.target.data.product[0].@src );
+			actualZoom = new ProductoZoom();
+			if( e.target is CollectionMiniBasic ){
+				actualZoom.txtTitle.text = e.target.activeNode.@title.toUpperCase();
+				actualZoom.txtDescription.htmlText = StringUtil.remove( e.target.activeNode, "\r" );	
+			} else {
+				actualZoom.txtTitle.text = e.target.data.product[0].@title.toUpperCase();
+				actualZoom.txtDescription.htmlText = StringUtil.remove( e.target.data.product[0], "\r" );	
+			}
+			
+			actualZoom.txtDescription.y = actualZoom.txtTitle.y + actualZoom.txtTitle.textHeight + 15;
+			
+			var zoomReq:URLRequest;
+			var activeNode:XML;
+			if ( e.currentTarget is CollectionMiniBasic ) {
+				activeNode = e.currentTarget.activeNode;
+			} else {
+				activeNode = e.target.data.product[0];	
+			}
+			
+			zoomReq = new URLRequest( e.target.data.@imgPath + activeNode.@src );				 
 			zoomLoader.load( zoomReq );
 			
-			mcFotoGrande.txtTitle.text = e.target.data.product[0].@title.toUpperCase();
-			mcFotoGrande.txtDescription.y = mcFotoGrande.txtTitle.y + mcFotoGrande.txtTitle.textHeight + 15;
-			mcFotoGrande.txtDescription.htmlText = StringUtil.remove( e.target.data.product[0], "\r" );
-			
-			if( mcFotoGrande.getChildByName("minis") ){
-				mcFotoGrande.removeChild( mcFotoGrande.getChildByName("minis") );
-			}
 			if( e.target.data.product.length() > 1 ){
-				var mcMinis:CollectionMiniBasic = new CollectionMiniBasic( e.target.data );
+				var mcMinis:CollectionMiniBasic = new CollectionMiniBasic( e.target.data, activeNode );
 				mcMinis.name = "minis";
-				mcMinis.addEventListener(Event.CHANGE, update_zoom );
-				mcMinis.x = mcFotoGrande.txtTitle.x;
-				mcMinis.y = mcFotoGrande.txtDescription.y + mcFotoGrande.txtDescription.height;
-				mcFotoGrande.minis = mcFotoGrande.addChild( mcMinis );
-				
+				mcMinis.addEventListener(Event.CHANGE, show_zoom );
+				mcMinis.x = actualZoom.txtTitle.x;
+				mcMinis.y = actualZoom.height - mcMinis.height - 10;
+				actualZoom.minis = mcMinis;
 			}
 		}
 		
 		private function update_zoom(e:Event):void 
 		{
-			DisplayUtil.remove( mcFotoGrande );
-						
 			var zoomReq:URLRequest = new URLRequest( e.target.data.@imgPath + e.currentTarget.activeNode.@src );
 			zoomLoader.load( zoomReq );
-			mcFotoGrande.txtTitle.text = e.currentTarget.activeNode.@title.toUpperCase();
-			mcFotoGrande.txtDescription.y = mcFotoGrande.txtTitle.y + mcFotoGrande.txtTitle.textHeight + 15;
-			mcFotoGrande.txtDescription.htmlText = StringUtil.remove( e.currentTarget.activeNode, "\r" );
 		}
 		
 		private function remove_effect(e:Event):void 
@@ -152,12 +147,11 @@ package com.zero.campi
 		
 		private function replace_effect(e:Event):void 
 		{
-			DisplayUtil.remove( (e.currentTarget as TramaTransition).getTrama() );
-			addChild(mcFotoGrande);
-			mcFotoGrande.minis.visible = mcFotoGrande.txtTitle.visible = mcFotoGrande.txtDescription.visible = true;
-			TweenLite.from( mcFotoGrande.txtTitle, 0.5, { alpha: 0, y: mcFotoGrande.txtTitle.y + 8 } );
-			TweenLite.from( mcFotoGrande.txtDescription, 0.5, { alpha: 0, y: mcFotoGrande.txtDescription.y + 8, delay: 0.2 } );
-			TweenLite.from( mcFotoGrande.minis, 0.5, { alpha: 0, y: mcFotoGrande.minis.y + 8, delay: 0.2 } );
+			var trama:CampiBitmapTrama = (e.currentTarget as TramaTransition).getTrama();
+			addChild( trama.target );
+			DisplayUtil.remove( trama );
+			if ( lastZoom ) DisplayUtil.remove(lastZoom);
+			lastZoom = actualZoom;
 		}
 		
 		private function xml_loaded(e:Event):void 

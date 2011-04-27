@@ -25,8 +25,6 @@ package com.zero.campi
 		
 		public function CampiTramaContent() 
 		{
-			
-			//trace("new CampiTramaContent");
 			if( mcFoto ){
 				if( !trama ) trama = new CampiBitmapTrama( mcFoto, Math.ceil( mcFoto.height /120 ), Math.ceil( mcFoto.width / 90 ) );
 				addChild( trama );

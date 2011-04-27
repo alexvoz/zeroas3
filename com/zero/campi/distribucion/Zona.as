@@ -41,6 +41,7 @@ package com.zero.campi.distribucion
 			if( !title ){
 				title = new TextField();
 				title.width = title.height = 0;
+				title.embedFonts = true;
 				title.autoSize = TextFieldAutoSize.LEFT;
 				title.selectable = false;
 				addChild(title);
