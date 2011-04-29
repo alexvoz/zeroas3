@@ -1,6 +1,5 @@
 package com.zero.campi 
 {
-	import com.adobe.utils.StringUtil;
 	import com.greensock.loading.core.DisplayObjectLoader;
 	import com.greensock.TweenLite;
 	import com.util.DisplayUtil;
@@ -21,6 +20,9 @@ package com.zero.campi
 	 */
 	public class CampiProductos extends CampiTramaContent 
 	{
+		public static const ZOOM_IN:String = "zoom_in";
+		public static const ZOOM_OUT:String = "zoom_out";
+		
 		private var products:XML;
 		private var container:Sprite;
 		private var tweens:Vector.<TweenLite>;
@@ -78,12 +80,12 @@ package com.zero.campi
 			addChild(tramaZoom);
 			animationZoom.hide();
 			
-			CampiSite.getApp().mcDroom.goTop();
+			stage.dispatchEvent( new Event( ZOOM_OUT) );
 		}
 		
 		private function show_zoom(e:Event):void 
 		{
-			CampiSite.getApp().mcDroom.goBottom();
+			stage.dispatchEvent( new Event( ZOOM_IN) );
 			
 			var minis:Array = DisplayUtil.getChildren( container );
 			for (var i:int = 0; i < minis.length; i++) 
@@ -98,16 +100,14 @@ package com.zero.campi
 				lastZoom.hide();
 			}
 			
-			actualZoom = new ProductoZoom();
+			var nodoXML:XML;
 			if( e.target is CollectionMiniBasic ){
-				actualZoom.txtTitle.text = e.target.activeNode.@title.toUpperCase();
-				actualZoom.txtDescription.htmlText = StringUtil.remove( e.target.activeNode, "\r" );	
+				nodoXML = e.target.activeNode;
 			} else {
-				actualZoom.txtTitle.text = e.target.data.product[0].@title.toUpperCase();
-				actualZoom.txtDescription.htmlText = StringUtil.remove( e.target.data.product[0], "\r" );	
+				nodoXML = e.target.data.product[0];
 			}
-			
-			actualZoom.txtDescription.y = actualZoom.txtTitle.y + actualZoom.txtTitle.textHeight + 15;
+						
+			actualZoom = new ProductoZoom(nodoXML);
 			
 			var zoomReq:URLRequest;
 			var activeNode:XML;
@@ -128,6 +128,7 @@ package com.zero.campi
 				mcMinis.y = actualZoom.height - mcMinis.height - 10;
 				actualZoom.minis = mcMinis;
 			}
+			
 		}
 		
 		private function update_zoom(e:Event):void 

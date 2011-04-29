@@ -29,6 +29,15 @@ package com.zero.campi
 			trigger.graphics.beginFill(0, 0);
 			trigger.graphics.drawRect(0, 0, width, height );
 			addChild(trigger);
+			
+			addEventListener(Event.ADDED_TO_STAGE, bind );
+		}
+		
+		private function bind(e:Event):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, bind);
+			stage.addEventListener( CampiProductos.ZOOM_IN, goBottom );
+			stage.addEventListener( CampiProductos.ZOOM_OUT, goTop );
 		}
 		
 		private function goto_droom(e:MouseEvent):void 
@@ -58,12 +67,12 @@ package com.zero.campi
 			}
 		}
 		
-		public function goTop():void
+		public function goTop(e:Event=null):void
 		{
 			TweenLite.to( this, 0.8, { y: 600, ease: Strong.easeInOut } );
 		}
 		
-		public function goBottom() {
+		public function goBottom(e:Event=null) {
 			TweenLite.to( this, 0.8, { y: 630, ease: Strong.easeInOut } );
 		}
 		

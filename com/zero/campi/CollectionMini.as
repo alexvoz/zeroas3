@@ -41,7 +41,7 @@ package com.zero.campi
 			this.buttonMode = true;
 			this.mouseChildren = false;
 			
-			var font:Font = new FontCollection();
+			var font:Font = new ButtonFont();
 			var format:TextFormat = new TextFormat();
 			format.font = font.fontName;
 			format.size = 14;
@@ -68,6 +68,8 @@ package com.zero.campi
 				if ( !sPath ) sPath = data.@imgPath;
 				var img:Image = new Image( sPath + p.@thumb, new Point(23, 35) );
 				img.visible = false;
+				if( p.@pdf == undefined ) p.@pdf = data.@pdf; //le clavo el pdf de la coleccion
+				if( p.@download == undefined ) p.@download = data.@download; //le clavo el down de la coleccion
 				container.addChild( img );
 			}
 			
