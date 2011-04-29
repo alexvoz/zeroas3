@@ -36,7 +36,9 @@
 		public var mcNav:CampiNav;
 		public var mcFondo:Sprite;
 		public var mcSombra:Sprite;
+		public var mcWindowMask:Sprite;
 		private var mcMainWindow:CampiMainWindow;
+		public var mcDroom:DroomLogo;
 		
 		public static function log( msg:*, toConsole:Boolean = false ):void {
 			if ( getApp() ) getApp().internalLog( msg, toConsole );
@@ -61,6 +63,11 @@
 			
 			this.mcMainWindow.mask = mcWindowMask;
 			
+			mcDroom = new DroomLogo();
+			mcDroom.x = 875;
+			mcDroom.y = 600;
+			addChild(mcDroom);
+						
 			this.addEventListener( WebSite.SECTION_CHANGED, mcMainWindow.section_changed );
 			mcNav.addEventListener(MouseEvent.CLICK, nav_bar_clicked );
 			

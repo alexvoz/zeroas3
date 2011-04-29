@@ -94,7 +94,7 @@
 		private function btn_over(e:MouseEvent):void 
 		{
 			if ( !initPos ) initPos = new Point( x, y );
-			txtLabel.textColor = 0xc9c9c9;
+			txtLabel.textColor = 0xd9d9d9;
 			
 			if ( CampiSite.getApp().mcFondo ) {
 				TweenMax.to( CampiSite.getApp().mcFondo, 0.5, { glowFilter: { strength: 1, blurX: 15, blurY: 15 } } );

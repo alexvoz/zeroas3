@@ -78,10 +78,13 @@ package com.zero.campi
 			addChild(tramaZoom);
 			animationZoom.hide();
 			
+			CampiSite.getApp().mcDroom.goTop();
 		}
 		
 		private function show_zoom(e:Event):void 
 		{
+			CampiSite.getApp().mcDroom.goBottom();
+			
 			var minis:Array = DisplayUtil.getChildren( container );
 			for (var i:int = 0; i < minis.length; i++) 
 			{

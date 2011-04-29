@@ -113,6 +113,10 @@
 				this.load("contacto.swf");
 				break;
 				
+				case CampiSite.CARACTERISTICAS:
+				this.load("info.swf");
+				break;
+				
 				default:
 				trace( "CampiMainWindow | section_changed | ", CampiSite.getApp().getSection() );
 				break;
