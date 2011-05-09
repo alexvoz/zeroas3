@@ -117,6 +117,10 @@
 				this.load("info.swf");
 				break;
 				
+				case CampiSite.FAQ:
+				this.load("faq.swf");
+				break;
+				
 				default:
 				trace( "CampiMainWindow | section_changed | ", CampiSite.getApp().getSection() );
 				break;

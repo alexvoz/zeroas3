@@ -65,7 +65,7 @@
 			
 			mcDroom = new DroomLogo();
 			mcDroom.x = 875;
-			mcDroom.y = 600;
+			mcDroom.y = 605;
 			addChild(mcDroom);
 						
 			this.addEventListener( WebSite.SECTION_CHANGED, mcMainWindow.section_changed );

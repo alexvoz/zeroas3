@@ -69,7 +69,7 @@ package com.zero.campi
 		
 		public function goTop(e:Event=null):void
 		{
-			TweenLite.to( this, 0.8, { y: 600, ease: Strong.easeInOut } );
+			TweenLite.to( this, 0.8, { y: 605, ease: Strong.easeInOut } );
 		}
 		
 		public function goBottom(e:Event=null) {
