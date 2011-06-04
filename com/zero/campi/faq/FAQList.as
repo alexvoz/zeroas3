@@ -38,7 +38,7 @@ package com.zero.campi.faq
 			addChild(mcDrag);
 			mcMask = new Sprite();
 			mcMask.graphics.beginFill( HTMLColors.magenta, 1 );
-			mcMask.graphics.drawRect( 0, 0, 450, mcBar.height );
+			mcMask.graphics.drawRect( 0, 0, 430, mcBar.height );
 			addChild(mcMask);
 			
 			mcBar.x = mcMask.width;

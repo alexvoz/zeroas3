@@ -39,11 +39,13 @@ package com.zero.campi
 			txtTitle.text = nodo.@title.toUpperCase();
 			txtDescription.htmlText = StringUtil.remove( nodo, "\r" );
 			txtDescription.y = txtTitle.y + txtTitle.textHeight + 15;
+			var nBotones:int = 500;
 			if ( nodo.@pdf.toString().length ) {
-				txtPDF.y = txtDescription.y + txtDescription.textHeight + 30;
-				txtDownload.y = txtPDF.y + txtPDF.textHeight;
+				txtPDF.y = nBotones;
+				txtDownload.y = txtPDF.y;
+				txtDownload.x = txtPDF.x + txtPDF.textWidth + 5;
 			} else {
-				txtDownload.y = txtDescription.y + txtDescription.textHeight + 30;
+				txtDownload.y = nBotones;
 			}
 			
 			txtPDF.htmlText = "<a href='"+nodo.@pdf+"' target='_blank'>" + txtPDF.text + "</a>";

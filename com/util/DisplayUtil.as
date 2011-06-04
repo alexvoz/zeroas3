@@ -2,6 +2,7 @@ package com.util {
 	
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
+	import flash.geom.Point;
 	
 	public class DisplayUtil {
 		public static  function remove(obj:Object):void {
@@ -29,6 +30,16 @@ package com.util {
 				obj.removeChildAt( obj.numChildren - 1 );
 			}
 		}
+		public static function addChildren( container:DisplayObjectContainer, a:Array ) {
+			a.forEach( function(item) { 
+				if (item is DisplayObject) {
+					container.addChild( item )
+				}} 
+				)			
+		}
+		public static function massiveRemove( a:Array ) {
+			a.forEach( function(item){ remove(item) } )
+		}
 		public static function getChildren( obj:DisplayObjectContainer, type:Class=null ):Array {
 			var a:Array = new Array();
 			for (var i:int = 0; i < obj.numChildren; i++) 
@@ -38,6 +49,43 @@ package com.util {
 				}
 			}
 			return a;
+		}
+		/**
+		 * @usage: layout generico en X o Y, sirve para armar en ambas direcciones tambien (si cols es true es horizontal, sino es vertical
+		 * @author: sminutoli
+		 */
+		public static function layout( contenedor:DisplayObjectContainer, units:uint= undefined, space:Point = undefined, cols:Boolean=true ):void {
+			
+			if ( !space ) space = new Point(0, 0 );
+			
+			//por las dudas evaluo si el contenedor está vacío
+			if ( contenedor.numChildren == 0 ) return;
+			
+			var nX:int = 0;
+			var nY:int = 0;
+						
+			for (var i:int = 0; i < contenedor.numChildren; i++) 
+			{
+				var actual:DisplayObject = contenedor.getChildAt(i);
+				if ( cols ) {
+					actual.x = nX;
+				} else {
+					actual.y = nY;
+				}
+				if ( units && i > 0 && (i+1) % units == 0 ) {
+					if ( cols ) {
+						nX = 0;
+						nY += actual.height + space.y;
+					} else {
+						nX += actual.width + space.x;
+						nY = 0;
+					}
+				} else {
+					if ( cols ) nX += actual.width + space.x;
+					else nY += actual.height + space.y;
+				}
+			}
+			
 		}
 		
 	}

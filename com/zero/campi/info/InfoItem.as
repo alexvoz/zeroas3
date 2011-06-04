@@ -33,12 +33,11 @@ package com.zero.campi.info
 			var font:Font = new ButtonLabel();
 			var format:TextFormat = new TextFormat();
 			format.font = font.fontName;
-			
+						
 			var format2:TextFormat = new TextFormat();
 			format2.font = font.fontName;
 			format2.size = 11;
-			format2.color = HTMLColors.grey;
-						
+									
 			if( !local_title ){
 				local_title = new TextField();
 				local_title.width = local_title.height = 0;

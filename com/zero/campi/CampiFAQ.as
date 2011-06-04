@@ -6,6 +6,7 @@
 	import com.zero.campi.faq.FAQList;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
 	/**
 	 * ...
 	 * @author sminutoli
@@ -14,6 +15,7 @@
 	{
 		public var mcTitle:Sprite;
 		public var mcTexto:Sprite;
+		public var mcTexto2:Sprite;
 		public var mcSubTitle:Sprite;
 		public var mcComment:Sprite;
 		public var mcComment2:Sprite;
@@ -35,8 +37,18 @@
 			mcTexto.x = mcTitle.x;
 			mcTexto.y = 120;
 			
-			children = [ mcTitle, mcTexto, mcSubTitle, mcComment, mcComment2 ];
+			children = [ mcTitle, mcTexto, mcTexto2, mcSubTitle, mcComment, mcComment2 ];
 			DisplayUtil.massiveRemove( children );
+			
+			mcTexto2.buttonMode = true;
+			mcTexto2.addEventListener(MouseEvent.CLICK, go_contact );
+		}
+		
+		private function go_contact(e:MouseEvent):void 
+		{
+			if ( CampiSite.getApp() ) {
+				CampiSite.getApp().setSection( CampiSite.CONTACTO );
+			}
 		}
 		override public function hide():void {
 			t2.reverse();
@@ -58,6 +70,7 @@
 			
 			t = TweenLite.from( mcTitle, 1, { alpha: 0, y: mcTitle.y + 30, ease: Strong.easeInOut} );
 			t2 = TweenLite.from( mcTexto, 1, { alpha: 0, x: mcTexto.x - 10, ease: Strong.easeInOut, delay: 0.5 } );
+			t3 = TweenLite.from( mcTexto2, 1, { alpha: 0, x: mcTexto2.x - 10, ease: Strong.easeInOut, delay: 0.5 } );
 			//t3 = TweenLite.from( mcSubTitle, 1, { alpha: 0, x: mcSubTitle.x - 10, ease: Strong.easeInOut, delay: 0.8 } );
 			//t4 = TweenLite.from( mcComment, 1, { alpha: 0, x: mcComment.x - 10, ease: Strong.easeInOut, delay: 1 } );
 			//t5 = TweenLite.from( mcComment2, 1, { alpha: 0, x: mcComment2.x - 10, ease: Strong.easeInOut, delay: 1.3 } );

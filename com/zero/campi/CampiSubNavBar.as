@@ -28,9 +28,16 @@
 				btn.alpha = 0;
 				btn.y = nY;
 				addChild(btn);
-				TweenMax.to( btn, 1, { alpha: 1, delay: i * 0.3, ease: Linear.easeNone } );
+				if ( i == aLabels.length - 1 ) {
+					btn.mouseEnabled = false;
+					btn.mouseChildren = false;
+					TweenMax.to( btn, 1, { alpha: 0.5, delay: i * 0.3, ease: Linear.easeNone } );	
+				} else {
+					TweenMax.to( btn, 1, { alpha: 1, delay: i * 0.3, ease: Linear.easeNone } );	
+				}
 				nY += btn.height + nSpace;
 			}
+			
 		}
 		
 	}

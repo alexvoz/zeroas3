@@ -36,7 +36,7 @@ package com.zero.campi.faq
 			var font:Font = new ButtonLabel();
 			var format:TextFormat = new TextFormat();
 			format.font = "Arial";
-			format.color = HTMLColors.white;
+			format.color = HTMLColors.black;
 			format.size = 11;
 			format.bold;
 			format.kerning = -0.5;
@@ -93,9 +93,9 @@ package com.zero.campi.faq
 			
 			arrow = new Sprite();
 			var aux:DisplayObject = new Bitmap( new ZonaItemArrow(0, 0) );
-			var color:ColorTransform = aux.transform.colorTransform;
-			color.color = HTMLColors.white;
-			aux.transform.colorTransform = color;
+			//var color:ColorTransform = aux.transform.colorTransform;
+			//color.color = HTMLColors.white;
+			//aux.transform.colorTransform = color;
 			aux.x = -aux.width / 2;
 			aux.y = -aux.height / 2;
 			arrow.addChild( aux );

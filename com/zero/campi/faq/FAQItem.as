@@ -33,7 +33,7 @@ package com.zero.campi.faq
 			var font:Font = new ButtonLabel();
 			var format:TextFormat = new TextFormat();
 			format.font = "Arial";
-			format.color = HTMLColors.lightgrey;
+			format.color = 0x666666;
 									
 			if( !local_title ){
 				local_title = new TextField();

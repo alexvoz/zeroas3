@@ -2,6 +2,7 @@
 {
 	import com.greensock.easing.Strong;
 	import com.greensock.TweenLite;
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.text.TextField;
@@ -14,7 +15,7 @@
 	public class CampiHistoria extends CampiTramaContent
 	{
 		
-		public var texto:TextField;
+		public var texto:DisplayObject;
 		public var mcTitle:Sprite;
 		private var t:TweenLite;
 		private var t2:TweenLite;
@@ -26,17 +27,14 @@
 			super();
 			removeChild( texto );
 			removeChild( mcTitle );
-			//trace(this);
 		}		
 		
 		override public function hide():void {
 			t.reverse();
-			//trace(this);
 		}
 		
 		private function hide_trama():void
 		{
-			//trace("CampiHistoria hide_trama");
 			super.hide()
 		}
 	
