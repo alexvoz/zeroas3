@@ -77,7 +77,7 @@ package com.general
 			return undefined;
 		}
 		
-		public function getResourceByIndex( i:uint ):DisplayObject {
+		public function getResourceByIndex( i:uint ):* {
 			return cache[i];
 		}
 		
