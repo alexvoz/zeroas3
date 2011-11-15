@@ -2,6 +2,7 @@ package com.zero.campi
 {
 	import com.greensock.TweenLite;
 	import com.adobe.utils.StringUtil;
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.MouseEvent;
@@ -22,6 +23,7 @@ package com.zero.campi
 		public var txtPDF:TextField;
 		public var txtDownload:TextField;
 		public var minis:CollectionMiniBasic;
+		public var btnClose:SimpleButton;
 		private var nodo:XML;
 		
 		public function ProductoZoom(nodo:XML) 
@@ -34,6 +36,7 @@ package com.zero.campi
 			removeChild( txtDescription );
 			removeChild( txtPDF );
 			removeChild( txtDownload );
+			removeChild( btnClose );
 			addEventListener(Event.ADDED_TO_STAGE, show_text );
 			
 			txtTitle.text = nodo.@title.toUpperCase();
@@ -68,9 +71,11 @@ package com.zero.campi
 		{
 			addChild( txtTitle );
 			addChild( txtDescription );
+			//addChild( btnClose );
 						
 			TweenLite.from( txtTitle, 0.5, { alpha: 0, y: txtTitle.y + 10  } );			
 			TweenLite.from( txtDescription, 0.5, { alpha: 0, y: txtDescription.y + 10, delay: 0.5  } );			
+			//TweenLite.from( btnClose, 0.5, { alpha: 0, y: btnClose.y + 10, delay: 1  } );			
 			
 			if ( nodo.@pdf.toString().length ) {
 				addChild( txtPDF );

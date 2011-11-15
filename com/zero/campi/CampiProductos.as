@@ -1,6 +1,9 @@
 package com.zero.campi 
 {
+	import com.greensock.easing.Strong;
 	import com.greensock.loading.core.DisplayObjectLoader;
+	import com.greensock.plugins.AutoAlphaPlugin;
+	import com.greensock.plugins.TweenPlugin;
 	import com.greensock.TweenLite;
 	import com.util.DisplayUtil;
 	import com.util.LayoutUtil;
@@ -8,12 +11,16 @@ package com.zero.campi
 	import flash.display.Loader;
 	import flash.display.MovieClip;
 	import flash.display.Shape;
+	import flash.display.SimpleButton;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
 	import flash.events.MouseEvent;
+	import flash.geom.Rectangle;
 	import flash.net.URLLoader;
 	import flash.net.URLRequest;
 	import flash.text.TextField;
+	import flash.ui.Keyboard;
 	/**
 	 * ...
 	 * @author sminutoli
@@ -23,6 +30,7 @@ package com.zero.campi
 		public static const ZOOM_IN:String = "zoom_in";
 		public static const ZOOM_OUT:String = "zoom_out";
 		
+		private var scrollPos:uint;
 		private var products:XML;
 		private var container:Sprite;
 		private var tweens:Vector.<TweenLite>;
@@ -34,9 +42,13 @@ package com.zero.campi
 		private var tramaZoom:CampiBitmapTrama;
 		private var zoomLoader:Loader;
 		private var lastContent:DisplayObject;
+		private var collections:XMLList;
+		private var btnUp:SimpleButton;
+		private var btnDown:SimpleButton;
 						
 		function CampiProductos()
 		{
+			TweenPlugin.activate( [ AutoAlphaPlugin ] );
 			animationClass = TramaTransition; //defino cual va a ser la transicion para que use la SuperClass
 			
 			super();
@@ -53,6 +65,8 @@ package com.zero.campi
 			container.addEventListener(MouseEvent.CLICK, show_zoom );
 			zoomLoader = new Loader();
 			zoomLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, make_trama_zoom );
+			
+			scrollPos = 0;
 		}
 		
 		private function make_trama_zoom(e:Event):void 
@@ -94,6 +108,10 @@ package com.zero.campi
 				minis[i].makeMini();
 			}
 			TweenLite.to( container, 0.5, { x: 720 } );
+			btnDown.alpha = btnUp.alpha = 0;
+			btnDown.x = btnUp.x = 720 - 20;
+			TweenLite.to( btnUp, 0.5, { autoAlpha: scrollPos > 0 ? 1 : 0, delay: 1 } );
+			TweenLite.to( btnDown, 0.5, { autoAlpha: scrollPos < collections.length() - 12 ? 1 : 0, delay: 1 } );
 			
 			if ( lastZoom ) {
 				DisplayUtil.remove( lastZoom.minis );
@@ -108,6 +126,7 @@ package com.zero.campi
 			}
 						
 			actualZoom = new ProductoZoom(nodoXML);
+			//actualZoom.addEventListener(MouseEvent.CLICK, close_zoom );
 			
 			var zoomReq:URLRequest;
 			var activeNode:XML;
@@ -161,14 +180,56 @@ package com.zero.campi
 		private function xml_loaded(e:Event):void 
 		{
 			products = new XML( e.currentTarget.data );
-			var collections:XMLList = products.collection;
+			collections = products.collection;
 			for each( var col:XML in collections ) {
 				var btn:CollectionMini = new CollectionMini( col );
 				container.addChild(btn);
 				btn.visible = false;
 			}
 			LayoutUtil.layoutY(container, 10);
-			
+			container.scrollRect = new Rectangle( 0, 0, 500, 530 );
+			if ( collections.length() > 12 ) {
+				btnUp = new ProductArrow();
+				btnDown = new ProductArrow();
+				btnUp.x = btnDown.x = container.x - 30;
+				btnUp.y = container.y + 15;
+				btnUp.scaleY = -1;
+				btnDown.y = container.y + 515;
+				this.addChild( btnUp );
+				this.addChild( btnDown );
+				btnUp.addEventListener(MouseEvent.CLICK, scroll_container);
+				btnDown.addEventListener(MouseEvent.CLICK, scroll_container);
+				TweenLite.to( btnUp, 0, { autoAlpha: 0 } );
+				btnDown.alpha = 0;
+				TweenLite.to( btnDown, 0.5, { autoAlpha: 1, delay: 6 } );
+			}
+		}
+		
+		private function scroll_container(e:Event):void 
+		{
+			switch( e.target ) {
+				case btnUp:
+				if ( scrollPos > 0 ) {
+					scrollPos--;
+				}
+				break;
+				
+				case btnDown:
+				if ( scrollPos < collections.length() - 12 ) {
+					scrollPos++;
+				}
+				break;
+			}
+			TweenLite.to( btnUp, 0.5, { autoAlpha: scrollPos > 0 ? 1 : 0 } );
+			TweenLite.to( btnDown, 0.5, { autoAlpha: scrollPos < collections.length() - 12 ? 1 : 0 } );
+						
+			for (var i2:int = 0; i2 < container.numChildren; i2++) 
+			{
+				var child2:DisplayObject = container.getChildAt( i2 );
+				var modulo2:int = 35 + 10;
+				var inicio:int = -modulo2 * scrollPos;
+				TweenLite.to( child2, 0.7, { y: inicio + modulo2*i2, ease: Strong.easeInOut, delay: i2 / 20 } );
+			}
 		}
 		
 		override public function hide():void {

@@ -30,6 +30,7 @@ package com.zero.campi
 		private var containerSingle:Sprite;
 		private var txtTitle:TextField;
 		private var bMini:Boolean;
+		private var novedad:Sprite;
 				
 		public function CollectionMini( data:XML ) 
 		{
@@ -58,6 +59,12 @@ package com.zero.campi
 			txtTitle.text = data.@title.toString().toUpperCase();
 			
 			addChild(txtTitle);
+			
+			if ( data.attribute("new").toString() ) {
+				novedad = new ProductoNovedad();
+				novedad.visible = false;
+				addChild( novedad );
+			}
 			
 			container = new Sprite();
 			addChild(container);
@@ -92,7 +99,7 @@ package com.zero.campi
 		{
 			TweenLite.to( this, 0.5, { alpha: 1 } );
 			if ( bMini ) {
-				TweenLite.to( containerSingle, 0.5, { alpha: 0, x: 0, onComplete: function(){ if( contains( containerSingle ) ) removeChild(containerSingle) } } );
+				//TweenLite.to( containerSingle, 0.5, { alpha: 0, x: 0, onComplete: function(){ if( contains( containerSingle ) ) removeChild(containerSingle) } } );
 			}
 		}
 		
@@ -100,22 +107,32 @@ package com.zero.campi
 		{
 			TweenLite.to( this, 0.5, { alpha: 0.7 } );
 			if ( bMini ) {
-				addChild( containerSingle );
-				TweenLite.to( containerSingle, 0.5, { alpha: 1, x: -33 } );
+				//addChild( containerSingle );
+				//TweenLite.to( containerSingle, 0.5, { alpha: 1, x: -33 } );
 			}
 		}
 		
 		public function show() {
-			tweens = new Vector.<TweenLite>( container.numChildren+1, true );
+			var nElements:int = novedad ? container.numChildren + 2 : container.numChildren + 1;
+			tweens = new Vector.<TweenLite>( nElements, true );
 			txtTitle.x = container.getBounds( this ).right + 10;
 			txtTitle.y = container.y + ( container.height - txtTitle.textHeight ) / 2;
 			txtTitle.visible = true;
+			var nX = txtTitle.x;
+						
 			for (var i:int = 0; i < container.numChildren; i++) 
 			{
 				container.getChildAt(i).visible = true;
 				tweens[i] = TweenLite.from( container.getChildAt(i), 0.5, { alpha: 0, x: 0, delay: i*0.3 } );
 			}
 			tweens[i] = TweenLite.from( txtTitle, 0.5, { alpha: 0, x: 0, delay: i * 0.3 } );
+			
+			if( novedad ){
+				novedad.y = txtTitle.y + txtTitle.textHeight - 1;
+				novedad.x = nX;
+				novedad.visible = true;
+				tweens[i+1] = TweenLite.from( novedad, 0.5, { alpha: 0, x: 0, delay: (i+1) * 0.3 } );
+			}			
 			
 			tweens = tweens.sort( sortOnDelay ).reverse();
 			tweens[0].vars.onComplete = show_end;
@@ -135,6 +152,10 @@ package com.zero.campi
 			}
 			TweenLite.killTweensOf( txtTitle, true );
 			TweenLite.to( txtTitle, 0.5, { x:0 } );
+			if(novedad){
+				TweenLite.killTweensOf( novedad, true );
+				TweenLite.to( novedad, 0.5, { x:0 } );
+			}
 		}
 		
 		public function makeNormal() {
@@ -143,6 +164,9 @@ package com.zero.campi
 			container.alpha = 1;
 			//tweens.forEach( function( item:TweenLite, index:int, vector ) { item.resume(); } );
 			TweenLite.to( txtTitle, 0.5, { x: container.getBounds( this ).right + 10, overwrite: false } );
+			if(novedad){
+				TweenLite.to( novedad, 0.5, { x:container.getBounds( this ).right + 10, overwrite: false } );
+			}
 		}
 		
 		protected function show_end():void {
