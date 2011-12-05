@@ -83,9 +83,20 @@ package com.util {
 				} else {
 					if ( cols ) nX += actual.width + space.x;
 					else nY += actual.height + space.y;
+					//trace( actual, actual.width );
 				}
 			}
 			
+		}
+		
+		public static function getRenderSize( contenedor:DisplayObjectContainer ):Point {
+			var size:Point = new Point();
+			for (var i:int = 0; i < contenedor.numChildren; i++) 
+			{
+				size.x += contenedor.getChildAt(i).width;
+				size.y += contenedor.getChildAt(i).height;
+			}
+			return size;
 		}
 		
 	}
