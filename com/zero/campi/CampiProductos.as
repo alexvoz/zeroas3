@@ -109,7 +109,7 @@ package com.zero.campi
 			}
 			TweenLite.to( container, 0.5, { x: 720 } );
 			btnDown.alpha = btnUp.alpha = 0;
-			btnDown.x = btnUp.x = 720 - 20;
+			btnDown.x = btnUp.x = 720 + 14;
 			TweenLite.to( btnUp, 0.5, { autoAlpha: scrollPos > 0 ? 1 : 0, delay: 1 } );
 			TweenLite.to( btnDown, 0.5, { autoAlpha: scrollPos < collections.length() - 12 ? 1 : 0, delay: 1 } );
 			
@@ -181,6 +181,15 @@ package com.zero.campi
 		{
 			products = new XML( e.currentTarget.data );
 			collections = products.collection;
+			var allProd:XMLList = products..product;
+			var nProd:int = 0;
+			for each( var prod:XML in allProd ) {
+				if ( !prod.attribute("id").toString() ) {
+					prod.@id = 100000 + nProd;
+				}
+				nProd++;
+			}
+			
 			for each( var col:XML in collections ) {
 				var btn:CollectionMini = new CollectionMini( col );
 				container.addChild(btn);
@@ -191,10 +200,10 @@ package com.zero.campi
 			if ( collections.length() > 12 ) {
 				btnUp = new ProductArrow();
 				btnDown = new ProductArrow();
-				btnUp.x = btnDown.x = container.x - 30;
-				btnUp.y = container.y + 15;
+				btnUp.x = btnDown.x = container.x + 12;
+				btnUp.y = container.y - 15;
 				btnUp.scaleY = -1;
-				btnDown.y = container.y + 515;
+				btnDown.y = container.y + 545;
 				this.addChild( btnUp );
 				this.addChild( btnDown );
 				btnUp.addEventListener(MouseEvent.CLICK, scroll_container);

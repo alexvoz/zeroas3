@@ -70,7 +70,10 @@ package com.zero.campi
 			addChild(container);
 									
 			var products:XMLList = data.product;
+			var nProduct:int = 0;
 			for each( var p:XML in products ) {
+				if ( data.@maxThumbs > 0 && nProduct >= data.@maxThumbs ) break;
+				
 				var sPath:String = p.@imgPath;
 				if ( !sPath ) sPath = data.@imgPath;
 				var img:Image = new Image( sPath + p.@thumb, new Point(23, 35) );
@@ -78,6 +81,8 @@ package com.zero.campi
 				if( p.@pdf == undefined ) p.@pdf = data.@pdf; //le clavo el pdf de la coleccion
 				if( p.@download == undefined ) p.@download = data.@download; //le clavo el down de la coleccion
 				container.addChild( img );
+				
+				nProduct++;
 			}
 			
 			containerSingle = new Sprite();
@@ -128,8 +133,8 @@ package com.zero.campi
 			tweens[i] = TweenLite.from( txtTitle, 0.5, { alpha: 0, x: 0, delay: i * 0.3 } );
 			
 			if( novedad ){
-				novedad.y = txtTitle.y + txtTitle.textHeight - 1;
-				novedad.x = nX;
+				novedad.y = txtTitle.y + txtTitle.textHeight - 2;
+				novedad.x = nX + 1;
 				novedad.visible = true;
 				tweens[i+1] = TweenLite.from( novedad, 0.5, { alpha: 0, x: 0, delay: (i+1) * 0.3 } );
 			}			
@@ -154,7 +159,7 @@ package com.zero.campi
 			TweenLite.to( txtTitle, 0.5, { x:0 } );
 			if(novedad){
 				TweenLite.killTweensOf( novedad, true );
-				TweenLite.to( novedad, 0.5, { x:0 } );
+				TweenLite.to( novedad, 0.5, { x:1 } );
 			}
 		}
 		
@@ -165,7 +170,7 @@ package com.zero.campi
 			//tweens.forEach( function( item:TweenLite, index:int, vector ) { item.resume(); } );
 			TweenLite.to( txtTitle, 0.5, { x: container.getBounds( this ).right + 10, overwrite: false } );
 			if(novedad){
-				TweenLite.to( novedad, 0.5, { x:container.getBounds( this ).right + 10, overwrite: false } );
+				TweenLite.to( novedad, 0.5, { x:container.getBounds( this ).right + 11, overwrite: false } );
 			}
 		}
 		

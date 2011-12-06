@@ -80,6 +80,7 @@ package com.zero.campi
 				} else {
 					scrollPos = Math.min( container.numChildren - 4,  activeIndex );
 					TweenLite.to( btnPrev, 0.5, { autoAlpha: 1, delay: 3 } );
+					if( scrollPos + 4 < container.numChildren ) TweenLite.to( btnNext, 0.5, { autoAlpha: 1, delay: 3 } );
 					for (var i2:int = 0; i2 < container.numChildren; i2++) 
 					{
 						var child2:DisplayObject = container.getChildAt( i2 );

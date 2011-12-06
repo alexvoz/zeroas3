@@ -11,6 +11,7 @@
 	import flash.events.ProgressEvent;
 	import flash.filters.DropShadowFilter;
 	import flash.net.URLRequest;
+	import flash.net.URLVariables;
 	/**
 	 * ...
 	 * @author sminutoli
@@ -84,6 +85,9 @@
 		public function load( url:String ):void {
 			if ( req.url == url ) return;
 			
+			var vars:URLVariables = new URLVariables();
+			vars.nocache = new Date().getTime();
+			req.data = vars;
 			req.url = url;
 			load_next();
 			
