@@ -64,6 +64,11 @@ package com.general
 			}
 		}
 		
+		public function stop() {
+			loader.unloadAndStop( true );
+			this.loading = false;
+		}
+		
 		/**
 		 * 
 		 * @param	path
