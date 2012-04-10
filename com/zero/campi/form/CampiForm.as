@@ -126,6 +126,7 @@ package com.zero.campi.form
 			var field:CampiField = new item[0]( item[1], item[2] );
 			field.addEventListener(FocusEvent.FOCUS_OUT, check_valid );
 			container.addChild( field );
+			
 		}
 		
 		private function check_valid(e:FocusEvent):void 

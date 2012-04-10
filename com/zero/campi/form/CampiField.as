@@ -116,7 +116,7 @@ package com.zero.campi.form
 		protected function validator(e:FocusEvent):void 
 		{
 			validate = true;
-			this.dispatchEvent( e );
+			if( e ) this.dispatchEvent( e );
 		}
 		
 		private function edit_mode(e:FocusEvent):void 
@@ -140,7 +140,10 @@ package com.zero.campi.form
 			txtInput.text = value;
 		}
 		
-		public function get validate():Boolean { return _validate; }
+		public function get validate():Boolean { 
+			validator(null);
+			return _validate; 
+		}
 		
 		public function set validate(value:Boolean):void 
 		{

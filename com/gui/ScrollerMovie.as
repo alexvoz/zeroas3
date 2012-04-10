@@ -68,6 +68,27 @@
 			
 			//the scrolling animation
 			mcContent.addEventListener( Event.ENTER_FRAME, content_check );
+			
+			this.addEventListener(Event.ADDED_TO_STAGE, init_stage );
+		}
+		
+		private function init_stage(e:Event):void 
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init_stage);
+			this.stage.addEventListener(MouseEvent.MOUSE_WHEEL, scroll_wheel, false, 0, true );
+		}
+		
+		private function scroll_wheel(e:MouseEvent):void 
+		{
+			if ( !this.getBounds(stage).contains( e.stageX, e.stageY ) ) return;
+			
+			var nOffset:Number;
+			nOffset = e.delta * -5;
+			var nY:Number = mcDrag.y + nOffset;
+			nY = Math.max( nY, mcBar.y );
+			nY = Math.min( nY, mcBar.y + mcBar.height - mcDrag.height );
+			
+			mcDrag.y = nY;
 		}
 		
 		private function force_drag(e:MouseEvent):void {
