@@ -5,6 +5,9 @@ package com.zero.campi
 	import com.zero.campi.form.CampiForm;
 	import flash.display.Sprite;
 	import flash.events.Event;
+	import flash.events.MouseEvent;
+	import flash.net.navigateToURL;
+	import flash.net.URLRequest;
 	/**
 	 * ...
 	 * @author sminutoli
@@ -32,6 +35,26 @@ package com.zero.campi
 			form = new CampiForm();
 			form.x = 520;
 			form.y = 127;
+			
+			var data:Sprite = mcDatos.getChildByName("mcDataFiscal") as Sprite;
+			data.buttonMode = true;
+			data.addEventListener(MouseEvent.CLICK, download_data );
+			data.addEventListener(MouseEvent.ROLL_OVER, data_over_out );
+			data.addEventListener(MouseEvent.ROLL_OUT, data_over_out );
+		}
+		
+		private function data_over_out(e:MouseEvent):void 
+		{
+			var nAlpha:Number = 1;
+			if (e.type == MouseEvent.ROLL_OVER) {
+				nAlpha = 0.6;
+			}
+			TweenLite.to( e.currentTarget, 0.8, { alpha: nAlpha } );
+		}
+		
+		private function download_data(e:MouseEvent):void 
+		{
+			navigateToURL( new URLRequest("data_fiscal.pdf"), "_blank" );
 		}
 		override public function hide():void {
 			t2.reverse();
