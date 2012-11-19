@@ -17,12 +17,14 @@ package com.zero.campi
 		
 		public var mcTitle:Sprite;
 		public var mcDatos:Sprite;
+		public var mcData:Sprite;
 		
 		private var form:CampiForm;
 		
 		private var t:TweenLite;
 		private var t2:TweenLite;
 		private var t3:TweenLite;
+		private var t4:TweenLite;
 		
 		public function CampiContacto() 
 		{
@@ -31,12 +33,13 @@ package com.zero.campi
 			super();
 			removeChild( mcTitle );
 			removeChild( mcDatos );
+			removeChild( mcData );
 			
 			form = new CampiForm();
 			form.x = 520;
 			form.y = 127;
 			
-			var data:Sprite = mcDatos.getChildByName("mcDataFiscal") as Sprite;
+			var data:Sprite = mcData;
 			data.buttonMode = true;
 			data.addEventListener(MouseEvent.CLICK, download_data );
 			data.addEventListener(MouseEvent.ROLL_OVER, data_over_out );
@@ -58,6 +61,7 @@ package com.zero.campi
 		}
 		override public function hide():void {
 			t2.reverse();
+			t4.reverse();
 		}
 		private function hide_title():void
 		{
@@ -81,6 +85,8 @@ package com.zero.campi
 			addChild( mcDatos );
 			t3 = TweenLite.from( mcDatos, 0.8, { alpha: 0, y: mcDatos.x - 10, ease: Strong.easeInOut, delay: 0.5 } );
 			
+			addChild( mcData );
+			t4 = TweenLite.from( mcData, 0.8, { alpha: 0, y: mcData.y - 10, ease: Strong.easeInOut, delay: 1 } );			
 		}
 		
 	}
